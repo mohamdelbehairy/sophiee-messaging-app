@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart' as getnav;
+import 'package:telephony/telephony.dart';
 
 class PhoneNumberPageBody extends StatefulWidget {
   const PhoneNumberPageBody({super.key, required this.size});
@@ -19,13 +20,29 @@ class PhoneNumberPageBody extends StatefulWidget {
 
 class _PhoneNumberPageBodyState extends State<PhoneNumberPageBody> {
   TextEditingController controller = TextEditingController();
+  TextEditingController optController = TextEditingController();
+  final Telephony telephony = Telephony.instance;
 
   String phoneNumber = '';
   String number = '';
 
+  void listenToInComingSms() {
+    telephony.listenIncomingSms(
+        onNewMessage: (SmsMessage message) {
+          if (message.body!.contains('sophiee-messaging-app')) {
+            String optCode = message.body!.substring(0, 6);
+            setState(() {
+              optController.text = optCode;
+            });
+          }
+        },
+        listenInBackground: false);
+  }
+
   @override
   void dispose() {
     controller.dispose();
+    optController.dispose();
     super.dispose();
   }
 
@@ -40,6 +57,7 @@ class _PhoneNumberPageBodyState extends State<PhoneNumberPageBody> {
         if (state is SendPhoneNumberAuthSuccess) {
           getnav.Get.to(
               () => OptPhoneNumberPage(
+                optController: optController,
                   size: widget.size,
                   phoneNumber: number,
                   resendPhoneNumber: phoneNumber),
@@ -59,15 +77,14 @@ class _PhoneNumberPageBodyState extends State<PhoneNumberPageBody> {
                 maxLines: 3,
                 message:
                     "Apologies, but we've blocked requests from your device temporarily due to unusual activity. Please try again later. Thank you for your understanding.");
-          } 
-           if (state.errorMessage == 'network-request-failed') {
+          }
+          if (state.errorMessage == 'network-request-failed') {
             showTopSnackBarFailure(
                 context: context,
                 maxLines: 3,
                 message:
                     "Sorry, the network request failed. Please check your network connection and try again.");
-          } 
-          
+          }
         }
       },
       builder: (context, state) {
@@ -84,6 +101,7 @@ class _PhoneNumberPageBodyState extends State<PhoneNumberPageBody> {
               number = '${value.countryCode} ${value.number}';
             });
           },
+          listenToInComingSms: listenToInComingSms,
         );
       },
     );

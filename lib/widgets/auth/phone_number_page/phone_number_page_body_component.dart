@@ -15,7 +15,8 @@ class PhoneNumberPageBodyComponent extends StatelessWidget {
       required this.number,
       required this.onChanged,
       required this.signInWithPhone,
-      required this.isLoading});
+      required this.isLoading,
+      required this.listenToInComingSms});
 
   final Size size;
   final TextEditingController controller;
@@ -24,6 +25,7 @@ class PhoneNumberPageBodyComponent extends StatelessWidget {
   final Function(PhoneNumber) onChanged;
   final PhoneNumberAuthCubit signInWithPhone;
   final bool isLoading;
+  final Function() listenToInComingSms;
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +51,7 @@ class PhoneNumberPageBodyComponent extends StatelessWidget {
               if (phoneNumber.isNotEmpty) {
                 await signInWithPhone.signInWithPhoneNumber(
                     phoneNumber: phoneNumber);
-
+                listenToInComingSms();
                 debugPrint('phone number: $phoneNumber');
               }
             })

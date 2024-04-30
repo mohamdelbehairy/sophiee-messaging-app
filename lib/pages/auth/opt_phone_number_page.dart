@@ -3,6 +3,7 @@ import 'package:sophiee/cubit/auth/google_auth/google_auth_cubit.dart';
 import 'package:sophiee/cubit/auth/phone_number_auth/phone_number_auth_cubit.dart';
 import 'package:sophiee/pages/create_account/add_user_data_page.dart';
 import 'package:sophiee/pages/home_page.dart';
+
 import 'package:sophiee/widgets/auth/opt_phone_number_page/opt_phone_number_page_body.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -14,14 +15,14 @@ class OptPhoneNumberPage extends StatelessWidget {
       {super.key,
       required this.size,
       required this.phoneNumber,
-      required this.resendPhoneNumber});
+      required this.resendPhoneNumber,
+      required this.optController});
   final Size size;
   final String phoneNumber;
   final String resendPhoneNumber;
+  final TextEditingController optController;
 
   @override
-
-
   @override
   Widget build(BuildContext context) {
     var isUserDataStored = context.read<GoogleAuthCubit>();
@@ -34,17 +35,17 @@ class OptPhoneNumberPage extends StatelessWidget {
               debugPrint('لقد نجحنااااااااااااااااااااااااااا');
               debugPrint(
                   'isVerified: ${FirebaseAuth.instance.currentUser!.phoneNumber}');
-              await Future.delayed(const Duration(seconds: 3));
+              await Future.delayed(const Duration(seconds: 2));
               if (!await isUserDataStored.isUserDataStored(
                   userID: FirebaseAuth.instance.currentUser!.uid)) {
                 getnav.Get.to(() => const AddUserDataPage(),
                     transition: getnav.Transition.rightToLeft);
+                optController.clear();
               } else {
                 getnav.Get.to(() => const HomePage(),
                     transition: getnav.Transition.rightToLeft);
               }
             }
-         
           },
           builder: (context, state) {
             return Container(
@@ -61,7 +62,7 @@ class OptPhoneNumberPage extends StatelessWidget {
                       kPrimaryColor
                     ])),
                 child: OptPhoneNumberPageBody(
-                  
+                    optController: optController,
                     resendPhoneNumber: resendPhoneNumber,
                     verifyPhoneNumber: verifyPhoneNumber,
                     size: size,

@@ -8,6 +8,7 @@ import 'package:sophiee/widgets/auth/custom_phone_number_text.dart';
 import 'package:sophiee/widgets/auth/opt_phone_number_page/custom_opt_resend_code_text.dart';
 import 'package:sophiee/widgets/verification_page/verification_page_progress_indicator.dart';
 import 'package:flutter/material.dart';
+import 'package:telephony/telephony.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 class OptPhoneNumberPageBody extends StatefulWidget {
@@ -16,12 +17,14 @@ class OptPhoneNumberPageBody extends StatefulWidget {
       required this.size,
       required this.phoneNumber,
       required this.verifyPhoneNumber,
-      required this.resendPhoneNumber});
+      required this.resendPhoneNumber,
+      required this.optController});
 
   final Size size;
   final String phoneNumber;
   final String resendPhoneNumber;
   final PhoneNumberAuthCubit verifyPhoneNumber;
+  final TextEditingController optController;
 
   @override
   State<OptPhoneNumberPageBody> createState() => _OptPhoneNumberPageBodyState();
@@ -29,18 +32,23 @@ class OptPhoneNumberPageBody extends StatefulWidget {
 
 class _OptPhoneNumberPageBodyState extends State<OptPhoneNumberPageBody> {
   bool isLoading = false;
-  TextEditingController controller = TextEditingController();
+  final Telephony telephony = Telephony.instance;
+  String textReceived = '';
+
+  void startListening() {
+    telephony.listenIncomingSms(
+        onNewMessage: (SmsMessage message) {
+          setState(() {
+            textReceived = message.body!;
+          });
+        },
+        listenInBackground: false);
+  }
 
   void isLoadingMethod() async {
     setState(() {
       isLoading = true;
     });
-  }
-
-  @override
-  void dispose() {
-    controller.dispose();
-    super.dispose();
   }
 
   @override
@@ -57,7 +65,7 @@ class _OptPhoneNumberPageBodyState extends State<OptPhoneNumberPageBody> {
                 snackBarPosition: SnackBarPosition.bottom,
                 message:
                     'The verification code from SMS/TOTP is invalid. Please check and enter the correct verification code again.');
-            controller.clear();
+            widget.optController.clear();
           }
         }
       },
@@ -78,10 +86,10 @@ class _OptPhoneNumberPageBodyState extends State<OptPhoneNumberPageBody> {
                 textColor: Colors.white54,
                 textSize: widget.size.height * .014),
             CustomOptPinput(
-              controller: controller,
+              controller: widget.optController,
               onCompleted: (value) async {
-                await widget.verifyPhoneNumber
-                    .verifyPhoneNumber(smsCode: value);
+                await widget.verifyPhoneNumber.verifyPhoneNumber(
+                    smsCode: value.isNotEmpty ? value : textReceived);
                 setState(() {
                   isLoading = true;
                 });
