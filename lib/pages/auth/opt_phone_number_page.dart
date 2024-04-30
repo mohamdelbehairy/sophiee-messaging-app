@@ -20,6 +20,9 @@ class OptPhoneNumberPage extends StatelessWidget {
   final String resendPhoneNumber;
 
   @override
+
+
+  @override
   Widget build(BuildContext context) {
     var isUserDataStored = context.read<GoogleAuthCubit>();
     var verifyPhoneNumber = context.read<PhoneNumberAuthCubit>();
@@ -41,6 +44,7 @@ class OptPhoneNumberPage extends StatelessWidget {
                     transition: getnav.Transition.rightToLeft);
               }
             }
+         
           },
           builder: (context, state) {
             return Container(
@@ -57,6 +61,7 @@ class OptPhoneNumberPage extends StatelessWidget {
                       kPrimaryColor
                     ])),
                 child: OptPhoneNumberPageBody(
+                  
                     resendPhoneNumber: resendPhoneNumber,
                     verifyPhoneNumber: verifyPhoneNumber,
                     size: size,

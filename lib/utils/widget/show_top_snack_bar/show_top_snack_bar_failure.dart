@@ -6,10 +6,12 @@ void showTopSnackBarFailure(
     {required BuildContext context,
     required String message,
     int? maxLines,
-    Function()? onTap}) {
+    Function()? onTap,
+    SnackBarPosition? snackBarPosition,
+    }) {
   return showTopSnackBar(
       Overlay.of(context),
-      // snackBarPosition :SnackBarPosition.bottom,
+      snackBarPosition :snackBarPosition ?? SnackBarPosition.top,
       GestureDetector(
         onTap: onTap,
         child: CustomSnackBar.error(

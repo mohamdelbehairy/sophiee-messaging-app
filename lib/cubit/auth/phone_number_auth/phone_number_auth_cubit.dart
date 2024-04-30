@@ -12,20 +12,17 @@ class PhoneNumberAuthCubit extends Cubit<PhoneNumberAuthState> {
     emit(PhoneNumberAuthLoading(isLoading: true));
     await FirebaseAuth.instance.verifyPhoneNumber(
       phoneNumber: phoneNumber,
-      verificationCompleted: (PhoneAuthCredential credential) async {
-        
-      },
+      verificationCompleted: (PhoneAuthCredential credential) async {},
       verificationFailed: (FirebaseAuthException e) {
         if (e.code == 'invalid-phone-number') {
           emit(
               SendPhoneNumberAuthFailure(errorMessage: 'invalid-phone-number'));
         } else if (e.code == 'too-many-requests') {
           emit(SendPhoneNumberAuthFailure(errorMessage: 'too-many-requests'));
-        } else if(e.code == 'network-request-failed') {
-          emit(SendPhoneNumberAuthFailure(errorMessage: 'network-request-failed'));
-        }
-        
-         else {
+        } else if (e.code == 'network-request-failed') {
+          emit(SendPhoneNumberAuthFailure(
+              errorMessage: 'network-request-failed'));
+        } else {
           emit(SendPhoneNumberAuthFailure(errorMessage: e.toString()));
         }
 
@@ -50,6 +47,10 @@ class PhoneNumberAuthCubit extends Cubit<PhoneNumberAuthState> {
       await FirebaseAuth.instance.signInWithCredential(credential);
 
       emit(VerifyPhoneNumberAuthSuccess());
+    } on FirebaseAuthException catch (e) {
+      emit(VerifyPhoneNumberAuthFailure(
+          errorMessage: 'invalid-verification-code'));
+      debugPrint('error from verify phone number method: ${e.toString()}');
     } catch (e) {
       emit(VerifyPhoneNumberAuthFailure(errorMessage: e.toString()));
       debugPrint('error from verify phone number method: ${e.toString()}');

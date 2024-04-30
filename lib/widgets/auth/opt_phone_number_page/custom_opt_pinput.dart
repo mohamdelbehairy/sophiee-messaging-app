@@ -2,13 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:pinput/pinput.dart';
 
 class CustomOptPinput extends StatelessWidget {
-  const CustomOptPinput(
-      {super.key, required this.size, this.onCompleted});
+  const CustomOptPinput({super.key, required this.size, this.onCompleted, required this.controller});
 
   final Size size;
 
   final void Function(String)? onCompleted;
-
+  final TextEditingController controller;
 
   @override
   Widget build(BuildContext context) {
@@ -31,14 +30,17 @@ class CustomOptPinput extends StatelessWidget {
     final submittedPinTheme = defaultPinTheme.copyWith(
         decoration: defaultPinTheme.decoration
             ?.copyWith(color: const Color.fromRGBO(234, 239, 243, 1)));
+
     return Padding(
         padding: EdgeInsets.symmetric(
             vertical: size.width * .05, horizontal: size.width * .06),
         child: Pinput(
-            length: 6,
-            defaultPinTheme: defaultPinTheme,
-            focusedPinTheme: focusedPinTheme,
-            submittedPinTheme: submittedPinTheme,
-            onCompleted: onCompleted));
+          length: 6,
+          controller: controller,
+          defaultPinTheme: defaultPinTheme,
+          focusedPinTheme: focusedPinTheme,
+          submittedPinTheme: submittedPinTheme,
+          onCompleted: onCompleted,
+        ));
   }
 }
