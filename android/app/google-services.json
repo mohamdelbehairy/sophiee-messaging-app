@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "193753542082",
+    "project_id": "sophiee-messaging-app",
+    "storage_bucket": "sophiee-messaging-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:193753542082:android:36e4ae0c5aa9140cf47a5b",
+        "android_client_info": {
+          "package_name": "com.example.sophiee"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBOkL1OmXZz82Iy4RPkqEAYdhtkgWLBI0o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
