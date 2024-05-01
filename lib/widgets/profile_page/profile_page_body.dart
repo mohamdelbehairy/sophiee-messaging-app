@@ -10,6 +10,7 @@ import 'package:get/get.dart' as getnav;
 
 class ProfilePageBody extends StatelessWidget {
   const ProfilePageBody({super.key});
+ 
 
   @override
   Widget build(BuildContext context) {

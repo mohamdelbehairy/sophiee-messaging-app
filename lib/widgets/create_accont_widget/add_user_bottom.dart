@@ -67,6 +67,7 @@ class AddUserBottom extends StatelessWidget {
   onPressedCustomBottom() async {
     if (globalKey.currentState!.validate()) {
       globalKey.currentState!.save();
+
       String profileImage;
       if (pickImage.selectedImage != null) {
         profileImage = await uploadImage.uploadImage(

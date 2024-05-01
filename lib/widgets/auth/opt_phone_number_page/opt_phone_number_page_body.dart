@@ -45,12 +45,6 @@ class _OptPhoneNumberPageBodyState extends State<OptPhoneNumberPageBody> {
         listenInBackground: false);
   }
 
-  void isLoadingMethod() async {
-    setState(() {
-      isLoading = true;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return BlocListener<PhoneNumberAuthCubit, PhoneNumberAuthState>(

@@ -38,12 +38,16 @@ class OptPhoneNumberPage extends StatelessWidget {
               await Future.delayed(const Duration(seconds: 2));
               if (!await isUserDataStored.isUserDataStored(
                   userID: FirebaseAuth.instance.currentUser!.uid)) {
-                getnav.Get.to(() => const AddUserDataPage(),
+                getnav.Get.to(
+                    () => const AddUserDataPage(),
                     transition: getnav.Transition.rightToLeft);
+                Future.delayed(const Duration(seconds: 2));
                 optController.clear();
               } else {
                 getnav.Get.to(() => const HomePage(),
                     transition: getnav.Transition.rightToLeft);
+                Future.delayed(const Duration(seconds: 2));
+                optController.clear();
               }
             }
           },

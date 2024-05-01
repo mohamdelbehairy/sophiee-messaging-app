@@ -8,6 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AddUserDataPage extends StatelessWidget {
   const AddUserDataPage({super.key});
+  
 
   @override
   Widget build(BuildContext context) {
@@ -18,16 +19,15 @@ class AddUserDataPage extends StatelessWidget {
     return PopScope(
         canPop: false,
         child: Scaffold(
-            // backgroundColor: Colors.white,
             appBar: AppBar(
                 automaticallyImplyLeading: false,
-                // titleSpacing: size.width * -.005,
                 backgroundColor: kPrimaryColor,
                 title: Text('Fill Your Profile',
                     style: TextStyle(
                         fontSize: size.width * .05,
                         fontWeight: FontWeight.normal))),
             body: AddUserDataPageBody(
+               
                 storeUserData: storeUserData,
                 uploadImage: uploadImage,
                 size: size,

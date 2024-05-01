@@ -11,12 +11,14 @@ class CustomAddUserDataPageBody extends StatefulWidget {
       required this.pickImage,
       required this.storeUserDate,
       required this.uploadImage,
-      required this.isLoading});
+      required this.isLoading
+      });
   final Size size;
   final PickImageCubit pickImage;
   final StoreUserDateCubit storeUserDate;
   final UploadImageCubit uploadImage;
   final bool isLoading;
+
 
   @override
   State<CustomAddUserDataPageBody> createState() =>
@@ -34,6 +36,7 @@ class _CustomAddUserDataPageBodyState extends State<CustomAddUserDataPageBody> {
   GlobalKey<FormState> globalKey = GlobalKey();
 
   @override
+  @override
   void dispose() {
     fullName.dispose();
     nickName.dispose();
@@ -49,6 +52,7 @@ class _CustomAddUserDataPageBodyState extends State<CustomAddUserDataPageBody> {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: widget.size.width * .04),
       child: AddUserDataPageBodyComponent(
+         
           isLoading: widget.isLoading,
           globalKey: globalKey,
           widget: widget,
