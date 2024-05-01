@@ -48,6 +48,7 @@ dependencies:
   flutter_bloc: ^8.1.3
   flutter_file_downloader: ^1.2.1
   flutter_linkify: ^6.0.0
+  flutter_native_splash: ^2.4.0
   flutter_pdfview: ^1.3.2
   flutter_scroll_to_index: ^3.0.0
   flutter_slidable: ^3.0.1
@@ -89,7 +90,7 @@ dev_dependencies:
   flutter_launcher_icons: ^0.13.1
   flutter_lints: ^3.0.0
   flutter_test:
-    sdk: flutter    
+    sdk: flutter
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
