@@ -13,7 +13,7 @@ class ProfilePageAppBar extends StatelessWidget {
       width: size.width,
       decoration: const BoxDecoration(color: kPrimaryColor),
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: size.width * .05),
+        padding: EdgeInsets.symmetric(horizontal: size.width * .045),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
