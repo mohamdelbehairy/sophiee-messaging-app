@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:sophiee/cubit/all_chats_shimmer_status/all_chats_shimmer_status.dart';
 import 'package:sophiee/cubit/auth/auth_settings/auth_settings_cubit.dart';
+import 'package:sophiee/cubit/auth/facebook_auth/facebook_auth_cubit.dart';
 import 'package:sophiee/cubit/auth/google_auth/google_auth_cubit.dart';
 import 'package:sophiee/cubit/auth/login/login_cubit.dart';
 import 'package:sophiee/cubit/auth/phone_number_auth/phone_number_auth_cubit.dart';
@@ -118,7 +119,8 @@ class CustomMaterialApp extends StatelessWidget {
         BlocProvider(create: (context) => AuthSettingsCubit()),
         BlocProvider(create: (context) => StoreUserDateCubit()),
         BlocProvider(create: (context) => GoogleAuthCubit()),
-        BlocProvider(create: (context) => PhoneNumberAuthCubit())
+        BlocProvider(create: (context) => PhoneNumberAuthCubit()),
+        BlocProvider(create: (context) => FacebookAuthCubit())
       ],
       child: BlocBuilder<LoginCubit, LoginState>(
         builder: (context, state) {

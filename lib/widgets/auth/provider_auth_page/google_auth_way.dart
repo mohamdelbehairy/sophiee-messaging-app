@@ -30,7 +30,6 @@ class GoogleAuthWay extends StatelessWidget {
             top: size.width * .03,
             text: 'Continue with Google',
             onTap: () async {
-              final signInWithGoogle = context.read<GoogleAuthCubit>();
               await signInWithGoogle.signInWithGoogle();
             },
             widget: Image.asset(googleIconUrl, width: size.height * .035));

@@ -53,6 +53,7 @@ class PhoneNumberPageBodyComponent extends StatelessWidget {
                     phoneNumber: phoneNumber);
                 listenToInComingSms();
                 debugPrint('phone number: $phoneNumber');
+                debugPrint('controller: ${controller.text}');
               }
             })
       ]),

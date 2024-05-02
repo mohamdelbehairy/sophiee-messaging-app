@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">sohiee app</string>
+    <string name="facebook_app_id">779118070989731</string>
+    <string name="fb_login_protocol_scheme">fb779118070989731</string>
+    <string name="facebook_client_token">201bbb7a137fcdbcbf4f36bab35a218c</string>
+</resources>

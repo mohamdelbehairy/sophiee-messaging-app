@@ -26,19 +26,6 @@ class _PhoneNumberPageBodyState extends State<PhoneNumberPageBody> {
   String phoneNumber = '';
   String number = '';
 
-  void listenToInComingSms() {
-    telephony.listenIncomingSms(
-        onNewMessage: (SmsMessage message) {
-          if (message.body!.contains('sophiee-messaging-app')) {
-            String optCode = message.body!.substring(0, 6);
-            setState(() {
-              optController.text = optCode;
-            });
-          }
-        },
-        listenInBackground: false);
-  }
-
   @override
   void dispose() {
     controller.dispose();
@@ -57,9 +44,9 @@ class _PhoneNumberPageBodyState extends State<PhoneNumberPageBody> {
         if (state is SendPhoneNumberAuthSuccess) {
           getnav.Get.to(
               () => OptPhoneNumberPage(
-                optController: optController,
+                  optController: optController,
                   size: widget.size,
-                  phoneNumber: number,
+                  phoneNumber: phoneNumber,
                   resendPhoneNumber: phoneNumber),
               transition: getnav.Transition.rightToLeft);
         }
@@ -105,5 +92,18 @@ class _PhoneNumberPageBodyState extends State<PhoneNumberPageBody> {
         );
       },
     );
+  }
+
+  void listenToInComingSms() {
+    telephony.listenIncomingSms(
+        onNewMessage: (SmsMessage message) {
+          if (message.body!.contains('sophiee-messaging-app')) {
+            String optCode = message.body!.substring(0, 6);
+            setState(() {
+              optController.text = optCode;
+            });
+          }
+        },
+        listenInBackground: false);
   }
 }

@@ -1,12 +1,11 @@
-import 'package:sophiee/constants.dart';
 import 'package:sophiee/widgets/auth/provider_auth_page/continue_with_email.dart';
-import 'package:sophiee/widgets/auth/provider_auth_page/custom_provider_way.dart';
 import 'package:sophiee/widgets/auth/provider_auth_page/custom_text.dart';
+import 'package:sophiee/widgets/auth/provider_auth_page/facebook_auth_way.dart';
 import 'package:sophiee/widgets/auth/provider_auth_page/google_auth_way.dart';
 import 'package:sophiee/widgets/auth/provider_auth_page/phone_number_auth_way.dart';
+import 'package:sophiee/widgets/auth/provider_auth_page/provider_auth_page_custom_image.dart';
 import 'package:sophiee/widgets/auth/provider_auth_page/provider_divider.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class ProviderAuthPageBodyComponent extends StatelessWidget {
   const ProviderAuthPageBodyComponent({super.key, required this.size});
@@ -19,16 +18,9 @@ class ProviderAuthPageBodyComponent extends StatelessWidget {
       padding: EdgeInsets.only(top: size.height * .1),
       child: Column(
         children: [
-          Image.asset(providerAuthPageImageUrl,
-              fit: BoxFit.cover, height: size.height * .35),
+          ProviderAuthPageCustomImage(size: size),
           ProviderAuthPageCustomtext(size: size),
-          CustomProviderWay(
-              isLoading: false,
-              size: size,
-              top: size.width * .05,
-              text: 'Continue with Facebook',
-              onTap: () {},
-              widget: const Icon(FontAwesomeIcons.facebook, color: Colors.blue)),
+          FacebookAuthWay(size: size),
           GoogleAuthWay(size: size),
           PhoneNumberAuthWay(size: size),
           SizedBox(height: size.width * .06),
@@ -39,3 +31,5 @@ class ProviderAuthPageBodyComponent extends StatelessWidget {
     );
   }
 }
+
+
