@@ -9,8 +9,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart' as getnav;
 
 class ProfilePageBody extends StatelessWidget {
-  const ProfilePageBody({super.key});
- 
+  const ProfilePageBody({super.key, required this.size});
+  final Size size;
 
   @override
   Widget build(BuildContext context) {
@@ -25,14 +25,15 @@ class ProfilePageBody extends StatelessWidget {
                 .firstWhere((element) => element.userID == currentUser.uid);
             TextEditingController controller =
                 TextEditingController(text: userData.bio);
-           
+
             return CustomProfilePageBody(
+              size: size,
               user: userData,
               onTap: () {
                 getnav.Get.to(
                     () =>
                         EditProfilePage(user: userData, controller: controller),
-                    transition: getnav.Transition.leftToRight);
+                    transition: getnav.Transition.rightToLeft);
               },
             );
           } else {

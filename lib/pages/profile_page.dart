@@ -8,10 +8,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
- 
 
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
     return Scaffold(
       body: BlocBuilder<AllChatsShimmerStatusCubit, bool>(
         builder: (context, isLoading) {
@@ -19,14 +19,10 @@ class ProfilePage extends StatelessWidget {
             builder: (context, state) {
               if (state == ConnectivityResult.wifi ||
                   state == ConnectivityResult.mobile) {
-                return isLoading ? const ProfilePageShimmer() :  const ProfilePageBody();
+                return isLoading
+                    ? const ProfilePageShimmer()
+                    : ProfilePageBody(size: size);
               } else {
-                // WidgetsBinding.instance.addPostFrameCallback((_) {
-                //
-                //   showTopSnackBar(Overlay.of(context),
-                //       snackBarPosition: SnackBarPosition.bottom,
-                //       CustomSnackBar.error(message: 'Please check your internet connection and try again.'));
-                // });
                 return const ProfilePageShimmer();
               }
             },

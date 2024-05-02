@@ -2,7 +2,7 @@ import 'package:sophiee/cubit/auth/login/login_cubit.dart';
 import 'package:sophiee/utils/shimmer/home/profile/custom_card_one_shimmer.dart';
 import 'package:sophiee/utils/shimmer/home/profile/custom_card_three_shimmer.dart';
 import 'package:sophiee/utils/shimmer/home/profile/custom_card_two_shimmer.dart';
-import 'package:sophiee/widgets/profile_page/app_bar_profile.dart';
+import 'package:sophiee/widgets/profile_page/profile_page_app_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -25,7 +25,7 @@ class ProfilePageShimmer extends StatelessWidget {
             Expanded(
               child: Stack(
                 children: [
-                  const CustomAppBarProfile(),
+                  ProfilePageAppBar(size: size),
                   Positioned(
                     child: Padding(
                       padding: const EdgeInsets.only(top: 100, right: 16, left: 16),
