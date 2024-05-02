@@ -27,7 +27,8 @@ _init() async {
   final token = prefs.getString('userID');
   final isFirstTimeUser = prefs.getString('isFirstTimeUser');
   if (token != null &&
-      (FirebaseAuth.instance.currentUser!.phoneNumber != null ||
+      ((FirebaseAuth.instance.currentUser!.phoneNumber != null &&
+              FirebaseAuth.instance.currentUser!.phoneNumber!.isNotEmpty) ||
           FirebaseAuth.instance.currentUser!.emailVerified)) {
     // UpdateUserOnline.checkOnline();
     return runApp(const SophieeApp(screen: HomePage()));

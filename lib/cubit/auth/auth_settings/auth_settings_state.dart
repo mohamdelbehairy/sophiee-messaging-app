@@ -13,6 +13,8 @@ final class EmailSignOutSuccess extends AuthSettingsState {}
 
 final class GoogleSignOutSuccess extends AuthSettingsState {}
 
+final class FacebookSignOutSuccess extends AuthSettingsState {}
+
 final class VerificationEmailSuccess extends AuthSettingsState {}
 
 final class AuthSettingsFailure extends AuthSettingsState {

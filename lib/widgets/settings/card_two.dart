@@ -1,5 +1,6 @@
 import 'package:sophiee/constants.dart';
 import 'package:sophiee/cubit/auth/auth_settings/auth_settings_cubit.dart';
+import 'package:sophiee/cubit/auth/facebook_auth/facebook_auth_cubit.dart';
 import 'package:sophiee/cubit/auth/google_auth/google_auth_cubit.dart';
 import 'package:sophiee/cubit/auth/login/login_cubit.dart';
 import 'package:sophiee/cubit/get_friends/get_friends_cubit.dart';
@@ -28,8 +29,11 @@ class _CustomCardTwoState extends State<CustomCardTwo> {
   void logOut() async {
     var signOut = context.read<AuthSettingsCubit>();
     if (widget.user.isGoogleAuth != null) {
-      signOut.googleSignOut();
       context.read<GoogleAuthCubit>().isLoading = false;
+      await signOut.googleSignOut();
+    } else if (widget.user.isFacebookAuth != null) {
+      context.read<FacebookAuthCubit>().isLoading = false;
+      await signOut.facebookSignOut();
     } else {
       signOut.signOut();
     }
@@ -49,7 +53,9 @@ class _CustomCardTwoState extends State<CustomCardTwo> {
   Widget build(BuildContext context) {
     return BlocListener<AuthSettingsCubit, AuthSettingsState>(
       listener: (context, state) async {
-        if (state is EmailSignOutSuccess || state is GoogleSignOutSuccess) {
+        if (state is EmailSignOutSuccess ||
+            state is GoogleSignOutSuccess ||
+            state is FacebookSignOutSuccess) {
           context.read<GetFriendsCubit>().emit(GetFriendsInitial());
           final shar = await SharedPreferences.getInstance();
           shar.setString('isFirstTimeUser', 'done');

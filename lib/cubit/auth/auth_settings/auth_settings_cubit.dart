@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -44,6 +45,19 @@ class AuthSettingsCubit extends Cubit<AuthSettingsState> {
     } catch (e) {
       emit(AuthSettingsFailure(errorMessage: e.toString()));
       debugPrint('error from google sign out method: ${e.toString()}');
+    }
+  }
+
+  Future<void> facebookSignOut() async {
+    try {
+      FacebookAuth facebookAuth = FacebookAuth.instance;
+      await facebookAuth.logOut();
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      prefs.clear();
+      emit(FacebookSignOutSuccess());
+    } catch (e) {
+      emit(AuthSettingsFailure(errorMessage: e.toString()));
+      debugPrint('error from facebook sign out method: ${e.toString()}');
     }
   }
 
