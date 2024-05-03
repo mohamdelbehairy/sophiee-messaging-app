@@ -12,6 +12,8 @@ final class GetFriendsSuccess extends GetFriendsState {
   GetFriendsSuccess({required this.friends});
 }
 
+final class IsFriendsFoundSuccess extends GetFriendsState {}
+
 final class GetFriendsFailure extends GetFriendsState {
   final String errorMessage;
 

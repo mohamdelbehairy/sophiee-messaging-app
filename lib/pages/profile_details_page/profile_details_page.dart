@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 
 class ProfileDetailsPage extends StatelessWidget {
   const ProfileDetailsPage(
-      {super.key, required this.user, required this.index});
+      {super.key, 
+      required this.user
+      , required this.index});
   final UserModel user;
   final int index;
 

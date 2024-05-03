@@ -16,26 +16,23 @@ class ProfilePageCardOneFollowing extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<GetFollowingCubit, GetFollowingState>(
-      builder: (context, state) {
-        if (state is GetFollowingSuccess) {
-          return GestureDetector(
-            onTap: () {
-              getnav.Get.to(() => ProfileDetailsPage(index: 1, user: user),
-                  transition: getnav.Transition.leftToRight);
-            },
-            child: CustomProfileInfo(
-              numberInfo: '${following.followingList.length}',
+    return GestureDetector(
+      onTap: () => getnav.Get.to(() => ProfileDetailsPage(index: 1, user: user),
+          transition: getnav.Transition.rightToLeft),
+      child: BlocBuilder<GetFollowingCubit, GetFollowingState>(
+        builder: (context, state) {
+          if (state is GetFollowingSuccess) {
+            return CustomProfileInfo(
+                numberInfo: '${following.followingList.length}',
+                textInfo: 'Following');
+          } else {
+            return const CustomProfileInfo(
+              numberInfo: '0',
               textInfo: 'Following',
-            ),
-          );
-        } else {
-          return const CustomProfileInfo(
-            numberInfo: '0',
-            textInfo: 'Following',
-          );
-        }
-      },
+            );
+          }
+        },
+      ),
     );
   }
 }

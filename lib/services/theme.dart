@@ -38,18 +38,15 @@ class ThemeModeService {
   ThemeData darkMode({required BuildContext context}) {
     final size = MediaQuery.of(context).size;
     return ThemeData(
-        scaffoldBackgroundColor: const Color(0xff2b2c33),
+        scaffoldBackgroundColor: const Color(0xff2b2c28),
         fontFamily: 'SFPRODISPLAYBOLD',
-        iconTheme: const IconThemeData(
-          color: Colors.white,
-        ),
+        iconTheme: const IconThemeData(color: Colors.white),
         appBarTheme: AppBarTheme(
           elevation: 0.0,
           titleTextStyle: TextStyle(
-            color: Colors.white,
-            fontSize: size.width * .06,
-            fontWeight: FontWeight.bold,
-          ),
+              color: Colors.white,
+              fontSize: size.width * .06,
+              fontWeight: FontWeight.bold),
           iconTheme:
               IconThemeData(color: Colors.white, size: size.height * .034),
           systemOverlayStyle: const SystemUiOverlayStyle(

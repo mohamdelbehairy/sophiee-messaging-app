@@ -39,7 +39,7 @@ class ProfilePageCardOneBodyComponent extends StatelessWidget {
         ],
       ),
       child: Card(
-        color: isDark ? const Color(0xff2b2c28) : Colors.white,
+        color: isDark ? const Color(0xff2b2c33) : Colors.white,
         elevation: 0,
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(size.width * .02)),

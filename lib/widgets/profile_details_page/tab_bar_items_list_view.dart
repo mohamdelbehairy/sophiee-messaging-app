@@ -26,12 +26,13 @@ class TabBarItemsListTile extends StatelessWidget {
             padding: EdgeInsets.only(top: size.width * .04),
             child: ListTile(
               title: Text(data.userName,
-                  style:
-                      TextStyle(color: isDark ? Colors.white : Colors.black)),
+                  style: TextStyle(
+                      color: isDark ? Colors.white : Colors.black,
+                      fontSize: size.width * .038)),
               leading: Stack(
                 children: [
                   CircleAvatar(
-                    radius: size.height * .03,
+                    radius: size.height * .028,
                     backgroundColor: Colors.transparent,
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(30),
@@ -47,7 +48,7 @@ class TabBarItemsListTile extends StatelessWidget {
                   if (widget != null) widget!
                 ],
               ),
-              subtitle: Text(data.bio,
+              subtitle: Text(data.nickName,
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(

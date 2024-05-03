@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sophiee/cubit/get_following/get_following_state.dart';
@@ -35,5 +36,17 @@ class GetFollowingCubit extends Cubit<GetFollowingState> {
       emit(GetFollowingFailure(errorMessage: e.toString()));
       debugPrint('error from get follow result cubit: ${e.toString()}');
     }
+  }
+
+  Future<bool> isFollowingFound() async {
+    final docSnapshot = await FirebaseFirestore.instance
+        .collection('followers')
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .collection('followers')
+        .get();
+    if (docSnapshot.docs.isEmpty) {
+      emit(IsFollowingFoundSuccess());
+    }
+    return docSnapshot.docs.isEmpty;
   }
 }

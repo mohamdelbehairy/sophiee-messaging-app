@@ -73,7 +73,7 @@ class _HomePageState extends State<HomePage> {
                         ? BottomNavigationShimmer(isDark: isDark)
                         : NavigationBar(
                             backgroundColor:
-                                isDark ? Colors.black26 : Colors.white10,
+                                isDark ? const Color(0xff2b2c33) : Colors.white10,
                             onDestinationSelected: (selectedIndex) {
                               setState(() {
                                 index = selectedIndex;

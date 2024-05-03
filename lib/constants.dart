@@ -23,3 +23,5 @@ const providerAuthPageImageUrl = 'assets/images/provider-auth.png';
 const googleIconUrl = 'assets/images/google-icon.png';
 
 const phoneNumberImageUrl = 'assets/images/phone-number.png';
+
+const noItemFoundLottieUrl = "assets/lottie/Animation - 1714723129676.json";
