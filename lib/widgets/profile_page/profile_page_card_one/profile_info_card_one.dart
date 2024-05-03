@@ -23,7 +23,7 @@ class ProfileInfoCardOne extends StatelessWidget {
             horizontalTitleGap: size.width * .03,
             leading:
                 CardOneProfileImage(size: size, isDark: isDark, user: user),
-            title: CardOneTitle(user: user, size: size),
+            title: CardOneTitle(user: user, size: size,isDark: isDark),
             subtitle: user.nickName.isNotEmpty
                 ? CardOneSubTitle(user: user, size: size)
                 : const SizedBox()));
