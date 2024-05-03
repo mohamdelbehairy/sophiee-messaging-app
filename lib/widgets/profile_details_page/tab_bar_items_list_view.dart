@@ -25,17 +25,23 @@ class TabBarItemsListTile extends StatelessWidget {
           return Padding(
             padding: EdgeInsets.only(top: size.width * .04),
             child: ListTile(
-              title: Text(data.userName,
-                  style: TextStyle(
-                      color: isDark ? Colors.white : Colors.black,
-                      fontSize: size.width * .038)),
+              title: Padding(
+                padding: EdgeInsets.only(
+                    top: data.bio.isEmpty && data.nickName.isEmpty
+                        ? size.width * .02
+                        : 0),
+                child: Text(data.userName,
+                    style: TextStyle(
+                        color: isDark ? Colors.white : Colors.black,
+                        fontSize: size.width * .038)),
+              ),
               leading: Stack(
                 children: [
                   CircleAvatar(
-                    radius: size.height * .028,
+                    radius: size.height * .025,
                     backgroundColor: Colors.transparent,
                     child: ClipRRect(
-                      borderRadius: BorderRadius.circular(30),
+                      borderRadius: BorderRadius.circular(size.height * .03),
                       child: FancyShimmerImage(
                           boxFit: BoxFit.cover,
                           shimmerBaseColor:
@@ -48,7 +54,7 @@ class TabBarItemsListTile extends StatelessWidget {
                   if (widget != null) widget!
                 ],
               ),
-              subtitle: Text(data.nickName,
+              subtitle: Text(data.bio.isNotEmpty ? data.bio : data.nickName,
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(

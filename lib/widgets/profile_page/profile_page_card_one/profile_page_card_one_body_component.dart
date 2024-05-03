@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sophiee/constants.dart';
 import 'package:sophiee/cubit/get_followers/get_followers_cubit.dart';
 import 'package:sophiee/cubit/get_following/get_following_cubit.dart';
 import 'package:sophiee/models/users_model.dart';
@@ -39,7 +40,7 @@ class ProfilePageCardOneBodyComponent extends StatelessWidget {
         ],
       ),
       child: Card(
-        color: isDark ? const Color(0xff2b2c33) : Colors.white,
+        color: isDark ? kDarkModeColor : Colors.white,
         elevation: 0,
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(size.width * .02)),

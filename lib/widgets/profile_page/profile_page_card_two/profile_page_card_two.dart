@@ -1,3 +1,4 @@
+import 'package:sophiee/constants.dart';
 import 'package:sophiee/cubit/auth/login/login_cubit.dart';
 import 'package:sophiee/widgets/profile_page/profile_page_card_two/friends_list_view.dart';
 import 'package:flutter/material.dart';
@@ -21,7 +22,7 @@ class ProfilePageCardTwo extends StatelessWidget {
           color: Colors.transparent,
           boxShadow: [BoxShadow(blurRadius: 0, color: Colors.transparent)]),
       child: Card(
-        color: isDark ? const Color(0xff2b2c33) : Colors.white,
+        color: isDark ? kDarkModeColor : Colors.white,
         elevation: 0,
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(size.width * .02)),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:sophiee/constants.dart';
 
 class ThemeModeService {
   ThemeData lightMode({required BuildContext context}) {
@@ -38,7 +39,7 @@ class ThemeModeService {
   ThemeData darkMode({required BuildContext context}) {
     final size = MediaQuery.of(context).size;
     return ThemeData(
-        scaffoldBackgroundColor: const Color(0xff2b2c28),
+        scaffoldBackgroundColor: kDarkModeBackgroundColor,
         fontFamily: 'SFPRODISPLAYBOLD',
         iconTheme: const IconThemeData(color: Colors.white),
         appBarTheme: AppBarTheme(
