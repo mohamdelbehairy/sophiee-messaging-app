@@ -1,21 +1,17 @@
 import 'package:sophiee/cubit/auth/login/login_cubit.dart';
-import 'package:sophiee/widgets/profile_page/profile_page_card_two/friends_list_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sophiee/utils/widget/profile_page_row_see_all.dart';
-import 'package:sophiee/pages/friends_page.dart';
-import 'package:get/get.dart' as getnav;
 
-class ProfilePageCardTwo extends StatelessWidget {
-  const ProfilePageCardTwo({super.key, required this.size});
+class ProfilePageCardThree extends StatelessWidget {
+  const ProfilePageCardThree({super.key, required this.size});
   final Size size;
-
   @override
   Widget build(BuildContext context) {
     final isDark = context.read<LoginCubit>().isDark;
 
     return Container(
-      height: size.height * .145,
+      height: size.height * .3,
       width: size.width,
       decoration: const BoxDecoration(
           color: Colors.transparent,
@@ -30,12 +26,9 @@ class ProfilePageCardTwo extends StatelessWidget {
             ProfilePageRowSeeAll(
                 size: size,
                 isDark: isDark,
-                textOne: 'Friends',
+                textOne: 'Photos',
                 textTwo: 'See all',
-                onPressed: () => getnav.Get.to(() => const FriendsPage(),
-                    transition: getnav.Transition.rightToLeft)),
-            FriendsListView(size: size),
-            SizedBox(height: size.width * .06)
+                onPressed: () {})
           ],
         ),
       ),

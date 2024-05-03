@@ -1,13 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:sophiee/pages/friends_page.dart';
-import 'package:get/get.dart' as getnav;
 
-class ProfilePageCardTwoFriendsText extends StatelessWidget {
-  const ProfilePageCardTwoFriendsText(
-      {super.key, required this.size, required this.isDark});
+
+class ProfilePageRowSeeAll extends StatelessWidget {
+  const ProfilePageRowSeeAll(
+      {super.key,
+      required this.size,
+      required this.isDark,
+      required this.textOne,
+      required this.textTwo, required this.onPressed});
 
   final Size size;
   final bool isDark;
+  final String textOne;
+  final String textTwo;
+  final Function() onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -16,17 +22,14 @@ class ProfilePageCardTwoFriendsText extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text('Friends',
+          Text(textOne,
               style: TextStyle(
                   color: isDark ? Colors.white : Colors.black,
                   fontSize: size.height * .02)),
           TextButton(
-            onPressed: () {
-              getnav.Get.to(() => const FriendsPage(),
-                  transition: getnav.Transition.rightToLeft);
-            },
+            onPressed: onPressed,
             child: Text(
-              'See all',
+              textTwo,
               style: TextStyle(
                   color: Colors.blue,
                   fontSize: size.width * .04,
