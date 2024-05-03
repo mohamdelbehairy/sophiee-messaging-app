@@ -1,13 +1,13 @@
 import 'package:sophiee/cubit/auth/login/login_cubit.dart';
 import 'package:sophiee/cubit/get_friends/get_friends_cubit.dart';
 import 'package:sophiee/cubit/get_friends/get_friends_state.dart';
-import 'package:sophiee/widgets/profile_page/card_two_profile/friends_number_icon.dart';
-import 'package:sophiee/widgets/profile_page/card_two_profile/show_friends_image.dart';
+import 'package:sophiee/widgets/profile_page/profile_page_card_two/friends_number_icon.dart';
+import 'package:sophiee/widgets/profile_page/profile_page_card_two/show_friends_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class CustomProfileListView extends StatelessWidget {
-  const CustomProfileListView({super.key, required this.size});
+class FriendsListView extends StatelessWidget {
+  const FriendsListView({super.key, required this.size});
   final Size size;
 
   @override

@@ -30,18 +30,16 @@ class ProfilePageCardOneBodyComponent extends StatelessWidget {
     return Container(
       height: size.height * .38,
       width: size.width,
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: Colors.transparent,
         boxShadow: [
           BoxShadow(
-              blurRadius: 40,
-              color: isDark
-                  ? Colors.grey.withOpacity(.01)
-                  : Colors.grey.withOpacity(.4))
+              blurRadius: 0,
+              color: Colors.transparent)
         ],
       ),
       child: Card(
-        color: isDark ? const Color(0xff2b2c33) : Colors.white,
+        color: isDark ? const Color(0xff2b2c28) : Colors.white,
         elevation: 0,
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(size.width * .02)),

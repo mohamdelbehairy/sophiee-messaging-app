@@ -25,10 +25,7 @@ class ProfilePageCardOneBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(
-          right: size.width * .035,
-          top: size.width * .02,
-          left: size.width * .035),
+      padding: EdgeInsets.only(top: size.width * .02),
       child: ProfilePageCardOneBodyComponent(
           size: size,
           isDark: isDark,

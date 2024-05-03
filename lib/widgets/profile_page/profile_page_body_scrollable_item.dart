@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sophiee/models/users_model.dart';
 import 'package:sophiee/widgets/profile_page/profile_page_card_one/profile_page_card_one.dart';
 import 'package:sophiee/widgets/profile_page/card_three_profile/custom_card_three.dart';
-import 'package:sophiee/widgets/profile_page/card_two_profile/custom_card_two.dart';
+import 'package:sophiee/widgets/profile_page/profile_page_card_two/profile_page_card_two.dart';
 
 class ProfilePageBodyScrollableItem extends StatelessWidget {
   const ProfilePageBodyScrollableItem(
@@ -29,14 +29,17 @@ class ProfilePageBodyScrollableItem extends StatelessWidget {
                   Expanded(
                     child: SizedBox(
                       width: size.width,
-                      child: Column(
-                        children: [
-                          ProfilePageCardOne(user: user, onTap: onTap,size: size),
-                          const SizedBox(height: 10),
-                          const CustomProfileCardTwo(),
-                          const SizedBox(height: 8),
-                          const CustomProfileCardThree(),
-                        ],
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(horizontal: size.width * .035),
+                        child: Column(
+                          children: [
+                            ProfilePageCardOne(user: user, onTap: onTap,size: size),
+                             SizedBox(height: size.width *.025),
+                             ProfilePageCardTwo(size: size),
+                            const SizedBox(height: 8),
+                            const CustomProfileCardThree(),
+                          ],
+                        ),
                       ),
                     ),
                   ),
