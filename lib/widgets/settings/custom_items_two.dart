@@ -5,18 +5,20 @@ class CustomItemsTwo extends StatelessWidget {
       {super.key,
       required this.color,
       required this.icon,
-      required this.size,
+      required this.iconSize,
       required this.text,
       this.icon2,
       this.enableFeedback = true,
-      required this.textColor});
+      required this.textColor,
+      required this.size});
   final Color color;
   final IconData icon;
-  final double size;
+  final double iconSize;
   final String text;
   final IconData? icon2;
   final bool enableFeedback;
   final Color textColor;
+  final Size size;
 
   @override
   Widget build(BuildContext context) {
@@ -26,23 +28,15 @@ class CustomItemsTwo extends StatelessWidget {
         Row(
           children: [
             CircleAvatar(
-              radius: 18,
-              backgroundColor: color,
-              child: Icon(
-                icon,
-                color: Colors.white,
-                size: size,
-              ),
-            ),
-            const SizedBox(width: 8),
-            Text(
-              text,
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 16,
-                color: textColor,
-              ),
-            )
+                radius: size.width * .042,
+                backgroundColor: color,
+                child: Icon(icon, color: Colors.white, size: iconSize)),
+            SizedBox(width: size.width * .02),
+            Text(text,
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: size.width * .039,
+                    color: textColor))
           ],
         ),
         IconButton(
@@ -52,7 +46,7 @@ class CustomItemsTwo extends StatelessWidget {
           highlightColor: Colors.white,
           icon: Icon(
             icon2,
-            size: 18,
+            size: size.width * .044,
             color: Colors.grey,
           ),
         ),

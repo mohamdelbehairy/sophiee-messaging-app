@@ -6,16 +6,18 @@ class CustomSwitchIcon extends StatelessWidget {
       {super.key,
       required this.size,
       required this.onChanged,
-      required this.value});
+      required this.value,
+      this.height});
 
   final Size size;
   final Function(bool) onChanged;
   final bool value;
+  final double? height;
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-        height: size.height * .02,
+        height: height ?? size.height * .02,
         width: size.height * .05,
         child: Switch(
             value: value,

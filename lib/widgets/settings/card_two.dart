@@ -65,16 +65,14 @@ class _CustomCardTwoState extends State<CustomCardTwo> {
       child: BlocBuilder<LoginCubit, LoginState>(
         builder: (context, state) {
           return Padding(
-            padding: const EdgeInsets.only(top: 12, left: 12, right: 12),
+            padding: const EdgeInsets.only(left: 12, right: 12),
             child: Container(
               height: 155,
               width: MediaQuery.of(context).size.width,
               decoration: BoxDecoration(color: Colors.transparent, boxShadow: [
                 BoxShadow(
-                  blurRadius: 40,
-                  color: context.read<LoginCubit>().isDark
-                      ? Colors.grey.withOpacity(.1)
-                      : Colors.grey.withOpacity(.4),
+                  blurRadius: 0,
+                  color: Colors.transparent,
                   // spreadRadius: 10,
                   // offset: Offset(10, 10),
                 )
@@ -91,13 +89,14 @@ class _CustomCardTwoState extends State<CustomCardTwo> {
                       InkWell(
                         onTap: onTap,
                         child: CustomItemsTwo(
+                          size: widget.size,
                             textColor: context.read<LoginCubit>().isDark
                                 ? Colors.white
                                 : Colors.black,
                             enableFeedback: false,
                             color: Colors.orange,
                             icon: Icons.lock,
-                            size: 18,
+                            iconSize: 18,
                             text: 'Logout'),
                       ),
                       if (showProgressIndicator)
@@ -107,12 +106,13 @@ class _CustomCardTwoState extends State<CustomCardTwo> {
                           ),
                         ),
                       const SizedBox(height: 12),
-                      const Expanded(
+                       Expanded(
                         child: CustomItemsTwo(
+                          size: widget.size,
                           textColor: Color(0xfffe6e6e),
                           icon2: FontAwesomeIcons.chevronRight,
                           text: 'Delete Account',
-                          size: 18,
+                          iconSize: 18,
                           icon: Icons.person,
                           color: Color(0xfffe6e6e),
                         ),

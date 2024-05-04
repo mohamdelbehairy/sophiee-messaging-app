@@ -4,6 +4,8 @@ const kPrimaryColor = Color(0xff2CB9B0);
 const kDarkModeColor = Color(0xff1e1e1e);
 const kDarkModeBackgroundColor = Color(0xff131312);
 
+// 0xff2b2c33
+
 const userCollection = 'users';
 
 const userNameField = 'userName';

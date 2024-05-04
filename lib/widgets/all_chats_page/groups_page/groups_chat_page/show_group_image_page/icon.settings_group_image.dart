@@ -1,6 +1,6 @@
 import 'package:sophiee/models/group_model.dart';
-import 'package:sophiee/utils/save_image.dart';
-import 'package:sophiee/utils/share_media.dart';
+import 'package:sophiee/utils/widget/media/save_image.dart';
+import 'package:sophiee/utils/widget/media/share_media.dart';
 import 'package:sophiee/widgets/show_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_styled_toast/flutter_styled_toast.dart';

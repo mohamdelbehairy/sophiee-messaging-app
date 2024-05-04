@@ -1,20 +1,27 @@
 import 'package:sophiee/cubit/auth/login/login_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sophiee/widgets/all_chats_page/groups_page/groups_chat_page/groups_permissions_page/custom_switch_icon.dart';
 
-class CustomItemsOne extends StatelessWidget {
-  const CustomItemsOne(
+class CardOneCustomItemsOne extends StatelessWidget {
+  const CardOneCustomItemsOne(
       {super.key,
       required this.color,
       required this.icon,
       required this.text,
       required this.iconChange,
-      required this.onPressed});
+      required this.onPressed,
+      required this.size,
+      required this.value,
+      required this.onChanged});
   final Color color;
   final IconData icon;
   final String text;
   final IconData iconChange;
   final Function() onPressed;
+  final Size size;
+  final bool value;
+  final Function(bool) onChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -24,19 +31,15 @@ class CustomItemsOne extends StatelessWidget {
         Row(
           children: [
             CircleAvatar(
-              radius: 18,
-              backgroundColor: color,
-              child: Icon(
-                icon,
-                color: Colors.white,
-                size: 18,
-              ),
-            ),
-            const SizedBox(width: 8),
+                radius: size.width * .042,
+                backgroundColor: color,
+                child:
+                    Icon(icon, color: Colors.white, size: size.width * .044)),
+            SizedBox(width: size.width * .02),
             Text(
               text,
               style: TextStyle(
-                  fontSize: 16,
+                  fontSize: size.width * .039,
                   color: context.read<LoginCubit>().isDark
                       ? Colors.white
                       : Colors.black),
@@ -69,12 +72,16 @@ class CustomItemsOne extends StatelessWidget {
         //     onChanged: onChanged,
         //   ),
         // ),
-        IconButton(
-          splashColor: Colors.transparent,
-          highlightColor: Colors.transparent,
-          onPressed: onPressed,
-          icon: Icon(iconChange),
-        ),
+        CustomSwitchIcon(
+            size: size,
+            onChanged: onChanged,
+            value: value,
+            height: size.height * .05)
+        // IconButton(
+        //     splashColor: Colors.transparent,
+        //     highlightColor: Colors.transparent,
+        //     onPressed: onPressed,
+        //     icon: Icon(iconChange)),
       ],
     );
   }

@@ -1,18 +1,25 @@
 import 'package:sophiee/widgets/settings/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 
-class AppBarSettings extends StatefulWidget {
-  const AppBarSettings({super.key});
+class SettingsPageAppBar extends StatefulWidget {
+  const SettingsPageAppBar({super.key, required this.size});
+  final Size size;
 
   @override
-  State<AppBarSettings> createState() => _AppBarSettingsState();
+  State<SettingsPageAppBar> createState() => _SettingsPageAppBarState();
 }
 
-class _AppBarSettingsState extends State<AppBarSettings> {
+class _SettingsPageAppBarState extends State<SettingsPageAppBar> {
   TextEditingController controller = TextEditingController();
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
     return CustomAppBarSetting(
       controller: controller,
       onTap: () {
@@ -29,10 +36,9 @@ class _AppBarSettingsState extends State<AppBarSettings> {
       padding: const EdgeInsets.only(left: 0),
       widget: TextButton(
         onPressed: () {},
-        child: Text(
-          'Reset',
-          style: TextStyle(color: Colors.white, fontSize: size.width * .039),
-        ),
+        child: Text('Reset',
+            style: TextStyle(
+                color: Colors.white, fontSize: widget.size.width * .039)),
       ),
     );
   }

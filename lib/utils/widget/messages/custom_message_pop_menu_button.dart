@@ -16,8 +16,8 @@ import 'package:sophiee/models/group_model.dart';
 import 'package:sophiee/models/message_model.dart';
 import 'package:sophiee/models/users_model.dart';
 import 'package:sophiee/pages/chats/message_forward_page.dart';
-import 'package:sophiee/utils/save_sound.dart';
-import 'package:sophiee/utils/share_media.dart';
+import 'package:sophiee/utils/widget/media/save_sound.dart';
+import 'package:sophiee/utils/widget/media/share_media.dart';
 import 'package:sophiee/utils/widget/messages/custom_pop_menu_item.dart';
 import 'package:sophiee/utils/widget/messages/delete_message_show_dialog.dart';
 
