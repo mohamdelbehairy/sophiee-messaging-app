@@ -5,13 +5,11 @@ class SettingsPageCardOneBody extends StatelessWidget {
   const SettingsPageCardOneBody(
       {super.key,
       required this.size,
-      required this.onPressed,
-      required this.onChanged, required this.value});
+      required this.onPressed});
 
   final Size size;
   final Function() onPressed;
-  final Function(bool) onChanged;
-  final bool value;
+
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +20,7 @@ class SettingsPageCardOneBody extends StatelessWidget {
             color: Colors.transparent,
             boxShadow: [BoxShadow(blurRadius: 0, color: Colors.transparent)]),
         child: CardOneBodyComponenet(
-          value: value,
-            size: size, onPressed: onPressed, onChanged: onChanged));
+         
+            size: size, onPressed: onPressed));
   }
 }

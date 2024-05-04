@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:sophiee/constants.dart';
 
 import 'custom_item_info_card_one_shimmer.dart';
 
@@ -12,10 +13,10 @@ class CustomCardThreeShimmer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: size.height *.3,
+      height: size.height * .3,
       width: size.width,
       child: Card(
-        color: isDark ? const Color(0xff2b2c33) : Colors.white,
+        color: isDark ? kDarkModeColor : Colors.white,
         child: Shimmer.fromColors(
           baseColor: isDark ? Colors.white12 : Colors.grey.shade300,
           highlightColor: isDark ? Colors.white24 : Colors.grey.shade100,

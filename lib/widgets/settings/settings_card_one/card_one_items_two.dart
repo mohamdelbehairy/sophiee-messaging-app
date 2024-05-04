@@ -10,36 +10,43 @@ class CardOneItemsTwo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(children: [
-      CustomItemsTwo(
-          size: size,
-          textColor:
-              context.read<LoginCubit>().isDark ? Colors.white : Colors.black,
-          icon2: FontAwesomeIcons.chevronRight,
-          text: 'Chat Customize',
-          iconSize: size.width * .034,
-          icon: FontAwesomeIcons.solidComments,
-          color: Colors.indigoAccent.shade400),
-      SizedBox(height: size.width * .028),
-      CustomItemsTwo(
-          size: size,
-          icon2: FontAwesomeIcons.chevronRight,
-          text: 'Notification',
-          iconSize: size.width * .048,
-          icon: Icons.notifications_active,
-          color: Colors.pink.shade400,
-          textColor:
-              context.read<LoginCubit>().isDark ? Colors.white : Colors.black),
-      SizedBox(height: size.width * .028),
-      CustomItemsTwo(
-          size: size,
-          textColor:
-              context.read<LoginCubit>().isDark ? Colors.white : Colors.black,
-          icon2: FontAwesomeIcons.chevronRight,
-          text: 'Privacy',
-          iconSize: size.width * .04,
-          icon: FontAwesomeIcons.shield,
-          color: const Color(0xffB338E0)),
-    ]);
+    return Padding(
+      padding: EdgeInsets.only(right: size.width * .04),
+      child: Column(children: [
+        CustomItemsTwo(
+            onTap: () {},
+            size: size,
+            textColor:
+                context.read<LoginCubit>().isDark ? Colors.white : Colors.black,
+            icon2: FontAwesomeIcons.chevronRight,
+            text: 'Chat Customize',
+            iconSize: size.width * .034,
+            icon: FontAwesomeIcons.solidComments,
+            color: Colors.indigoAccent.shade400),
+        SizedBox(height: size.width * .028),
+        CustomItemsTwo(
+            onTap: () {},
+            size: size,
+            icon2: FontAwesomeIcons.chevronRight,
+            text: 'Notification',
+            iconSize: size.width * .048,
+            icon: Icons.notifications_active,
+            color: Colors.pink.shade400,
+            textColor: context.read<LoginCubit>().isDark
+                ? Colors.white
+                : Colors.black),
+        SizedBox(height: size.width * .028),
+        CustomItemsTwo(
+            onTap: () {},
+            size: size,
+            textColor:
+                context.read<LoginCubit>().isDark ? Colors.white : Colors.black,
+            icon2: FontAwesomeIcons.chevronRight,
+            text: 'Privacy',
+            iconSize: size.width * .04,
+            icon: FontAwesomeIcons.shield,
+            color: const Color(0xffB338E0)),
+      ]),
+    );
   }
 }

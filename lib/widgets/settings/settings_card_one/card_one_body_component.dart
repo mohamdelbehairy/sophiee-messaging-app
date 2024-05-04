@@ -7,16 +7,10 @@ import 'package:sophiee/widgets/settings/settings_card_one/card_one_items_two.da
 
 class CardOneBodyComponenet extends StatelessWidget {
   const CardOneBodyComponenet(
-      {super.key,
-      required this.size,
-      required this.onPressed,
-      required this.onChanged,
-      required this.value});
+      {super.key, required this.size, required this.onPressed});
 
   final Size size;
   final Function() onPressed;
-  final Function(bool) onChanged;
-  final bool value;
 
   @override
   Widget build(BuildContext context) {
@@ -30,11 +24,7 @@ class CardOneBodyComponenet extends StatelessWidget {
             bottom: size.width * .04),
         child: Column(
           children: [
-            CardOneItemsOne(
-                value: value,
-                size: size,
-                onChanged: onChanged,
-                onPressed: onPressed),
+            CardOneItemsOne(size: size, onPressed: onPressed),
             SizedBox(height: size.width * .028),
             CardOneItemsTwo(size: size)
           ],
@@ -43,4 +33,3 @@ class CardOneBodyComponenet extends StatelessWidget {
     );
   }
 }
-

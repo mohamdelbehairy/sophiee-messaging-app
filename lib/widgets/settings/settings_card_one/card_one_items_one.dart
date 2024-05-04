@@ -7,25 +7,18 @@ import 'package:sophiee/widgets/settings/settings_card_one/card_one_custom_items
 
 class CardOneItemsOne extends StatelessWidget {
   const CardOneItemsOne(
-      {super.key,
-      required this.value,
-      required this.onChanged,
-      required this.onPressed,
-      required this.size});
-  final bool value;
-  final Function(bool) onChanged;
+      {super.key, required this.onPressed, required this.size});
+
   final Function() onPressed;
   final Size size;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(right: size.width * .04),
+      padding: EdgeInsets.only(right: size.width * .01),
       child: Column(
         children: [
           CardOneCustomItemsOne(
-              value: value,
-              onChanged: onChanged,
               size: size,
               onPressed: onPressed,
               iconChange: Icons.brightness_4_outlined,
@@ -36,8 +29,6 @@ class CardOneItemsOne extends StatelessWidget {
                   : Colors.black54),
           SizedBox(height: size.width * .028),
           CardOneCustomItemsOne(
-              onChanged: (value) {},
-              value: true,
               size: size,
               onPressed: () {},
               iconChange: Icons.lock,

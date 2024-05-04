@@ -33,11 +33,9 @@ class _SettingsPageCardOneState extends State<SettingsPageCardOne> {
           vertical: widget.size.width * .035),
       child: SettingsPageCardOneBody(
         size: widget.size,
-        value: isDarkMode,
-        onChanged: (value) {
+        onPressed: () {
           setState(() {
             isDarkMode = !isDarkMode;
-            // isValue = isDarkMode;
           });
           saveDarkMode(isDarkMode: isDarkMode);
           if (!isDarkMode) {
@@ -46,7 +44,6 @@ class _SettingsPageCardOneState extends State<SettingsPageCardOne> {
             context.read<LoginCubit>().changeAppTheme();
           }
         },
-        onPressed: () {},
       ),
     );
   }
