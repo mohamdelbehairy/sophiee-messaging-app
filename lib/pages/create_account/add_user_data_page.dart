@@ -8,7 +8,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AddUserDataPage extends StatelessWidget {
   const AddUserDataPage({super.key});
-  
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +26,6 @@ class AddUserDataPage extends StatelessWidget {
                         fontSize: size.width * .05,
                         fontWeight: FontWeight.normal))),
             body: AddUserDataPageBody(
-               
                 storeUserData: storeUserData,
                 uploadImage: uploadImage,
                 size: size,

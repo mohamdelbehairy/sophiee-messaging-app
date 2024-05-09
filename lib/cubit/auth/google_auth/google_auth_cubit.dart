@@ -12,7 +12,7 @@ class GoogleAuthCubit extends Cubit<GoogleAuthState> {
   GoogleAuthCubit() : super(GoogleAuthInitial());
 
   bool isLoading = false;
-  Future<UserCredential?> signInWithGoogle() async {
+  Future<UserCredential?> signInWithGoogle({required String? token}) async {
     emit(GoogleAuthLoading());
 
     try {
@@ -33,7 +33,8 @@ class GoogleAuthCubit extends Cubit<GoogleAuthState> {
           prefs.setString('userID', userCredentail.user!.uid);
 
           if (!await isUserDataStored(userID: userCredentail.user!.uid)) {
-            await googleAuthStoreUserData(userCredentail: userCredentail);
+            await googleAuthStoreUserData(
+                userCredentail: userCredentail, token: token ?? '');
           }
           emit(GoogleAuthSuccess(isLoading: true));
           return userCredentail;
@@ -54,7 +55,7 @@ class GoogleAuthCubit extends Cubit<GoogleAuthState> {
   }
 
   Future<void> googleAuthStoreUserData(
-      {required UserCredential userCredentail}) async {
+      {required UserCredential userCredentail, required String token}) async {
     UserModel userModel = UserModel.fromJson({
       'userName': userCredentail.user!.displayName,
       'emailAddress': userCredentail.user!.email,
@@ -62,7 +63,8 @@ class GoogleAuthCubit extends Cubit<GoogleAuthState> {
       'profileImage': userCredentail.user!.photoURL,
       'onlineStatue': Timestamp.now(),
       'isStory': false,
-      'isGoogleAuth': true
+      'isGoogleAuth': true,
+      'token': token
     });
     await FirebaseFirestore.instance
         .collection('users')

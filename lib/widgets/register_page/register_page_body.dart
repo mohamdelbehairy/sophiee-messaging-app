@@ -1,3 +1,4 @@
+import 'package:sophiee/constants.dart';
 import 'package:sophiee/cubit/auth/login/login_cubit.dart';
 import 'package:sophiee/pages/login_page.dart';
 import 'package:sophiee/utils/widget/auth/auth_positioned_icon.dart';
@@ -17,7 +18,7 @@ class RegisterPageBody extends StatelessWidget {
       fit: StackFit.expand,
       children: [
         const Image(
-            image: AssetImage('assets/images/signPage.jpg'), fit: BoxFit.cover),
+            image: AssetImage(emailAuthImageUrl), fit: BoxFit.cover),
         AuthPositionedIcon(
             top: 50,
             right: 16,

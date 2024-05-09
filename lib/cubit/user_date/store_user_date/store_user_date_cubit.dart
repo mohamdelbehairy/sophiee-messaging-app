@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sophiee/models/users_model.dart';
@@ -19,10 +20,11 @@ class StoreUserDateCubit extends Cubit<StoreUserDateState> {
       required String gender,
       required String profileImage,
       String? phoneNumber,
-      bool? isEmailAuth
-      }) async {
+      bool? isEmailAuth}) async {
     emit(StoreUserDateLoading(isLoading: true));
     try {
+      String? token = await FirebaseMessaging.instance.getToken();
+
       UserModel userModel = UserModel.fromJson({
         'userName': userName,
         'emailAddress': emailAddress,
@@ -35,7 +37,8 @@ class StoreUserDateCubit extends Cubit<StoreUserDateState> {
         'phoneNumber': phoneNumber,
         'onlineStatue': Timestamp.now(),
         'isStory': false,
-        'isEmailAuth':isEmailAuth
+        'isEmailAuth': isEmailAuth,
+        'token': token,
       });
       await FirebaseFirestore.instance
           .collection('users')

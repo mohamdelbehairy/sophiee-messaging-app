@@ -1,6 +1,7 @@
 import 'package:sophiee/constants.dart';
 import 'package:sophiee/cubit/auth/google_auth/google_auth_cubit.dart';
 import 'package:sophiee/cubit/auth/phone_number_auth/phone_number_auth_cubit.dart';
+import 'package:sophiee/cubit/user_date/user_token/user_token_cubit.dart';
 import 'package:sophiee/pages/create_account/add_user_data_page.dart';
 import 'package:sophiee/pages/home_page.dart';
 
@@ -27,6 +28,8 @@ class OptPhoneNumberPage extends StatelessWidget {
   Widget build(BuildContext context) {
     var isUserDataStored = context.read<GoogleAuthCubit>();
     var verifyPhoneNumber = context.read<PhoneNumberAuthCubit>();
+    var token = context.read<UserTokenCubit>();
+
     return Scaffold(
         backgroundColor: Colors.white,
         body: BlocConsumer<PhoneNumberAuthCubit, PhoneNumberAuthState>(
@@ -38,15 +41,16 @@ class OptPhoneNumberPage extends StatelessWidget {
               await Future.delayed(const Duration(seconds: 2));
               if (!await isUserDataStored.isUserDataStored(
                   userID: FirebaseAuth.instance.currentUser!.uid)) {
-                getnav.Get.to(
-                    () => const AddUserDataPage(),
+                getnav.Get.to(() => const AddUserDataPage(),
                     transition: getnav.Transition.rightToLeft);
                 Future.delayed(const Duration(seconds: 2));
                 optController.clear();
               } else {
+                String? getToken = await token.getUserToken();
                 getnav.Get.to(() => const HomePage(),
                     transition: getnav.Transition.rightToLeft);
                 Future.delayed(const Duration(seconds: 2));
+                await token.updateUserToken(token: getToken);
                 optController.clear();
               }
             }

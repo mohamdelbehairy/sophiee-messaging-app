@@ -50,6 +50,7 @@ import 'package:sophiee/cubit/upload/upload_image/upload_image_cubit.dart';
 import 'package:sophiee/cubit/upload/upload_video/upload_video_cubit.dart';
 import 'package:sophiee/cubit/user_date/get_user_data/get_user_data_cubit.dart';
 import 'package:sophiee/cubit/user_date/store_user_date/store_user_date_cubit.dart';
+import 'package:sophiee/cubit/user_date/user_token/user_token_cubit.dart';
 import 'package:sophiee/services/theme.dart';
 
 
@@ -120,7 +121,8 @@ class CustomMaterialApp extends StatelessWidget {
         BlocProvider(create: (context) => StoreUserDateCubit()),
         BlocProvider(create: (context) => GoogleAuthCubit()),
         BlocProvider(create: (context) => PhoneNumberAuthCubit()),
-        BlocProvider(create: (context) => FacebookAuthCubit())
+        BlocProvider(create: (context) => FacebookAuthCubit()),
+        BlocProvider(create: (context) => UserTokenCubit())
       ],
       child: BlocBuilder<LoginCubit, LoginState>(
         builder: (context, state) {

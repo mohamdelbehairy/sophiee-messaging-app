@@ -6,6 +6,7 @@ import 'package:sophiee/cubit/auth/facebook_auth/facebook_auth_cubit.dart';
 import 'package:sophiee/cubit/auth/login/login_cubit.dart';
 import 'package:sophiee/cubit/user_date/get_user_data/get_user_data_cubit.dart';
 import 'package:sophiee/cubit/user_date/get_user_data/get_user_data_state.dart';
+import 'package:sophiee/cubit/user_date/user_token/user_token_cubit.dart';
 import 'package:sophiee/models/users_model.dart';
 import 'package:sophiee/pages/create_account/verificaton_page.dart';
 import 'package:sophiee/pages/home_page.dart';
@@ -26,6 +27,7 @@ class _FacebookAuthWayState extends State<FacebookAuthWay> {
   Widget build(BuildContext context) {
     var signInWithFacebook = context.read<FacebookAuthCubit>();
     var isDark = context.read<LoginCubit>().isDark;
+    var token = context.read<UserTokenCubit>();
     return BlocListener<GetUserDataCubit, GetUserDataStates>(
       listener: (context, userDataState) {
         if (userDataState is GetUserDataSuccess &&
@@ -34,7 +36,7 @@ class _FacebookAuthWayState extends State<FacebookAuthWay> {
           if (currentUser != null) {
             final user = userDataState.userModel
                 .firstWhere((element) => element.userID == currentUser.uid);
-                userData = user;
+            userData = user;
           }
         }
       },
@@ -43,6 +45,8 @@ class _FacebookAuthWayState extends State<FacebookAuthWay> {
           if (state is FacebookAuthSuccess) {
             signInWithFacebook.isLoading = state.isLoading;
             await Future.delayed(const Duration(seconds: 3));
+            String? getToken = await token.getUserToken();
+            await token.updateUserToken(token: getToken);
 
             if (FirebaseAuth.instance.currentUser!.emailVerified) {
               getnav.Get.to(() => const HomePage(),
@@ -61,7 +65,8 @@ class _FacebookAuthWayState extends State<FacebookAuthWay> {
               top: widget.size.width * .05,
               text: 'Continue with Facebook',
               onTap: () async {
-                await signInWithFacebook.signInWithFacebook();
+                String? getToken = await token.getUserToken();
+                await signInWithFacebook.signInWithFacebook(token: getToken);
               },
               widget:
                   const Icon(FontAwesomeIcons.facebook, color: Colors.blue));

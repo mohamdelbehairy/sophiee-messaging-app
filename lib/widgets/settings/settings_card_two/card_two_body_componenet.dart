@@ -17,7 +17,7 @@ class CardTwoBodyComponenet extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: size.width * .035),
       child: Container(
-        height: size.height * .17,
+        height: size.height * .18,
         width: size.width,
         decoration: const BoxDecoration(
             color: Colors.transparent,

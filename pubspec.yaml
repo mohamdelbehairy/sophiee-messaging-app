@@ -42,6 +42,7 @@ dependencies:
   file_picker: ^6.1.1
   firebase_auth: ^4.15.3
   firebase_core: ^2.25.4
+  firebase_messaging: ^14.9.2
   firebase_storage: ^11.5.6
   flutter:
     sdk: flutter
@@ -75,7 +76,7 @@ dependencies:
   pinput: ^4.0.0
   popover: ^0.3.0
   scrollable_positioned_list: ^0.3.8
-  share_plus: ^7.2.2
+  share_plus: ^9.0.0
   shared_preferences: ^2.2.2
   shimmer: ^3.0.0
   smooth_page_indicator: ^1.1.0

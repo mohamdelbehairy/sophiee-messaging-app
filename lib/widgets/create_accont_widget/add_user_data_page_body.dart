@@ -35,7 +35,6 @@ class AddUserDataPageBody extends StatelessWidget {
           },
           builder: (context, uploadState) {
             return CustomAddUserDataPageBody(
-               
                 size: size,
                 isLoading: uploadImage.isLoading == false
                     ? storeUserData.isLoading

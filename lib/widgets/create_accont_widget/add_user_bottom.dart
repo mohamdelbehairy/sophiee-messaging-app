@@ -108,7 +108,7 @@ class AddUserBottom extends StatelessWidget {
         SharedPreferences prefs = await SharedPreferences.getInstance();
         prefs.setString('userID', FirebaseAuth.instance.currentUser!.uid);
         getnav.Get.to(() => const HomePage(),
-            transition: getnav.Transition.leftToRight);
+            transition: getnav.Transition.rightToLeft);
       }
     }
   }

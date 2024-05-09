@@ -49,7 +49,7 @@ class ProfilePageCardOneBodyComponent extends StatelessWidget {
             ProfileInfoCardOne(user: user, onTap: onTap, size: size),
             ProfilePageCardOneDivider(size: size),
             ProfilePageCardOneBio(size: size, user: user, isDark: isDark),
-            SizedBox(height: size.height * .05),
+            SizedBox(height: size.height * .01),
             ProfilePageCardOneProfileDetails(
                 size: size,
                 isDark: isDark,

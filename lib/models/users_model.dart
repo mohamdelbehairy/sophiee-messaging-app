@@ -16,43 +16,44 @@ class UserModel {
   bool? isGoogleAuth;
   bool? isEmailAuth;
   bool? isFacebookAuth;
+  String? token;
 
-  UserModel({
-    required this.userName,
-    required this.emailAddress,
-    required this.userID,
-    required this.bio,
-    required this.nickName,
-    required this.profileImage,
-    required this.gender,
-    this.phoneNumber,
-    required this.onlineStatue,
-    required this.dateOfBirth,
-    required this.isStory,
-    this.lastMessage,
-    this.isGoogleAuth,
-    this.isEmailAuth,
-    this.isFacebookAuth
-  });
+  UserModel(
+      {required this.userName,
+      required this.emailAddress,
+      required this.userID,
+      required this.bio,
+      required this.nickName,
+      required this.profileImage,
+      required this.gender,
+      this.phoneNumber,
+      required this.onlineStatue,
+      required this.dateOfBirth,
+      required this.isStory,
+      this.lastMessage,
+      this.isGoogleAuth,
+      this.isEmailAuth,
+      this.isFacebookAuth,
+      this.token});
 
   factory UserModel.fromJson(jsonData) {
     return UserModel(
-      userName: jsonData['userName'] ?? '',
-      emailAddress: jsonData['emailAddress'] ?? '',
-      userID: jsonData['userID'] ?? '',
-      bio: jsonData['bio'] ?? '',
-      nickName: jsonData['nickName'] ?? '',
-      profileImage: jsonData['profileImage'] ?? '',
-      dateOfBirth: jsonData['dateOfBirth'] ?? '',
-      phoneNumber: jsonData['phoneNumber'],
-      gender: jsonData['gender'] ?? '',
-      onlineStatue: (jsonData['onlineStatue'] ?? Timestamp.now()).toDate(),
-      isStory: jsonData['isStory'] ?? false,
-      lastMessage: jsonData['lastMessage'],
-      isGoogleAuth:jsonData['isGoogleAuth'],
-      isEmailAuth:jsonData['isEmailAuth'],
-      isFacebookAuth:jsonData['isFacebookAuth']
-    );
+        userName: jsonData['userName'] ?? '',
+        emailAddress: jsonData['emailAddress'] ?? '',
+        userID: jsonData['userID'] ?? '',
+        bio: jsonData['bio'] ?? '',
+        nickName: jsonData['nickName'] ?? '',
+        profileImage: jsonData['profileImage'] ?? '',
+        dateOfBirth: jsonData['dateOfBirth'] ?? '',
+        phoneNumber: jsonData['phoneNumber'],
+        gender: jsonData['gender'] ?? '',
+        onlineStatue: (jsonData['onlineStatue'] ?? Timestamp.now()).toDate(),
+        isStory: jsonData['isStory'] ?? false,
+        lastMessage: jsonData['lastMessage'],
+        isGoogleAuth: jsonData['isGoogleAuth'],
+        isEmailAuth: jsonData['isEmailAuth'],
+        isFacebookAuth: jsonData['isFacebookAuth'],
+        token: jsonData['token']);
   }
   Map<String, dynamic> toMap() {
     return {
@@ -68,9 +69,10 @@ class UserModel {
       'onlineStatue': onlineStatue,
       'isStory': isStory,
       // 'lastMessage': lastMessage,
-      'isGoogleAuth':isGoogleAuth,
-      'isEmailAuth':isEmailAuth,
-      'isFacebookAuth':isFacebookAuth
+      'isGoogleAuth': isGoogleAuth,
+      'isEmailAuth': isEmailAuth,
+      'isFacebookAuth': isFacebookAuth,
+      'token': token
     };
   }
 

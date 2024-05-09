@@ -1,4 +1,5 @@
 import 'package:sophiee/cubit/auth/login/login_cubit.dart';
+import 'package:sophiee/cubit/user_date/user_token/user_token_cubit.dart';
 import 'package:sophiee/pages/home_page.dart';
 import 'package:sophiee/utils/widget/show_top_snack_bar/show_top_snack_bar_failure.dart';
 import 'package:sophiee/widgets/login_page/login_page_botom_sheet_details.dart';
@@ -12,6 +13,7 @@ class LoginPageBottomSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var token = context.read<UserTokenCubit>();
     return DraggableScrollableSheet(
       initialChildSize: 0.88,
       minChildSize: 0.75,
@@ -24,7 +26,7 @@ class LoginPageBottomSheet extends StatelessWidget {
               borderRadius: const BorderRadius.only(
                   topLeft: Radius.circular(16), topRight: Radius.circular(16))),
           child: BlocConsumer<LoginCubit, LoginState>(
-            listener: (context, state) {
+            listener: (context, state) async {
               if (state is LoginFailure &&
                   state.errorMessage == 'invalid-credential') {
                 showTopSnackBarFailure(
@@ -38,6 +40,8 @@ class LoginPageBottomSheet extends StatelessWidget {
                     context,
                     MaterialPageRoute(builder: (context) => const HomePage()),
                     (route) => false);
+                String? getToken = await token.getUserToken();
+                await token.updateUserToken(token: getToken);
               }
             },
             builder: (context, state) {

@@ -33,7 +33,6 @@ class AddUserDataPageBodyComponent extends StatefulWidget {
   final TextEditingController phoneNumber;
   final TextEditingController gender;
   final bool isLoading;
- 
 
   @override
   State<AddUserDataPageBodyComponent> createState() =>
@@ -94,7 +93,6 @@ class _AddUserDataPageBodyComponentState
                 size: widget.widget.size,
                 gender: widget.gender),
             AddUserBottom(
-           
                 isLoading: widget.isLoading,
                 phoneNumber: phone,
                 pickImage: widget.widget.pickImage,

@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:sophiee/cubit/user_date/user_token/user_token_cubit.dart';
 import 'package:sophiee/widgets/settings/settings_card_two/card_two_body_componenet.dart';
 import 'package:sophiee/widgets/settings/settings_card_two/logout_show_dialog.dart';
 
@@ -17,12 +18,18 @@ class SettingsPageCardTwoBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var removeToken = context.read<UserTokenCubit>();
     return BlocListener<AuthSettingsCubit, AuthSettingsState>(
       listener: (context, state) async {
-        if (state is EmailSignOutSuccess ||
-            state is GoogleSignOutSuccess ||
-            state is FacebookSignOutSuccess) {
+        if (state is GoogleSignOutSuccess || state is FacebookSignOutSuccess) {
           context.read<GetFriendsCubit>().emit(GetFriendsInitial());
+
+          await removeToken.updateUserToken(token: '');
+          final shar = await SharedPreferences.getInstance();
+          shar.setString('isFirstTimeUser', 'done');
+          debugPrint(shar.getString('isFirstTimeUser'));
+        }
+        if (state is EmailSignOutSuccess) {
           final shar = await SharedPreferences.getInstance();
           shar.setString('isFirstTimeUser', 'done');
           debugPrint(shar.getString('isFirstTimeUser'));

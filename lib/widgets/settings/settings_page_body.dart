@@ -6,6 +6,7 @@ import 'package:sophiee/constants.dart';
 import 'package:sophiee/cubit/auth/auth_settings/auth_settings_cubit.dart';
 import 'package:sophiee/cubit/auth/facebook_auth/facebook_auth_cubit.dart';
 import 'package:sophiee/cubit/auth/google_auth/google_auth_cubit.dart';
+import 'package:sophiee/cubit/user_date/user_token/user_token_cubit.dart';
 import 'package:sophiee/models/users_model.dart';
 import 'package:sophiee/pages/auth/provider_auth_page.dart';
 import 'package:sophiee/widgets/settings/seetings_page_app_bar.dart';
@@ -59,7 +60,9 @@ class _SettingsPageBodyState extends State<SettingsPageBody> {
       context.read<FacebookAuthCubit>().isLoading = false;
       await signOut.facebookSignOut();
     } else {
-      signOut.signOut();
+      var removeToken = context.read<UserTokenCubit>();
+      await removeToken.updateUserToken(token: '');
+      await signOut.signOut();
     }
 
     getnav.Get.to(() => const ProviderAuthPage(),
