@@ -15,28 +15,24 @@ class SearchResultPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    // context
-    //     .read<FollowStatusCubit>()
-    //     .checkFollowStatus(followerID: user.userID);
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: kPrimaryColor,
-        titleSpacing: size.width * -.02,
-        leading: GestureDetector(
-            onTap: () {
-              context.read<GetFollowersCubit>().followersList.clear();
-              context.read<GetFollowingCubit>().followingList.clear();
-              context
-                  .read<GetFriendsCubit>()
-                  .getFriends(userID: FirebaseAuth.instance.currentUser!.uid);
-              Navigator.pop(context);
-            },
-            child: const Icon(Icons.arrow_back, color: Colors.white)),
-        title: Text('Search Page',
-            style: TextStyle(
-                fontSize: size.height * .028, fontWeight: FontWeight.bold)),
-      ),
+          backgroundColor: kPrimaryColor,
+          titleSpacing: size.width * -.02,
+          leading: GestureDetector(
+              onTap: () {
+                context.read<GetFollowersCubit>().followersList.clear();
+                context.read<GetFollowingCubit>().followingList.clear();
+                context
+                    .read<GetFriendsCubit>()
+                    .getFriends(userID: FirebaseAuth.instance.currentUser!.uid);
+                Navigator.pop(context);
+              },
+              child: const Icon(Icons.arrow_back, color: Colors.white)),
+          title: Text('Search Page',
+              style: TextStyle(
+                  fontSize: size.height * .028, fontWeight: FontWeight.bold))),
       body: SearchResultBogy(user: user),
     );
   }

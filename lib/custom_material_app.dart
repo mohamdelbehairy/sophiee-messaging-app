@@ -35,6 +35,7 @@ import 'package:sophiee/cubit/groups/high_light_group_message/hight_light_messag
 import 'package:sophiee/cubit/groups/message_group/group_message_cubit.dart';
 import 'package:sophiee/cubit/message/message_cubit.dart';
 import 'package:sophiee/cubit/network_error_status/network_error_status_cubit.dart';
+import 'package:sophiee/cubit/notification/message_notification/message_notification_cubit.dart';
 import 'package:sophiee/cubit/notification/notification_setting/notification_setting_cubit.dart';
 import 'package:sophiee/cubit/open_files/open_files_cubit.dart';
 import 'package:sophiee/cubit/pick_contact/pick_contact_cubit.dart';
@@ -57,7 +58,7 @@ import 'package:sophiee/services/theme.dart';
 import 'cubit/chat_high_lights/chat_high_light_message/chat_high_light_message_cubit.dart';
 import 'cubit/delete_messages/delete_chat_message_cubit.dart';
 import 'cubit/groups/update_groups_details/update_groups_details_cubit.dart';
-import 'cubit/notification/notification_follower/follower_notification_cubit.dart';
+import 'cubit/notification/follower_notification/follower_notification_cubit.dart';
 
 class CustomMaterialApp extends StatelessWidget {
   const CustomMaterialApp(
@@ -125,7 +126,8 @@ class CustomMaterialApp extends StatelessWidget {
         BlocProvider(create: (context) => FacebookAuthCubit()),
         BlocProvider(create: (context) => UserTokenCubit()),
         BlocProvider(create: (context) => NotificationSettingCubit()),
-        BlocProvider(create: (context) => FollowerNotificationCubit())
+        BlocProvider(create: (context) => FollowerNotificationCubit()),
+        BlocProvider(create: (context) => MessageNotificationCubit())
       ],
       child: BlocBuilder<LoginCubit, LoginState>(
         builder: (context, state) {

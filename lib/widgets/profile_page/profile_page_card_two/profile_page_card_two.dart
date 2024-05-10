@@ -16,7 +16,7 @@ class ProfilePageCardTwo extends StatelessWidget {
     final isDark = context.read<LoginCubit>().isDark;
 
     return Container(
-      height: size.height * .145,
+      height: size.height * .147,
       width: size.width,
       decoration: const BoxDecoration(
           color: Colors.transparent,
@@ -36,7 +36,7 @@ class ProfilePageCardTwo extends StatelessWidget {
                 onPressed: () => getnav.Get.to(() => const FriendsPage(),
                     transition: getnav.Transition.rightToLeft)),
             FriendsListView(size: size),
-            SizedBox(height: size.width * .06)
+            SizedBox(height: size.width * .034)
           ],
         ),
       ),

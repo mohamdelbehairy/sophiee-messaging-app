@@ -16,7 +16,7 @@ class FollowerNotificationCubit extends Cubit<FolloweNotificationState> {
       FlutterLocalNotificationsPlugin();
 
   // init follower notification
-  void initFolloweNotification() {
+  void initFollowerNotification() {
     FirebaseMessaging.onMessage.listen((message) async {
       debugPrint('title: ${message.notification!.title}');
       debugPrint('body: ${message.notification!.body}');
@@ -38,17 +38,18 @@ class FollowerNotificationCubit extends Cubit<FolloweNotificationState> {
         },
       };
       await http.post(Uri.parse(serverUrl), body: jsonEncode(data), headers: {
-        'Content-Type': 'application/json; charset=UTF-8',
+        'Content-Type': contentType,
         'Authorization': 'key=$serverKey'
       });
       emit(SendFollowerNotificationSuccess());
-    } on Exception catch (e) {
+    }  catch (e) {
       emit(FolloweNotificationFailure(errorMessage: e.toString()));
       debugPrint(
           'error from send follower notification method: ${e.toString()}');
     }
   }
-
+  
+  // show follower notification
   Future<void> showFollowerNotification(
       {required String title, required String body}) async {
     AndroidNotificationDetails android = const AndroidNotificationDetails(

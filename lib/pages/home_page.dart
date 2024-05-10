@@ -5,7 +5,8 @@ import 'package:sophiee/cubit/chats/chats_cubit.dart';
 import 'package:sophiee/cubit/get_followers/get_followers_cubit.dart';
 import 'package:sophiee/cubit/get_following/get_following_cubit.dart';
 import 'package:sophiee/cubit/get_friends/get_friends_cubit.dart';
-import 'package:sophiee/cubit/notification/notification_follower/follower_notification_cubit.dart';
+import 'package:sophiee/cubit/notification/follower_notification/follower_notification_cubit.dart';
+import 'package:sophiee/cubit/notification/message_notification/message_notification_cubit.dart';
 import 'package:sophiee/cubit/notification/notification_setting/notification_setting_cubit.dart';
 import 'package:sophiee/pages/chats/all_chats_page.dart';
 import 'package:sophiee/pages/profile_page.dart';
@@ -38,7 +39,8 @@ class _HomePageState extends State<HomePage> {
 
     initLocalNotification.initLocalNotification();
 
-    context.read<FollowerNotificationCubit>().initFolloweNotification();
+    context.read<FollowerNotificationCubit>().initFollowerNotification();
+    context.read<MessageNotificationCubit>().initMessageNotification();
 
     context.read<ChatsCubit>().chats();
     appStatusCubit = context.read<AllChatsShimmerStatusCubit>();

@@ -1,4 +1,5 @@
 import 'package:sophiee/cubit/chat_media_files/chat_store_media_files/chat_store_media_files_cubit.dart';
+import 'package:sophiee/cubit/notification/message_notification/message_notification_cubit.dart';
 import 'package:sophiee/cubit/user_date/get_user_data/get_user_data_cubit.dart';
 import 'package:sophiee/cubit/user_date/get_user_data/get_user_data_state.dart';
 import 'package:sophiee/cubit/message/message_cubit.dart';
@@ -41,11 +42,14 @@ class ChatPageSendTextMessageButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var storeMedia = context.read<ChatStoreMediaFilesCubit>();
+    var sendMessageNotification = context.read<MessageNotificationCubit>();
 
     return BlocBuilder<GetUserDataCubit, GetUserDataStates>(
       builder: (context, state) {
         if (state is GetUserDataSuccess && state.userModel.isNotEmpty) {
           final currentUser = FirebaseAuth.instance.currentUser;
+          final friendUser = user.userID;
+          final friendData = state.userModel.firstWhere((element) => element.userID == friendUser);
           if (currentUser != null) {
             final userData = state.userModel
                 .firstWhere((element) => element.userID == currentUser.uid);
@@ -69,6 +73,14 @@ class ChatPageSendTextMessageButton extends StatelessWidget {
                       replayTextMessage: replayTextMessage,
                       replaySoundMessage: replaySoundMessage,
                       replayRecordMessage: replayRecordMessage);
+                  debugPrint('userToken: ${friendData.token}');
+                  debugPrint('userID: ${user.userID}');
+                  debugPrint('userName: ${user.userName}');
+                   sendMessageNotification.sendMessageNotification(
+                      receiverToken: friendData.token,
+                      senderName: userData.userName,
+                      message: textEditingController.text,
+                      senderId: userData.userID);
 
                   if (textEditingController.text.startsWith('http') ||
                       textEditingController.text.startsWith('https')) {

@@ -3,7 +3,7 @@ import 'package:sophiee/cubit/follow_status/follow_status_cubit.dart';
 import 'package:sophiee/cubit/follower/follower_cubit.dart';
 import 'package:sophiee/cubit/get_followers/get_followers_cubit.dart';
 import 'package:sophiee/cubit/get_following/get_following_cubit.dart';
-import 'package:sophiee/cubit/notification/notification_follower/follower_notification_cubit.dart';
+import 'package:sophiee/cubit/notification/follower_notification/follower_notification_cubit.dart';
 import 'package:sophiee/models/users_model.dart';
 
 import 'package:flutter/material.dart';
