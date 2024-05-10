@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:sophiee/cubit/chat_media_files/chat_store_media_files/chat_store_media_files_cubit.dart';
+import 'package:sophiee/cubit/notification/message_notification/message_notification_cubit.dart';
 import 'package:sophiee/cubit/upload/upload_image/upload_image_cubit.dart';
 import 'package:sophiee/utils/navigation.dart';
 import 'package:sophiee/cubit/user_date/get_user_data/get_user_data_cubit.dart';
@@ -57,15 +58,15 @@ class _PickImagePageBodyState extends State<PickImagePageBody> {
     var uploadImage = context.read<UploadImageCubit>();
     var sendMessage = context.read<MessageCubit>();
     var storeMedia = context.read<ChatStoreMediaFilesCubit>();
+    var sendMessageNotification = context.read<MessageNotificationCubit>();
 
     return Stack(
       children: [
         Container(
-          margin: EdgeInsets.only(top: size.height * .05),
-          decoration: BoxDecoration(
-              image: DecorationImage(
-                  image: FileImage(widget.image), fit: BoxFit.fitWidth)),
-        ),
+            margin: EdgeInsets.only(top: size.height * .05),
+            decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: FileImage(widget.image), fit: BoxFit.fitWidth))),
         Positioned(
             height: size.height * .18,
             width: size.width,
@@ -79,6 +80,9 @@ class _PickImagePageBodyState extends State<PickImagePageBody> {
             builder: (context, state) {
               if (state is GetUserDataSuccess && state.userModel.isNotEmpty) {
                 final currentUser = FirebaseAuth.instance.currentUser;
+                final friendUser = widget.user.userID;
+                final friendData = state.userModel
+                    .firstWhere((element) => element.userID == friendUser);
                 if (currentUser != null) {
                   final userData = state.userModel.firstWhere(
                       (element) => element.userID == currentUser.uid);
@@ -118,6 +122,7 @@ class _PickImagePageBodyState extends State<PickImagePageBody> {
                               userID: widget.user.userID,
                               myUserName: userData.userName,
                               myProfileImage: userData.profileImage);
+
                           await storeMedia.storeMedia(
                               friendID: widget.user.userID,
                               messageImage: imageUrl,
@@ -125,6 +130,12 @@ class _PickImagePageBodyState extends State<PickImagePageBody> {
                               messageText: controller.text.isEmpty
                                   ? controller.text
                                   : null);
+                          await sendMessageNotification.sendMessageNotification(
+                              receiverToken: friendData.token,
+                              senderName: userData.userName,
+                              message:
+                                  '${userData.userName.split(' ')[0]} sent an image',
+                              senderId: userData.userID);
                           if (controller.text.startsWith('http') ||
                               controller.text.startsWith('https')) {
                             storeMedia.storeLink(

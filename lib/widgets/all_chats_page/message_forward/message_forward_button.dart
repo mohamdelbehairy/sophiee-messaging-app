@@ -2,6 +2,7 @@ import 'package:sophiee/constants.dart';
 import 'package:sophiee/cubit/chat_media_files/chat_store_media_files/chat_store_media_files_cubit.dart';
 import 'package:sophiee/cubit/forward/forward_selected_friend/forward_selected_friend_cubit.dart';
 import 'package:sophiee/cubit/forward/forward_selected_group/forward_selected_group_cubit.dart';
+import 'package:sophiee/cubit/notification/message_notification/message_notification_cubit.dart';
 import 'package:sophiee/cubit/user_date/get_user_data/get_user_data_cubit.dart';
 import 'package:sophiee/cubit/user_date/get_user_data/get_user_data_state.dart';
 import 'package:sophiee/cubit/groups/groups_mdeia_files/group_store_media_files/group_store_media_files_cubit.dart';
@@ -47,6 +48,7 @@ class _MessageForwardButtonState extends State<MessageForwardButton> {
     var sendGroupMessage = context.read<GroupMessageCubit>();
     var storeGroupMedia = context.read<GroupStoreMediaFilesCubit>();
     var storeChatMedia = context.read<ChatStoreMediaFilesCubit>();
+    var sendMessageNotification = context.read<MessageNotificationCubit>();
 
     return BlocBuilder<GetUserDataCubit, GetUserDataStates>(
       builder: (context, state) {
@@ -64,6 +66,7 @@ class _MessageForwardButtonState extends State<MessageForwardButton> {
                   if (selectedFriend.selectedFriendList.isNotEmpty) {
                     String messageID = const Uuid().v4();
                     for (var friend in selectedFriend.selectedFriendList) {
+                      final friendData = state.userModel.firstWhere((element) => element.userID == friend.userID);
                       if (widget.message != null) {
                         await sendMessage.sendMessage(
                             messageID: messageID,
@@ -94,8 +97,47 @@ class _MessageForwardButtonState extends State<MessageForwardButton> {
                             replayTextMessage: '',
                             replayRecordMessage: '',
                             replaySoundMessage: '');
+                        if (widget.message!.phoneContactNumber != null) {
+                          await sendMessageNotification.sendMessageNotification(
+                              receiverToken: friendData.token,
+                              senderName: userData.userName,
+                              message:
+                                  '${userData.userName.split(' ')[0]} shared a contact',
+                              senderId: userData.userID);
+                        }
+                        if (widget.message!.messageSound != null) {
+                          await sendMessageNotification.sendMessageNotification(
+                              receiverToken: friendData.token,
+                              senderName: userData.userName,
+                              message:
+                                  '${userData.userName.split(' ')[0]} sent a sound',
+                              senderId: userData.userID);
+                        }
+                        if (widget.message!.messageRecord != null) {
+                          await sendMessageNotification.sendMessageNotification(
+                              receiverToken: friendData.token,
+                              senderName: userData.userName,
+                              message:
+                                  '${userData.userName.split(' ')[0]} sent a record',
+                              senderId: userData.userID);
+                        }
                         if (widget.message!.messageImage != null ||
                             widget.message!.messageVideo != null) {
+                          if (widget.message!.messageVideo != null) {
+                            await sendMessageNotification.sendMessageNotification(
+                                receiverToken: friendData.token,
+                                senderName: userData.userName,
+                                message:
+                                    '${userData.userName.split(' ')[0]} sent video',
+                                senderId: userData.userID);
+                          } else {
+                            await sendMessageNotification.sendMessageNotification(
+                                receiverToken: friendData.token,
+                                senderName: userData.userName,
+                                message:
+                                    '${userData.userName.split(' ')[0]} sent an image',
+                                senderId: userData.userID);
+                          }
                           await storeChatMedia.storeMedia(
                             friendID: friend.userID,
                             messageID: messageID,
@@ -110,6 +152,12 @@ class _MessageForwardButtonState extends State<MessageForwardButton> {
                               friendID: friend.userID,
                               messageID: messageID,
                               messageLink: widget.message!.messageText);
+
+                          await sendMessageNotification.sendMessageNotification(
+                              receiverToken: friendData.token,
+                              senderName: userData.userName,
+                              message: widget.message!.messageText,
+                              senderId: userData.userID);
                         }
                       } else {
                         await sendMessage.sendMessage(
@@ -144,6 +192,21 @@ class _MessageForwardButtonState extends State<MessageForwardButton> {
                             replayTextMessage: '',
                             replayRecordMessage: '',
                             replaySoundMessage: '');
+                        if (widget.mediaFiles!.messageVideo != null) {
+                          await sendMessageNotification.sendMessageNotification(
+                              receiverToken: friendData.token,
+                              senderName: userData.userName,
+                              message:
+                                  '${userData.userName.split(' ')[0]} sent a video',
+                              senderId: userData.userID);
+                        } else {
+                          await sendMessageNotification.sendMessageNotification(
+                              receiverToken: friendData.token,
+                              senderName: userData.userName,
+                              message:
+                                  '${userData.userName.split(' ')[0]} sent an image',
+                              senderId: userData.userID);
+                        }
                         await storeChatMedia.storeMedia(
                             friendID: friend.userID,
                             messageID: messageID,
@@ -266,7 +329,8 @@ class _MessageForwardButtonState extends State<MessageForwardButton> {
                     ? SizedBox(
                         height: size.width * .07,
                         width: size.width * .07,
-                        child: const CircularProgressIndicator(color: Colors.white),
+                        child: const CircularProgressIndicator(
+                            color: Colors.white),
                       )
                     : Icon(Icons.send,
                         color: Colors.white, size: size.width * .07),

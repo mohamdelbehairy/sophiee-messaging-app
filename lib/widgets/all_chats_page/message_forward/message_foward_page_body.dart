@@ -32,7 +32,6 @@ class MessageForwardPageBody extends StatelessWidget {
   final CreateGroupsCubit group;
   final bool isDark;
 
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -63,7 +62,6 @@ class MessageForwardPageBody extends StatelessWidget {
               bottom: size.height * .02,
               right: size.width * .04,
               child: MessageForwardButton(
-               
                   message: message, user: user, mediaFiles: mediaFiles),
             )
         ],

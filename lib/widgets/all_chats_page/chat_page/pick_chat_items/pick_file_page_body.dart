@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:sophiee/cubit/chat_media_files/chat_store_media_files/chat_store_media_files_cubit.dart';
+import 'package:sophiee/cubit/notification/message_notification/message_notification_cubit.dart';
 import 'package:sophiee/cubit/upload/upload_file/upload_file_cubit.dart';
 import 'package:sophiee/utils/navigation.dart';
 import 'package:sophiee/cubit/user_date/get_user_data/get_user_data_cubit.dart';
@@ -65,6 +66,7 @@ class _GroupsPagePickFilePageBodyState extends State<PickFilePageBody> {
     var message = context.read<MessageCubit>();
     var uploadFile = context.read<UploadFileCubit>();
     var storeMedia = context.read<ChatStoreMediaFilesCubit>();
+    var sendMessageNotification = context.read<MessageNotificationCubit>();
 
     return Stack(
       children: [
@@ -90,6 +92,10 @@ class _GroupsPagePickFilePageBodyState extends State<PickFilePageBody> {
             builder: (context, state) {
               if (state is GetUserDataSuccess && state.userModel.isNotEmpty) {
                 final currentUser = FirebaseAuth.instance.currentUser;
+                final friendUser = widget.user.userID;
+                final friendData = state.userModel
+                    .firstWhere((element) => element.userID == friendUser);
+
                 if (currentUser != null) {
                   final userData = state.userModel.firstWhere(
                       (element) => element.userID == currentUser.uid);
@@ -142,6 +148,12 @@ class _GroupsPagePickFilePageBodyState extends State<PickFilePageBody> {
                                   await widget.file.length() / 1024 < 1024
                                       ? 'KB'
                                       : 'MB');
+                          await sendMessageNotification.sendMessageNotification(
+                              receiverToken: friendData.token,
+                              senderName: userData.userName,
+                              message:
+                                  '${userData.userName.split(' ')[0]} sent file',
+                              senderId: userData.userID);
                           if (controller.text.startsWith('http') ||
                               controller.text.startsWith('https')) {
                             storeMedia.storeLink(

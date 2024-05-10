@@ -32,17 +32,16 @@ class PickImagePage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.black,
       body: PickImagePageBody(
-        replayMessageID: replayMessageID,
-        friendNameReplay: friendNameReplay,
-        image: image,
-        user: user,
-        replayTextMessageImage: replayTextMessageImage,
-        replayImageMessageImage: replayImageMessageImage,
-        replayFileMessageFile: replayFileMessageImage,
-        replayContactMessageContact: replayContactMessageContact,
-        replaySoundMessage: replaySoundMessage,
-        replayRecordMessage: replayRecordMessage,
-      ),
+          replayMessageID: replayMessageID,
+          friendNameReplay: friendNameReplay,
+          image: image,
+          user: user,
+          replayTextMessageImage: replayTextMessageImage,
+          replayImageMessageImage: replayImageMessageImage,
+          replayFileMessageFile: replayFileMessageImage,
+          replayContactMessageContact: replayContactMessageContact,
+          replaySoundMessage: replaySoundMessage,
+          replayRecordMessage: replayRecordMessage),
     );
   }
 }

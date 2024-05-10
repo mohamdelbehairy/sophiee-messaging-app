@@ -1,3 +1,4 @@
+import 'package:sophiee/cubit/notification/message_notification/message_notification_cubit.dart';
 import 'package:sophiee/utils/navigation.dart';
 import 'package:sophiee/cubit/user_date/get_user_data/get_user_data_cubit.dart';
 import 'package:sophiee/cubit/user_date/get_user_data/get_user_data_state.dart';
@@ -26,6 +27,7 @@ class PickContactBottomSheetButton extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     final message = context.read<MessageCubit>();
     final pickContact = context.read<PickContactCubit>();
+    var sendMessageNotification = context.read<MessageNotificationCubit>();
     navigation() {
       Navigation.navigationOnePop(context: context);
     }
@@ -36,6 +38,9 @@ class PickContactBottomSheetButton extends StatelessWidget {
         builder: (context, state) {
           if (state is GetUserDataSuccess && state.userModel.isNotEmpty) {
             final currentUser = FirebaseAuth.instance.currentUser;
+            final friendUser = user.userID;
+            final friendData = state.userModel
+                .firstWhere((element) => element.userID == friendUser);
             if (currentUser != null) {
               final userData = state.userModel
                   .firstWhere((element) => element.userID == currentUser.uid);
@@ -65,6 +70,11 @@ class PickContactBottomSheetButton extends StatelessWidget {
                     // context: context
                   );
                   pickContact.phoneContact == null;
+                  await sendMessageNotification.sendMessageNotification(
+                      receiverToken: friendData.token,
+                      senderName: userData.userName,
+                      message: '${userData.userName.split(' ')[0]} shared a contact',
+                      senderId: userData.userID);
                 },
                 child: Container(
                   height: size.height * .07,

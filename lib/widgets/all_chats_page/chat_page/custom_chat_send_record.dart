@@ -1,4 +1,5 @@
 import 'package:sophiee/cubit/chat_media_files/chat_store_media_files/chat_store_media_files_cubit.dart';
+import 'package:sophiee/cubit/notification/message_notification/message_notification_cubit.dart';
 import 'package:sophiee/cubit/user_date/get_user_data/get_user_data_cubit.dart';
 import 'package:sophiee/cubit/user_date/get_user_data/get_user_data_state.dart';
 import 'package:sophiee/cubit/message/message_cubit.dart';
@@ -34,11 +35,16 @@ class CustomChatSendRecord extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var storeMedia = context.read<ChatStoreMediaFilesCubit>();
+    var sendMessageNotification = context.read<MessageNotificationCubit>();
 
     return BlocBuilder<GetUserDataCubit, GetUserDataStates>(
       builder: (context, state) {
         if (state is GetUserDataSuccess && state.userModel.isNotEmpty) {
           final currentUser = FirebaseAuth.instance.currentUser;
+          final friendUser = widget.user.userID;
+          final friendData = state.userModel
+              .firstWhere((element) => element.userID == friendUser);
+
           if (currentUser != null) {
             final data = state.userModel
                 .firstWhere((element) => element.userID == currentUser.uid);
@@ -90,6 +96,12 @@ class CustomChatSendRecord extends StatelessWidget {
                         isSwip && messageModel!.messageRecord != null
                             ? messageModel!.messageRecord
                             : '');
+                sendMessageNotification.sendMessageNotification(
+                    receiverToken: friendData.token,
+                    senderName: data.userName,
+                    message:
+                        "${data.userName.split(' ')[0]} sent a voice message",
+                    senderId: data.userID);
                 await storeMedia.storeVoice(
                     friendID: widget.user.userID,
                     messageID: messageID,

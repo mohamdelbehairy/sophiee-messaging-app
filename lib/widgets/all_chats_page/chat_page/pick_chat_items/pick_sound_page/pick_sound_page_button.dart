@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:sophiee/constants.dart';
 import 'package:sophiee/cubit/chat_media_files/chat_store_media_files/chat_store_media_files_cubit.dart';
+import 'package:sophiee/cubit/notification/message_notification/message_notification_cubit.dart';
 import 'package:sophiee/cubit/user_date/get_user_data/get_user_data_cubit.dart';
 import 'package:sophiee/cubit/user_date/get_user_data/get_user_data_state.dart';
 import 'package:sophiee/cubit/message/message_cubit.dart';
@@ -68,11 +69,16 @@ class _PickSoundPageButtonState extends State<PickSoundPageButton> {
     var uploadAudio = context.read<UploadAudioCubit>();
     var sendMessage = context.read<MessageCubit>();
     var storeMedia = context.read<ChatStoreMediaFilesCubit>();
+    var sendMessageNotification = context.read<MessageNotificationCubit>();
 
     return BlocBuilder<GetUserDataCubit, GetUserDataStates>(
       builder: (context, state) {
         if (state is GetUserDataSuccess && state.userModel.isNotEmpty) {
           final currentUser = FirebaseAuth.instance.currentUser;
+          final friendUser = widget.user.userID;
+          final friendData = state.userModel
+              .firstWhere((element) => element.userID == friendUser);
+
           if (currentUser != null) {
             final userData = state.userModel
                 .firstWhere((element) => element.userID == currentUser.uid);
@@ -116,6 +122,13 @@ class _PickSoundPageButtonState extends State<PickSoundPageButton> {
                         messageID: messageID,
                         messageSound: audioUrl,
                         messageSoundName: widget.audioName);
+
+                    await sendMessageNotification.sendMessageNotification(
+                        receiverToken: friendData.token,
+                        senderName: userData.userName,
+                        message:
+                            '${userData.userName.split(' ')[0]} sent sound',
+                        senderId: userData.userID);
                     navigation();
                   } finally {
                     setState(() {
@@ -130,7 +143,8 @@ class _PickSoundPageButtonState extends State<PickSoundPageButton> {
                       ? SizedBox(
                           height: widget.size.height * .03,
                           width: widget.size.width * .065,
-                          child: const CircularProgressIndicator(color: Colors.white))
+                          child: const CircularProgressIndicator(
+                              color: Colors.white))
                       : Icon(Icons.send,
                           color: Colors.white, size: widget.size.height * .035),
                 ),

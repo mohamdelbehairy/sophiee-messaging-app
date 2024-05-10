@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:sophiee/cubit/chat_media_files/chat_store_media_files/chat_store_media_files_cubit.dart';
+import 'package:sophiee/cubit/notification/message_notification/message_notification_cubit.dart';
 import 'package:sophiee/cubit/user_date/get_user_data/get_user_data_cubit.dart';
 import 'package:sophiee/cubit/user_date/get_user_data/get_user_data_state.dart';
 import 'package:sophiee/cubit/message/message_cubit.dart';
@@ -43,6 +44,8 @@ class _PickVideoSendVideoMessageButtonState
     var uploadVideo = context.read<UploadVideoCubit>();
     var message = context.read<MessageCubit>();
     var storeMedia = context.read<ChatStoreMediaFilesCubit>();
+    var sendMessageNotification = context.read<MessageNotificationCubit>();
+
     return Positioned(
       width: widget.size.width,
       bottom: widget.size.height * .015,
@@ -50,6 +53,9 @@ class _PickVideoSendVideoMessageButtonState
         builder: (context, state) {
           if (state is GetUserDataSuccess && state.userModel.isNotEmpty) {
             final currentUser = FirebaseAuth.instance.currentUser;
+            final friendUser = widget.user.userID;
+            final friendData = state.userModel
+                .firstWhere((element) => element.userID == friendUser);
             if (currentUser != null) {
               final userData = state.userModel
                   .firstWhere((element) => element.userID == currentUser.uid);
@@ -90,6 +96,11 @@ class _PickVideoSendVideoMessageButtonState
                         messageText: widget.controller.text.isEmpty
                             ? widget.controller.text
                             : null);
+                    await sendMessageNotification.sendMessageNotification(
+                        receiverToken: friendData.token,
+                        senderName: userData.userName,
+                        message: '${userData.userName.split(' ')[0]} sent a video',
+                        senderId: userData.userID);
                     if (widget.controller.text.startsWith('http') ||
                         widget.controller.text.startsWith('https')) {
                       storeMedia.storeLink(
