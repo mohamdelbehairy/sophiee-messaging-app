@@ -4,8 +4,8 @@ import 'package:sophiee/widgets/all_chats_page/chat_page/chat_page_body_details.
 import 'package:sophiee/widgets/all_chats_page/chat_page/send_message/custom_chat_page_item_send_message.dart';
 import 'package:flutter/material.dart';
 
-class CustomChatPageTextFieldItem extends StatelessWidget {
-  const CustomChatPageTextFieldItem(
+class CustomChatPageTextFieldItemDetails extends StatelessWidget {
+  const CustomChatPageTextFieldItemDetails(
       {super.key,
       required this.widget,
       required this.textEditingController,

@@ -7,8 +7,8 @@ import 'package:sophiee/cubit/upload/upload_audio/upload_audio_cubit.dart';
 import 'package:sophiee/models/message_model.dart';
 import 'package:sophiee/models/users_model.dart';
 import 'package:sophiee/utils/widget/replay_to_message/replay_audio_message.dart';
-import 'package:sophiee/widgets/all_chats_page/chat_page/custom_chat_page_text_field_item.dart';
-import 'package:sophiee/widgets/all_chats_page/chat_page/custom_message/custom_message_list_view.dart';
+import 'package:sophiee/widgets/all_chats_page/chat_page/chat_page_swip_message.dart';
+import 'package:sophiee/widgets/all_chats_page/chat_page/custom_chat_page_text_field_item_details.dart';
 import 'package:sophiee/widgets/all_chats_page/chat_page/custom_chat_send_text_and_record_item.dart';
 import 'package:sophiee/utils/widget/replay_to_message/replay_contact_message.dart';
 import 'package:sophiee/utils/widget/replay_to_message/replay_file_message.dart';
@@ -17,7 +17,6 @@ import 'package:sophiee/utils/widget/replay_to_message/replay_text_message.dart'
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:swipe_to/swipe_to.dart';
 
 class ChatPageBodyDetails extends StatefulWidget {
   const ChatPageBodyDetails(
@@ -112,20 +111,17 @@ class _ChatPageBodyDetailsState extends State<ChatPageBodyDetails> {
                               receiverID: widget.user.userID,
                               messageID: message.messageID);
                         }
-                        return SwipeTo(
-                          onLeftSwipe: (details) {
-                            setState(() {
-                              isSwip = !isSwip;
-                              messageModel = message;
-                              focusNode.requestFocus();
+                        return ChatPageSwipMessage(
+                            message: message,
+                            size: widget.size,
+                            user: widget.user,
+                            onLeftSwipe: (details) {
+                              setState(() {
+                                isSwip = !isSwip;
+                                messageModel = message;
+                                focusNode.requestFocus();
+                              });
                             });
-                          },
-                          key: Key(message.messageID),
-                          child: CustomMessageListView(
-                              user: widget.user,
-                              message: message,
-                              size: widget.size),
-                        );
                       },
                     ),
                   ),
@@ -208,8 +204,8 @@ class _ChatPageBodyDetailsState extends State<ChatPageBodyDetails> {
                                 });
                               }),
                       if (isSwip) SizedBox(height: widget.size.height * .003),
-                      BlocBuilder<GetUserDataCubit, GetUserDataStates>(
-                        builder: (context, state) {
+                      BlocListener<GetUserDataCubit, GetUserDataStates>(
+                        listener: (context, state) {
                           if (state is GetUserDataSuccess &&
                               state.userModel.isNotEmpty) {
                             if (isSwip) {
@@ -218,20 +214,20 @@ class _ChatPageBodyDetailsState extends State<ChatPageBodyDetails> {
                                   (element) => element.userID == currentUser);
                             }
                           }
-                          return CustomChatPageTextFieldItem(
-                              onChanged: (value) {
-                                setState(() {
-                                  isShowSendButton = value.trim().isNotEmpty;
-                                });
-                              },
-                              widget: widget,
-                              textEditingController: textEditingController,
-                              scrollController: scrollController,
-                              focusNode: focusNode,
-                              isSwip: isSwip,
-                              messageModel: messageModel,
-                              userData: userData);
                         },
+                        child: CustomChatPageTextFieldItemDetails(
+                            onChanged: (value) {
+                              setState(() {
+                                isShowSendButton = value.trim().isNotEmpty;
+                              });
+                            },
+                            widget: widget,
+                            textEditingController: textEditingController,
+                            scrollController: scrollController,
+                            focusNode: focusNode,
+                            isSwip: isSwip,
+                            messageModel: messageModel,
+                            userData: userData),
                       ),
                     ],
                   ),

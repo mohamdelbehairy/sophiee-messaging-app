@@ -18,7 +18,7 @@ class MyFriendsBottomMessage extends StatelessWidget {
       highlightColor: Colors.transparent,
       onTap: () {
         context.read<MessageCubit>().getMessage(receiverID: user.userID);
-        getnav.Get.to(() => ChatPage(user: user),
+        getnav.Get.to(() => ChatPage(userID: user.userID),
             transition: getnav.Transition.leftToRight);
       },
       child: Container(

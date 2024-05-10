@@ -32,7 +32,7 @@ class ControlMembersIcon extends StatelessWidget {
             color: Colors.grey, size: size.width * .05),
         itemBuilder: (context) => [
               groupsInfoPopMenuItem(
-                  onTap: () => getnav.Get.to(() => ChatPage(user: userData),
+                  onTap: () => getnav.Get.to(() => ChatPage(userID: userData.userID),
                       transition: getnav.Transition.leftToRight),
                   itemName: 'Message ${userData.userName.split(' ')[0]}',
                   size: size),
