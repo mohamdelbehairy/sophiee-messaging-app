@@ -26,7 +26,8 @@ class SearchResultCardListTile extends StatelessWidget {
                 color: isDark ? Colors.white : Colors.black,
                 fontSize: size.height * .02),
           ),
-          SearchResultPageBodyBottom(user: user, userData: userData),
+          SearchResultPageBodyBottom(
+              user: user, userData: userData, size: size),
         ],
       ),
       leading: CircleAvatar(

@@ -1,12 +1,17 @@
 part of 'follower_notification_cubit.dart';
 
+sealed class FolloweNotificationState {}
 
-sealed class NotificationFollowerState {}
+final class FolloweNotificationInitial extends FolloweNotificationState {}
 
-final class NotificationFollowerInitial extends NotificationFollowerState {}
+final class InitFollowerNotificationSuccess extends FolloweNotificationState {}
 
-final class InitFollowerNotificationSuccess extends NotificationFollowerState {}
+final class SendFollowerNotificationSuccess extends FolloweNotificationState {}
 
-final class SendFollowerNotificationSuccess extends NotificationFollowerState {}
+final class ShowFollowerNotificationSuccess extends FolloweNotificationState {}
 
-final class ShowFollowerNotificationSuccess extends NotificationFollowerState {}
+final class FolloweNotificationFailure extends FolloweNotificationState {
+  final String errorMessage;
+
+  FolloweNotificationFailure({required this.errorMessage});
+}

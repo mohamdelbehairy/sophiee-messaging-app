@@ -57,6 +57,7 @@ import 'package:sophiee/services/theme.dart';
 import 'cubit/chat_high_lights/chat_high_light_message/chat_high_light_message_cubit.dart';
 import 'cubit/delete_messages/delete_chat_message_cubit.dart';
 import 'cubit/groups/update_groups_details/update_groups_details_cubit.dart';
+import 'cubit/notification/notification_follower/follower_notification_cubit.dart';
 
 class CustomMaterialApp extends StatelessWidget {
   const CustomMaterialApp(
@@ -123,7 +124,8 @@ class CustomMaterialApp extends StatelessWidget {
         BlocProvider(create: (context) => PhoneNumberAuthCubit()),
         BlocProvider(create: (context) => FacebookAuthCubit()),
         BlocProvider(create: (context) => UserTokenCubit()),
-        BlocProvider(create: (context) => NotificationSettingCubit())
+        BlocProvider(create: (context) => NotificationSettingCubit()),
+        BlocProvider(create: (context) => FollowerNotificationCubit())
       ],
       child: BlocBuilder<LoginCubit, LoginState>(
         builder: (context, state) {
