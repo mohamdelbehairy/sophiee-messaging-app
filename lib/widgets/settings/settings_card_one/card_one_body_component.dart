@@ -16,7 +16,7 @@ class CardOneBodyComponenet extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       color: context.read<LoginCubit>().isDark ? kDarkModeColor : Colors.white,
-      elevation: 0,
+      elevation: context.read<LoginCubit>().isDark ? 1 : 0,
       child: Padding(
         padding: EdgeInsets.only(
             left: size.width * .045,

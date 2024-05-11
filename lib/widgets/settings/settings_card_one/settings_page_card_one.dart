@@ -28,9 +28,11 @@ class _SettingsPageCardOneState extends State<SettingsPageCardOne> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(
-          horizontal: widget.size.width * .035,
-          vertical: widget.size.width * .035),
+      padding: EdgeInsets.only(
+          left: widget.size.width * .035,
+          right: widget.size.width * .035,
+          top: widget.size.width * .035,
+          bottom: 6),
       child: SettingsPageCardOneBody(
         size: widget.size,
         onPressed: () {

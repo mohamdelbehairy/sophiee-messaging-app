@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../../../models/group_model.dart';
 import '../../../pages/chats/groups/groups_chat_page/groups_chat_page.dart';
-import 'custom_create_group.dart';
-import 'custom_my_groups.dart';
+import 'custom_create_group/custom_create_group.dart';
+import 'custom_my_groups/custom_my_groups.dart';
 import 'package:get/get.dart' as getnav;
 
 class GroupPageBodyWidget extends StatelessWidget {
