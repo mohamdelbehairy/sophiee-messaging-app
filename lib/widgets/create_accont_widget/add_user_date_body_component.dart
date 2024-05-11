@@ -9,6 +9,8 @@ import 'package:sophiee/widgets/create_accont_widget/add_user_profile_image.dart
 import 'package:sophiee/widgets/create_accont_widget/add_user_text_filed.dart';
 import 'package:flutter/material.dart';
 
+import '../../constants.dart';
+
 class AddUserDataPageBodyComponent extends StatefulWidget {
   const AddUserDataPageBodyComponent(
       {super.key,
@@ -50,6 +52,8 @@ class _AddUserDataPageBodyComponentState
         child: Column(
           children: [
             AddUserProfileImage(
+              imageUrl: defaultProfileImageUrl,
+              top: widget.widget.size.height * .03,
                 enabled: !widget.isLoading,
                 size: widget.widget.size,
                 pickImage: widget.widget.pickImage),

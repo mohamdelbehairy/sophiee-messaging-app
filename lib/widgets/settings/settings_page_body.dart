@@ -42,7 +42,14 @@ class _SettingsPageBodyState extends State<SettingsPageBody> {
       child: SingleChildScrollView(
         child: Column(
           children: [
-            SettingsPageAppBar(size: widget.size),
+            SettingsPageAppBar(
+                size: widget.size,
+                widget: TextButton(
+                    onPressed: () {},
+                    child: Text('Reset',
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: widget.size.width * .039)))),
             SettingsPageCardOne(size: widget.size),
             SettingsPageCardTwo(size: widget.size, onPressed: onPressed),
           ],

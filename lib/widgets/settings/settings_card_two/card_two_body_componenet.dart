@@ -17,7 +17,7 @@ class CardTwoBodyComponenet extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: size.width * .035),
       child: Container(
-        height: size.height * .18,
+        height: size.height * .15,
         width: size.width,
         decoration: const BoxDecoration(
             color: Colors.transparent,
@@ -26,15 +26,16 @@ class CardTwoBodyComponenet extends StatelessWidget {
           color:
               context.read<LoginCubit>().isDark ? kDarkModeColor : Colors.white,
           elevation: context.read<LoginCubit>().isDark ? 1 : 0,
+           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
           child: Padding(
             padding: EdgeInsets.only(
                 left: size.width * .045,
-                top: size.width * .065,
+                top: size.width * .045,
                 right: size.width * .04),
             child: Column(
               children: [
                 CardTwoLogoutItem(onTap: onTap, size: size),
-                SizedBox(height: size.width * .03),
+                SizedBox(height: size.width * .001),
                 CardTwoDeleteItem(size: size),
               ],
             ),

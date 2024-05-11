@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart' as getnav;
 import 'package:sophiee/cubit/auth/login/login_cubit.dart';
 import 'package:sophiee/widgets/settings/custom_items_two.dart';
+
+import '../../../edit/edit_page.dart';
 
 class CardOneItemsTwo extends StatelessWidget {
   const CardOneItemsTwo({super.key, required this.size});
@@ -23,7 +26,7 @@ class CardOneItemsTwo extends StatelessWidget {
             iconSize: size.width * .034,
             icon: FontAwesomeIcons.solidComments,
             color: Colors.indigoAccent.shade400),
-        SizedBox(height: size.width * .028),
+        SizedBox(height: size.width * .005),
         CustomItemsTwo(
             onTap: () {},
             size: size,
@@ -35,9 +38,12 @@ class CardOneItemsTwo extends StatelessWidget {
             textColor: context.read<LoginCubit>().isDark
                 ? Colors.white
                 : Colors.black),
-        SizedBox(height: size.width * .028),
+        SizedBox(height: size.width * .005),
         CustomItemsTwo(
-            onTap: () {},
+            onTap: () {
+              getnav.Get.to(() => EditPage(size: size),
+                  transition: getnav.Transition.rightToLeft);
+            },
             size: size,
             textColor:
                 context.read<LoginCubit>().isDark ? Colors.white : Colors.black,

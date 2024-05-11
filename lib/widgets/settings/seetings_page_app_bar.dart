@@ -2,8 +2,9 @@ import 'package:sophiee/widgets/settings/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 
 class SettingsPageAppBar extends StatefulWidget {
-  const SettingsPageAppBar({super.key, required this.size});
+  const SettingsPageAppBar({super.key, required this.size, this.widget});
   final Size size;
+  final Widget? widget;
 
   @override
   State<SettingsPageAppBar> createState() => _SettingsPageAppBarState();
@@ -34,12 +35,7 @@ class _SettingsPageAppBarState extends State<SettingsPageAppBar> {
       },
       appParTitle: 'Setting',
       padding: const EdgeInsets.only(left: 0),
-      widget: TextButton(
-        onPressed: () {},
-        child: Text('Reset',
-            style: TextStyle(
-                color: Colors.white, fontSize: widget.size.width * .039)),
-      ),
+      widget: widget.widget,
     );
   }
 }

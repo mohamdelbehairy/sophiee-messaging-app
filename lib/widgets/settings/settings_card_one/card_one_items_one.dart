@@ -27,7 +27,6 @@ class CardOneItemsOne extends StatelessWidget {
               color: context.read<LoginCubit>().isDark
                   ? Colors.grey
                   : Colors.black54),
-          SizedBox(height: size.width * .028),
           CardOneCustomItemsOne(
               size: size,
               onPressed: () {},

@@ -15,6 +15,7 @@ class AddUserDataPage extends StatelessWidget {
     var pickImage = context.read<PickImageCubit>();
     var storeUserData = context.read<StoreUserDateCubit>();
     var uploadImage = context.read<UploadImageCubit>();
+    
     return PopScope(
         canPop: false,
         child: Scaffold(

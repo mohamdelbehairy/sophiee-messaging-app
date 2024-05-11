@@ -44,6 +44,7 @@ class _AddUserGenderState extends State<AddUserGender> {
     return Stack(
       children: [
         AddUserTextField(
+          enabled: false,
           size: widget.size,
           hintText: 'Gender',
           controller: widget.gender,

@@ -1,4 +1,3 @@
-import 'package:sophiee/constants.dart';
 import 'package:sophiee/cubit/pick_image/pick_image_cubit.dart';
 import 'package:sophiee/cubit/pick_image/pick_image_state.dart';
 import 'package:sophiee/utils/widget/profile_image/choose_profile_image.dart';
@@ -12,17 +11,19 @@ class AddUserProfileImage extends StatelessWidget {
       {super.key,
       required this.size,
       required this.pickImage,
-      required this.enabled});
+      required this.enabled, required this.top, required this.imageUrl});
 
   final Size size;
   final PickImageCubit pickImage;
   final bool enabled;
+  final double top;
+  final String imageUrl;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding:
-          EdgeInsets.only(top: size.height * .03, bottom: size.height * .02),
+          EdgeInsets.only(top:top , bottom: size.height * .02),
       child: Stack(
         children: [
           BlocBuilder<PickImageCubit, PickImageStates>(
@@ -34,7 +35,7 @@ class AddUserProfileImage extends StatelessWidget {
                     backgroundImage: FileImage(state.image));
               }
               return CustomProfileImage(
-                  size: size, isDark: false, imageUrl: defaultProfileImageUrl);
+                  size: size, isDark: false, imageUrl: imageUrl);
             },
           ),
           ChooseProfileImage(

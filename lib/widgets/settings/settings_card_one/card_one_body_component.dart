@@ -17,15 +17,16 @@ class CardOneBodyComponenet extends StatelessWidget {
     return Card(
       color: context.read<LoginCubit>().isDark ? kDarkModeColor : Colors.white,
       elevation: context.read<LoginCubit>().isDark ? 1 : 0,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
       child: Padding(
         padding: EdgeInsets.only(
             left: size.width * .045,
-            top: size.width * .04,
-            bottom: size.width * .04),
+            top: size.width * .035,
+            bottom: size.width * .02),
         child: Column(
           children: [
             CardOneItemsOne(size: size, onPressed: onPressed),
-            SizedBox(height: size.width * .028),
+            SizedBox(height: size.width * .005),
             CardOneItemsTwo(size: size)
           ],
         ),

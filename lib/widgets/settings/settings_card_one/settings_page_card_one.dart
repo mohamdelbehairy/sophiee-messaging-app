@@ -32,7 +32,7 @@ class _SettingsPageCardOneState extends State<SettingsPageCardOne> {
           left: widget.size.width * .035,
           right: widget.size.width * .035,
           top: widget.size.width * .035,
-          bottom: 6),
+          bottom: 0),
       child: SettingsPageCardOneBody(
         size: widget.size,
         onPressed: () {

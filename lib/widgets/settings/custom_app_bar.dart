@@ -7,7 +7,7 @@ class CustomAppBarSetting extends StatelessWidget {
       {super.key,
       required this.appParTitle,
       required this.padding,
-      required this.widget,
+      this.widget,
       required this.hintText,
       required this.onChanged,
       this.suffixIcon,
@@ -15,7 +15,7 @@ class CustomAppBarSetting extends StatelessWidget {
       required this.controller});
   final String appParTitle;
   final EdgeInsets padding;
-  final Widget widget;
+  final Widget? widget;
   final String hintText;
   final Function(String) onChanged;
   final IconData? suffixIcon;
@@ -47,7 +47,7 @@ class CustomAppBarSetting extends StatelessWidget {
                         fontWeight: FontWeight.bold),
                   ),
                 ),
-                widget,
+                if (widget != null) widget!,
               ],
             ),
             SizedBox(height: size.width * .02),
