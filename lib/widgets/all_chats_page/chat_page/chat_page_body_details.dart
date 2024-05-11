@@ -6,6 +6,7 @@ import 'package:sophiee/cubit/message/message_state.dart';
 import 'package:sophiee/cubit/upload/upload_audio/upload_audio_cubit.dart';
 import 'package:sophiee/models/message_model.dart';
 import 'package:sophiee/models/users_model.dart';
+import 'package:sophiee/utils/shimmer/home/all_chats/chat_page/message_page_shimmer.dart';
 import 'package:sophiee/utils/widget/replay_to_message/replay_audio_message.dart';
 import 'package:sophiee/widgets/all_chats_page/chat_page/chat_page_swip_message.dart';
 import 'package:sophiee/widgets/all_chats_page/chat_page/custom_chat_page_text_field_item_details.dart';
@@ -88,9 +89,9 @@ class _ChatPageBodyDetailsState extends State<ChatPageBodyDetails> {
           }
         },
         builder: (context, state) {
-          // if(state is MessageLoading) {
-          //   return MessagePageShimmer();
-          // }
+          if(state is MessageLoading) {
+            return const MessagePageShimmer();
+          }
           return Stack(
             children: [
               Column(

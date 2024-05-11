@@ -41,6 +41,7 @@ class _HomePageState extends State<HomePage> {
 
     context.read<FollowerNotificationCubit>().initFollowerNotification();
     context.read<MessageNotificationCubit>().initMessageNotification();
+    context.read<MessageNotificationCubit>().appState(context);
 
     context.read<ChatsCubit>().chats();
     appStatusCubit = context.read<AllChatsShimmerStatusCubit>();

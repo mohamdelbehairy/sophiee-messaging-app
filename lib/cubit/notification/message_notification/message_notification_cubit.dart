@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:http/http.dart' as http;
 import 'package:sophiee/constants.dart';
+import 'package:sophiee/pages/chats/chat_page.dart';
 
 part 'message_notification_state.dart';
 
@@ -61,7 +62,8 @@ class MessageNotificationCubit extends Cubit<MessageNotificationState> {
 
   // show message notification
   Future<void> showMessageNotification(
-      {required String title, required String body}) async {
+      {required String title,
+      required String body}) async {
     try {
       AndroidNotificationDetails android = const AndroidNotificationDetails(
           "com.example.sophiee", "myChannel",
@@ -71,11 +73,37 @@ class MessageNotificationCubit extends Cubit<MessageNotificationState> {
 
       await _flutterLocalNotificationsPlugin.show(
           DateTime.now().microsecondsSinceEpoch, title, body, details);
+
       emit(ShowMessageNotificationSuccess());
     } catch (e) {
       emit(MessageNotificationFailure(errorMessage: e.toString()));
       debugPrint(
           'error from show message notification method: ${e.toString()}');
     }
+  }
+
+  // navigate to chat page
+  void navigationToChatPage(RemoteMessage message, BuildContext context) {
+    debugPrint('data: ${message.data}');
+    debugPrint('message: ${message.data['senderId']}');
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => ChatPage(userID: message.data['senderId'])));
+  }
+
+  // app state
+  Future<void> appState(BuildContext context) async {
+    // when app is closed
+    RemoteMessage? message =
+        await FirebaseMessaging.instance.getInitialMessage();
+    if (message != null) {
+      navigationToChatPage(message, context);
+    }
+
+    // when app is in background
+    FirebaseMessaging.onMessageOpenedApp.listen((message) {
+      navigationToChatPage(message, context);
+    });
   }
 }
