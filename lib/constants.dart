@@ -31,6 +31,8 @@ const googleIconUrl = 'assets/images/google-icon.png';
 
 const phoneNumberImageUrl = 'assets/images/phone-number.png';
 
+const noGroupChat = "assets/images/no-group-chat.png";
+
 const noItemFoundLottieUrl = "assets/lottie/Animation - 1714723129676.json";
 
 const serverUrl = "https://fcm.googleapis.com/fcm/send";

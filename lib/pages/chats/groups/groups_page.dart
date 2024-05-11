@@ -7,7 +7,6 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-
 class GroupsPage extends StatelessWidget {
   const GroupsPage({super.key});
 
@@ -22,9 +21,9 @@ class GroupsPage extends StatelessWidget {
       builder: (context, state) {
         if (state == ConnectivityResult.wifi ||
             state == ConnectivityResult.mobile) {
-          return GroupsPageBody(group: group);
+          return GroupsPageBody(group: group, size: size, isDark: isDark);
         } else {
-          return GroupsChatShimmer(isDark: isDark,size: size);
+          return GroupsChatShimmer(isDark: isDark, size: size);
         }
       },
     ));
