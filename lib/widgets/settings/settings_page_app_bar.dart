@@ -2,9 +2,16 @@ import 'package:sophiee/widgets/settings/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 
 class SettingsPageAppBar extends StatefulWidget {
-  const SettingsPageAppBar({super.key, required this.size, this.widget});
+  const SettingsPageAppBar(
+      {super.key,
+      required this.size,
+      this.widget,
+      this.arrowIcon,
+       this.mainAxisAlignment});
   final Size size;
   final Widget? widget;
+  final Widget? arrowIcon;
+  final MainAxisAlignment? mainAxisAlignment;
 
   @override
   State<SettingsPageAppBar> createState() => _SettingsPageAppBarState();
@@ -22,6 +29,9 @@ class _SettingsPageAppBarState extends State<SettingsPageAppBar> {
   @override
   Widget build(BuildContext context) {
     return CustomAppBarSetting(
+      arrowIcon: widget.arrowIcon,
+      mainAxisAlignment: widget.mainAxisAlignment,
+      size: widget.size,
       controller: controller,
       onTap: () {
         setState(() {

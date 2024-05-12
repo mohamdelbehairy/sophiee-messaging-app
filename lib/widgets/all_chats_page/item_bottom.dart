@@ -33,39 +33,37 @@ class ItemBottom extends StatelessWidget {
             color = Colors.grey;
           }
           return ListTile(
-            title: ItemBottomListTileTitle(data: data, user: user),
-            leading: Stack(
-              children: [
-                CircleAvatar(
-                  radius: size.height * .03,
-                  backgroundColor: Colors.transparent,
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(size.height * .034),
-                    child: FancyShimmerImage(
-                        boxFit: BoxFit.cover,
-                        shimmerBaseColor:
-                            isDark ? Colors.white12 : Colors.grey.shade300,
-                        shimmerHighlightColor:
-                            isDark ? Colors.white24 : Colors.grey.shade100,
-                        imageUrl: data.profileImage),
-                  ),
-                ),
-                Positioned(
-                  bottom: 0.0,
-                  right: 0.0,
-                  child: CircleAvatar(
-                    radius: size.width * .02,
-                    backgroundColor: Colors.white,
+              title: ItemBottomListTileTitle(data: data, user: user),
+              leading: Stack(
+                children: [
+                  CircleAvatar(
+                      radius: size.height * .03,
+                      backgroundColor: Colors.transparent,
+                      child: ClipRRect(
+                          borderRadius:
+                              BorderRadius.circular(size.height * .034),
+                          child: FancyShimmerImage(
+                              boxFit: BoxFit.cover,
+                              shimmerBaseColor: isDark
+                                  ? Colors.white12
+                                  : Colors.grey.shade300,
+                              shimmerHighlightColor: isDark
+                                  ? Colors.white24
+                                  : Colors.grey.shade100,
+                              imageUrl: data.profileImage))),
+                  Positioned(
+                    bottom: 0.0,
+                    right: 0.0,
                     child: CircleAvatar(
-                      backgroundColor: color,
-                      radius: size.width * .015,
-                    ),
-                  ),
-                )
-              ],
-            ),
-            subtitle: ItemBottomSubTitleListTile(user: user, data: data),
-          );
+                        radius: size.width * .02,
+                        backgroundColor:
+                            isDark ? kDarkModeColor : const Color(0xfff1f2f2),
+                        child: CircleAvatar(
+                            backgroundColor: color, radius: size.width * .015)),
+                  )
+                ],
+              ),
+              subtitle: ItemBottomSubTitleListTile(user: user, data: data));
         } else {
           return Container();
         }

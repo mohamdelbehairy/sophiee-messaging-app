@@ -40,6 +40,7 @@ class _SearchPageBodyState extends State<SearchPageBody> {
             Stack(
               children: [
                 CustomAppBarSetting(
+                  size: size,
                   controller: controller,
                   onTap: () {
                     setState(() {

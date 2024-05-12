@@ -37,6 +37,7 @@ class CustomMyGroupsBody extends StatelessWidget {
                 groupModel: groupModel, isDark: isDark, size: size),
             SizedBox(height: size.width * .01),
             Text(groupModel.groupName,
+            maxLines: 1,
                 style: TextStyle(color: isDark ? Colors.white : Colors.black)),
             SizedBox(height: size.width * .01),
             GroupsMemberImageCover(

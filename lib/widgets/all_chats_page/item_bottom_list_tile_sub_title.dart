@@ -25,14 +25,10 @@ class ItemBottomSubTitleListTile extends StatelessWidget {
         }
         return Row(
           children: [
-            // if (user.lastMessage?['senderID'] ==
-            //     FirebaseAuth.instance.currentUser!.uid)
-            //   Icon(user.lastMessage?['isSeen'] ? Icons.done_all : Icons.done,
-            //       size: size.width * .045, color: Colors.grey),
-            // SizedBox(width: size.width * .005),
+           
             Expanded(
               child: Padding(
-                padding: EdgeInsets.only(right: size.width * .25),
+                padding: EdgeInsets.only(right: size.width * .18),
                 child: Text(
                   user.lastMessage?['record'] != null &&
                           user.lastMessage?['senderID'] ==

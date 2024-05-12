@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sophiee/cubit/pick_image/pick_image_state.dart';
 import 'package:sophiee/cubit/update_user_data/update_user_cubit_cubit.dart';
 
 import '../cubit/pick_image/pick_image_cubit.dart';
@@ -18,18 +17,11 @@ class EditProfilePage extends StatelessWidget {
     var uploadImage = context.read<UploadImageCubit>();
 
     return PopScope(
-      onPopInvoked: (didPop) {
-        if (pickImage.state is PickImageSucccess) {
-          pickImage.emit(PickImageInitial());
-          pickImage.selectedImage = null;
-        }
-      },
-      child: EditprofilePageBody(
-          updateUserData: updateUserData,
-          uploadImage: uploadImage,
-          size: size,
-          pickImage: pickImage),
-    );
+        canPop: false,
+        child: EditprofilePageBody(
+            updateUserData: updateUserData,
+            uploadImage: uploadImage,
+            size: size,
+            pickImage: pickImage));
   }
 }
-

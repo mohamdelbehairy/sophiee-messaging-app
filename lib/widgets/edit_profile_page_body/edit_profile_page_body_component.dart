@@ -5,8 +5,9 @@ import 'package:sophiee/constants.dart';
 import 'package:sophiee/cubit/update_user_data/update_user_cubit_cubit.dart';
 
 import '../../cubit/pick_image/pick_image_cubit.dart';
+import '../../cubit/pick_image/pick_image_state.dart';
 import '../../cubit/upload/upload_image/upload_image_cubit.dart';
-import '../settings/seetings_page_app_bar.dart';
+import '../settings/settings_page_app_bar.dart';
 import 'edit_profile_component_details.dart';
 
 class EditProfilePageBodyComponent extends StatelessWidget {
@@ -35,7 +36,19 @@ class EditProfilePageBodyComponent extends StatelessWidget {
         body: SingleChildScrollView(
           child: Column(
             children: [
-              SettingsPageAppBar(size: size),
+              SettingsPageAppBar(
+                  size: size,
+                  arrowIcon: GestureDetector(
+                    onTap: () {
+                      if (pickImage.state is PickImageSucccess) {
+                        pickImage.emit(PickImageInitial());
+                        pickImage.selectedImage = null;
+                      }
+                      Navigator.pop(context);
+                    },
+                    child: const Icon(Icons.arrow_back,
+                        color: Colors.white, size: 35),
+                  )),
               EditProfileComponentDetails(
                   size: size,
                   pickImage: pickImage,

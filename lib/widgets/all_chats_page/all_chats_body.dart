@@ -18,9 +18,7 @@ class AllChatsBody extends StatelessWidget {
           state == ConnectivityResult.mobile) {
         return const CustomScrollView(
           slivers: [
-            SliverToBoxAdapter(
-              child: ListViewTop(),
-            ),
+            SliverToBoxAdapter(child: ListViewTop()),
             ListViewBottom(),
           ],
         );

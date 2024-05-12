@@ -12,22 +12,27 @@ class CustomAppBarSetting extends StatelessWidget {
       required this.onChanged,
       this.suffixIcon,
       required this.onTap,
-      required this.controller});
+      required this.controller,
+      this.arrowIcon,
+      required this.size,
+      this.mainAxisAlignment});
   final String appParTitle;
   final EdgeInsets padding;
   final Widget? widget;
+  final Widget? arrowIcon;
   final String hintText;
   final Function(String) onChanged;
   final IconData? suffixIcon;
   final Function() onTap;
   final TextEditingController controller;
+  final Size size;
+  final MainAxisAlignment? mainAxisAlignment;
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
     return Container(
       height: size.height * .18,
-      width: MediaQuery.of(context).size.width,
+      width: size.width,
       decoration: const BoxDecoration(color: kPrimaryColor),
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: size.width * .04),
@@ -35,29 +40,28 @@ class CustomAppBarSetting extends StatelessWidget {
           children: [
             SizedBox(height: size.height * .045),
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: mainAxisAlignment ?? MainAxisAlignment.start,
               children: [
+                if (arrowIcon != null) arrowIcon!,
+                if (arrowIcon != null) SizedBox(width: size.width * .02),
                 Padding(
                   padding: padding,
-                  child: Text(
-                    appParTitle,
-                    style: TextStyle(
-                        fontSize: size.height * .034,
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold),
-                  ),
+                  child: Text(appParTitle,
+                      style: TextStyle(
+                          fontSize: size.height * .034,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold)),
                 ),
                 if (widget != null) widget!,
               ],
             ),
             SizedBox(height: size.width * .02),
             SearchItem(
-              controller: controller,
-              onTap: onTap,
-              hintText: hintText,
-              onChanged: onChanged,
-              suffixIcon: suffixIcon,
-            ),
+                controller: controller,
+                onTap: onTap,
+                hintText: hintText,
+                onChanged: onChanged,
+                suffixIcon: suffixIcon),
           ],
         ),
       ),

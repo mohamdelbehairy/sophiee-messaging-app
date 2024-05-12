@@ -54,43 +54,40 @@ class ChatItemTop extends StatelessWidget {
                     alignment: Alignment.bottomRight,
                     children: [
                       CircleAvatar(
-                        radius: size.height * .034,
-                        backgroundColor:
-                            data.isStory ? kPrimaryColor : Colors.transparent,
-                        child: CircleAvatar(
-                          radius: size.height * .033,
+                          radius: size.height * .034,
                           backgroundColor:
-                              data.isStory ? Colors.white : Colors.transparent,
+                              data.isStory ? kPrimaryColor : Colors.transparent,
                           child: CircleAvatar(
-                            radius: size.height * .031,
-                            backgroundColor: Colors.transparent,
-                            child: ClipRRect(
-                                borderRadius:
-                                    BorderRadius.circular(size.height * .035),
-                                child: FancyShimmerImage(
-                                    boxFit: BoxFit.cover,
-                                    shimmerBaseColor: isDark
-                                        ? Colors.white12
-                                        : Colors.grey.shade300,
-                                    shimmerHighlightColor: isDark
-                                        ? Colors.white24
-                                        : Colors.grey.shade100,
-                                    imageUrl: data.profileImage)),
-                          ),
-                        ),
-                      ),
+                              radius: size.height * .033,
+                              backgroundColor: data.isStory
+                                  ? Colors.white
+                                  : Colors.transparent,
+                              child: CircleAvatar(
+                                  radius: size.height * .031,
+                                  backgroundColor: Colors.transparent,
+                                  child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(
+                                          size.height * .035),
+                                      child: FancyShimmerImage(
+                                          boxFit: BoxFit.cover,
+                                          shimmerBaseColor: isDark
+                                              ? Colors.white12
+                                              : Colors.grey.shade300,
+                                          shimmerHighlightColor: isDark
+                                              ? Colors.white24
+                                              : Colors.grey.shade100,
+                                          imageUrl: data.profileImage))))),
                       Padding(
-                        padding: EdgeInsetsDirectional.only(
-                            bottom: size.width * .012, end: size.width * .0015),
-                        child: CircleAvatar(
-                          radius: size.width * .022,
-                          backgroundColor: Colors.white,
+                          padding: EdgeInsetsDirectional.only(
+                              bottom: size.width * .01),
                           child: CircleAvatar(
-                            backgroundColor: color,
-                            radius: size.width * .017,
-                          ),
-                        ),
-                      )
+                              radius: size.width * .02,
+                              backgroundColor: isDark
+                                  ? kDarkModeColor
+                                  : const Color(0xfff1f2f2),
+                              child: CircleAvatar(
+                                  backgroundColor: color,
+                                  radius: size.width * .015)))
                     ],
                   )),
               SizedBox(height: size.width * .01),

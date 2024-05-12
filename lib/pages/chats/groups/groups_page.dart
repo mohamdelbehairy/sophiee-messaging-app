@@ -15,7 +15,7 @@ class GroupsPage extends StatelessWidget {
     var isDark = context.read<LoginCubit>().isDark;
     var size = MediaQuery.of(context).size;
     var group = context.read<CreateGroupsCubit>();
-    group.getGroups();
+    // group.getGroups();
 
     return Scaffold(body: BlocBuilder<ConnectivityCubit, ConnectivityResult>(
       builder: (context, state) {

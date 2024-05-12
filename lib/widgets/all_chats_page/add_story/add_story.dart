@@ -14,29 +14,28 @@ class AddStory extends StatelessWidget {
     return Column(
       children: [
         InkWell(
-          splashColor: Colors.transparent,
-          highlightColor: Colors.transparent,
-          onTap: () => showPopover(
-            height: size.height * .15,
-            width: size.height * .25,
-            backgroundColor: isDark ? const Color(0xff2b2c33) : Colors.white,
-            direction: PopoverDirection.bottom,
-            context: context,
-            bodyBuilder: (context) => const AddStoryPopover(),
-          ),
-          child: CircleAvatar(
-            radius: size.width * .073,
-            backgroundColor: Colors.grey.withOpacity(.1),
-            child: const Icon(Icons.add),
-          ),
-        ),
-        SizedBox(height: size.width * .01),
-        Text(
-          'Your Story',
-          style: TextStyle(
-              fontWeight: FontWeight.bold,
-              color: isDark ? Colors.white : Colors.black),
-        )
+            splashColor: Colors.transparent,
+            highlightColor: Colors.transparent,
+            onTap: () => showPopover(
+                height: size.height * .15,
+                width: size.height * .25,
+                backgroundColor:
+                    isDark ? const Color(0xff2b2c33) : Colors.white,
+                direction: PopoverDirection.bottom,
+                context: context,
+                bodyBuilder: (context) => const AddStoryPopover()),
+            child: CircleAvatar(
+                radius: 25,
+                backgroundColor: isDark
+                    ? const Color(0xff4a4b50)
+                    : Colors.grey.withOpacity(.15),
+                child: Icon(Icons.add,
+                    color: isDark ? const Color(0xffd2d1d8) : Colors.grey))),
+        const SizedBox(height: 8),
+        Text('Your Story',
+            style: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: isDark ? Colors.white : Colors.black))
       ],
     );
   }

@@ -16,6 +16,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import '../cubit/groups/create_groups/create_groups_cubit.dart';
+
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -44,6 +46,8 @@ class _HomePageState extends State<HomePage> {
     context.read<MessageNotificationCubit>().appState(context);
 
     context.read<ChatsCubit>().chats();
+    context.read<CreateGroupsCubit>().getGroups();
+
     appStatusCubit = context.read<AllChatsShimmerStatusCubit>();
     context
         .read<GetFriendsCubit>()
