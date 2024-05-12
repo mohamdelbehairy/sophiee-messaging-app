@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:sophiee/constants.dart';
+import 'package:sophiee/cubit/update_user_data/update_user_cubit_cubit.dart';
 
 import '../../cubit/pick_image/pick_image_cubit.dart';
 import '../../cubit/upload/upload_image/upload_image_cubit.dart';
-import '../../cubit/user_date/store_user_date/store_user_date_cubit.dart';
 import '../settings/seetings_page_app_bar.dart';
 import 'edit_profile_component_details.dart';
 
@@ -13,12 +13,12 @@ class EditProfilePageBodyComponent extends StatelessWidget {
   const EditProfilePageBodyComponent(
       {super.key,
       required this.uploadImage,
-      required this.storeUserData,
+      required this.updateUserData,
       required this.size,
       required this.pickImage});
 
   final UploadImageCubit uploadImage;
-  final StoreUserDateCubit storeUserData;
+  final UpdateUserDataCubit updateUserData;
   final Size size;
   final PickImageCubit pickImage;
 
@@ -27,7 +27,7 @@ class EditProfilePageBodyComponent extends StatelessWidget {
     return ModalProgressHUD(
       opacity: 0.1,
       inAsyncCall: uploadImage.isLoading == false
-          ? storeUserData.isLoading
+          ? updateUserData.isLoading
           : uploadImage.isLoading,
       progressIndicator: LoadingAnimationWidget.discreteCircle(
           color: kPrimaryColor, size: size.height * .04),
@@ -39,7 +39,7 @@ class EditProfilePageBodyComponent extends StatelessWidget {
               EditProfileComponentDetails(
                   size: size,
                   pickImage: pickImage,
-                  storeUserDate: storeUserData,
+                  updateUserDate: updateUserData,
                   uploadImage: uploadImage)
             ],
           ),

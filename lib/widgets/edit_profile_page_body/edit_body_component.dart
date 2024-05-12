@@ -2,11 +2,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sophiee/cubit/pick_image/pick_image_cubit.dart';
+import 'package:sophiee/cubit/update_user_data/update_user_cubit_cubit.dart';
 
 import '../../cubit/upload/upload_image/upload_image_cubit.dart';
 import '../../cubit/user_date/get_user_data/get_user_data_cubit.dart';
 import '../../cubit/user_date/get_user_data/get_user_data_state.dart';
-import '../../cubit/user_date/store_user_date/store_user_date_cubit.dart';
 import 'edit_profile_page_fields.dart';
 
 class EditBodyComponent extends StatelessWidget {
@@ -18,7 +18,7 @@ class EditBodyComponent extends StatelessWidget {
       required this.dateOfBirth,
       required this.gender,
       required this.size,
-      required this.storeUserDate,
+      required this.updateUserDate,
       required this.pickImage,
       required this.uploadImage});
 
@@ -28,7 +28,7 @@ class EditBodyComponent extends StatelessWidget {
   final TextEditingController dateOfBirth;
   final TextEditingController gender;
   final Size size;
-  final StoreUserDateCubit storeUserDate;
+  final UpdateUserDataCubit updateUserDate;
   final PickImageCubit pickImage;
   final UploadImageCubit uploadImage;
 
@@ -57,7 +57,7 @@ class EditBodyComponent extends StatelessWidget {
                 dateOfBirth: dateOfBirth,
                 gender: gender,
                 uploadImage: uploadImage,
-                storeUserDate: storeUserDate);
+                updateUserDate: updateUserDate);
           } else {
             return Container();
           }

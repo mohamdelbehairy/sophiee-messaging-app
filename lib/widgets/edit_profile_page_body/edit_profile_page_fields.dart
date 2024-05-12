@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:sophiee/cubit/update_user_data/update_user_cubit_cubit.dart';
 
 import '../../cubit/pick_image/pick_image_cubit.dart';
 import '../../cubit/upload/upload_image/upload_image_cubit.dart';
-import '../../cubit/user_date/store_user_date/store_user_date_cubit.dart';
 import '../../models/users_model.dart';
 import '../create_accont_widget/add_user_date_of_birth.dart';
 import '../create_accont_widget/add_user_full_name.dart';
@@ -24,7 +24,7 @@ class EditProfilePageFields extends StatelessWidget {
       required this.dateOfBirth,
       required this.gender,
       required this.uploadImage,
-      required this.storeUserDate});
+      required this.updateUserDate});
 
   final Size size;
   final UserModel userData;
@@ -35,7 +35,7 @@ class EditProfilePageFields extends StatelessWidget {
   final TextEditingController dateOfBirth;
   final TextEditingController gender;
   final UploadImageCubit uploadImage;
-  final StoreUserDateCubit storeUserDate;
+  final UpdateUserDataCubit updateUserDate;
 
   @override
   Widget build(BuildContext context) {
@@ -85,7 +85,7 @@ class EditProfilePageFields extends StatelessWidget {
               gender: gender),
           SaveChangesButton(
               uploadImage: uploadImage,
-              storeUserDate: storeUserDate,
+              updateUserDate: updateUserDate,
               pickImage: pickImage,
               fullName: fullName,
               nickName: nickName,

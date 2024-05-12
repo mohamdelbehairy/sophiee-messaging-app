@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:sophiee/cubit/update_user_data/update_user_cubit_cubit.dart';
 import 'package:sophiee/widgets/edit_profile_page_body/edit_body_component.dart';
 
 import '../../cubit/pick_image/pick_image_cubit.dart';
 import '../../cubit/upload/upload_image/upload_image_cubit.dart';
-import '../../cubit/user_date/store_user_date/store_user_date_cubit.dart';
 
 class EditProfileComponentDetails extends StatefulWidget {
   const EditProfileComponentDetails(
       {super.key,
       required this.size,
       required this.pickImage,
-      required this.storeUserDate,
+      required this.updateUserDate,
       required this.uploadImage});
 
   final Size size;
   final PickImageCubit pickImage;
-  final StoreUserDateCubit storeUserDate;
+  final UpdateUserDataCubit updateUserDate;
   final UploadImageCubit uploadImage;
 
   @override
@@ -44,7 +44,7 @@ class _EditProfileComponentDetailsState extends State<EditProfileComponentDetail
   Widget build(BuildContext context) {
     return EditBodyComponent(
         uploadImage: widget.uploadImage,
-        storeUserDate: widget.storeUserDate,
+        updateUserDate: widget.updateUserDate,
         pickImage: widget.pickImage,
         fullName: fullName,
         nickName: nickName,
