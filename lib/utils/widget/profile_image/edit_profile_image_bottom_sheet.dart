@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sophiee/cubit/auth/login/login_cubit.dart';
-import 'package:sophiee/widgets/edit_profile_page/bottom_sheet_items.dart';
+
+import 'bottom_sheet_items.dart';
 
 class EditProfileImageBottomSheet extends StatelessWidget {
   const EditProfileImageBottomSheet(

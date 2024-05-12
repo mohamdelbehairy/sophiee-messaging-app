@@ -8,7 +8,8 @@ class ChooseProfileImage extends StatelessWidget {
       required this.isDark,
       required this.takePhoto,
       required this.choosePhoto,
-      required this.size, required this.isLoading});
+      required this.size,
+      required this.isLoading});
 
   final bool isDark;
   final Function() takePhoto;
@@ -27,7 +28,8 @@ class ChooseProfileImage extends StatelessWidget {
             onTap: () {
               if (isLoading) {
                 showModalBottomSheet(
-                    backgroundColor: isDark ? const Color(0xff2b2c33) : Colors.white,
+                    backgroundColor:
+                        isDark ? const Color(0xff2b2c33) : Colors.white,
                     context: context,
                     builder: (context) => EditProfileImageBottomSheet(
                         takePhoto: takePhoto, choosePhoto: choosePhoto));
@@ -39,7 +41,7 @@ class ChooseProfileImage extends StatelessWidget {
                 child: CircleAvatar(
                     radius: size.width * .04,
                     backgroundColor: kPrimaryColor,
-                    child:
-                        const Icon(Icons.camera_alt_rounded, color: Colors.white)))));
+                    child: const Icon(Icons.camera_alt_rounded,
+                        color: Colors.white)))));
   }
 }

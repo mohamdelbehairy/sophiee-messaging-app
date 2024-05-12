@@ -1,12 +1,10 @@
 import 'package:sophiee/cubit/user_date/get_user_data/get_user_data_cubit.dart';
 import 'package:sophiee/cubit/user_date/get_user_data/get_user_data_state.dart';
-import 'package:sophiee/pages/edit_profile_page.dart';
 import 'package:sophiee/utils/shimmer/home/profile/profile_page_shimmer.dart';
 import 'package:sophiee/widgets/profile_page/profile_page_body_component.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get/get.dart' as getnav;
 
 class ProfilePageBody extends StatelessWidget {
   const ProfilePageBody({super.key, required this.size});
@@ -23,19 +21,8 @@ class ProfilePageBody extends StatelessWidget {
           if (currentUser != null) {
             final userData = state.userModel
                 .firstWhere((element) => element.userID == currentUser.uid);
-            TextEditingController controller =
-                TextEditingController(text: userData.bio);
 
-            return ProfilePageBodyComponent(
-              size: size,
-              user: userData,
-              onTap: () {
-                getnav.Get.to(
-                    () =>
-                        EditProfilePage(user: userData, controller: controller),
-                    transition: getnav.Transition.rightToLeft);
-              },
-            );
+            return ProfilePageBodyComponent(size: size, user: userData);
           } else {
             return Container();
           }

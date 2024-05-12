@@ -8,8 +8,7 @@ import 'package:sophiee/widgets/profile_page/profile_page_card_one/card_one_titl
 
 class ProfileInfoCardOne extends StatelessWidget {
   const ProfileInfoCardOne(
-      {super.key, required this.onTap, required this.user, required this.size});
-  final Function() onTap;
+      {super.key, required this.user, required this.size});
   final UserModel user;
   final Size size;
 

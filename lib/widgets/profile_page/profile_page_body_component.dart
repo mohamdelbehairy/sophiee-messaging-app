@@ -5,8 +5,8 @@ import 'package:sophiee/widgets/profile_page/profile_page_body_scrollable_item.d
 
 class ProfilePageBodyComponent extends StatelessWidget {
   const ProfilePageBodyComponent(
-      {super.key, required this.onTap, required this.user, required this.size});
-  final Function() onTap;
+      {super.key, required this.user, required this.size});
+
   final UserModel user;
   final Size size;
 
@@ -21,8 +21,7 @@ class ProfilePageBodyComponent extends StatelessWidget {
             child: Stack(
               children: [
                 ProfilePageAppBar(size: size),
-                ProfilePageBodyScrollableItem(
-                    onTap: onTap, size: size, user: user)
+                ProfilePageBodyScrollableItem(size: size, user: user)
               ],
             ),
           ),

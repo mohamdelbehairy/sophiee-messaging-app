@@ -6,11 +6,10 @@ import 'package:sophiee/widgets/profile_page/profile_page_card_two/profile_page_
 
 class ProfilePageBodyScrollableItem extends StatelessWidget {
   const ProfilePageBodyScrollableItem(
-      {super.key, required this.size, required this.user, required this.onTap});
+      {super.key, required this.size, required this.user});
 
   final Size size;
   final UserModel user;
-  final Function() onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -34,8 +33,7 @@ class ProfilePageBodyScrollableItem extends StatelessWidget {
                             EdgeInsets.symmetric(horizontal: size.width * .035),
                         child: Column(
                           children: [
-                            ProfilePageCardOne(
-                                user: user, onTap: onTap, size: size),
+                            ProfilePageCardOne(user: user, size: size),
                             SizedBox(height: size.width * .02),
                             ProfilePageCardTwo(size: size),
                             SizedBox(height: size.width * .02),

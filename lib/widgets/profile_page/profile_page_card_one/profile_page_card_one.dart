@@ -7,10 +7,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sophiee/widgets/profile_page/profile_page_card_one/profile_page_card_one_body.dart';
 
 class ProfilePageCardOne extends StatelessWidget {
-  const ProfilePageCardOne(
-      {super.key, required this.onTap, required this.user, required this.size});
+  const ProfilePageCardOne({super.key, required this.user, required this.size});
 
-  final Function() onTap;
   final UserModel user;
   final Size size;
 
@@ -24,7 +22,6 @@ class ProfilePageCardOne extends StatelessWidget {
         size: size,
         isDark: isDark,
         user: user,
-        onTap: onTap,
         follower: follower,
         following: following);
   }

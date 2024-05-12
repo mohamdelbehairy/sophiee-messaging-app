@@ -9,20 +9,17 @@ import 'package:sophiee/widgets/profile_page/profile_page_card_one/profile_page_
 import 'package:sophiee/widgets/profile_page/profile_page_card_one/profile_page_card_one_profile_details.dart';
 
 class ProfilePageCardOneBodyComponent extends StatelessWidget {
-  const ProfilePageCardOneBodyComponent({
-    super.key,
-    required this.size,
-    required this.isDark,
-    required this.user,
-    required this.onTap,
-    required this.follower,
-    required this.following,
-  });
+  const ProfilePageCardOneBodyComponent(
+      {super.key,
+      required this.size,
+      required this.isDark,
+      required this.user,
+      required this.follower,
+      required this.following});
 
   final Size size;
   final bool isDark;
   final UserModel user;
-  final Function() onTap;
   final GetFollowersCubit follower;
   final GetFollowingCubit following;
 
@@ -33,11 +30,7 @@ class ProfilePageCardOneBodyComponent extends StatelessWidget {
       width: size.width,
       decoration: const BoxDecoration(
         color: Colors.transparent,
-        boxShadow: [
-          BoxShadow(
-              blurRadius: 0,
-              color: Colors.transparent)
-        ],
+        boxShadow: [BoxShadow(blurRadius: 0, color: Colors.transparent)],
       ),
       child: Card(
         color: isDark ? kDarkModeColor : Colors.white,
@@ -46,7 +39,7 @@ class ProfilePageCardOneBodyComponent extends StatelessWidget {
             borderRadius: BorderRadius.circular(size.width * .02)),
         child: Column(
           children: [
-            ProfileInfoCardOne(user: user, onTap: onTap, size: size),
+            ProfileInfoCardOne(user: user, size: size),
             ProfilePageCardOneDivider(size: size),
             ProfilePageCardOneBio(size: size, user: user, isDark: isDark),
             SizedBox(height: size.height * .01),
