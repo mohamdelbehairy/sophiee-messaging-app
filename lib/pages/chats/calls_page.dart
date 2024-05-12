@@ -18,7 +18,7 @@ class CallsPage extends StatelessWidget {
         builder: (context, state) {
           if (state == ConnectivityResult.wifi ||
               state == ConnectivityResult.mobile) {
-            return CallsPageBody(isDark: isDark);
+            return CallsPageBody(isDark: isDark,size: size);
           } else {
             return CallsPageShimmer(size: size,isDark: isDark);
           }
