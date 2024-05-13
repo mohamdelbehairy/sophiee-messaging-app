@@ -39,9 +39,9 @@ class ProfilePageCardOneProfileDetails extends StatelessWidget {
             children: [
               const CustomProfileInfo(
                   numberInfo: '532', textInfo: 'Public Post'),
-              ProfilePageCardOneFollowers(user: user, follower: follower),
-              ProfilePageCardOneFollowing(user: user, following: following),
-            ],
+              ProfilePageCardOneFollowers(user: user, follower: follower,size: size),
+              ProfilePageCardOneFollowing(user: user, following: following,size: size),
+            ]
           ),
         ),
       ),

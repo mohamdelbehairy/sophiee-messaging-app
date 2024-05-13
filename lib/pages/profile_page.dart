@@ -6,8 +6,25 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class ProfilePage extends StatelessWidget {
+import '../cubit/get_followers/get_followers_cubit.dart';
+import '../cubit/get_following/get_following_cubit.dart';
+import '../cubit/get_friends/get_friends_cubit.dart';
+
+class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
+
+  @override
+  State<ProfilePage> createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends State<ProfilePage> {
+  @override
+  void initState() {
+    context.read<GetFriendsCubit>().isFriendFound();
+    context.read<GetFollowingCubit>().isFollowingFound();
+    context.read<GetFollowersCubit>().isFollowersFound();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {

@@ -17,6 +17,7 @@ class UserModel {
   bool? isEmailAuth;
   bool? isFacebookAuth;
   String? token;
+   bool? isFollowing;
 
   UserModel(
       {required this.userName,
@@ -34,7 +35,9 @@ class UserModel {
       this.isGoogleAuth,
       this.isEmailAuth,
       this.isFacebookAuth,
-      this.token});
+      this.token,
+      this.isFollowing
+      });
 
   factory UserModel.fromJson(jsonData) {
     return UserModel(
@@ -53,7 +56,9 @@ class UserModel {
         isGoogleAuth: jsonData['isGoogleAuth'],
         isEmailAuth: jsonData['isEmailAuth'],
         isFacebookAuth: jsonData['isFacebookAuth'],
-        token: jsonData['token']);
+        token: jsonData['token'],
+        isFollowing:jsonData['isFollowing']
+        );
   }
   Map<String, dynamic> toMap() {
     return {

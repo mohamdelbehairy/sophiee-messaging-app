@@ -18,23 +18,20 @@ class SearchResultCardListTile extends StatelessWidget {
       title: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(
-            user.userName,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            style: TextStyle(
-                color: isDark ? Colors.white : Colors.black,
-                fontSize: size.height * .02),
-          ),
+          Text(user.userName,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(
+                  color: isDark ? Colors.white : Colors.black,
+                  fontSize: size.height * .02)),
           SearchResultPageBodyBottom(
               user: user, userData: userData, size: size),
         ],
       ),
       leading: CircleAvatar(
-        radius: size.width * .06,
-        backgroundColor: Colors.transparent,
-        backgroundImage: NetworkImage(user.profileImage),
-      ),
+          radius: size.width * .06,
+          backgroundColor: Colors.transparent,
+          backgroundImage: NetworkImage(user.profileImage)),
       subtitle: Text(user.bio,
           maxLines: 2,
           overflow: TextOverflow.ellipsis,

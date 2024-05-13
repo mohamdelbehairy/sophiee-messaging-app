@@ -6,8 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'profile_details_list_tile.dart';
 
-class TabBarItemsListTile extends StatelessWidget {
-  const TabBarItemsListTile(
+class ListViewListTile extends StatelessWidget {
+  const ListViewListTile(
       {super.key,
       required this.user,
       required this.size,

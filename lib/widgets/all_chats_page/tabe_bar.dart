@@ -1,14 +1,10 @@
 import 'package:sophiee/constants.dart';
-import 'package:sophiee/cubit/get_followers/get_followers_cubit.dart';
-import 'package:sophiee/cubit/get_following/get_following_cubit.dart';
 import 'package:sophiee/pages/chats/calls_page.dart';
 import 'package:sophiee/pages/chats/groups/groups_page.dart';
 import 'package:sophiee/pages/friends_page.dart';
 import 'package:sophiee/pages/search_page.dart';
 import 'package:sophiee/widgets/all_chats_page/all_chats_body.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart' as getnav;
 
 class CustomTabBar extends StatefulWidget {
@@ -26,16 +22,16 @@ class _CustomTabBarState extends State<CustomTabBar> {
     'Calls',
   ];
 
-  @override
-  void initState() {
-    super.initState();
-    context
-        .read<GetFollowingCubit>()
-        .getFollowing(userID: FirebaseAuth.instance.currentUser!.uid);
-    context
-        .read<GetFollowersCubit>()
-        .getFollowers(userID: FirebaseAuth.instance.currentUser!.uid);
-  }
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   context
+  //       .read<GetFollowingCubit>()
+  //       .getFollowing(userID: FirebaseAuth.instance.currentUser!.uid);
+  //   context
+  //       .read<GetFollowersCubit>()
+  //       .getFollowers(userID: FirebaseAuth.instance.currentUser!.uid);
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -56,18 +52,17 @@ class _CustomTabBarState extends State<CustomTabBar> {
                   : IconButton(
                       splashColor: Colors.transparent,
                       highlightColor: Colors.transparent,
-                      enableFeedback: false,
-                      onPressed: () => getnav.Get.to(() => const FriendsPage(),
-                          transition: getnav.Transition.leftToRight),
+                      onPressed: () => getnav.Get.to(
+                          () => FriendsPage(size: size, isDark: false),
+                          transition: getnav.Transition.rightToLeft),
                       icon: const Icon(Icons.group),
                     ),
             ),
             IconButton(
               splashColor: Colors.transparent,
               highlightColor: Colors.transparent,
-              enableFeedback: false,
               onPressed: () => getnav.Get.to(() => const SearchPage(),
-                  transition: getnav.Transition.leftToRight),
+                  transition: getnav.Transition.rightToLeft),
               icon: const Icon(Icons.search),
             ),
           ],

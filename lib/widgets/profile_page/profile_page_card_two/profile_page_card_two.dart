@@ -33,7 +33,8 @@ class ProfilePageCardTwo extends StatelessWidget {
                 isDark: isDark,
                 textOne: 'Friends',
                 textTwo: 'See all',
-                onPressed: () => getnav.Get.to(() => const FriendsPage(),
+                onPressed: () => getnav.Get.to(
+                    () => FriendsPage(size: size, isDark: isDark),
                     transition: getnav.Transition.rightToLeft)),
             FriendsListView(size: size),
             SizedBox(height: size.width * .034)

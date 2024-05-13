@@ -12,33 +12,33 @@ class ListViewTop extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
 
-    return SizedBox(
-      height: size.height * .14,
-      child: Padding(
-        padding: const EdgeInsets.only(top: 16, left: 4),
-        child: BlocBuilder<GetFriendsCubit, GetFriendsState>(
-          builder: (context, state) {
-            if (state is GetFriendsSuccess) {
-              return ListView.builder(
-                  physics: const BouncingScrollPhysics(),
-                  scrollDirection: Axis.horizontal,
-                  itemCount: state.friends.length + 1,
-                  itemBuilder: (context, index) {
-                    if (index == 0) {
-                      return const Padding(
-                          padding: EdgeInsets.only(left: 8), child: AddStory());
-                    } else {
-                      return Padding(
-                          padding: const EdgeInsets.only(left: 8),
-                          child: ChatItemTop(user: state.friends[index - 1]));
-                    }
-                  });
-            } else {
-              return Container();
-            }
-          },
-        ),
-      ),
+    return BlocBuilder<GetFriendsCubit, GetFriendsState>(
+      builder: (context, state) {
+        if (state is GetFriendsSuccess) {
+          return SizedBox(
+            height: size.height * .14,
+            child: Padding(
+                padding: const EdgeInsets.only(top: 16, left: 4),
+                child: ListView.builder(
+                    physics: const BouncingScrollPhysics(),
+                    scrollDirection: Axis.horizontal,
+                    itemCount: state.friends.length + 1,
+                    itemBuilder: (context, index) {
+                      if (index == 0) {
+                        return const Padding(
+                            padding: EdgeInsets.only(left: 8),
+                            child: AddStory());
+                      } else {
+                        return Padding(
+                            padding: const EdgeInsets.only(left: 8),
+                            child: ChatItemTop(user: state.friends[index - 1]));
+                      }
+                    })),
+          );
+        } else {
+          return Container();
+        }
+      },
     );
   }
 }

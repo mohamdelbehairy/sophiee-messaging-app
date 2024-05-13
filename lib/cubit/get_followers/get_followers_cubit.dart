@@ -49,4 +49,15 @@ class GetFollowersCubit extends Cubit<GetFollowersState> {
     }
     return docSnapshot.docs.isEmpty;
   }
+
+  Future<bool> isFriend({required String userID}) async {
+    final docSnapshot = await FirebaseFirestore.instance
+        .collection('friends')
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .collection('friends')
+        .doc(userID)
+        .get();
+
+    return docSnapshot.exists;
+  }
 }

@@ -51,7 +51,7 @@ class FriendsCubit extends Cubit<FriendsState> {
     }
   }
 
-  void deleteFriends({required String friendID}) async {
+  Future<void> deleteFriends({required String friendID}) async {
     try {
       await FirebaseFirestore.instance
           .collection('friends')

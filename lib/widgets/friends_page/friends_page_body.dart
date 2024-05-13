@@ -5,36 +5,28 @@ import 'package:sophiee/cubit/get_friends/get_friends_state.dart';
 import 'package:sophiee/cubit/user_date/get_user_data/get_user_data_cubit.dart';
 import 'package:sophiee/cubit/user_date/get_user_data/get_user_data_state.dart';
 import 'package:sophiee/pages/my_friend_page.dart';
-import 'package:sophiee/utils/widget/profile_details_no_item_found.dart';
-import 'package:sophiee/widgets/profile_details_page/tab_bar_items_list_view.dart';
+import 'package:sophiee/utils/widget/no_result_found.dart';
+import 'package:sophiee/widgets/profile_details_page/list_view_list_tile.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart' as getnav;
 
-class ProfileDetailsFriendsPage extends StatefulWidget {
-  const ProfileDetailsFriendsPage({super.key, required this.size});
+class FriendsPageBody extends StatefulWidget {
+  const FriendsPageBody({super.key, required this.size});
   final Size size;
 
   @override
-  State<ProfileDetailsFriendsPage> createState() =>
-      _ProfileDetailsFriendsPageState();
+  State<FriendsPageBody> createState() => _FriendsPageBodyState();
 }
 
-class _ProfileDetailsFriendsPageState extends State<ProfileDetailsFriendsPage> {
+class _FriendsPageBodyState extends State<FriendsPageBody> {
   Color? color;
   @override
   Widget build(BuildContext context) {
     var isDark = context.read<LoginCubit>().isDark;
     return BlocBuilder<GetFriendsCubit, GetFriendsState>(
       builder: (context, state) {
-        if (state is IsFriendsFoundSuccess) {
-          return ProfileDetailsNoItemFound(
-              size: widget.size,
-              textOne: 'No Friends',
-              textTwo:
-                  'We didn\'t find any friends yet \n Please add a new friend');
-        }
         if (state is GetFriendsSuccess) {
           return ListView.builder(
               itemCount: state.friends.length,
@@ -45,7 +37,7 @@ class _ProfileDetailsFriendsPageState extends State<ProfileDetailsFriendsPage> {
                         () => MyFriendPage(user: state.friends[index]),
                         transition: getnav.Transition.rightToLeft);
                   },
-                  child: TabBarItemsListTile(
+                  child: ListViewListTile(
                     user: state.friends[index],
                     size: widget.size,
                     widget: BlocBuilder<GetUserDataCubit, GetUserDataStates>(
@@ -71,8 +63,8 @@ class _ProfileDetailsFriendsPageState extends State<ProfileDetailsFriendsPage> {
                           child: CircleAvatar(
                             radius: widget.size.width * .02,
                             backgroundColor: isDark
-                                  ? kDarkModeColor
-                                  : const Color(0xfff1f2f2),
+                                ? kDarkModeColor
+                                : const Color(0xfff1f2f2),
                             child: CircleAvatar(
                                 radius: widget.size.width * .015,
                                 backgroundColor: color),
@@ -84,7 +76,15 @@ class _ProfileDetailsFriendsPageState extends State<ProfileDetailsFriendsPage> {
                 );
               });
         } else {
-          return Container();
+          return const Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              CustomNoResultFound(
+                  textOne: 'No Friend Found',
+                  textTwo:
+                      'We didn\'t find any friends yet \n Please add a new friend'),
+            ],
+          );
         }
       },
     );

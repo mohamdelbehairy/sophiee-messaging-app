@@ -23,11 +23,6 @@ class AllChatsBody extends StatelessWidget {
           ],
         );
       } else {
-        // WidgetsBinding.instance.addPostFrameCallback((_) {
-        //   showTopSnackBar(Overlay.of(context),
-        //       snackBarPosition: SnackBarPosition.bottom,
-        //       CustomSnackBar.error(message: 'Please check your internet connection and try again.'));
-        // });
         return const SingleChildScrollView(
           physics: NeverScrollableScrollPhysics(),
           child: Column(children: [

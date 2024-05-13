@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:lottie/lottie.dart';
 import 'package:sophiee/constants.dart';
 import 'package:sophiee/cubit/auth/login/login_cubit.dart';
 
@@ -25,9 +24,14 @@ class ProfileDetailsNoItemFound extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        SizedBox(
-            height: size.height * .3,
-            child: Lottie.asset(repeat: false, noItemFoundLottieUrl)),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            FittedBox(
+              fit: BoxFit.scaleDown,
+              child: Image.asset(emptyImageUrl, fit: BoxFit.cover, height: size.height * .25)),
+          ],
+        ),
         Text(textOne,
             style: TextStyle(color: isDark ? Colors.white: Colors.black, fontSize: size.height * .045)),
         SizedBox(height: size.width * .01),

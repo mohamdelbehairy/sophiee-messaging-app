@@ -40,3 +40,7 @@ const serverKey =
     "AAAALRycbcI:APA91bG22x3xWNtc4loGWfQN-fJnKwIdOc2NFVubKemU3CzGqrAhIHBdlhKKFG_jDOqGbwlg-5jgI07aHvbtrmfQgnsgsAGzb5hfyUhXeLPaquSwLiAIeraaxK9TnyRO4nDkb8MLbqoG";
 
 const contentType = "application/json; charset=UTF-8";
+
+const emptyImageUrl = "assets/images/empty.png";
+
+const searchFriendsImageUrl = 'assets/images/search_friends.png';

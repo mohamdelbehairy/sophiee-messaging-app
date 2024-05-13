@@ -6,7 +6,7 @@ import 'package:sophiee/cubit/user_date/get_user_data/get_user_data_cubit.dart';
 import 'package:sophiee/cubit/user_date/get_user_data/get_user_data_state.dart';
 import 'package:sophiee/models/users_model.dart';
 import 'package:sophiee/pages/search_result_page.dart';
-import 'package:sophiee/widgets/search_page/no_result_found.dart';
+import 'package:sophiee/utils/widget/no_result_found.dart';
 import 'package:sophiee/widgets/search_page/result_item.dart';
 import 'package:sophiee/widgets/settings/custom_app_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -14,6 +14,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart' as getnav;
+
+import '../../constants.dart';
 
 class SearchPageBody extends StatefulWidget {
   const SearchPageBody({super.key});
@@ -67,9 +69,10 @@ class _SearchPageBodyState extends State<SearchPageBody> {
                               .toList();
                     });
                   },
-                  widget:
-                      const Icon(FontAwesomeIcons.barsStaggered, color: Colors.white),
+                  widget: const Icon(FontAwesomeIcons.barsStaggered,
+                      color: Colors.white),
                   appParTitle: 'Search',
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   padding: EdgeInsets.only(left: size.height * .035),
                 ),
                 Positioned(
@@ -148,12 +151,15 @@ class _SearchPageBodyState extends State<SearchPageBody> {
                                   .contains(controller.text.toLowerCase())))
                           .toList()
                           .isEmpty
-                      ? const CustomNoResultFound()
+                      ? const CustomNoResultFound(
+                          textOne: 'No Result Found',
+                          textTwo:
+                              "You didn't find any results with this name yet,\nplease enter a success username or email.",
+                        )
                       : Container(
                           decoration: const BoxDecoration(
                             image: DecorationImage(
-                              image: AssetImage(
-                                  'assets/images/search_friends.png'),
+                              image: AssetImage(searchFriendsImageUrl),
                             ),
                           ),
                         ),

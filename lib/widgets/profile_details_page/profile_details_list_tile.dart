@@ -22,16 +22,12 @@ class ProfileDetailsListTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(top: size.width * .04),
-      child: ListTile(
+    return ListTile(
         title:
             ProfileDetailsListTileTitle(data: data, size: size, isDark: isDark),
         leading: ProfileDetailsListTileLeading(
             size: size, isDark: isDark, data: data, widget: widget),
         subtitle: ProfileDetailsListTileSubTitle(data: data, size: size),
-        trailing: trailingWidget,
-      ),
-    );
+        trailing: trailingWidget);
   }
 }
