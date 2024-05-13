@@ -2,16 +2,21 @@ import 'package:sophiee/cubit/auth/login/login_cubit.dart';
 import 'package:sophiee/cubit/user_date/get_user_data/get_user_data_cubit.dart';
 import 'package:sophiee/cubit/user_date/get_user_data/get_user_data_state.dart';
 import 'package:sophiee/models/users_model.dart';
-import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'profile_details_list_tile.dart';
 
 class TabBarItemsListTile extends StatelessWidget {
   const TabBarItemsListTile(
-      {super.key, required this.user, required this.size, this.widget});
+      {super.key,
+      required this.user,
+      required this.size,
+      this.widget,
+      this.trailingWidget});
   final UserModel user;
   final Size size;
   final Widget? widget;
+  final Widget? trailingWidget;
 
   @override
   Widget build(BuildContext context) {
@@ -22,45 +27,12 @@ class TabBarItemsListTile extends StatelessWidget {
           final currentUser = user.userID;
           final data = state.userModel
               .firstWhere((element) => element.userID == currentUser);
-          return Padding(
-            padding: EdgeInsets.only(top: size.width * .04),
-            child: ListTile(
-              title: Padding(
-                padding: EdgeInsets.only(
-                    top: data.bio.isEmpty && data.nickName.isEmpty
-                        ? size.width * .02
-                        : 0),
-                child: Text(data.userName,
-                    style: TextStyle(
-                        color: isDark ? Colors.white : Colors.black,
-                        fontSize: size.width * .038)),
-              ),
-              leading: Stack(
-                children: [
-                  CircleAvatar(
-                    radius: size.height * .025,
-                    backgroundColor: Colors.transparent,
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(size.height * .03),
-                      child: FancyShimmerImage(
-                          boxFit: BoxFit.cover,
-                          shimmerBaseColor:
-                              isDark ? Colors.white12 : Colors.grey.shade300,
-                          shimmerHighlightColor:
-                              isDark ? Colors.white24 : Colors.grey.shade100,
-                          imageUrl: data.profileImage),
-                    ),
-                  ),
-                  if (widget != null) widget!
-                ],
-              ),
-              subtitle: Text(data.bio.isNotEmpty ? data.bio : data.nickName,
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
-                      color: Colors.grey, fontSize: size.width * .028)),
-            ),
-          );
+          return ProfileDetailsListTile(
+              size: size,
+              data: data,
+              isDark: isDark,
+              widget: widget,
+              trailingWidget: trailingWidget);
         } else {
           return Container();
         }

@@ -29,9 +29,8 @@ class ProfilePageCardOneBodyComponent extends StatelessWidget {
       height: size.height * .38,
       width: size.width,
       decoration: const BoxDecoration(
-        color: Colors.transparent,
-        boxShadow: [BoxShadow(blurRadius: 0, color: Colors.transparent)],
-      ),
+          color: Colors.transparent,
+          boxShadow: [BoxShadow(blurRadius: 0, color: Colors.transparent)]),
       child: Card(
         color: isDark ? kDarkModeColor : Colors.white,
         elevation: 0,

@@ -1,4 +1,5 @@
 import 'package:sophiee/constants.dart';
+import 'package:sophiee/cubit/auth/login/login_cubit.dart';
 import 'package:sophiee/cubit/get_friends/get_friends_cubit.dart';
 import 'package:sophiee/cubit/get_friends/get_friends_state.dart';
 import 'package:sophiee/cubit/user_date/get_user_data/get_user_data_cubit.dart';
@@ -24,6 +25,7 @@ class _ProfileDetailsFriendsPageState extends State<ProfileDetailsFriendsPage> {
   Color? color;
   @override
   Widget build(BuildContext context) {
+    var isDark = context.read<LoginCubit>().isDark;
     return BlocBuilder<GetFriendsCubit, GetFriendsState>(
       builder: (context, state) {
         if (state is IsFriendsFoundSuccess) {
@@ -65,11 +67,14 @@ class _ProfileDetailsFriendsPageState extends State<ProfileDetailsFriendsPage> {
                         }
                         return Positioned(
                           right: 0.0,
-                          bottom: widget.size.width * .002,
+                          bottom: 0.0,
                           child: CircleAvatar(
-                            radius: widget.size.width * .022,
+                            radius: widget.size.width * .02,
+                            backgroundColor: isDark
+                                  ? kDarkModeColor
+                                  : const Color(0xfff1f2f2),
                             child: CircleAvatar(
-                                radius: widget.size.width * .017,
+                                radius: widget.size.width * .015,
                                 backgroundColor: color),
                           ),
                         );
