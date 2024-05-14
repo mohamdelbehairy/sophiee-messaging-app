@@ -6,7 +6,10 @@ import 'card_three_grid_view.dart';
 
 class CardThreeCustomScrollItemTwo extends StatelessWidget {
   const CardThreeCustomScrollItemTwo(
-      {super.key, required this.getImage, required this.size, required this.isDark});
+      {super.key,
+      required this.getImage,
+      required this.size,
+      required this.isDark});
 
   final GetImageCubit getImage;
   final Size size;
@@ -20,7 +23,12 @@ class CardThreeCustomScrollItemTwo extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 12),
         child: BlocBuilder<GetImageCubit, GetImageState>(
           builder: (context, state) {
-            return CardThreeGridView(getImage: getImage,isDark: isDark,size: size);
+            return CardThreeGridView(
+                getImage: getImage,
+                isDark: isDark,
+                size: size,
+                crossAxisCount: 3,
+                physics: const NeverScrollableScrollPhysics());
           },
         ),
       ),

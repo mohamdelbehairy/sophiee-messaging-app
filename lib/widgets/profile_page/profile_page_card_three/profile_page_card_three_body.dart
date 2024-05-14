@@ -27,13 +27,11 @@ class ProfilePageCardThreeBody extends StatelessWidget {
         physics: const BouncingScrollPhysics(),
         slivers: [
           SliverToBoxAdapter(
-              child: CardThreeCustomScrollItemOne(size: size, isDark: isDark)),
+              child: CardThreeCustomScrollItemOne(
+                  size: size, isDark: isDark, getImage: getImage)),
           SliverToBoxAdapter(
               child: CardThreeCustomScrollItemTwo(
-            getImage: getImage,
-            size: size,
-            isDark: isDark,
-          ))
+                  getImage: getImage, size: size, isDark: isDark))
         ],
       ),
     );
