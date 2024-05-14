@@ -3,7 +3,7 @@ import 'package:get/get.dart' as getnav;
 
 import '../../../cubit/user_date/image/get_image/get_image_cubit.dart';
 import '../../../utils/widget/profile_page_row_see_all.dart';
-import 'card_three_see_all.dart';
+import '../../../pages/card_three_see_all_page.dart';
 
 class CardThreeCustomScrollItemOne extends StatelessWidget {
   const CardThreeCustomScrollItemOne(
