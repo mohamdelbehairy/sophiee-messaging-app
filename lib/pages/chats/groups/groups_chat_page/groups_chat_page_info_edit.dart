@@ -3,7 +3,6 @@ import 'package:sophiee/cubit/groups/update_groups_details/update_groups_details
 import 'package:sophiee/cubit/pick_image/pick_image_cubit.dart';
 import 'package:sophiee/models/group_model.dart';
 import 'package:sophiee/widgets/all_chats_page/groups_page/groups_chat_page/groups_chat_page_edit/editing_groups_details.dart';
-import 'package:sophiee/widgets/all_chats_page/groups_page/groups_chat_page/groups_chat_page_edit/groups_chat_edit_pick_image.dart';
 import 'package:sophiee/widgets/all_chats_page/groups_page/groups_chat_page/groups_chat_page_edit/groups_chat_page_edit_items.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -66,9 +65,12 @@ class _GroupsChatPageInfoEditPageState
           child: Scaffold(
             appBar: AppBar(
               backgroundColor: kPrimaryColor,
+              titleSpacing: size.width * -.001,
               title: const Text('Edit',
                   style: TextStyle(
-                      color: Colors.white, fontWeight: FontWeight.normal)),
+                      color: Colors.white,
+                      fontWeight: FontWeight.w400,
+                      fontSize: 22)),
               leading: GestureDetector(
                   onTap: () {
                     Navigator.pop(context);
@@ -91,8 +93,8 @@ class _GroupsChatPageInfoEditPageState
                     groupModel: widget.groupModel,
                     groupNameController: groupNameController,
                     descriptionController: descriptionController),
-                const GroupsChatEditPickImage(),
-                Divider(thickness: 1, color: Colors.grey.withOpacity(.2)),
+                // const GroupsChatEditPickImage(),
+                // Divider(thickness: 1, color: Colors.grey.withOpacity(.2)),
               ],
             ),
           ),

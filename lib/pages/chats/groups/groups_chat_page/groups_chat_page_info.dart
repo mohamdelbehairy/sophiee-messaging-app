@@ -9,7 +9,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class GroupsChatPageInfo extends StatelessWidget {
-  const GroupsChatPageInfo({super.key, required this.groupModel});
+  const GroupsChatPageInfo({super.key, 
+  
+  required this.groupModel
+  
+  });
   final GroupModel groupModel;
 
   @override

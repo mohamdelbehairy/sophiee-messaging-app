@@ -11,7 +11,7 @@ class AddUserTextField extends StatelessWidget {
       this.iconColor,
       this.textInputType,
       this.validator,
-      this.enabled});
+      this.enabled, this.bottom});
 
   final Size size;
   final String hintText;
@@ -22,11 +22,12 @@ class AddUserTextField extends StatelessWidget {
   final TextInputType? textInputType;
   final String? Function(String?)? validator;
   final bool? enabled;
+  final double? bottom;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(bottom: size.width * .045),
+      padding: EdgeInsets.only(bottom: bottom ?? size.width * .045),
       child: ClipRRect(
           borderRadius: BorderRadius.circular(size.width * .02),
           child: GestureDetector(

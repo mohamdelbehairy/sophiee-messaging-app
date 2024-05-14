@@ -47,7 +47,7 @@ class GroupsChatPageInfoDetails extends StatelessWidget {
                         componentName: 'Group Members',
                         onTap: () => getnav.Get.to(
                             () => GroupsChatMembersPage(groupModel: groupData),
-                            transition: getnav.Transition.leftToRight)),
+                            transition: getnav.Transition.rightToLeft)),
                     SizedBox(height: size.height * .008),
                     GroupsChatComponent(
                         componentName: 'Highlights',
@@ -59,7 +59,7 @@ class GroupsChatPageInfoDetails extends StatelessWidget {
                           getnav.Get.to(
                               () => GroupsChatHighLightsPage(
                                   size: size, groupModel: groupData),
-                              transition: getnav.Transition.leftToRight);
+                              transition: getnav.Transition.rightToLeft);
                         }),
                     SizedBox(height: size.height * .008),
                     GroupsChatComponent(
@@ -67,7 +67,7 @@ class GroupsChatPageInfoDetails extends StatelessWidget {
                         onTap: () => getnav.Get.to(
                             () => GroupsChatMediaFilesPage(
                                 groupModel: groupData, size: size),
-                            transition: getnav.Transition.leftToRight)),
+                            transition: getnav.Transition.rightToLeft)),
                     SizedBox(height: size.height * .008),
                   ],
                 );

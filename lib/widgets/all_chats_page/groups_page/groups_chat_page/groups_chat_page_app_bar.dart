@@ -17,7 +17,7 @@ class GroupsChatPageAppBar extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         getnav.Get.to(() => GroupsChatPageInfo(groupModel: groupData),
-            transition: getnav.Transition.leftToRight);
+            transition: getnav.Transition.rightToLeft);
       },
       child: Row(
         children: [
