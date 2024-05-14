@@ -3,7 +3,7 @@ import 'package:sophiee/models/group_model.dart';
 import 'package:sophiee/pages/chats/groups/groups_add_member_page.dart';
 import 'package:sophiee/pages/chats/groups/groups_chat_page/group_permissions_page.dart';
 import 'package:sophiee/pages/chats/groups/groups_chat_page/groups_chat_page_info_edit.dart';
-import 'package:sophiee/widgets/all_chats_page/groups_page/groups_chat_page/groups_chat_page_info/groups_info_pop_menu_item.dart';
+import 'package:sophiee/utils/widget/pop_menu_info_item.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart' as getnav;

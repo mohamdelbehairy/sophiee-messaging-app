@@ -5,7 +5,7 @@ import 'package:sophiee/models/users_model.dart';
 import 'package:sophiee/pages/my_friend_page.dart';
 import 'package:sophiee/pages/chats/chat_page.dart';
 import 'package:sophiee/widgets/all_chats_page/groups_page/groups_chat_page/groups_chat_members_page/remove_member_show_dialog.dart';
-import 'package:sophiee/widgets/all_chats_page/groups_page/groups_chat_page/groups_chat_page_info/groups_info_pop_menu_item.dart';
+import 'package:sophiee/utils/widget/pop_menu_info_item.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -33,12 +33,12 @@ class ControlMembersIcon extends StatelessWidget {
         itemBuilder: (context) => [
               groupsInfoPopMenuItem(
                   onTap: () => getnav.Get.to(() => ChatPage(userID: userData.userID),
-                      transition: getnav.Transition.leftToRight),
+                      transition: getnav.Transition.rightToLeft),
                   itemName: 'Message ${userData.userName.split(' ')[0]}',
                   size: size),
               groupsInfoPopMenuItem(
                   onTap: () => getnav.Get.to(() => MyFriendPage(user: userData),
-                      transition: getnav.Transition.leftToRight),
+                      transition: getnav.Transition.rightToLeft),
                   itemName: 'View ${userData.userName.split(' ')[0]}',
                   size: size),
               if (groupModel.groupOwnerID ==
