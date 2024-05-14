@@ -46,5 +46,6 @@ class CustomCardThreeShimmer extends StatelessWidget {
         ),
       ),
     );
+  
   }
 }

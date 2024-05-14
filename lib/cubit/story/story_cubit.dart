@@ -14,16 +14,17 @@ class StoryCubit extends Cubit<StoryState> {
   StoryCubit() : super(AddStoryInitial());
 
   Future<void> addStory(
-      {File? image,
+      {String? imageUrl,
       File? video,
       required BuildContext context,
       required String storyText}) async {
     try {
-      String? imageUrl;
+      // String? imageUrl;
       String? videoUrl;
-      if (image != null) {
-        imageUrl = await uploadStoryImage(imageFile: image, context: context);
-      } else if (video != null) {
+      // if (image != null) {
+      //   imageUrl = await uploadStoryImage(imageFile: image, context: context);
+      // } else
+      if (video != null) {
         videoUrl = await uploadStoryVideo(videoFile: video, context: context);
       }
       StoryModel storyModel = StoryModel.fromJson({
@@ -52,7 +53,7 @@ class StoryCubit extends Cubit<StoryState> {
       showDialog(
           context: context,
           builder: (BuildContext context) {
-            return const  AddStoryAlertDialog();
+            return const AddStoryAlertDialog();
           });
       String videoName = DateTime.now().millisecondsSinceEpoch.toString();
       Reference reference =
@@ -75,7 +76,7 @@ class StoryCubit extends Cubit<StoryState> {
       showDialog(
           context: context,
           builder: (BuildContext context) {
-            return const  AddStoryAlertDialog();
+            return const AddStoryAlertDialog();
           });
       String imageName = DateTime.now().millisecondsSinceEpoch.toString();
       Reference reference =

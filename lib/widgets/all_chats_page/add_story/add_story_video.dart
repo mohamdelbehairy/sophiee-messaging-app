@@ -84,7 +84,7 @@ class _AddStoryVideoState extends State<AddStoryVideo> {
                 highlightColor: Colors.transparent,
                 onTap: () async {
                   await story.addStory(
-                      image: null,
+                      imageUrl: null,
                       video: widget.video,
                       context: context,
                       storyText: controller.text);

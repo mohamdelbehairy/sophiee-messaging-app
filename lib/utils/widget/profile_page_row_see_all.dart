@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-
 class ProfilePageRowSeeAll extends StatelessWidget {
   const ProfilePageRowSeeAll(
       {super.key,
       required this.size,
       required this.isDark,
       required this.textOne,
-      required this.textTwo, required this.onPressed});
+      required this.textTwo,
+      required this.onPressed});
 
   final Size size;
   final bool isDark;
@@ -18,7 +18,7 @@ class ProfilePageRowSeeAll extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: size.width * .04),
+      padding: const EdgeInsets.symmetric(horizontal: 12),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [

@@ -1,5 +1,6 @@
 import 'package:sophiee/cubit/all_chats_shimmer_status/all_chats_shimmer_status.dart';
 import 'package:sophiee/cubit/connectivity/connectivity_cubit.dart';
+import 'package:sophiee/cubit/user_date/image/get_image/get_image_cubit.dart';
 import 'package:sophiee/utils/shimmer/home/profile/profile_page_shimmer.dart';
 import 'package:sophiee/widgets/profile_page/profile_page_body.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
@@ -20,6 +21,7 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   @override
   void initState() {
+    context.read<GetImageCubit>();
     context.read<GetFriendsCubit>().isFriendFound();
     context.read<GetFollowingCubit>().isFollowingFound();
     context.read<GetFollowersCubit>().isFollowersFound();

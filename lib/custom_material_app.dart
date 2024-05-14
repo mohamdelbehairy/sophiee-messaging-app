@@ -59,6 +59,8 @@ import 'cubit/chat_high_lights/chat_high_light_message/chat_high_light_message_c
 import 'cubit/delete_messages/delete_chat_message_cubit.dart';
 import 'cubit/groups/update_groups_details/update_groups_details_cubit.dart';
 import 'cubit/notification/follower_notification/follower_notification_cubit.dart';
+import 'cubit/user_date/image/get_image/get_image_cubit.dart';
+import 'cubit/user_date/image/store_image/store_image_cubit.dart';
 
 class CustomMaterialApp extends StatelessWidget {
   const CustomMaterialApp(
@@ -127,7 +129,9 @@ class CustomMaterialApp extends StatelessWidget {
         BlocProvider(create: (context) => UserTokenCubit()),
         BlocProvider(create: (context) => NotificationSettingCubit()),
         BlocProvider(create: (context) => FollowerNotificationCubit()),
-        BlocProvider(create: (context) => MessageNotificationCubit())
+        BlocProvider(create: (context) => MessageNotificationCubit()),
+        BlocProvider(create: (context) => StoreImageCubit()),
+        BlocProvider(create: (context) => GetImageCubit()..getImage())
       ],
       child: BlocBuilder<LoginCubit, LoginState>(
         builder: (context, state) {

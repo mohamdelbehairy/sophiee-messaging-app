@@ -20,7 +20,7 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
-  await runAppInit(
+  runAppInit();
 
   FlutterNativeSplash.remove();
 }
