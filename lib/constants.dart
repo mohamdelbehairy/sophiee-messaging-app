@@ -44,3 +44,6 @@ const contentType = "application/json; charset=UTF-8";
 const emptyImageUrl = "assets/images/empty.png";
 
 const searchFriendsImageUrl = 'assets/images/search_friends.png';
+
+const defaultImageUrl =
+    "https://he.cecollaboratory.com/public/layouts/images/group-default-logo.png";

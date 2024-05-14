@@ -14,12 +14,10 @@ class CustomMyGroups extends StatelessWidget {
     final size = MediaQuery.of(context).size;
 
     return Container(
-      decoration: const BoxDecoration(boxShadow: [
-        BoxShadow(blurRadius: 0, spreadRadius: 0, color: Colors.transparent)
-      ]),
-      child: CustomMyGroupsBody(
-          isDark: isDark, size: size, groupModel: groupModel),
-    );
+        decoration: const BoxDecoration(boxShadow: [
+          BoxShadow(blurRadius: 0, spreadRadius: 0, color: Colors.transparent)
+        ]),
+        child: CustomMyGroupsBody(
+            isDark: isDark, size: size, groupModel: groupModel));
   }
 }
-

@@ -4,6 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../../../../constants.dart';
+import '../../../create_accont_widget/add_user_profile_image.dart';
+
 class CreateGroupAddGroupImage extends StatelessWidget {
   const CreateGroupAddGroupImage({super.key});
 
@@ -17,19 +20,12 @@ class CreateGroupAddGroupImage extends StatelessWidget {
       },
       child: BlocBuilder<PickImageCubit, PickImageStates>(
         builder: (context, state) {
-          return CircleAvatar(
-            radius: size.height * .03,
-            backgroundColor: const Color(0xffced9df),
-            backgroundImage: pickImage.selectedImage != null
-                ? FileImage(pickImage.selectedImage!)
-                : null,
-            child: Center(
-              child: pickImage.selectedImage == null
-                  ? Icon(Icons.camera_alt,
-                      color: Colors.white, size: size.height * .03)
-                  : Container(),
-            ),
-          );
+          return AddUserProfileImage(
+              imageUrl: defaultImageUrl,
+              top: size.height * .01,
+              enabled: true,
+              size: size,
+              pickImage: pickImage);
         },
       ),
     );

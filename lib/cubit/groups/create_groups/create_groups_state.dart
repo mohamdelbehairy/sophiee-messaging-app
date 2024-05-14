@@ -1,3 +1,5 @@
+import 'package:sophiee/models/group_model.dart';
+
 abstract class CreateGroupsState {}
 
 final class CreateGroupsInitial extends CreateGroupsState {}
@@ -8,7 +10,11 @@ final class UploadGroupImageLoading extends CreateGroupsState {
   UploadGroupImageLoading({required this.isLoading});
 }
 
-final class CreateGroupsSuccess extends CreateGroupsState {}
+final class CreateGroupsSuccess extends CreateGroupsState {
+  final GroupModel groupModel;
+
+  CreateGroupsSuccess({required this.groupModel});
+}
 
 final class CreateGroupsFailure extends CreateGroupsState {
   final String errorMessage;

@@ -25,7 +25,7 @@ class CreateGroupFloatingActionButton extends StatelessWidget {
               backgroundColor: kPrimaryColor,
               onPressed: () => getnav.Get.to(
                   () => CreateGroupPageSecond(size: size),
-                  transition: getnav.Transition.leftToRight),
+                  transition: getnav.Transition.rightToLeft),
               child: const Icon(FontAwesomeIcons.arrowRight, color: Colors.white));
         } else {
           return const SizedBox();

@@ -11,27 +11,13 @@ class CreateGroupSecondCardTwo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(boxShadow: [
-        BoxShadow(
-            color: Colors.grey.withOpacity(.01),
-            spreadRadius: 40,
-            blurRadius: 40),
-      ]),
-      child: Card(
-        shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(size.width * .02)),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(height: size.width * .03),
-            CreateGroupPageTwoTextTitle(size: size),
-            SizedBox(height: size.width * .03),
-            CreateGroupSecondGridView(
-                size: size, groupMember: groupsMembersSelected),
-          ],
-        ),
-      ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        CreateGroupPageTwoTextTitle(size: size),
+        CreateGroupSecondGridView(
+            size: size, groupMember: groupsMembersSelected),
+      ],
     );
   }
 }

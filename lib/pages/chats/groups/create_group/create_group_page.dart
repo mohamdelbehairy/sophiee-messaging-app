@@ -17,24 +17,23 @@ class CreateGroupPage extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     var groupsMembersSelected = context.read<GroupsMemberSelectedCubit>();
     return Scaffold(
-      appBar: AppBar(
-          titleSpacing: size.width * -.02,
-          backgroundColor: kPrimaryColor,
-          title: CreateGroupAppBar(
-              size: size, groupsMember: groupsMembersSelected),
-          leading: CreateGroupAppBarLeading(
-              groupsMembersSelected: groupsMembersSelected)),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          CreateGroupShowSelectedFriend(
-              groupsMembersSelected: groupsMembersSelected, size: size),
-          CreateGroupTextTitle(size: size),
-          const CreateGroupSelectedFriends(),
-        ],
-      ),
-      floatingActionButton: CreateGroupFloatingActionButton(
-          size: size, groupsMembersSelected: groupsMembersSelected),
-    );
+        appBar: AppBar(
+            titleSpacing: size.width * -.02,
+            backgroundColor: kPrimaryColor,
+            title: CreateGroupAppBar(
+                size: size, groupsMember: groupsMembersSelected),
+            leading: CreateGroupAppBarLeading(
+                groupsMembersSelected: groupsMembersSelected)),
+        body: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            CreateGroupShowSelectedFriend(
+                groupsMembersSelected: groupsMembersSelected, size: size),
+            CreateGroupTextTitle(size: size),
+            const CreateGroupSelectedFriends(),
+          ],
+        ),
+        floatingActionButton: CreateGroupFloatingActionButton(
+            size: size, groupsMembersSelected: groupsMembersSelected));
   }
 }

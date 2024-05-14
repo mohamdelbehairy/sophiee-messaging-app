@@ -2,12 +2,13 @@ import 'package:sophiee/constants.dart';
 import 'package:sophiee/cubit/groups/create_groups/create_groups_cubit.dart';
 import 'package:sophiee/cubit/groups/groups_member_selected/groups_member_selected_cubit.dart';
 import 'package:sophiee/cubit/pick_image/pick_image_cubit.dart';
+import 'package:sophiee/cubit/pick_image/pick_image_state.dart';
 import 'package:sophiee/widgets/all_chats_page/groups_page/create_group_page/create_group_add_group_info.dart';
-import 'package:sophiee/widgets/all_chats_page/groups_page/create_group_page/create_group_second_card_two.dart';
 import 'package:sophiee/widgets/all_chats_page/groups_page/create_group_page/create_group_second_floating_action_button.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
+
+import 'create_group_second_card_two.dart';
 
 class CreateGroupSecondBodyComponenet extends StatelessWidget {
   const CreateGroupSecondBodyComponenet({
@@ -40,7 +41,10 @@ class CreateGroupSecondBodyComponenet extends StatelessWidget {
           leading: GestureDetector(
               onTap: () {
                 Navigator.pop(context);
-                context.read<PickImageCubit>().selectedImage = null;
+                if (selectedImage.state is PickImageSucccess) {
+                  selectedImage.selectedImage = null;
+                  selectedImage.emit(PickImageInitial());
+                }
               },
               child: const Icon(Icons.arrow_back)),
         ),
@@ -51,6 +55,7 @@ class CreateGroupSecondBodyComponenet extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     CreateGroupAddGroupInfo(
+                        size: size,
                         descriptionController: descriptionController,
                         groupNameController: groupNameController),
                     Expanded(

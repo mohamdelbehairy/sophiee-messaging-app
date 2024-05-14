@@ -12,7 +12,7 @@ class CreateGroupPageTwoTextTitle extends StatelessWidget {
   Widget build(BuildContext context) {
     var groupMember = context.read<GroupsMemberSelectedCubit>();
     return Padding(
-        padding: EdgeInsets.only(left: size.width * .04),
+        padding: EdgeInsets.only(left: size.width * .04,top: size.width * .03,bottom: size.width * .03),
         child:
             BlocBuilder<GroupsMemberSelectedCubit, GroupsMemberSelectedState>(
           builder: (context, state) {

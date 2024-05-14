@@ -9,6 +9,8 @@ import 'package:sophiee/cubit/groups/create_groups/create_groups_state.dart';
 import 'package:sophiee/models/group_model.dart';
 import 'package:uuid/uuid.dart';
 
+import '../../../constants.dart';
+
 class CreateGroupsCubit extends Cubit<CreateGroupsState> {
   CreateGroupsCubit() : super(CreateGroupsInitial());
 
@@ -22,12 +24,10 @@ class CreateGroupsCubit extends Cubit<CreateGroupsState> {
     try {
       usersID.add(FirebaseAuth.instance.currentUser!.uid);
       GroupModel groupModel = GroupModel.fromJson({
-        'groupID': const  Uuid().v1(),
+        'groupID': const Uuid().v1(),
         'groupName': groupName,
         'groupDescription': groupDescription,
-        'groupImage': groupImageFile != null
-            ? groupImageUrl
-            : 'https://he.cecollaboratory.com/public/layouts/images/group-default-logo.png',
+        'groupImage': groupImageFile != null ? groupImageUrl : defaultImageUrl,
         'groupOwnerID': FirebaseAuth.instance.currentUser!.uid,
         'usersID': usersID,
         'adminsID': const [],
@@ -44,7 +44,7 @@ class CreateGroupsCubit extends Cubit<CreateGroupsState> {
           .doc(groupModel.groupID)
           .set(groupModel.toMap());
       isLoading = false;
-      emit(CreateGroupsSuccess());
+      emit(CreateGroupsSuccess(groupModel: groupModel));
     } catch (e) {
       isLoading = false;
       debugPrint('error from create groups method: ${e.toString()}');

@@ -11,7 +11,9 @@ class AddUserProfileImage extends StatelessWidget {
       {super.key,
       required this.size,
       required this.pickImage,
-      required this.enabled, required this.top, required this.imageUrl});
+      required this.enabled,
+      required this.top,
+      required this.imageUrl});
 
   final Size size;
   final PickImageCubit pickImage;
@@ -22,8 +24,7 @@ class AddUserProfileImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding:
-          EdgeInsets.only(top:top , bottom: size.height * .02),
+      padding: EdgeInsets.only(top: top, bottom: size.height * .02),
       child: Stack(
         children: [
           BlocBuilder<PickImageCubit, PickImageStates>(

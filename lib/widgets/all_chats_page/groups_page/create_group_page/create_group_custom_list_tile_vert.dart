@@ -27,32 +27,27 @@ class CreateGroupCustomLIstTileVert extends StatelessWidget {
         children: [
           Text(userData.userName,
               style: TextStyle(
-                  color: widget.isDark
-                      ? Colors.white
-                      : Colors.black)),
+                  color: widget.isDark ? Colors.white : Colors.black)),
           Container(
             height: widget.size.height * .022,
             width: widget.size.width * .05,
-            margin:
-                EdgeInsets.only(top: widget.size.width * .02),
+            margin: EdgeInsets.only(top: widget.size.width * .02),
             color: isSelected &&
                     selectedFriends
-                        .getGroupsMemberSelectedFriendsList
-                        .isNotEmpty
+                        .getGroupsMemberSelectedFriendsList.isNotEmpty
                 ? kPrimaryColor
                 : Colors.grey,
             child: isSelected &&
                     selectedFriends
-                        .getGroupsMemberSelectedFriendsList
-                        .isNotEmpty
+                        .getGroupsMemberSelectedFriendsList.isNotEmpty
                 ? Icon(Icons.done,
-                    size: widget.size.height * .022,
-                    color: Colors.white)
+                    size: widget.size.height * .022, color: Colors.white)
                 : Container(),
           )
         ],
       ),
-      subtitle: Text(userData.bio,
+      subtitle: Text(
+          userData.nickName.isNotEmpty ? userData.nickName : userData.bio,
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
           style: const TextStyle(color: Colors.grey)),
@@ -63,12 +58,10 @@ class CreateGroupCustomLIstTileVert extends StatelessWidget {
           borderRadius: BorderRadius.circular(30),
           child: FancyShimmerImage(
               boxFit: BoxFit.cover,
-              shimmerBaseColor: widget.isDark
-                  ? Colors.white12
-                  : Colors.grey.shade300,
-              shimmerHighlightColor: widget.isDark
-                  ? Colors.white24
-                  : Colors.grey.shade100,
+              shimmerBaseColor:
+                  widget.isDark ? Colors.white12 : Colors.grey.shade300,
+              shimmerHighlightColor:
+                  widget.isDark ? Colors.white24 : Colors.grey.shade100,
               imageUrl: userData.profileImage),
         ),
       ),

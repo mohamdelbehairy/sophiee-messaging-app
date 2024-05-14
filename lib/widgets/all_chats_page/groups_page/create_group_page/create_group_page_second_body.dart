@@ -2,6 +2,7 @@ import 'package:sophiee/cubit/groups/create_groups/create_groups_cubit.dart';
 import 'package:sophiee/cubit/groups/create_groups/create_groups_state.dart';
 import 'package:sophiee/cubit/groups/groups_member_selected/groups_member_selected_cubit.dart';
 import 'package:sophiee/cubit/pick_image/pick_image_cubit.dart';
+import 'package:sophiee/cubit/pick_image/pick_image_state.dart';
 import 'package:sophiee/pages/chats/groups/create_group/create_group_page_second.dart';
 import 'package:sophiee/widgets/all_chats_page/groups_page/create_group_page/create_group_second_body_component.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +16,8 @@ class CreateGroupPageSecondBody extends StatelessWidget {
       required this.widget,
       required this.globalKey,
       required this.groupNameController,
-      required this.selectedImage, required this.descriptionController});
+      required this.selectedImage,
+      required this.descriptionController});
 
   final CreateGroupsCubit createGroup;
   final GroupsMemberSelectedCubit groupsMembersSelected;
@@ -35,7 +37,10 @@ class CreateGroupPageSecondBody extends StatelessWidget {
         if (state is CreateGroupsSuccess) {
           Navigator.pop(context);
           Navigator.pop(context);
-          context.read<PickImageCubit>().selectedImage = null;
+
+          selectedImage.selectedImage = null;
+          selectedImage.emit(PickImageInitial());
+
           for (var friend
               in groupsMembersSelected.getGroupsMemberSelectedFriendsList) {
             groupsMembersSelected.deleteGroupsMemberSelectedFriends(
@@ -45,7 +50,7 @@ class CreateGroupPageSecondBody extends StatelessWidget {
       },
       builder: (context, state) {
         return CreateGroupSecondBodyComponenet(
-          descriptionController: descriptionController,
+            descriptionController: descriptionController,
             size: widget.size,
             createGroup: createGroup,
             globalKey: globalKey,
