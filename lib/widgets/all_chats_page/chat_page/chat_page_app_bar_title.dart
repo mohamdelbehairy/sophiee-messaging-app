@@ -72,11 +72,10 @@ class ChatPageAppBarTitle extends StatelessWidget {
                 children: [
                   GestureDetector(
                       onTap: () => showModalBottomSheet(
-                            context: context,
-                            backgroundColor: Colors.transparent,
-                            builder: (context) =>
-                                ChatPageFriendInfoBottomSheet(user: data)
-                          ),
+                          context: context,
+                          backgroundColor: Colors.transparent,
+                          builder: (context) =>
+                              ChatPageFriendBottomSheetInfo(user: data)),
                       child: CircleAvatar(
                           backgroundColor: Colors.transparent,
                           backgroundImage:
@@ -87,9 +86,7 @@ class ChatPageAppBarTitle extends StatelessWidget {
                     children: [
                       Text(
                         data.userName,
-                        style: TextStyle(
-                          fontSize: size.width * .04,
-                        ),
+                        style: TextStyle(fontSize: size.width * .04),
                       ),
                       BlocBuilder<MessageCubit, MessageState>(
                         builder: (context, state) {

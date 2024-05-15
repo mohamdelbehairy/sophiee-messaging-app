@@ -20,21 +20,15 @@ class ChatPageFriendInfoListTile extends StatelessWidget {
           children: [
             Text(user.userName,
                 style: TextStyle(color: isDark ? Colors.white : Colors.black)),
-            SizedBox(width: size.width *.01),
-            CircleAvatar(
-              radius: size.width * .01,
-              backgroundColor: kPrimaryColor,
-            )
+            const SizedBox(width: 4),
+            const CircleAvatar(radius: 4, backgroundColor: kPrimaryColor)
           ],
         ),
         leading: CircleAvatar(
-          backgroundColor: Colors.transparent,
-          backgroundImage: CachedNetworkImageProvider(user.profileImage),
-        ),
-        subtitle: const Text(
-          '@milana.myles',
-          style: TextStyle(color: Colors.blue),
-        ),
+            backgroundColor: Colors.transparent,
+            backgroundImage: CachedNetworkImageProvider(user.profileImage)),
+        subtitle: Text(user.nickName.isNotEmpty ? user.nickName : user.bio,
+            style: const TextStyle(color: Colors.blue)),
       ),
     );
   }

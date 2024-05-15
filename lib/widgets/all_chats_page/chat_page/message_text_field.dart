@@ -23,7 +23,7 @@ class MessageTextField extends StatelessWidget {
       focusNode: focusNode,
       controller: controller,
       onChanged: onChanged,
-      cursorColor: const Color(0xff2b2c33),
+      cursorColor: isDark ? Colors.white : const Color(0xff2b2c33),
       style:
           TextStyle(color: isDark ? Colors.white : Colors.black, fontSize: 14),
       maxLines: null,
@@ -38,9 +38,9 @@ class MessageTextField extends StatelessWidget {
             borderSide:
                 BorderSide(color: const Color(0xff2b2c33).withOpacity(.1))),
         filled: true,
-        fillColor: const Color(0xff2b2c33).withOpacity(.1),
+        fillColor: isDark ? messageFriendColorDarkMode: const Color(0xff2b2c33).withOpacity(.1),
         hintText: 'Type your message',
-        hintStyle: const TextStyle(color: Colors.grey),
+        hintStyle:  TextStyle(color: isDark ? Colors.white70: Colors.grey),
         prefixIcon: IconButton(
           splashColor: Colors.transparent,
           highlightColor: Colors.transparent,

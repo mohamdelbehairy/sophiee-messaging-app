@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sophiee/cubit/auth/login/login_cubit.dart';
 import 'package:sophiee/models/users_model.dart';
 import 'package:sophiee/widgets/all_chats_page/chat_page/chat_page_body_component.dart';
 import 'package:sophiee/widgets/all_chats_page/chat_page/chat_page_app_bar_title.dart';
@@ -17,8 +18,10 @@ class ChatPageBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var isDark = context.read<LoginCubit>().isDark;
     return Scaffold(
-      backgroundColor: chatLightModeBackground,
+      backgroundColor:
+          isDark ? chatDarkModeBackground : chatLightModeBackground,
       appBar: AppBar(
         titleSpacing: size.width * -.02,
         backgroundColor: kPrimaryColor,

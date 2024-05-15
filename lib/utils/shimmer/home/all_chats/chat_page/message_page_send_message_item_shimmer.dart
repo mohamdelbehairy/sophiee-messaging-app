@@ -10,7 +10,7 @@ class MessagePageSendMessageItemShimmer extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         CustomMediumItemShimmer(
-            width: 320,
+            width: 300,
             alignment: Alignment.center,
             borderRadius: BorderRadius.circular(32)),
         Container(

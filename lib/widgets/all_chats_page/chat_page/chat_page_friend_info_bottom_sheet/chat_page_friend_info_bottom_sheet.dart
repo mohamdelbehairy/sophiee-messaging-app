@@ -11,17 +11,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart' as getnav;
 
-class ChatPageFriendInfoBottomSheet extends StatefulWidget {
-  const ChatPageFriendInfoBottomSheet({super.key, required this.user});
+import '../../../../constants.dart';
+
+class ChatPageFriendBottomSheetInfo extends StatefulWidget {
+  const ChatPageFriendBottomSheetInfo({super.key, required this.user});
   final UserModel user;
 
   @override
-  State<ChatPageFriendInfoBottomSheet> createState() =>
-      _ChatPageFriendInfoBottomSheetState();
+  State<ChatPageFriendBottomSheetInfo> createState() =>
+      _ChatPageFriendBottomSheetInfoState();
 }
 
-class _ChatPageFriendInfoBottomSheetState
-    extends State<ChatPageFriendInfoBottomSheet> {
+class _ChatPageFriendBottomSheetInfoState
+    extends State<ChatPageFriendBottomSheetInfo> {
   @override
   void initState() {
     super.initState();
@@ -40,15 +42,13 @@ class _ChatPageFriendInfoBottomSheetState
             transition: getnav.Transition.downToUp);
       },
       child: Container(
-        height: size.height * .4,
+        height: size.height * .42,
         width: size.width,
         decoration: BoxDecoration(
-          color: isDark ? const Color(0xff2b2c33) : Colors.white,
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(size.width * .04),
-            topRight: Radius.circular(size.width * .04),
-          ),
-        ),
+            color: isDark ? kDarkModeColor : Colors.white,
+            borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(size.width * .04),
+                topRight: Radius.circular(size.width * .04))),
         child: BlocBuilder<ConnectivityCubit, ConnectivityResult>(
           builder: (context, state) {
             if (state == ConnectivityResult.wifi ||
