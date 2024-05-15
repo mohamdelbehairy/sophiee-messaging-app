@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sophiee/cubit/auth/login/login_cubit.dart';
 import 'package:sophiee/models/send_message_items_model.dart';
 
 class ChatChooseMediaListView extends StatelessWidget {
@@ -10,9 +12,10 @@ class ChatChooseMediaListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var isDark = context.read<LoginCubit>().isDark;
     return Container(
       height: size.height * .1,
-      color: const Color(0xfff1f1f2),
+      color: Colors.transparent,
       child: ListView.builder(
           scrollDirection: Axis.horizontal,
           itemCount: itemsList.length,
@@ -34,7 +37,8 @@ class ChatChooseMediaListView extends StatelessWidget {
                         )),
                     const SizedBox(height: 4),
                     Text(itemsList[index].itemName,
-                        style: const TextStyle(color: Colors.black))
+                        style: TextStyle(
+                            color: isDark ? Colors.white : Colors.black))
                   ],
                 ),
               ),

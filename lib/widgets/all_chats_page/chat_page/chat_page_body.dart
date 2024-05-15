@@ -20,27 +20,26 @@ class ChatPageBody extends StatelessWidget {
   Widget build(BuildContext context) {
     var isDark = context.read<LoginCubit>().isDark;
     return Scaffold(
-      backgroundColor:
-          isDark ? chatDarkModeBackground : chatLightModeBackground,
-      appBar: AppBar(
-        titleSpacing: size.width * -.02,
-        backgroundColor: kPrimaryColor,
-        elevation: 0,
-        title: ChatPageAppBarTitle(user: user),
-        iconTheme: const IconThemeData(size: 35, color: Colors.white),
-        leading: GestureDetector(
-            onTap: () {
-              context.read<PickContactCubit>().emit(PickContactInitial());
-              Navigator.pop(context);
-            },
-            child: const Icon(Icons.arrow_back)),
-        actions: const [
-          ChatsIconsAppBarButton(icon: Icons.call),
-          ChatsIconsAppBarButton(icon: FontAwesomeIcons.video),
-          ChatsIconsAppBarButton(icon: Icons.error),
-        ],
-      ),
-      body: ChatPageBodyComponent(user: user, size: size),
-    );
+        backgroundColor:
+            isDark ? chatDarkModeBackground : chatLightModeBackground,
+        appBar: AppBar(
+          titleSpacing: -8.0,
+          backgroundColor: kPrimaryColor,
+          elevation: 0,
+          title: ChatPageAppBarTitle(user: user),
+          iconTheme: const IconThemeData(size: 35, color: Colors.white),
+          leading: GestureDetector(
+              onTap: () {
+                context.read<PickContactCubit>().emit(PickContactInitial());
+                Navigator.pop(context);
+              },
+              child: const Icon(Icons.arrow_back)),
+          actions: const [
+            ChatsIconsAppBarButton(icon: Icons.call),
+            ChatsIconsAppBarButton(icon: FontAwesomeIcons.video),
+            ChatsIconsAppBarButton(icon: Icons.error),
+          ],
+        ),
+        body: ChatPageBodyComponent(user: user, size: size));
   }
 }

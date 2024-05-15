@@ -37,10 +37,14 @@ class CustomMessageListView extends StatelessWidget {
         backGroundMessageColor:
             message.senderID == FirebaseAuth.instance.currentUser!.uid
                 ? kPrimaryColor
-                : isDark ? messageFriendColorDarkMode: messageFriendColorLightMode,
+                : isDark
+                    ? messageFriendColorDarkMode
+                    : messageFriendColorLightMode,
         messageTextColor:
             message.senderID == FirebaseAuth.instance.currentUser!.uid
                 ? Colors.white
-                : Colors.white70);
+                : isDark
+                    ? Colors.white70
+                    : Colors.black);
   }
 }

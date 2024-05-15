@@ -8,11 +8,13 @@ class MessageDateTime extends StatelessWidget {
       {super.key,
       required this.size,
       required this.message,
-      required this.isSeen});
+      required this.isSeen,
+      required this.left});
 
   final Size size;
   final MessageModel message;
   final bool isSeen;
+  final double left;
 
   @override
   Widget build(BuildContext context) {
@@ -27,8 +29,8 @@ class MessageDateTime extends StatelessWidget {
           top: message.senderID != FirebaseAuth.instance.currentUser!.uid
               ? size.width * .01
               : 0,
-          left: size.width * .04,
-          right: size.width * .035,
+          left: left,
+          right: size.width * .03,
           bottom: size.width * .01),
       child: Row(
         mainAxisAlignment:

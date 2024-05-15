@@ -15,7 +15,7 @@ class CardOneItemsOne extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(right: size.width * .01),
+      padding: const EdgeInsets.only(right: 4),
       child: Column(
         children: [
           CardOneCustomItemsOne(

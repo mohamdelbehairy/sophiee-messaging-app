@@ -10,6 +10,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import '../../../../cubit/auth/login/login_cubit.dart';
+
 class GroupsChatPageBody extends StatelessWidget {
   const GroupsChatPageBody(
       {super.key,
@@ -28,7 +30,9 @@ class GroupsChatPageBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var isDark = context.read<LoginCubit>().isDark;
     return Scaffold(
+      backgroundColor: isDark ? chatDarkModeBackground : chatLightModeBackground,
       appBar: AppBar(
         titleSpacing: size.width * -.02,
         backgroundColor: kPrimaryColor,

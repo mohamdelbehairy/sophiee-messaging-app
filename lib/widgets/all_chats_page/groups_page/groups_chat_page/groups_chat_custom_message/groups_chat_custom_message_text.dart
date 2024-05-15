@@ -1,3 +1,4 @@
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sophiee/constants.dart';
 import 'package:sophiee/models/message_model.dart';
 import 'package:sophiee/models/users_model.dart';
@@ -5,6 +6,8 @@ import 'package:sophiee/utils/widget/messages/replay_message/replay_message_text
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
+
+import '../../../../../cubit/auth/login/login_cubit.dart';
 
 class GroupsChatCustomMessageText extends StatelessWidget {
   const GroupsChatCustomMessageText(
@@ -19,6 +22,7 @@ class GroupsChatCustomMessageText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    var isDark = context.read<LoginCubit>().isDark;
     // if (message.messageFile != null) {
     //   return SizedBox();
     // }
@@ -81,7 +85,9 @@ class GroupsChatCustomMessageText extends StatelessWidget {
                         : message.senderID ==
                                 FirebaseAuth.instance.currentUser!.uid
                             ? Colors.white
-                            : Colors.black,
+                            : isDark
+                                ? Colors.white70
+                                : Colors.black,
                   ),
                 ),
               ),

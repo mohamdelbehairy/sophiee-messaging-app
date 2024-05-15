@@ -74,7 +74,11 @@ class CustomMessage extends StatelessWidget {
                   backGroundMessageColor: backGroundMessageColor,
                   user: user,
                   messageTextColor: messageTextColor)),
-          MessageDateTime(size: size, message: message, isSeen: isSeen),
+          MessageDateTime(
+              size: size,
+              message: message,
+              isSeen: isSeen,
+              left: size.width * .025),
         ],
       ),
     );

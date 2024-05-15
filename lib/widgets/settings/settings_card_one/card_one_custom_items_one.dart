@@ -30,15 +30,13 @@ class CardOneCustomItemsOne extends StatelessWidget {
                 backgroundColor: color,
                 child:
                     Icon(icon, color: Colors.white, size: size.width * .044)),
-            SizedBox(width: size.width * .02),
-            Text(
-              text,
-              style: TextStyle(
-                  fontSize: size.width * .039,
-                  color: context.read<LoginCubit>().isDark
-                      ? Colors.white
-                      : Colors.black),
-            ),
+            const SizedBox(width: 8),
+            Text(text,
+                style: TextStyle(
+                    fontSize: size.width * .039,
+                    color: context.read<LoginCubit>().isDark
+                        ? Colors.white
+                        : Colors.black))
           ],
         ),
         // Icon(iconChange)

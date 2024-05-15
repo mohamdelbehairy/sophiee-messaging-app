@@ -6,7 +6,6 @@ import 'package:sophiee/cubit/auth/login/login_cubit.dart';
 import 'package:sophiee/pages/edit_profile_page.dart';
 import 'package:sophiee/widgets/settings/custom_items_two.dart';
 
-
 class CardOneItemsTwo extends StatelessWidget {
   const CardOneItemsTwo({super.key, required this.size});
   final Size size;
@@ -14,7 +13,7 @@ class CardOneItemsTwo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(right: size.width * .04),
+      padding: const EdgeInsets.only(right: 16),
       child: Column(children: [
         CustomItemsTwo(
             onTap: () {},
@@ -22,11 +21,11 @@ class CardOneItemsTwo extends StatelessWidget {
             textColor:
                 context.read<LoginCubit>().isDark ? Colors.white : Colors.black,
             icon2: FontAwesomeIcons.chevronRight,
-            text: 'Chat Customize',
-            iconSize: size.width * .034,
-            icon: FontAwesomeIcons.solidComments,
+            text: 'General',
+            iconSize: size.width * .05,
+            icon: Icons.settings,
             color: Colors.indigoAccent.shade400),
-        SizedBox(height: size.width * .005),
+        const SizedBox(height: 4),
         CustomItemsTwo(
             onTap: () {},
             size: size,
@@ -38,7 +37,7 @@ class CardOneItemsTwo extends StatelessWidget {
             textColor: context.read<LoginCubit>().isDark
                 ? Colors.white
                 : Colors.black),
-        SizedBox(height: size.width * .005),
+       const SizedBox(height: 4),
         CustomItemsTwo(
             onTap: () {
               getnav.Get.to(() => EditProfilePage(size: size),

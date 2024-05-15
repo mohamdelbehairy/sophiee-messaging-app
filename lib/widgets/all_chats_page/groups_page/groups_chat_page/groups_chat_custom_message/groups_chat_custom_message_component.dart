@@ -87,7 +87,11 @@ class GroupsChatCustomMessageComponenet extends StatelessWidget {
                         bottomRight: bottomRight,
                         isSeen: isSeen,
                         backGroundMessageColor: backGroundMessageColor)),
-                MessageDateTime(size: size, message: message, isSeen: isSeen),
+                MessageDateTime(
+                    size: size,
+                    message: message,
+                    isSeen: isSeen,
+                    left: size.width * .12),
               ],
             ),
           );

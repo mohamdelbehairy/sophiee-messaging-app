@@ -19,14 +19,11 @@ class CardOneBodyComponenet extends StatelessWidget {
       elevation: context.read<LoginCubit>().isDark ? 1 : 0,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
       child: Padding(
-        padding: EdgeInsets.only(
-            left: size.width * .045,
-            top: size.width * .035,
-            bottom: size.width * .02),
+        padding: const EdgeInsets.only(left: 18, top: 13),
         child: Column(
           children: [
             CardOneItemsOne(size: size, onPressed: onPressed),
-            SizedBox(height: size.width * .005),
+            const SizedBox(height: 6),
             CardOneItemsTwo(size: size)
           ],
         ),

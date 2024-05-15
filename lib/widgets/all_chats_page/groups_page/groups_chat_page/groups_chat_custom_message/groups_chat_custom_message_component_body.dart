@@ -1,4 +1,6 @@
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sophiee/constants.dart';
+import 'package:sophiee/cubit/auth/login/login_cubit.dart';
 import 'package:sophiee/models/group_model.dart';
 import 'package:sophiee/models/message_model.dart';
 import 'package:sophiee/widgets/all_chats_page/groups_page/groups_chat_page/groups_chat_custom_message/groups_chat_custom_message_component.dart';
@@ -18,6 +20,7 @@ class GroupsChatCustomMessageComponentBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var isDark = context.read<LoginCubit>().isDark;
     return GroupsChatCustomMessageComponenet(
         groupModel: groupModel,
         message: message,
@@ -28,7 +31,9 @@ class GroupsChatCustomMessageComponentBody extends StatelessWidget {
         backGroundMessageColor:
             message.senderID == FirebaseAuth.instance.currentUser!.uid
                 ? kPrimaryColor
-                : const Color(0xfff0fafe),
+                : isDark
+                    ? messageFriendColorDarkMode
+                    : messageFriendColorLightMode,
         bottomLeft: message.senderID == FirebaseAuth.instance.currentUser!.uid
             ? Radius.circular(size.width * .03)
             : const Radius.circular(0),
@@ -36,8 +41,10 @@ class GroupsChatCustomMessageComponentBody extends StatelessWidget {
             ? const Radius.circular(0)
             : Radius.circular(size.width * .03),
         messageTextColor:
-            message.senderID == FirebaseAuth.instance.currentUser!.uid
+               message.senderID == FirebaseAuth.instance.currentUser!.uid
                 ? Colors.white
-                : Colors.black);
+                : isDark
+                    ? Colors.white70
+                    : Colors.black);
   }
 }
