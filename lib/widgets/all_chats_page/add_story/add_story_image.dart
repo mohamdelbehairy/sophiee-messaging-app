@@ -87,8 +87,7 @@ class _AddStoryImageState extends State<AddStoryImage> {
                       isStoryImage: true);
                   await story.addStory(
                       imageUrl: storyImage,
-                      video: null,
-                      context: context,
+                      videoUrl: null,
                       storyText: controller.text);
                   await story.updateIsStory(isStory: true);
                 },

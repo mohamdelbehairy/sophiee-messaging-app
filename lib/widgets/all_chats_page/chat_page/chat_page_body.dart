@@ -18,6 +18,7 @@ class ChatPageBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: chatLightModeBackground,
       appBar: AppBar(
         titleSpacing: size.width * -.02,
         backgroundColor: kPrimaryColor,

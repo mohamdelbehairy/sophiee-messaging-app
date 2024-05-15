@@ -31,7 +31,7 @@ class ListViewBottom extends StatelessWidget {
                         .read<MessageCubit>()
                         .getMessage(receiverID: chat.chatsList[index].userID);
                     getnav.Get.to(() => ChatPage(userID: chat.chatsList[index].userID),
-                        transition: getnav.Transition.leftToRight);
+                        transition: getnav.Transition.rightToLeft);
                   },
                   child: Slidable(
                     key: ValueKey(index),

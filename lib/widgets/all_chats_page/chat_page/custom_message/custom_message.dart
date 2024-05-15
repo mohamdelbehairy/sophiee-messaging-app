@@ -12,17 +12,16 @@ import 'package:get/get.dart' as getnav;
 import 'package:url_launcher/url_launcher.dart';
 
 class CustomMessage extends StatelessWidget {
-  const CustomMessage({
-    super.key,
-    required this.message,
-    required this.backGroundMessageColor,
-    required this.messageTextColor,
-    required this.alignment,
-    required this.bottomLeft,
-    required this.bottomRight,
-    required this.isSeen,
-    required this.user,
-  });
+  const CustomMessage(
+      {super.key,
+      required this.message,
+      required this.backGroundMessageColor,
+      required this.messageTextColor,
+      required this.alignment,
+      required this.bottomLeft,
+      required this.bottomRight,
+      required this.isSeen,
+      required this.user});
   final MessageModel message;
   final Color backGroundMessageColor;
   final Color messageTextColor;
@@ -51,6 +50,10 @@ class CustomMessage extends StatelessWidget {
           } else {
             debugPrint('error');
           }
+        }
+        if (message.messageText.startsWith('http') ||
+            message.messageText.startsWith('https')) {
+          await launchUrl(Uri.parse(message.messageText));
         }
       },
       child: Column(

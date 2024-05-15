@@ -52,8 +52,8 @@ class CustomMessageDetails extends StatelessWidget {
                         ? null
                         : message.messageText.length <= 4
                             ? size.width * .15
-                            : message.messageText.length > 30
-                                ? size.width * .8
+                            : message.messageText.length > 40
+                                ? size.width * .65
                                 : null,
         margin: EdgeInsets.symmetric(
             horizontal: size.width * .03, vertical: size.width * .003),

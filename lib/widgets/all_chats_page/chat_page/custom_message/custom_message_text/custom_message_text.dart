@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:sophiee/models/message_model.dart';
 import 'package:sophiee/utils/widget/messages/replay_message/replay_message_text.dart';
 import 'package:flutter/material.dart';
@@ -61,7 +62,13 @@ class CustomMessageText extends StatelessWidget {
                     messageTextColor: messageTextColor)),
           Text(
             messageModel.messageText,
-            style: TextStyle(color: messageTextColor),
+            style: TextStyle(
+                color: (messageModel.messageText.startsWith('http') ||
+                            messageModel.messageText.startsWith('https')) &&
+                        messageModel.senderID !=
+                            FirebaseAuth.instance.currentUser!.uid
+                    ? const Color(0xff8dbceb)
+                    : messageTextColor),
           ),
         ],
       ),

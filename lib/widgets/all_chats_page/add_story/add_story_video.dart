@@ -9,6 +9,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:video_player/video_player.dart';
 
+import '../../../cubit/upload/upload_video/upload_video_cubit.dart';
+
 class AddStoryVideo extends StatefulWidget {
   const AddStoryVideo({super.key, required this.video});
   final File video;
@@ -43,6 +45,8 @@ class _AddStoryVideoState extends State<AddStoryVideo> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final story = context.read<StoryCubit>();
+    var uploadVideo = context.read<UploadVideoCubit>();
+
     return BlocListener<StoryCubit, StoryState>(
       listener: (context, state) {
         if (state is AddStorySuccess) {
@@ -83,10 +87,11 @@ class _AddStoryVideoState extends State<AddStoryVideo> {
                 splashColor: Colors.transparent,
                 highlightColor: Colors.transparent,
                 onTap: () async {
+                  String videoUrl = await uploadVideo.uploadVideo(
+                      videoFile: widget.video, fieldName: 'stories_videos');
                   await story.addStory(
                       imageUrl: null,
-                      video: widget.video,
-                      context: context,
+                      videoUrl: videoUrl,
                       storyText: controller.text);
                   await story.updateIsStory(isStory: true);
                 },

@@ -27,7 +27,7 @@ class MessageDateTime extends StatelessWidget {
           top: message.senderID != FirebaseAuth.instance.currentUser!.uid
               ? size.width * .01
               : 0,
-          left: size.width * .13,
+          left: size.width * .04,
           right: size.width * .035,
           bottom: size.width * .01),
       child: Row(

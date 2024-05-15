@@ -6,7 +6,8 @@ class ThemeModeService {
   ThemeData lightMode({required BuildContext context}) {
     final size = MediaQuery.of(context).size;
     return ThemeData(
-      scaffoldBackgroundColor: const Color(0xfff1f2f2),
+      scaffoldBackgroundColor: const Color(0xfff5f5f5),
+      //fefeff
       fontFamily: 'SFPRODISPLAYBOLD',
       appBarTheme: AppBarTheme(
         elevation: 0.0,

@@ -1,32 +1,18 @@
 import 'dart:async';
-import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sophiee/cubit/story/story_state.dart';
 import 'package:sophiee/models/story_model.dart';
-import 'package:sophiee/widgets/all_chats_page/add_story/add_story_alert_dialog.dart';
 
 class StoryCubit extends Cubit<StoryState> {
   StoryCubit() : super(AddStoryInitial());
 
   Future<void> addStory(
-      {String? imageUrl,
-      File? video,
-      required BuildContext context,
-      required String storyText}) async {
+      {String? imageUrl, String? videoUrl, required String storyText}) async {
     try {
-      // String? imageUrl;
-      String? videoUrl;
-      // if (image != null) {
-      //   imageUrl = await uploadStoryImage(imageFile: image, context: context);
-      // } else
-      if (video != null) {
-        videoUrl = await uploadStoryVideo(videoFile: video, context: context);
-      }
       StoryModel storyModel = StoryModel.fromJson({
         'storyImage': imageUrl,
         'storyVideo': videoUrl,
@@ -44,51 +30,6 @@ class StoryCubit extends Cubit<StoryState> {
     } catch (e) {
       emit(AddStoryFailure(errorMessage: e.toString()));
       debugPrint('error from add story: ${e.toString()}');
-    }
-  }
-
-  Future<String?> uploadStoryVideo(
-      {required File videoFile, required BuildContext context}) async {
-    try {
-      showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            return const AddStoryAlertDialog();
-          });
-      String videoName = DateTime.now().millisecondsSinceEpoch.toString();
-      Reference reference =
-          FirebaseStorage.instance.ref().child('stories_videos/$videoName');
-      await reference.putFile(videoFile);
-      String videoUrl = await reference.getDownloadURL();
-      emit(UploadStoryVideoSuccess());
-      debugPrint('videoUrl: $videoUrl');
-      return videoUrl;
-    } catch (e) {
-      emit(UploadStoryVideoFailure(errorMessage: e.toString()));
-      debugPrint('error from upload story image: ${e.toString()}');
-      return '';
-    }
-  }
-
-  Future<String> uploadStoryImage(
-      {required File imageFile, required BuildContext context}) async {
-    try {
-      showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            return const AddStoryAlertDialog();
-          });
-      String imageName = DateTime.now().millisecondsSinceEpoch.toString();
-      Reference reference =
-          FirebaseStorage.instance.ref().child('stories_images/$imageName');
-      await reference.putFile(imageFile);
-      String imageUrl = await reference.getDownloadURL();
-      emit(UploadStoryImageSuccess());
-      return imageUrl;
-    } catch (e) {
-      emit(UploadStoryImageFailure(errorMessage: e.toString()));
-      debugPrint('error from upload story image: ${e.toString()}');
-      return '';
     }
   }
 

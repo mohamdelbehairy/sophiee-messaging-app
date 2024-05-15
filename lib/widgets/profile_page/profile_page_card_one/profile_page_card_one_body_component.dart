@@ -32,7 +32,7 @@ class ProfilePageCardOneBodyComponent extends StatelessWidget {
           color: Colors.transparent,
           boxShadow: [BoxShadow(blurRadius: 0, color: Colors.transparent)]),
       child: Card(
-        color: isDark ? kDarkModeColor : Colors.white,
+        color: isDark ? kDarkModeColor : cardLightModeBackground,
         elevation: 0,
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(size.width * .02)),
