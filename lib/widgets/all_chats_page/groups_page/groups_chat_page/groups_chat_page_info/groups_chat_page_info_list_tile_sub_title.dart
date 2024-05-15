@@ -8,12 +8,16 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class CustomSubTitle extends StatelessWidget {
-  const CustomSubTitle(
-      {super.key, required this.groupModel, required this.size});
+class GroupsChatPageInfoTitleSubTitle extends StatelessWidget {
+  const GroupsChatPageInfoTitleSubTitle(
+      {super.key,
+      required this.groupModel,
+      required this.size,
+      required this.isDark});
 
   final GroupModel groupModel;
   final Size size;
+  final bool isDark;
 
   @override
   Widget build(BuildContext context) {
@@ -84,16 +88,17 @@ class CustomSubTitle extends StatelessWidget {
           return Row(
             children: [
               CircleAvatar(radius: size.height * .005, backgroundColor: color),
-              SizedBox(width: size.width * .015),
+              const SizedBox(width: 6),
               SizedBox(
-                width: size.width * .6,
-                child: Text(
-                    groupModel.groupDescription.isNotEmpty
-                        ? groupModel.groupDescription
-                        : text,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis),
-              )
+                  width: size.width * .6,
+                  child: Text(
+                      groupModel.groupDescription.isNotEmpty
+                          ? groupModel.groupDescription
+                          : text,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                          color: isDark ? Colors.white70 : Colors.grey)))
             ],
           );
         } else {

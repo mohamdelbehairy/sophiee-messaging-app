@@ -1,22 +1,26 @@
-import 'package:sophiee/cubit/auth/login/login_cubit.dart';
 import 'package:sophiee/models/group_model.dart';
 import 'package:sophiee/pages/chats/groups/groups_chat_page/groups_chat_page_info.dart';
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart' as getnav;
 
 class GroupsChatPageAppBar extends StatelessWidget {
-  const GroupsChatPageAppBar({super.key, required this.groupData});
+  const GroupsChatPageAppBar(
+      {super.key,
+      required this.groupData,
+      required this.isDark,
+      required this.size});
   final GroupModel groupData;
+  final bool isDark;
+  final Size size;
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-    var isDark = context.read<LoginCubit>().isDark;
     return GestureDetector(
       onTap: () {
-        getnav.Get.to(() => GroupsChatPageInfo(groupModel: groupData),
+        getnav.Get.to(
+            () => GroupsChatPageInfo(
+                groupModel: groupData, isDark: isDark, size: size),
             transition: getnav.Transition.rightToLeft);
       },
       child: Row(

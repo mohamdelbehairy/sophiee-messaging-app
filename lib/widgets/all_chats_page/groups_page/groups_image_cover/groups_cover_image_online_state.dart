@@ -41,13 +41,13 @@ class GroupsCoverImageOnlineState extends StatelessWidget {
             color = differenceInMinutes < 1 ? kPrimaryColor : Colors.grey;
             return CircleAvatar(
                 radius: size.width * .018,
-                backgroundColor: isDark ? kDarkModeColor : Colors.white,
+                backgroundColor: isDark ? cardDarkModeBackground : Colors.white,
                 child: CircleAvatar(
                     radius: size.width * .0135, backgroundColor: color));
           } else {
             return CircleAvatar(
                 radius: size.width * .018,
-                backgroundColor: isDark ? kDarkModeColor : Colors.white,
+                backgroundColor: isDark ? cardDarkModeBackground : Colors.white,
                 child: CircleAvatar(
                     radius: size.width * .0135, backgroundColor: Colors.grey));
           }

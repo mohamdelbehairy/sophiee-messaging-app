@@ -22,7 +22,7 @@ class ProfilePageCardTwo extends StatelessWidget {
           color: Colors.transparent,
           boxShadow: [BoxShadow(blurRadius: 0, color: Colors.transparent)]),
       child: Card(
-        color: isDark ? kDarkModeColor : cardLightModeBackground,
+        color: isDark ? cardDarkModeBackground : cardLightModeBackground,
         elevation: 0,
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(size.width * .02)),

@@ -32,12 +32,14 @@ class GroupsChatPageBody extends StatelessWidget {
   Widget build(BuildContext context) {
     var isDark = context.read<LoginCubit>().isDark;
     return Scaffold(
-      backgroundColor: isDark ? chatDarkModeBackground : chatLightModeBackground,
+      backgroundColor:
+          isDark ? chatDarkModeBackground : chatLightModeBackground,
       appBar: AppBar(
-        titleSpacing: size.width * -.02,
+        titleSpacing: -8,
         backgroundColor: kPrimaryColor,
         elevation: 0,
-        title: GroupsChatPageAppBar(groupData: groupModel),
+        title: GroupsChatPageAppBar(
+            groupData: groupModel, isDark: isDark, size: size),
         actions: const [
           ChatsIconsAppBarButton(icon: Icons.call),
           ChatsIconsAppBarButton(icon: FontAwesomeIcons.video),

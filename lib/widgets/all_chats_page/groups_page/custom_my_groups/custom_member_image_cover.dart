@@ -26,7 +26,7 @@ class CustomMemberImageCover extends StatelessWidget {
       widthFactor: 0.5,
       child: CircleAvatar(
         radius: size.width * .04,
-        backgroundColor: isDark ? kDarkModeColor : Colors.white,
+        backgroundColor: isDark ? cardDarkModeBackground : Colors.white,
         child: BlocBuilder<GetUserDataCubit, GetUserDataStates>(
           builder: (context, state) {
             if (state is GetUserDataSuccess && state.userModel.isNotEmpty) {

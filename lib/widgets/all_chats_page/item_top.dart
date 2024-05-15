@@ -83,7 +83,7 @@ class ChatItemTop extends StatelessWidget {
                           child: CircleAvatar(
                               radius: size.width * .02,
                               backgroundColor: isDark
-                                  ? kDarkModeColor
+                                  ? cardDarkModeBackground
                                   : const Color(0xfff1f2f2),
                               child: CircleAvatar(
                                   backgroundColor: color,

@@ -6,8 +6,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class GroupsChatInfoBody extends StatelessWidget {
-  const GroupsChatInfoBody({super.key, required this.groupModel});
+  const GroupsChatInfoBody(
+      {super.key,
+      required this.groupModel,
+      required this.size,
+      required this.isDark});
   final GroupModel groupModel;
+  final Size size;
+  final bool isDark;
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +26,10 @@ class GroupsChatInfoBody extends StatelessWidget {
               final userData = state.userModel
                   .firstWhere((element) => element.userID == currentUser);
               return GroupsChatPageInfoDetails(
-                  groupModel: groupModel, user: userData);
+                  isDark: isDark,
+                  size: size,
+                  groupModel: groupModel,
+                  user: userData);
             } else {
               return Container();
             }

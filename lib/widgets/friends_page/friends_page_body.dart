@@ -63,7 +63,7 @@ class _FriendsPageBodyState extends State<FriendsPageBody> {
                           child: CircleAvatar(
                             radius: widget.size.width * .02,
                             backgroundColor: isDark
-                                ? kDarkModeColor
+                                ? cardDarkModeBackground
                                 : const Color(0xfff1f2f2),
                             child: CircleAvatar(
                                 radius: widget.size.width * .015,

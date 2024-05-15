@@ -19,7 +19,7 @@ class ProfilePageCardThreeBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: isDark ? kDarkModeColor : cardLightModeBackground,
+      color: isDark ? cardDarkModeBackground : cardLightModeBackground,
       elevation: 0,
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(size.width * .02)),

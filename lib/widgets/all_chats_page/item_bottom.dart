@@ -57,7 +57,7 @@ class ItemBottom extends StatelessWidget {
                     child: CircleAvatar(
                         radius: size.width * .02,
                         backgroundColor:
-                            isDark ? kDarkModeColor : const Color(0xfff1f2f2),
+                            isDark ? cardDarkModeBackground : const Color(0xfff1f2f2),
                         child: CircleAvatar(
                             backgroundColor: color, radius: size.width * .015)),
                   )

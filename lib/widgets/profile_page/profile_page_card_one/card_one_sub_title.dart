@@ -2,14 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:sophiee/models/users_model.dart';
 
 class CardOneSubTitle extends StatelessWidget {
-  const CardOneSubTitle({super.key, required this.user, required this.size});
+  const CardOneSubTitle(
+      {super.key,
+      required this.user,
+      required this.size,
+      required this.isDark});
 
   final UserModel user;
   final Size size;
+  final bool isDark;
 
   @override
   Widget build(BuildContext context) {
     return Text(user.nickName,
-        style: TextStyle(color: Colors.grey, fontSize: size.width * .03));
+        style: TextStyle(
+            color: isDark ? Colors.white12 : Colors.grey,
+            fontSize: size.width * .03));
   }
 }

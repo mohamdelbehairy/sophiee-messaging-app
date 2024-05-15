@@ -3,16 +3,12 @@ import 'package:flutter/material.dart';
 class GroupsChatPageInfoAppBar extends StatelessWidget {
   const GroupsChatPageInfoAppBar({super.key});
 
-
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-    return Text(
+    return const Text(
       'About Group Chat',
       style: TextStyle(
-          color: Colors.white70,
-          fontSize: size.height * .025,
-          fontWeight: FontWeight.normal),
+          color: Colors.white, fontSize: 22, fontWeight: FontWeight.w400),
     );
   }
 }

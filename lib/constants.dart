@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
 const kPrimaryColor = Color(0xff2CB9B0);
-const kDarkModeColor = Color(0xff1e1e1e);
 
 const kDarkModeBackgroundColor = Color(0xff131312);
+const kLightModeBackgroundColor = Color(0xfff5f5f5);
+
 const chatLightModeBackground = Color(0xfffefeff);
 const chatDarkModeBackground = Color(0xff18181c);
 
@@ -11,6 +12,7 @@ const messageFriendColorLightMode = Color(0xffe8f8f8);
 const messageFriendColorDarkMode = Color(0xff2c2a30);
 
 const cardLightModeBackground = Color(0xfffefeff);
+const cardDarkModeBackground = Color(0xff1e1e1e);
 
 // 0xff2b2c33
 

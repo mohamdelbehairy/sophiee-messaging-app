@@ -14,7 +14,7 @@ class CustomCardOneShimmer extends StatelessWidget {
     return SizedBox(
       height: size.height * .39,
       child: Card(
-        color: isDark ? kDarkModeColor : Colors.white,
+        color: isDark ? cardDarkModeBackground : Colors.white,
         child: Shimmer.fromColors(
           baseColor: isDark ? Colors.white12 : Colors.grey.shade300,
           highlightColor: isDark ? Colors.white24 : Colors.grey.shade100,

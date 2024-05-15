@@ -24,7 +24,7 @@ class CardTwoBodyComponenet extends StatelessWidget {
             boxShadow: [BoxShadow(blurRadius: 0, color: Colors.transparent)]),
         child: Card(
           color:
-              context.read<LoginCubit>().isDark ? kDarkModeColor : Colors.white,
+              context.read<LoginCubit>().isDark ? cardDarkModeBackground : Colors.white,
           elevation: context.read<LoginCubit>().isDark ? 1 : 0,
            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
           child: Padding(

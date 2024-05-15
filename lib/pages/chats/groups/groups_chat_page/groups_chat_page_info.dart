@@ -9,16 +9,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class GroupsChatPageInfo extends StatelessWidget {
-  const GroupsChatPageInfo({super.key, 
-  
-  required this.groupModel
-  
-  });
+  const GroupsChatPageInfo(
+      {super.key,
+      required this.groupModel,
+      required this.size,
+      required this.isDark});
   final GroupModel groupModel;
+  final Size size;
+  final bool isDark;
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
     return Scaffold(
         appBar: AppBar(
           backgroundColor: kPrimaryColor,
@@ -41,6 +42,6 @@ class GroupsChatPageInfo extends StatelessWidget {
             )
           ],
         ),
-        body: GroupsChatInfoBody(groupModel: groupModel));
+        body: GroupsChatInfoBody(groupModel: groupModel, size: size,isDark: isDark));
   }
 }

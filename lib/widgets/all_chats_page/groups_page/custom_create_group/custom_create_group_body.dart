@@ -10,7 +10,7 @@ class CustomCreateGroupBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: isDark ? kDarkModeColor : Colors.white,
+      color: isDark ? cardDarkModeBackground : Colors.white,
       elevation: isDark ? 1 : 0,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,

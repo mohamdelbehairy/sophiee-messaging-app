@@ -12,6 +12,7 @@ class ProfilePageCardOneDivider extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
         padding: EdgeInsets.symmetric(horizontal: size.width * .04),
-        child: Divider(thickness: 1, color: Colors.grey.shade100));
+        child: Divider(thickness: 1, color: Colors.grey.withOpacity(.1)));
   }
 }
+

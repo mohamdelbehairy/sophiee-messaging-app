@@ -45,7 +45,7 @@ class _ChatPageFriendBottomSheetInfoState
         height: size.height * .42,
         width: size.width,
         decoration: BoxDecoration(
-            color: isDark ? kDarkModeColor : Colors.white,
+            color: isDark ? cardDarkModeBackground : Colors.white,
             borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(size.width * .04),
                 topRight: Radius.circular(size.width * .04))),

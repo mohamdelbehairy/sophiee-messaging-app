@@ -36,7 +36,7 @@ class ListTileLeading extends StatelessWidget {
             child: CircleAvatar(
                 radius: 9,
                 backgroundColor: isDark
-                                  ? kDarkModeColor
+                                  ? cardDarkModeBackground
                                   : const Color(0xfff1f2f2),
                 child: const CircleAvatar(backgroundColor: kPrimaryColor, radius: 7)))
       ],

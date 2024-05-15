@@ -15,7 +15,7 @@ class CardOneBodyComponenet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: context.read<LoginCubit>().isDark ? kDarkModeColor : Colors.white,
+      color: context.read<LoginCubit>().isDark ? cardDarkModeBackground : Colors.white,
       elevation: context.read<LoginCubit>().isDark ? 1 : 0,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
       child: Padding(
