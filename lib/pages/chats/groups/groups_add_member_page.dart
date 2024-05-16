@@ -5,9 +5,13 @@ import 'package:sophiee/widgets/all_chats_page/groups_page/groups_chat_page/grou
 
 class GroupsAddMemberPage extends StatelessWidget {
   const GroupsAddMemberPage(
-      {super.key, required this.size, required this.groupModel});
+      {super.key,
+      required this.size,
+      required this.groupModel,
+      required this.isDark});
   final Size size;
   final GroupModel groupModel;
+  final bool isDark;
 
   @override
   Widget build(BuildContext context) {
@@ -15,15 +19,13 @@ class GroupsAddMemberPage extends StatelessWidget {
       appBar: AppBar(
         centerTitle: true,
         backgroundColor: kPrimaryColor,
-        title: Text(
+        title: const Text(
           'Add members',
           style: TextStyle(
-              color: Colors.white,
-              fontSize: size.height * .028,
-              fontWeight: FontWeight.normal),
+              color: Colors.white, fontSize: 22, fontWeight: FontWeight.normal),
         ),
       ),
-      body: GroupsAddMemberPageBody(size: size, groupModel: groupModel),
+      body: GroupsAddMemberPageBody(size: size, groupModel: groupModel,isDark: isDark),
     );
   }
 }

@@ -23,7 +23,8 @@ class GroupsMembers extends StatelessWidget {
         isDark: isDark,
         componentName: 'Group Members',
         onTap: () => getnav.Get.to(
-            () => GroupsChatMembersPage(groupModel: groupData),
+            () => GroupsChatMembersPage(
+                groupModel: groupData, size: size, isDark: isDark),
             transition: getnav.Transition.rightToLeft));
   }
 }

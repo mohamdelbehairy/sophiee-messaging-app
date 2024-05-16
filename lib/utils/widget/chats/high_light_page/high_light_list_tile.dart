@@ -12,12 +12,13 @@ class HighLightListTile extends StatelessWidget {
       required this.size,
       required this.user,
       this.groupModel,
-      this.userData});
+      this.userData, required this.isDark});
   final MessageModel message;
   final Size size;
   final UserModel user;
   final UserModel? userData;
   final GroupModel? groupModel;
+  final bool isDark;
 
   @override
   Widget build(BuildContext context) {
@@ -29,6 +30,7 @@ class HighLightListTile extends StatelessWidget {
                 subtitle: HighLightListTileSubTitle(
                     user: user, message: message, size: size))),
         ListTilePostionedFriendDetails(
+          isDark: isDark,
             userData: userData,
             size: size,
             user: user,

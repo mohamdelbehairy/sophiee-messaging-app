@@ -55,7 +55,7 @@ class _ChatPageFriendBottomSheetInfoState
                 state == ConnectivityResult.mobile ||
                 state == ConnectivityResult.vpn) {
               return ChatPageFriendInfoBottomSheetBody(
-                  size: size, user: widget.user);
+                  isDark: isDark, size: size, user: widget.user);
             } else {
               return ChatPageFriendInfoShimmer(size: size);
             }

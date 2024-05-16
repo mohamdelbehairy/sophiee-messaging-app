@@ -27,22 +27,22 @@ class ProfilePageCardOneProfileDetails extends StatelessWidget {
     return Expanded(
       child: Container(
         decoration: BoxDecoration(
-            color:
-                isDark ? Colors.white12 : const Color(0xfff9f8f8).withOpacity(.7),
+            color: isDark
+                ? Colors.grey.withOpacity(.01)
+                : const Color(0xfff9f8f8).withOpacity(.7),
             borderRadius: BorderRadius.only(
                 bottomLeft: Radius.circular(size.width * .02),
                 bottomRight: Radius.circular(size.width * .02))),
         child: Padding(
-          padding: EdgeInsets.only(top: size.width * .06),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              const CustomProfileInfo(
-                  numberInfo: '532', textInfo: 'Public Post'),
-              ProfilePageCardOneFollowers(user: user, follower: follower,size: size),
-              ProfilePageCardOneFollowing(user: user, following: following,size: size),
-            ]
-          ),
+          padding: const EdgeInsets.only(top: 24),
+          child:
+              Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
+            const CustomProfileInfo(numberInfo: '532', textInfo: 'Public Post'),
+            ProfilePageCardOneFollowers(
+                user: user, follower: follower, size: size),
+            ProfilePageCardOneFollowing(
+                user: user, following: following, size: size),
+          ]),
         ),
       ),
     );

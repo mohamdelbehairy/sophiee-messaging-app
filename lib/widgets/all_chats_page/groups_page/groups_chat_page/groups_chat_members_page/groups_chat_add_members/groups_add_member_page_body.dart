@@ -9,9 +9,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class GroupsAddMemberPageBody extends StatelessWidget {
   const GroupsAddMemberPageBody(
-      {super.key, required this.size, required this.groupModel});
+      {super.key, required this.size, required this.groupModel, required this.isDark});
   final Size size;
   final GroupModel groupModel;
+  final bool isDark;
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +27,7 @@ class GroupsAddMemberPageBody extends StatelessWidget {
           builder: (context, state) {
             return Column(
               children: [
-                GroupsAddMembersListView(size: size, groupModel: groupModel),
+                GroupsAddMembersListView(size: size, groupModel: groupModel,isDark: isDark),
                 if (groupsMemberSelected
                     .getGroupsMemberSelectedFriendsList.isNotEmpty)
                   GroupsChatAddMemberButton(

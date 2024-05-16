@@ -9,9 +9,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class GroupsChatMembersPageListView extends StatelessWidget {
   const GroupsChatMembersPageListView(
-      {super.key, required this.groupModel, required this.size});
+      {super.key, required this.groupModel, required this.size, required this.isDark});
   final GroupModel groupModel;
   final Size size;
+  final bool isDark;
 
   @override
   Widget build(BuildContext context) {
@@ -37,6 +38,7 @@ class GroupsChatMembersPageListView extends StatelessWidget {
                       color = Colors.grey;
                     }
                     return GroupsChatMembersListTile(
+                      isDark: isDark,
                         color: color,
                         userData: userData,
                         size: size,

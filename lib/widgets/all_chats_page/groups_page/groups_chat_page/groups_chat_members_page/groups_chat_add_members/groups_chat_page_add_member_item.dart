@@ -6,19 +6,23 @@ import 'package:get/get.dart' as getnav;
 
 class GroupsChatPageAddMemberItem extends StatelessWidget {
   const GroupsChatPageAddMemberItem(
-      {super.key, required this.size, required this.groupModel});
+      {super.key,
+      required this.size,
+      required this.groupModel,
+      required this.isDark});
   final Size size;
-
+  final bool isDark;
   final GroupModel groupModel;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: size.width * .03),
+      padding: const EdgeInsets.symmetric(horizontal: 12),
       child: GestureDetector(
         onTap: () => getnav.Get.to(
-            () => GroupsAddMemberPage(size: size, groupModel: groupModel),
-            transition: getnav.Transition.leftToRight),
+            () => GroupsAddMemberPage(
+                size: size, groupModel: groupModel, isDark: isDark),
+            transition: getnav.Transition.rightToLeft),
         child: Row(
           children: [
             Icon(FontAwesomeIcons.plus,

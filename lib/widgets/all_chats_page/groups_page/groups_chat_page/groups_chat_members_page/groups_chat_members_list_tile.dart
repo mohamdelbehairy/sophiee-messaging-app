@@ -13,11 +13,13 @@ class GroupsChatMembersListTile extends StatelessWidget {
       required this.userData,
       required this.size,
       required this.groupModel,
-      required this.color});
+      required this.color,
+      required this.isDark});
   final UserModel userData;
   final Size size;
   final GroupModel groupModel;
   final Color color;
+  final bool isDark;
 
   @override
   Widget build(BuildContext context) {
@@ -26,12 +28,18 @@ class GroupsChatMembersListTile extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         SizedBox(
-          width: size.width * .7,
+          width: size.width * .72,
           child: ListTile(
             title: Text(userData.userName,
-                maxLines: 1, overflow: TextOverflow.ellipsis),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(color: isDark ? Colors.white : Colors.black)),
             subtitle: Text(userData.bio,
-                maxLines: 1, overflow: TextOverflow.ellipsis),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(
+                    color: isDark ? Colors.white60 : Colors.grey,
+                    fontSize: 12)),
             leading: Stack(
               children: [
                 CircleAvatar(
@@ -50,7 +58,8 @@ class GroupsChatMembersListTile extends StatelessWidget {
                 Positioned(
                     right: 0.0,
                     bottom: 0.0,
-                    child: GroupsChatMembersStatus(size: size, color: color)),
+                    child: GroupsChatMembersStatus(
+                        size: size, color: color, isDark: isDark)),
               ],
             ),
           ),

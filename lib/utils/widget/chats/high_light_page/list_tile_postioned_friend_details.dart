@@ -14,13 +14,15 @@ class ListTilePostionedFriendDetails extends StatelessWidget {
       required this.user,
       required this.message,
       this.groupModel,
-      this.userData});
+      this.userData,
+      required this.isDark});
 
   final Size size;
   final UserModel user;
   final UserModel? userData;
   final MessageModel message;
   final GroupModel? groupModel;
+  final bool isDark;
 
   @override
   Widget build(BuildContext context) {
@@ -45,35 +47,36 @@ class ListTilePostionedFriendDetails extends StatelessWidget {
                               boxFit: BoxFit.cover,
                               imageUrl: user.profileImage))),
                   Padding(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: size.width * .015),
+                      padding: const EdgeInsets.symmetric(horizontal: 6),
                       child: Text(
                           message.senderID ==
                                   FirebaseAuth.instance.currentUser!.uid
                               ? 'You'
                               : user.userName,
                           style: TextStyle(
-                              color: Colors.black,
+                              color: isDark ? Colors.white : Colors.black,
                               fontSize: size.width * .035,
                               fontWeight: FontWeight.normal))),
                   Icon(FontAwesomeIcons.play, size: size.width * .02),
                   if (groupModel != null)
                     Padding(
-                        padding: EdgeInsets.only(left: size.width * .015),
+                        padding: const EdgeInsets.only(left: 6),
                         child: Text(groupModel!.groupName,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
                             style: TextStyle(
-                                color: Colors.black,
+                                color: isDark ? Colors.white : Colors.black,
                                 fontSize: size.width * .035,
                                 fontWeight: FontWeight.normal))),
                   if (groupModel == null)
                     Padding(
-                        padding: EdgeInsets.only(left: size.width * .015),
+                        padding: const EdgeInsets.only(left: 6),
                         child: Text(
                             message.senderID == userData!.userID
                                 ? 'you'
                                 : userData!.userName,
                             style: TextStyle(
-                                color: Colors.black,
+                                color: isDark ? Colors.white : Colors.black,
                                 fontSize: size.width * .035,
                                 fontWeight: FontWeight.normal))),
                 ],
@@ -81,7 +84,7 @@ class ListTilePostionedFriendDetails extends StatelessWidget {
               Text(
                   '${Timestamp.now().toDate().difference(message.messageDateTime).inDays < 1 ? message.showChatImageTime() : Timestamp.now().toDate().difference(message.messageDateTime).inDays == 1 || message.messageDateTime.hour < 00 ? 'Yesterday' : message.showHighLightTime()} ',
                   style: TextStyle(
-                      color: Colors.grey,
+                      color: isDark ? Colors.white70: Colors.grey,
                       fontSize: size.width * .03,
                       fontWeight: FontWeight.w100))
             ],

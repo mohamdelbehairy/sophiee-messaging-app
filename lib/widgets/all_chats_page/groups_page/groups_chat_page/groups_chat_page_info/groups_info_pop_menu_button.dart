@@ -1,4 +1,6 @@
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sophiee/constants.dart';
+import 'package:sophiee/cubit/auth/login/login_cubit.dart';
 import 'package:sophiee/models/group_model.dart';
 import 'package:sophiee/pages/chats/groups/groups_add_member_page.dart';
 import 'package:sophiee/pages/chats/groups/groups_chat_page/group_permissions_page.dart';
@@ -17,6 +19,7 @@ class GroupsInfoPopupMenueButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var isDark = context.read<LoginCubit>().isDark;
     return PopupMenuButton(
       offset: Offset(0, size.height * .06),
       color: kPrimaryColor,
@@ -29,8 +32,9 @@ class GroupsInfoPopupMenueButton extends StatelessWidget {
             size: size,
             itemName: 'Add member',
             onTap: () => getnav.Get.to(
-                () => GroupsAddMemberPage(groupModel: groupModel, size: size),
-                transition: getnav.Transition.leftToRight),
+                () => GroupsAddMemberPage(
+                    groupModel: groupModel, size: size, isDark: isDark),
+                transition: getnav.Transition.rightToLeft),
           ),
         groupsInfoPopMenuItem(
           size: size,
@@ -43,21 +47,22 @@ class GroupsInfoPopupMenueButton extends StatelessWidget {
                     .contains(FirebaseAuth.instance.currentUser!.uid)) {
               getnav.Get.to(
                   () => GroupsChatPageInfoEditPage(groupModel: groupModel),
-                  transition: getnav.Transition.leftToRight);
+                  transition: getnav.Transition.rightToLeft);
             } else {
               showDialog(
                   context: context,
                   builder: (context) {
                     return AlertDialog(
                       backgroundColor: kPrimaryColor,
-                      content: const Text('Only admins can edit this groups\'s info'),
+                      content: const Text(
+                          'Only admins can edit this groups\'s info'),
                       actions: <Widget>[
                         TextButton(
                           onPressed: () async {
                             Navigator.pop(context);
                           },
-                          child:
-                              const Text('Ok', style: TextStyle(color: Colors.white)),
+                          child: const Text('Ok',
+                              style: TextStyle(color: Colors.white)),
                         ),
                       ],
                     );
@@ -73,7 +78,7 @@ class GroupsInfoPopupMenueButton extends StatelessWidget {
             itemName: 'Group permissions',
             onTap: () => getnav.Get.to(
                 () => GroupPermissionsPage(size: size, groupModel: groupModel),
-                transition: getnav.Transition.leftToRight),
+                transition: getnav.Transition.rightToLeft),
           ),
       ],
     );

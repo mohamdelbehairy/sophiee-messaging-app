@@ -17,6 +17,7 @@ class GroupsChatPageEditItems extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+   
     return Padding(
       padding:
           EdgeInsets.symmetric(vertical: size.height * .01, horizontal: 16),

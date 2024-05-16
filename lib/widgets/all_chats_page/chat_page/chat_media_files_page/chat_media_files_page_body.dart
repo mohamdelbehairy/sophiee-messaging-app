@@ -12,6 +12,7 @@ class ChatMediaFilesPageBody extends StatelessWidget {
   final Size size;
   final ChatGetMediaFilesCubit mediaFilesList;
 
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(

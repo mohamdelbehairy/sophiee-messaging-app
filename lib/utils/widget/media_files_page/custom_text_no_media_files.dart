@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../cubit/auth/login/login_cubit.dart';
 
 class CustomTextNoMediaFiles extends StatelessWidget {
   const CustomTextNoMediaFiles(
@@ -9,9 +12,10 @@ class CustomTextNoMediaFiles extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+        var isDark = context.read<LoginCubit>().isDark;
     return Center(
         child: Text(text,
             style:
-                TextStyle(color: Colors.black, fontSize: size.height * .02)));
+                TextStyle(color: isDark ? Colors.white: Colors.black, fontSize: size.height * .02)));
   }
 }

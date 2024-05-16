@@ -7,9 +7,13 @@ import 'phone_number_bottom_sheet.dart';
 
 class ChatPageFriendInfoBottomSheetDetails extends StatelessWidget {
   const ChatPageFriendInfoBottomSheetDetails(
-      {super.key, required this.size, required this.user});
+      {super.key,
+      required this.size,
+      required this.user,
+      required this.isDark});
   final Size size;
   final UserModel user;
+  final bool isDark;
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +27,7 @@ class ChatPageFriendInfoBottomSheetDetails extends StatelessWidget {
           if (user.phoneNumber != null) const SizedBox(height: 12),
           MediaFilesBottomSheet(size: size, user: user),
           const SizedBox(height: 12),
-          HighlightsBottomSheet(user: user, size: size),
+          HighlightsBottomSheet(user: user, size: size, isDark: isDark),
         ],
       ),
     );

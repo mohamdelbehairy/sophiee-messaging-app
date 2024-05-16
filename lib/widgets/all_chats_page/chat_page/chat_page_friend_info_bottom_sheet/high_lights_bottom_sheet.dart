@@ -10,10 +10,14 @@ import 'chat_page_friend_info_connection.dart';
 
 class HighlightsBottomSheet extends StatelessWidget {
   const HighlightsBottomSheet(
-      {super.key, required this.user, required this.size});
+      {super.key,
+      required this.user,
+      required this.size,
+      required this.isDark});
 
   final UserModel user;
   final Size size;
+  final bool isDark;
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +29,7 @@ class HighlightsBottomSheet extends StatelessWidget {
           context
               .read<ChatHighLightMessageCubit>()
               .getHightLightMessage(friendID: user.userID);
-          getnav.Get.to(() => ChatHighLightPage(size: size, user: user),
+          getnav.Get.to(() => ChatHighLightPage(size: size, user: user,isDark: isDark),
               transition: getnav.Transition.rightToLeft);
         });
   }

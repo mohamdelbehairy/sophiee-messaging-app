@@ -7,10 +7,8 @@ class HighLightPageAppBarText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text('Highlight messages',
+    return const Text('Highlight messages',
         style: TextStyle(
-            color: Colors.white,
-            fontSize: size.height * .025,
-            fontWeight: FontWeight.normal));
+            color: Colors.white, fontSize: 20, fontWeight: FontWeight.normal));
   }
 }

@@ -10,9 +10,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class GroupsChatMembersPageBody extends StatelessWidget {
   const GroupsChatMembersPageBody(
-      {super.key, required this.size, required this.groupModel});
+      {super.key,
+      required this.size,
+      required this.groupModel,
+      required this.isDark});
   final Size size;
   final GroupModel groupModel;
+  final bool isDark;
 
   @override
   Widget build(BuildContext context) {
@@ -27,13 +31,11 @@ class GroupsChatMembersPageBody extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                  padding: EdgeInsets.only(
-                      right: size.width * .035,
-                      left: size.width * .035,
-                      top: size.width * .025),
+                  padding: const EdgeInsets.only(right: 14, left: 14, top: 10),
                   child: Text('All Members',
                       style: TextStyle(
-                          color: const Color(0xff85889f),
+                          color:
+                              isDark ? Colors.white70 : const Color(0xff85889f),
                           fontWeight: FontWeight.normal,
                           fontSize: size.height * .015))),
               if (groupData.isAddFriends ||
@@ -41,14 +43,16 @@ class GroupsChatMembersPageBody extends StatelessWidget {
                       FirebaseAuth.instance.currentUser!.uid ||
                   groupData.adminsID
                       .contains(FirebaseAuth.instance.currentUser!.uid))
-                SizedBox(height: size.height * .01),
+                const SizedBox(height: 8),
               if (groupData.isAddFriends ||
                   groupData.groupOwnerID ==
                       FirebaseAuth.instance.currentUser!.uid ||
                   groupData.adminsID
                       .contains(FirebaseAuth.instance.currentUser!.uid))
-                GroupsChatPageAddMemberItem(size: size, groupModel: groupData),
-              GroupsChatMembersPageListView(groupModel: groupData, size: size),
+                GroupsChatPageAddMemberItem(
+                    size: size, groupModel: groupData, isDark: isDark),
+              GroupsChatMembersPageListView(
+                  groupModel: groupData, size: size, isDark: isDark),
             ],
           );
         } else {

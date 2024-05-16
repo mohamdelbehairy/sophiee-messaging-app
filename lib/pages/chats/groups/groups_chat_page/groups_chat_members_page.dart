@@ -4,22 +4,28 @@ import 'package:sophiee/widgets/all_chats_page/groups_page/groups_chat_page/grou
 import 'package:flutter/material.dart';
 
 class GroupsChatMembersPage extends StatelessWidget {
-  const GroupsChatMembersPage({super.key, required this.groupModel});
+  const GroupsChatMembersPage(
+      {super.key,
+      required this.groupModel,
+      required this.isDark,
+      required this.size});
   final GroupModel groupModel;
+  final bool isDark;
+  final Size size;
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
           centerTitle: true,
           backgroundColor: kPrimaryColor,
-          title: Text('Actions',
+          title: const Text('Actions',
               style: TextStyle(
                   color: Colors.white,
-                  fontSize: size.height * .03,
-                  fontWeight: FontWeight.normal))),
-      body: GroupsChatMembersPageBody(size: size, groupModel: groupModel),
+                  fontSize: 22,
+                  fontWeight: FontWeight.w400))),
+      body: GroupsChatMembersPageBody(
+          size: size, groupModel: groupModel, isDark: isDark),
     );
   }
 }

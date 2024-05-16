@@ -46,7 +46,7 @@ class _ChatMediaFilesPageState extends State<ChatMediaFilesPage> {
         appBar: AppBar(
           backgroundColor: kPrimaryColor,
           title: Text(widget.user.userName),
-          titleSpacing: widget.size.width * -.01,
+          titleSpacing: -4,
           titleTextStyle: TextStyle(fontSize: widget.size.width * .055),
           bottom: PreferredSize(
             preferredSize: const Size.fromHeight(kToolbarHeight),

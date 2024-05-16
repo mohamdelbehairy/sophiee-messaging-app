@@ -12,9 +12,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ChatPageFriendInfoBottomSheetBody extends StatelessWidget {
   const ChatPageFriendInfoBottomSheetBody(
-      {super.key, required this.size, required this.user});
+      {super.key,
+      required this.size,
+      required this.user,
+      required this.isDark});
   final Size size;
   final UserModel user;
+  final bool isDark;
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +42,8 @@ class ChatPageFriendInfoBottomSheetBody extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            const ChatPageFriendDetails(textNumber: '532', textType: 'Public Post'),
+            const ChatPageFriendDetails(
+                textNumber: '532', textType: 'Public Post'),
             BlocBuilder<GetFollowersCubit, GetFollowersState>(
               builder: (context, state) {
                 return ChatPageFriendDetails(
@@ -54,9 +59,9 @@ class ChatPageFriendInfoBottomSheetBody extends StatelessWidget {
             }),
           ],
         ),
-        ChatPageFriendInfoBottomSheetDetails(size: size,user: user)
+        ChatPageFriendInfoBottomSheetDetails(
+            size: size, user: user, isDark: isDark)
       ],
     );
   }
 }
-

@@ -16,7 +16,7 @@ class CardOneSubTitle extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(user.nickName,
         style: TextStyle(
-            color: isDark ? Colors.white12 : Colors.grey,
+            color: isDark ? Colors.white60 : Colors.grey,
             fontSize: size.width * .03));
   }
 }

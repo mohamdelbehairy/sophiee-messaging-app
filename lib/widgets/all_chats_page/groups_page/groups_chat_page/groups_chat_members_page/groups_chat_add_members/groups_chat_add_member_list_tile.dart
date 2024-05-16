@@ -1,5 +1,4 @@
 import 'package:sophiee/constants.dart';
-import 'package:sophiee/cubit/auth/login/login_cubit.dart';
 import 'package:sophiee/cubit/user_date/get_user_data/get_user_data_cubit.dart';
 import 'package:sophiee/cubit/user_date/get_user_data/get_user_data_state.dart';
 import 'package:sophiee/cubit/groups/groups_member_selected/groups_member_selected_cubit.dart';
@@ -15,11 +14,13 @@ class GroupsChatAddMembersListTile extends StatefulWidget {
       {super.key,
       required this.size,
       required this.groupModel,
-      required this.user});
+      required this.user,
+      required this.isDark});
 
   final Size size;
   final GroupModel groupModel;
   final UserModel user;
+  final bool isDark;
 
   @override
   State<GroupsChatAddMembersListTile> createState() =>
@@ -33,7 +34,7 @@ class _GroupsChatAddMembersListTileState
   @override
   Widget build(BuildContext context) {
     var selectedMembers = context.read<GroupsMemberSelectedCubit>();
-    var isDark = context.read<LoginCubit>().isDark;
+
     return GestureDetector(
       onTap: () async {
         setState(() {
@@ -72,7 +73,11 @@ class _GroupsChatAddMembersListTileState
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(data.userName),
+                        Text(data.userName,
+                            style: TextStyle(
+                                color: widget.isDark
+                                    ? Colors.white
+                                    : Colors.black)),
                         if (!widget.groupModel.usersID
                             .contains(widget.user.userID))
                           Container(
@@ -103,17 +108,21 @@ class _GroupsChatAddMembersListTileState
                       borderRadius: BorderRadius.circular(30),
                       child: FancyShimmerImage(
                           boxFit: BoxFit.cover,
-                          shimmerBaseColor:
-                              isDark ? Colors.white12 : Colors.grey.shade300,
-                          shimmerHighlightColor:
-                              isDark ? Colors.white24 : Colors.grey.shade100,
+                          shimmerBaseColor: widget.isDark
+                              ? Colors.white12
+                              : Colors.grey.shade300,
+                          shimmerHighlightColor: widget.isDark
+                              ? Colors.white24
+                              : Colors.grey.shade100,
                           imageUrl: data.profileImage),
                     ),
                   ),
                   subtitle: Text(
                       widget.groupModel.usersID.contains(widget.user.userID)
                           ? 'Already added to the group'
-                          : data.bio),
+                          : data.bio,
+                      style: TextStyle(
+                          color: widget.isDark ? Colors.white60 : Colors.grey,fontSize: 12)),
                 );
               } else {
                 return Container();

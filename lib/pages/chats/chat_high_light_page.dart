@@ -9,9 +9,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ChatHighLightPage extends StatelessWidget {
-  const ChatHighLightPage({super.key, required this.size, required this.user});
+  const ChatHighLightPage({super.key, required this.size, required this.user, required this.isDark});
   final Size size;
   final UserModel user;
+  final bool isDark;
 
   @override
   Widget build(BuildContext context) {

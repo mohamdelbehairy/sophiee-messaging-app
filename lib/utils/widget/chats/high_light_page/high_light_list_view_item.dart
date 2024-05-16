@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sophiee/cubit/auth/login/login_cubit.dart';
 import 'package:sophiee/cubit/user_date/get_user_data/get_user_data_cubit.dart';
 import 'package:sophiee/cubit/user_date/get_user_data/get_user_data_state.dart';
 import 'package:sophiee/models/group_model.dart';
@@ -23,6 +24,7 @@ class HighLightListViewItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var isDark = context.read<LoginCubit>().isDark;
     return BlocBuilder<GetUserDataCubit, GetUserDataStates>(
       builder: (context, state) {
         if (state is GetUserDataSuccess && state.userModel.isNotEmpty) {
@@ -33,6 +35,7 @@ class HighLightListViewItem extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               HighLightListTile(
+                  isDark: isDark,
                   userData: userData,
                   message: message,
                   size: size,

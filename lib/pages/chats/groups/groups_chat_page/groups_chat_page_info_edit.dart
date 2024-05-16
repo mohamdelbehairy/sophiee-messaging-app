@@ -93,8 +93,6 @@ class _GroupsChatPageInfoEditPageState
                     groupModel: widget.groupModel,
                     groupNameController: groupNameController,
                     descriptionController: descriptionController),
-                // const GroupsChatEditPickImage(),
-                // Divider(thickness: 1, color: Colors.grey.withOpacity(.2)),
               ],
             ),
           ),

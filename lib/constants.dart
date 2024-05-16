@@ -57,3 +57,5 @@ const searchFriendsImageUrl = 'assets/images/search_friends.png';
 
 const defaultImageUrl =
     "https://he.cecollaboratory.com/public/layouts/images/group-default-logo.png";
+
+const noHighlightMessages = 'assets/images/highLightMessage.png';

@@ -7,10 +7,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class GroupsAddMembersListView extends StatelessWidget {
   const GroupsAddMembersListView(
-      {super.key, required this.size, required this.groupModel});
+      {super.key,
+      required this.size,
+      required this.groupModel,
+      required this.isDark});
 
   final Size size;
   final GroupModel groupModel;
+  final bool isDark;
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +28,8 @@ class GroupsAddMembersListView extends StatelessWidget {
                 return GroupsChatAddMembersListTile(
                     size: size,
                     groupModel: groupModel,
-                    user: state.friends[index]);
+                    user: state.friends[index],
+                    isDark: isDark);
               },
             );
           } else {
