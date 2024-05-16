@@ -11,7 +11,7 @@ class SettingsPageCardOneBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        height: size.height * .34,
+        height: size.height * .36,
         width: size.width,
         decoration: const BoxDecoration(
             color: Colors.transparent,

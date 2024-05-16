@@ -36,19 +36,24 @@ class FollowerNotificationCubit extends Cubit<FolloweNotificationState> {
           'title': folowingName,
           'body': '${folowingName.split(' ')[0]} is starting follow you',
         },
+        'data': {
+          'click_action': 'FLUTTER_NOTIFICATION_CLICK',
+          'status': 'done',
+          'page': 'follower',
+        }
       };
       await http.post(Uri.parse(serverUrl), body: jsonEncode(data), headers: {
         'Content-Type': contentType,
         'Authorization': 'key=$serverKey'
       });
       emit(SendFollowerNotificationSuccess());
-    }  catch (e) {
+    } catch (e) {
       emit(FolloweNotificationFailure(errorMessage: e.toString()));
       debugPrint(
           'error from send follower notification method: ${e.toString()}');
     }
   }
-  
+
   // show follower notification
   Future<void> showFollowerNotification(
       {required String title, required String body}) async {

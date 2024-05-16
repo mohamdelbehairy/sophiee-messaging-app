@@ -45,6 +45,7 @@ class MessageNotificationCubit extends Cubit<MessageNotificationState> {
           'click_action': 'FLUTTER_NOTIFICATION_CLICK',
           'status': 'done',
           'senderId': senderId,
+          'page': 'chat',
         }
       };
 
@@ -62,8 +63,7 @@ class MessageNotificationCubit extends Cubit<MessageNotificationState> {
 
   // show message notification
   Future<void> showMessageNotification(
-      {required String title,
-      required String body}) async {
+      {required String title, required String body}) async {
     try {
       AndroidNotificationDetails android = const AndroidNotificationDetails(
           "com.example.sophiee", "myChannel",
@@ -85,11 +85,15 @@ class MessageNotificationCubit extends Cubit<MessageNotificationState> {
   // navigate to chat page
   void navigationToChatPage(RemoteMessage message, BuildContext context) {
     debugPrint('data: ${message.data}');
+    debugPrint('page: ${message.data['page']}');
     debugPrint('message: ${message.data['senderId']}');
-    Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) => ChatPage(userID: message.data['senderId'])));
+    if (message.data['page'] == 'chat') {
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) =>
+                  ChatPage(userID: message.data['senderId'])));
+    }
   }
 
   // app state
