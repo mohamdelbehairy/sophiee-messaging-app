@@ -5,10 +5,10 @@ import 'package:sophiee/models/users_model.dart';
 import 'package:sophiee/widgets/all_chats_page/chat_page/chat_page_body_component.dart';
 import 'package:sophiee/widgets/all_chats_page/chat_page/chat_page_app_bar_title.dart';
 import 'package:sophiee/widgets/all_chats_page/chat_page/chats_icons_app_bar_button.dart';
-import 'package:sophiee/cubit/pick_contact/pick_contact_cubit.dart';
-import 'package:sophiee/cubit/pick_contact/pick_contact_state.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:sophiee/constants.dart';
+
+import '../../../utils/initial_state.dart';
 
 class ChatPageBody extends StatelessWidget {
   const ChatPageBody({super.key, required this.size, required this.user});
@@ -30,7 +30,7 @@ class ChatPageBody extends StatelessWidget {
           iconTheme: const IconThemeData(size: 35, color: Colors.white),
           leading: GestureDetector(
               onTap: () {
-                context.read<PickContactCubit>().emit(PickContactInitial());
+                InitialState.initPickContactState(context);
                 Navigator.pop(context);
               },
               child: const Icon(Icons.arrow_back)),

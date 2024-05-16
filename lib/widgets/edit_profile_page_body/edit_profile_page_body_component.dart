@@ -3,6 +3,7 @@ import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:sophiee/constants.dart';
 import 'package:sophiee/cubit/update_user_data/update_user_cubit_cubit.dart';
+import 'package:sophiee/utils/initial_state.dart';
 
 import '../../cubit/pick_image/pick_image_cubit.dart';
 import '../../cubit/pick_image/pick_image_state.dart';
@@ -41,8 +42,7 @@ class EditProfilePageBodyComponent extends StatelessWidget {
                   arrowIcon: GestureDetector(
                     onTap: () {
                       if (pickImage.state is PickImageSucccess) {
-                        pickImage.emit(PickImageInitial());
-                        pickImage.selectedImage = null;
+                       InitialState.initPickImageState(context);
                       }
                       Navigator.pop(context);
                     },

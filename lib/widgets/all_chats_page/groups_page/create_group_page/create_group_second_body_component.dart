@@ -8,6 +8,7 @@ import 'package:sophiee/widgets/all_chats_page/groups_page/create_group_page/cre
 import 'package:flutter/material.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
+import '../../../../utils/initial_state.dart';
 import 'create_group_second_card_two.dart';
 
 class CreateGroupSecondBodyComponenet extends StatelessWidget {
@@ -42,8 +43,7 @@ class CreateGroupSecondBodyComponenet extends StatelessWidget {
               onTap: () {
                 Navigator.pop(context);
                 if (selectedImage.state is PickImageSucccess) {
-                  selectedImage.selectedImage = null;
-                  selectedImage.emit(PickImageInitial());
+                  InitialState.initPickImageState(context);
                 }
               },
               child: const Icon(Icons.arrow_back)),

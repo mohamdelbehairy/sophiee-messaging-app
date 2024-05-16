@@ -4,6 +4,7 @@ import '../../constants.dart';
 import '../../cubit/pick_image/pick_image_cubit.dart';
 import '../../cubit/pick_image/pick_image_state.dart';
 import '../../models/users_model.dart';
+import '../../utils/initial_state.dart';
 import '../../utils/widget/custom_bottom.dart';
 
 class DiscardChangesButton extends StatelessWidget {
@@ -40,8 +41,7 @@ class DiscardChangesButton extends StatelessWidget {
           dateOfBirth.text = userData.dateOfBirth;
           gender.text = userData.gender;
           if (pickImage.state is PickImageSucccess) {
-            pickImage.emit(PickImageInitial());
-            pickImage.selectedImage = null;
+            InitialState.initPickImageState(context);
           }
         },
         borderRadius: BorderRadius.circular(24),

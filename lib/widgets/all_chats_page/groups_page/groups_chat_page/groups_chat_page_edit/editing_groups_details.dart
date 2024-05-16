@@ -1,9 +1,10 @@
 import 'package:sophiee/cubit/groups/update_groups_details/update_groups_details_cubit.dart';
 import 'package:sophiee/cubit/pick_image/pick_image_cubit.dart';
-import 'package:sophiee/cubit/pick_image/pick_image_state.dart';
 import 'package:sophiee/models/group_model.dart';
 import 'package:sophiee/widgets/all_chats_page/groups_page/groups_chat_page/groups_chat_page_info/app_bar_icon.dart';
 import 'package:flutter/material.dart';
+
+import '../../../../../utils/initial_state.dart';
 
 class EditingGroupsDetails extends StatelessWidget {
   const EditingGroupsDetails(
@@ -48,8 +49,8 @@ class EditingGroupsDetails extends StatelessWidget {
                 groupID: groupModel.groupID,
                 groupImageFile: selectedImage.selectedImage!);
             debugPrint('selectedImage: ${selectedImage.selectedImage}');
-            selectedImage.emit(PickImageInitial());
-            selectedImage.selectedImage = null;
+            // ignore: use_build_context_synchronously
+            InitialState.initPickContactState(context);
           }
         });
   }

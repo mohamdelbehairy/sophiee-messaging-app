@@ -2,11 +2,12 @@ import 'package:sophiee/cubit/groups/create_groups/create_groups_cubit.dart';
 import 'package:sophiee/cubit/groups/create_groups/create_groups_state.dart';
 import 'package:sophiee/cubit/groups/groups_member_selected/groups_member_selected_cubit.dart';
 import 'package:sophiee/cubit/pick_image/pick_image_cubit.dart';
-import 'package:sophiee/cubit/pick_image/pick_image_state.dart';
 import 'package:sophiee/pages/chats/groups/create_group/create_group_page_second.dart';
 import 'package:sophiee/widgets/all_chats_page/groups_page/create_group_page/create_group_second_body_component.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../../utils/initial_state.dart';
 
 class CreateGroupPageSecondBody extends StatelessWidget {
   const CreateGroupPageSecondBody(
@@ -38,8 +39,7 @@ class CreateGroupPageSecondBody extends StatelessWidget {
           Navigator.pop(context);
           Navigator.pop(context);
 
-          selectedImage.selectedImage = null;
-          selectedImage.emit(PickImageInitial());
+          InitialState.initPickImageState(context);
 
           for (var friend
               in groupsMembersSelected.getGroupsMemberSelectedFriendsList) {

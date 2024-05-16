@@ -1,14 +1,13 @@
 import 'dart:io';
-import 'package:sophiee/cubit/pick_image/pick_image_state.dart';
 import 'package:sophiee/cubit/story/story_cubit.dart';
 import 'package:sophiee/cubit/story/story_state.dart';
 import 'package:sophiee/pages/home_page.dart';
+import 'package:sophiee/utils/initial_state.dart';
 import 'package:sophiee/widgets/all_chats_page/add_story/add_story_share_bottom.dart';
 import 'package:sophiee/widgets/all_chats_page/custom_chat_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../cubit/pick_image/pick_image_cubit.dart';
 import '../../../cubit/upload/upload_image/upload_image_cubit.dart';
 import '../../../cubit/user_date/image/store_image/store_image_cubit.dart';
 
@@ -28,14 +27,13 @@ class _AddStoryImageState extends State<AddStoryImage> {
     final story = context.read<StoryCubit>();
     var uploadImage = context.read<UploadImageCubit>();
     var storeImage = context.read<StoreImageCubit>();
-    var pickImage = context.read<PickImageCubit>();
+
     return Scaffold(
       backgroundColor: Colors.black87,
       body: BlocListener<StoryCubit, StoryState>(
         listener: (context, state) {
           if (state is AddStorySuccess) {
-            pickImage.emit(PickImageInitial());
-            pickImage.selectedImage = null;
+            InitialState.initPickImageState(context);
             Navigator.pushAndRemoveUntil(
                 context,
                 MaterialPageRoute(builder: (context) => const HomePage()),

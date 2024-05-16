@@ -2,6 +2,7 @@ import 'package:sophiee/constants.dart';
 import 'package:sophiee/cubit/pick_contact/pick_contact_cubit.dart';
 import 'package:sophiee/cubit/pick_contact/pick_contact_state.dart';
 import 'package:sophiee/models/group_model.dart';
+import 'package:sophiee/utils/initial_state.dart';
 import 'package:sophiee/widgets/all_chats_page/chat_page/chats_icons_app_bar_button.dart';
 import 'package:sophiee/widgets/all_chats_page/groups_page/groups_chat_page/groups_chat_page_app_bar.dart';
 import 'package:sophiee/widgets/all_chats_page/groups_page/groups_chat_page/groups_chat_page_body_details.dart';
@@ -47,7 +48,7 @@ class GroupsChatPageBody extends StatelessWidget {
         ],
         leading: GestureDetector(
           onTap: () {
-            context.read<PickContactCubit>().emit(PickContactInitial());
+            InitialState.initPickContactState(context);
             Navigator.pop(context);
           },
           child: const Icon(Icons.arrow_back, color: Colors.white),

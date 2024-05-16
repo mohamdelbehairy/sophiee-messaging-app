@@ -4,8 +4,6 @@ import 'package:sophiee/cubit/follow_status/follow_status_cubit.dart';
 import 'package:sophiee/cubit/follower/follower_cubit.dart';
 import 'package:sophiee/cubit/follower/follower_state.dart';
 import 'package:sophiee/cubit/friends/friends_cubit.dart';
-import 'package:sophiee/cubit/get_friends/get_friends_cubit.dart';
-import 'package:sophiee/cubit/get_friends/get_friends_state.dart';
 import 'package:sophiee/cubit/user_date/get_user_data/get_user_data_cubit.dart';
 import 'package:sophiee/cubit/user_date/get_user_data/get_user_data_state.dart';
 import 'package:sophiee/models/users_model.dart';
@@ -14,6 +12,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_styled_toast/flutter_styled_toast.dart';
+
+import '../../utils/initial_state.dart';
 
 class MyFriendItemTwo extends StatefulWidget {
   const MyFriendItemTwo({super.key, required this.user, this.widget});
@@ -34,7 +34,7 @@ class _MyFriendItemTwoState extends State<MyFriendItemTwo> {
   }
 
   void initialFriends() {
-    context.read<GetFriendsCubit>().emit(GetFriendsInitial());
+     InitialState.initFriendState(context);
   }
 
   @override

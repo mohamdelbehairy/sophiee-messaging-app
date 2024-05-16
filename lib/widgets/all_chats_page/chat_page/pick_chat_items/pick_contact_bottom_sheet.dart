@@ -1,11 +1,12 @@
 import 'package:sophiee/cubit/auth/login/login_cubit.dart';
-import 'package:sophiee/cubit/pick_contact/pick_contact_cubit.dart';
-import 'package:sophiee/cubit/pick_contact/pick_contact_state.dart';
+
 import 'package:sophiee/models/users_model.dart';
 import 'package:sophiee/widgets/all_chats_page/chat_page/pick_chat_items/pick_contact_bottom_sheet_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
+import '../../../../utils/initial_state.dart';
 
 class PickContactBottomSheet extends StatelessWidget {
   const PickContactBottomSheet(
@@ -21,7 +22,7 @@ class PickContactBottomSheet extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final isDark = context.read<LoginCubit>().isDark;
-    final pickContact = context.read<PickContactCubit>();
+
     String formattedPhoneNumber = phoneContactNumber.startsWith('+2')
         ? '+2${phoneContactNumber.substring(2, 3)} ${phoneContactNumber.substring(3, 6)} ${phoneContactNumber.substring(7)}'
         : '+2${phoneContactNumber.substring(0, 1)} ${phoneContactNumber.substring(1, 4)} ${phoneContactNumber.substring(4)}';
@@ -48,7 +49,9 @@ class PickContactBottomSheet extends StatelessWidget {
                       padding: EdgeInsets.only(left: size.width * .01),
                       child: Text(phoneContactName,
                           style: TextStyle(
-                              color: isDark ? Colors.white : const Color(0xff2b2c33),
+                              color: isDark
+                                  ? Colors.white
+                                  : const Color(0xff2b2c33),
                               fontSize: size.width * .05,
                               fontWeight: FontWeight.normal))),
                   Text(formattedPhoneNumber,
@@ -72,8 +75,7 @@ class PickContactBottomSheet extends StatelessWidget {
               child: GestureDetector(
                   onTap: () {
                     Navigator.pop(context);
-                    pickContact.phoneContact == null;
-                    pickContact.emit(PickContactInitial());
+                    InitialState.initPickContactState(context);
                   },
                   child: Icon(FontAwesomeIcons.xmark,
                       color: isDark ? Colors.white : Colors.black)))

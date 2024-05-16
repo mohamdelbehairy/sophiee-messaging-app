@@ -1,11 +1,11 @@
 import 'package:sophiee/cubit/auth/login/login_cubit.dart';
 import 'package:sophiee/cubit/get_friends/get_friends_cubit.dart';
-import 'package:sophiee/cubit/get_friends/get_friends_state.dart';
 import 'package:sophiee/models/users_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:sophiee/utils/initial_state.dart';
 
 class MyFriendItemOne extends StatelessWidget {
   const MyFriendItemOne({super.key, required this.user});
@@ -40,7 +40,8 @@ class MyFriendItemOne extends StatelessWidget {
             splashColor: Colors.transparent,
             highlightColor: Colors.transparent,
             onPressed: () {},
-            icon: const Icon(FontAwesomeIcons.ellipsisVertical, color: Colors.white),
+            icon: const Icon(FontAwesomeIcons.ellipsisVertical,
+                color: Colors.white),
           ),
         ),
         Positioned(
@@ -51,7 +52,7 @@ class MyFriendItemOne extends StatelessWidget {
             highlightColor: Colors.transparent,
             onPressed: () {
               Navigator.pop(context);
-              context.read<GetFriendsCubit>().emit(GetFriendsInitial());
+              InitialState.initFriendState(context);
               context
                   .read<GetFriendsCubit>()
                   .getFriends(userID: FirebaseAuth.instance.currentUser!.uid);
