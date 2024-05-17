@@ -4,7 +4,7 @@ sealed class MessageNotificationState {}
 
 final class MessageNotificationInitial extends MessageNotificationState {}
 
-final class InitMessageNotificationnSuccess extends MessageNotificationState {}
+final class InitMessageNotificationSuccess extends MessageNotificationState {}
 
 final class SendMessageNotificationSuccess extends MessageNotificationState {}
 

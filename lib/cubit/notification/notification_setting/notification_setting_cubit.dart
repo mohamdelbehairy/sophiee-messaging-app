@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
+import '../../../utils/navigation_notify.dart';
+
 part 'notification_setting_state.dart';
 
 class NotificationSettingCubit extends Cubit<NotificationSettingState> {
@@ -43,5 +45,20 @@ class NotificationSettingCubit extends Cubit<NotificationSettingState> {
     } else {
       debugPrint('user denied permission');
     }
+  }
+
+  // app state
+  Future<void> appState(BuildContext context) async {
+    // when app is closed
+    RemoteMessage? message =
+        await FirebaseMessaging.instance.getInitialMessage();
+    if (message != null) {
+      NavigationNotify.navigationNotification(message, context);
+    }
+
+    // when app is in background
+    FirebaseMessaging.onMessageOpenedApp.listen((message) {
+      NavigationNotify.navigationNotification(message, context);
+    });
   }
 }

@@ -1,6 +1,13 @@
 import 'dart:io';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:sophiee/cubit/get_friends/get_friends_cubit.dart';
+import 'package:sophiee/cubit/get_friends/get_friends_state.dart';
+import 'package:sophiee/cubit/notification/story_notification/story_notification_cubit.dart';
 import 'package:sophiee/cubit/story/story_cubit.dart';
 import 'package:sophiee/cubit/story/story_state.dart';
+import 'package:sophiee/cubit/user_date/get_user_data/get_user_data_cubit.dart';
+import 'package:sophiee/cubit/user_date/get_user_data/get_user_data_state.dart';
+import 'package:sophiee/models/users_model.dart';
 import 'package:sophiee/pages/home_page.dart';
 import 'package:sophiee/utils/initial_state.dart';
 import 'package:sophiee/widgets/all_chats_page/add_story/add_story_share_bottom.dart';
@@ -23,11 +30,18 @@ class _AddStoryImageState extends State<AddStoryImage> {
   TextEditingController controller = TextEditingController();
   @override
   Widget build(BuildContext context) {
+    context
+        .read<GetFriendsCubit>()
+        .getFriends(userID: FirebaseAuth.instance.currentUser!.uid);
+    context.read<GetUserDataCubit>().getUserData();
     final size = MediaQuery.of(context).size;
-    final story = context.read<StoryCubit>();
-    var uploadImage = context.read<UploadImageCubit>();
-    var storeImage = context.read<StoreImageCubit>();
+    // final story = context.read<StoryCubit>();
+    // var uploadImage = context.read<UploadImageCubit>();
+    // var storeImage = context.read<StoreImageCubit>();
 
+    List<UserModel>? items;
+    List<UserModel>? items2;
+    // UserModel? user;
     return Scaffold(
       backgroundColor: Colors.black87,
       body: BlocListener<StoryCubit, StoryState>(
@@ -73,23 +87,62 @@ class _AddStoryImageState extends State<AddStoryImage> {
             Positioned(
               bottom: size.height * .02,
               right: size.width * .02,
-              child: InkWell(
-                splashColor: Colors.transparent,
-                highlightColor: Colors.transparent,
-                onTap: () async {
-                  String storyImage = await uploadImage.uploadImage(
-                      imageFile: widget.image, fieldName: 'stories_images');
-                  storeImage.storeImage(
-                      imageUrl: storyImage,
-                      isProfileImage: false,
-                      isStoryImage: true);
-                  await story.addStory(
-                      imageUrl: storyImage,
-                      videoUrl: null,
-                      storyText: controller.text);
-                  await story.updateIsStory(isStory: true);
+              child: BlocListener<GetFriendsCubit, GetFriendsState>(
+                listener: (context, friendState) {
+                  if (friendState is GetFriendsSuccess) {
+                    // print('userName: ${friendState.friends.length}');
+                    items = friendState.friends;
+                    // print('items: $items');
+                  }
                 },
-                child: const AddStoryShareBottom(),
+                child: BlocListener<GetUserDataCubit, GetUserDataStates>(
+                  listener: (context, state) {
+                    if (state is GetUserDataSuccess) {
+                      items2 = state.userModel;
+                      // for (var element in items!) {
+                      // debugPrint('element: ${element.userName}');
+                      // final friendUser = element.userID;
+                      // final friendData = state.userModel.firstWhere(
+                      //     (element) => element.userID == friendUser);
+                      // user = friendData;
+                      // debugPrint('username: ${user!.userName}');
+                      // debugPrint('token: ${user!.token}');
+                      // }
+                    }
+                  },
+                  child: InkWell(
+                    splashColor: Colors.transparent,
+                    highlightColor: Colors.transparent,
+                    onTap: () async {
+                      for (var element in items!) {
+                        // debugPrint('element: ${element.userName}');
+                        var data = items2!
+                            .firstWhere((e) => e.userID == element.userID);
+                        var storyNotification =
+                            context.read<StoryNotificationCubit>();
+                        await storyNotification.sendStoryNotification(
+                            receiverToken: data.token,
+                            senderName: 'senderName',
+                            senderId: 'senderId');
+                        debugPrint('userName: ${data.userName}');
+                        debugPrint('userID: ${data.userID}');
+                        debugPrint('token: ${data.token}');
+                      }
+                      // String storyImage = await uploadImage.uploadImage(
+                      //     imageFile: widget.image, fieldName: 'stories_images');
+                      // storeImage.storeImage(
+                      //     imageUrl: storyImage,
+                      //     isProfileImage: false,
+                      //     isStoryImage: true);
+                      // await story.addStory(
+                      //     imageUrl: storyImage,
+                      //     videoUrl: null,
+                      //     storyText: controller.text);
+                      // await story.updateIsStory(isStory: true);
+                    },
+                    child: const AddStoryShareBottom(),
+                  ),
+                ),
               ),
             ),
           ],

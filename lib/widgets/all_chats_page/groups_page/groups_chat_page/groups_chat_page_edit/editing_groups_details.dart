@@ -50,7 +50,7 @@ class EditingGroupsDetails extends StatelessWidget {
                 groupImageFile: selectedImage.selectedImage!);
             debugPrint('selectedImage: ${selectedImage.selectedImage}');
             // ignore: use_build_context_synchronously
-            InitialState.initPickContactState(context);
+            InitialState.initPickImageState(context);
           }
         });
   }
