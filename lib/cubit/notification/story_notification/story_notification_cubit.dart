@@ -20,9 +20,11 @@ class StoryNotificationCubit extends Cubit<StoryNotificationState> {
     FirebaseMessaging.onMessage.listen((message) async {
       debugPrint('title: ${message.notification!.title}');
       debugPrint('body: ${message.notification!.body}');
-      await showStoryNotification(
-          title: message.notification!.title.toString(),
-          body: message.notification!.body.toString());
+      if (message.data['page'] == 'story') {
+        await showStoryNotification(
+            title: message.notification!.title.toString(),
+            body: message.notification!.body.toString());
+      }
     });
   }
 
@@ -36,7 +38,7 @@ class StoryNotificationCubit extends Cubit<StoryNotificationState> {
         'to': receiverToken,
         'notification': {
           'title': senderName,
-          'body': '${senderName.split(' ')[0]} add a story',
+          'body': '${senderName.split(' ')[0]} add a new story',
         },
         'data': {
           'click_action': 'FLUTTER_NOTIFICATION_CLICK',
@@ -68,7 +70,7 @@ class StoryNotificationCubit extends Cubit<StoryNotificationState> {
       NotificationDetails details = NotificationDetails(android: android);
 
       await _flutterLocalNotificationsPlugin.show(
-         DateTime.now().microsecondsSinceEpoch, title, body, details);
+          DateTime.now().microsecondsSinceEpoch, title, body, details);
 
       emit(ShowStoryNotificationSuccess());
     } catch (e) {

@@ -21,9 +21,12 @@ class MessageNotificationCubit extends Cubit<MessageNotificationState> {
     FirebaseMessaging.onMessage.listen((message) async {
       debugPrint('title: ${message.notification!.title}');
       debugPrint('body: ${message.notification!.body}');
-      await showMessageNotification(
-          title: message.notification!.title.toString(),
-          body: message.notification!.body.toString());
+
+      if (message.data['page'] == 'chat') {
+        await showMessageNotification(
+            title: message.notification!.title.toString(),
+            body: message.notification!.body.toString());
+      }
     });
   }
 
@@ -80,7 +83,4 @@ class MessageNotificationCubit extends Cubit<MessageNotificationState> {
           'error from show message notification method: ${e.toString()}');
     }
   }
-
-
-
 }

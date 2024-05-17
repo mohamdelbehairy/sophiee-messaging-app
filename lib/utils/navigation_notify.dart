@@ -1,5 +1,6 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:sophiee/pages/story_view_page.dart';
 
 import '../pages/chats/chat_page.dart';
 
@@ -20,6 +21,11 @@ class NavigationNotify {
       debugPrint('message data: ${message.data}');
       debugPrint('sender id: ${message.data['senderId']}');
       debugPrint('message data page: ${message.data['page']}');
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) =>
+                  StoryViewPage(userID: message.data['senderId'])));
     }
   }
 }

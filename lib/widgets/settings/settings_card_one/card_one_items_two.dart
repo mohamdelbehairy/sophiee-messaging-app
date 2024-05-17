@@ -25,7 +25,7 @@ class CardOneItemsTwo extends StatelessWidget {
             iconSize: size.width * .05,
             icon: Icons.settings,
             color: Colors.indigoAccent.shade400),
-        const SizedBox(height: 3),
+        const SizedBox(height: 2),
         CustomItemsTwo(
             onTap: () {},
             size: size,
@@ -37,7 +37,7 @@ class CardOneItemsTwo extends StatelessWidget {
             textColor: context.read<LoginCubit>().isDark
                 ? Colors.white
                 : Colors.black),
-       const SizedBox(height: 3),
+          const SizedBox(height: 2),
         CustomItemsTwo(
             onTap: () {
               getnav.Get.to(() => EditProfilePage(size: size),

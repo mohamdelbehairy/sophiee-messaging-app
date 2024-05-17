@@ -4,7 +4,7 @@ import 'package:sophiee/cubit/user_date/get_user_data/get_user_data_cubit.dart';
 import 'package:sophiee/cubit/user_date/get_user_data/get_user_data_state.dart';
 import 'package:sophiee/cubit/story/story_cubit.dart';
 import 'package:sophiee/models/users_model.dart';
-import 'package:sophiee/pages/story_view.dart';
+import 'package:sophiee/pages/story_view_page.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
@@ -23,7 +23,7 @@ class ChatItemTop extends StatelessWidget {
         context.read<StoryCubit>().checkIsStory(friendId: user.userID);
     navigatorPush() {
       Navigator.push(context,
-          MaterialPageRoute(builder: (context) => StoryViewPage(user: user)));
+          MaterialPageRoute(builder: (context) => StoryViewPage(userID: user.userID)));
     }
 
     return BlocBuilder<GetUserDataCubit, GetUserDataStates>(
