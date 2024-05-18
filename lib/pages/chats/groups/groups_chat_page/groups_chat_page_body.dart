@@ -1,6 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:sophiee/constants.dart';
 import 'package:sophiee/cubit/pick_contact/pick_contact_cubit.dart';
 import 'package:sophiee/cubit/pick_contact/pick_contact_state.dart';
+import 'package:sophiee/cubit/user_date/get_user_data/get_user_data_cubit.dart';
+import 'package:sophiee/cubit/user_date/get_user_data/get_user_data_state.dart';
 import 'package:sophiee/models/group_model.dart';
 import 'package:sophiee/utils/initial_state.dart';
 import 'package:sophiee/widgets/all_chats_page/chat_page/chats_icons_app_bar_button.dart';
@@ -32,50 +35,67 @@ class GroupsChatPageBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var isDark = context.read<LoginCubit>().isDark;
-    return Scaffold(
-      backgroundColor:
-          isDark ? chatDarkModeBackground : chatLightModeBackground,
-      appBar: AppBar(
-        titleSpacing: -8,
-        backgroundColor: kPrimaryColor,
-        elevation: 0,
-        title: GroupsChatPageAppBar(
-            groupData: groupModel, isDark: isDark, size: size),
-        actions: const [
-          ChatsIconsAppBarButton(icon: Icons.call),
-          ChatsIconsAppBarButton(icon: FontAwesomeIcons.video),
-          ChatsIconsAppBarButton(icon: Icons.error)
-        ],
-        leading: GestureDetector(
-          onTap: () {
-            InitialState.initPickContactState(context);
-            Navigator.pop(context);
-          },
-          child: const Icon(Icons.arrow_back, color: Colors.white),
-        ),
-      ),
-      body: BlocBuilder<PickContactCubit, PickContactState>(
-        builder: (context, state) {
-          if (state is PickContactSuccess) {
-            WidgetsBinding.instance.addPostFrameCallback((_) {
-              showModalBottomSheet(
-                  context: context,
-                  builder: (context) => GroupsChatPickContactBottomSheet(
-                      groupModel: groupModel,
-                      phoneContactName: state.phoneContact.fullName!.toString(),
-                      phoneContactNumber:
-                          state.phoneContact.phoneNumber!.number.toString()));
-            });
-          }
-          return GroupsChatPageBodyDetails(
-              size: size,
-              onChanged: onChanged,
-              groupModel: groupModel,
-              scrollController: scrollController,
-              controller: controller,
-              isShowSendButton: isShowSendButton);
-        },
-      ),
+    return BlocBuilder<GetUserDataCubit, GetUserDataStates>(
+      builder: (context, state) {
+        if (state is GetUserDataSuccess && state.userModel.isNotEmpty) {
+          final userData = state.userModel.firstWhere((element) =>
+              element.userID == FirebaseAuth.instance.currentUser!.uid);
+          return Scaffold(
+            // backgroundColor:
+            //     isDark ? chatDarkModeBackground : chatLightModeBackground,
+            backgroundColor: userData.chatbackgroundColor != null
+                ? Color(userData.chatbackgroundColor!)
+                : isDark && userData.chatbackgroundColor == null
+                    ? chatDarkModeBackground
+                    : chatLightModeBackground,
+            appBar: AppBar(
+              titleSpacing: -8,
+              backgroundColor: kPrimaryColor,
+              elevation: 0,
+              title: GroupsChatPageAppBar(
+                  groupData: groupModel, isDark: isDark, size: size),
+              actions: const [
+                ChatsIconsAppBarButton(icon: Icons.call),
+                ChatsIconsAppBarButton(icon: FontAwesomeIcons.video),
+                ChatsIconsAppBarButton(icon: Icons.error)
+              ],
+              leading: GestureDetector(
+                onTap: () {
+                  InitialState.initPickContactState(context);
+                  Navigator.pop(context);
+                },
+                child: const Icon(Icons.arrow_back, color: Colors.white),
+              ),
+            ),
+            body: BlocBuilder<PickContactCubit, PickContactState>(
+              builder: (context, state) {
+                if (state is PickContactSuccess) {
+                  WidgetsBinding.instance.addPostFrameCallback((_) {
+                    showModalBottomSheet(
+                        context: context,
+                        builder: (context) => GroupsChatPickContactBottomSheet(
+                            groupModel: groupModel,
+                            phoneContactName:
+                                state.phoneContact.fullName!.toString(),
+                            phoneContactNumber: state
+                                .phoneContact.phoneNumber!.number
+                                .toString()));
+                  });
+                }
+                return GroupsChatPageBodyDetails(
+                    size: size,
+                    onChanged: onChanged,
+                    groupModel: groupModel,
+                    scrollController: scrollController,
+                    controller: controller,
+                    isShowSendButton: isShowSendButton);
+              },
+            ),
+          );
+        } else {
+          return Container();
+        }
+      },
     );
   }
 }

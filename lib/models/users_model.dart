@@ -19,7 +19,7 @@ class UserModel {
   String? token;
   bool? isFollowing;
   String? chatbackgroundImage;
-  String? chatbackgroundColor;
+  int? chatbackgroundColor;
 
   UserModel(
       {required this.userName,

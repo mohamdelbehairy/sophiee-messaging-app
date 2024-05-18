@@ -11,17 +11,27 @@ import 'package:sophiee/constants.dart';
 import '../../../utils/initial_state.dart';
 
 class ChatPageBody extends StatelessWidget {
-  const ChatPageBody({super.key, required this.size, required this.user});
+  const ChatPageBody(
+      {super.key,
+      required this.size,
+      required this.user,
+      required this.userData});
 
   final Size size;
   final UserModel user;
+  final UserModel userData;
 
   @override
   Widget build(BuildContext context) {
     var isDark = context.read<LoginCubit>().isDark;
     return Scaffold(
-        backgroundColor:
-            isDark ? chatDarkModeBackground : chatLightModeBackground,
+        // backgroundColor:
+        //     isDark ? chatDarkModeBackground : chatLightModeBackground,
+        backgroundColor: userData.chatbackgroundColor != null
+            ? Color(userData.chatbackgroundColor!)
+            : isDark && userData.chatbackgroundColor == null
+                ? chatDarkModeBackground
+                : chatLightModeBackground,
         appBar: AppBar(
           titleSpacing: -8.0,
           backgroundColor: kPrimaryColor,

@@ -40,7 +40,7 @@ class UpdateUserDataCubit extends Cubit<UpdateUserDataStates> {
   }
 
   Future<void> updateUserField(
-      {required String fieldName, required String? fieldValue}) async {
+      {required String fieldName, required int? fieldValue}) async {
     try {
       await FirebaseFirestore.instance
           .collection(userCollection)

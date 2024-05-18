@@ -16,8 +16,8 @@ class SetColorTextButton extends StatelessWidget {
           debugPrint('pickerColor: $pickerColor');
           Color selectedColor = pickerColor;
 
-          String colorValue = '0x${selectedColor.value.toRadixString(16)}';
-          debugPrint('selected color value: $colorValue');
+          int colorValue = selectedColor.value;
+          debugPrint('selected color value: ${Color(colorValue)}');
 
           await updateColor.updateUserField(
               fieldName: 'chatbackgroundColor', fieldValue: colorValue);
