@@ -20,6 +20,6 @@ class GeneralSettingCard extends StatelessWidget {
                 boxShadow: [
                   BoxShadow(blurRadius: 0, color: Colors.transparent)
                 ]),
-            child: GeneralSettingPageCardDetails(size: size, isDark: isDark)));
+            child: GeneralSettingPageCardBody(size: size, isDark: isDark)));
   }
 }

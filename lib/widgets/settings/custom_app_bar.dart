@@ -16,7 +16,8 @@ class CustomAppBarSetting extends StatelessWidget {
       this.arrowIcon,
       required this.size,
       this.mainAxisAlignment,
-      this.onTapArrowIcon});
+      this.onTapArrowIcon,
+      this.fontSize});
   final String appParTitle;
   final EdgeInsets padding;
   final Widget? widget;
@@ -29,6 +30,7 @@ class CustomAppBarSetting extends StatelessWidget {
   final Size size;
   final MainAxisAlignment? mainAxisAlignment;
   final Function()? onTapArrowIcon;
+  final double? fontSize;
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +54,7 @@ class CustomAppBarSetting extends StatelessWidget {
                   padding: padding,
                   child: Text(appParTitle,
                       style: TextStyle(
-                          fontSize: size.height * .034,
+                          fontSize: fontSize ?? size.height * .034,
                           color: Colors.white,
                           fontWeight: FontWeight.bold)),
                 ),

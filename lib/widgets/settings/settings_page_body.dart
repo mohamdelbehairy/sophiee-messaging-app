@@ -43,6 +43,7 @@ class _SettingsPageBodyState extends State<SettingsPageBody> {
         child: Column(
           children: [
             SettingsPageAppBar(
+              appParTitle: 'Setting',
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 size: widget.size,
                 widget: TextButton(

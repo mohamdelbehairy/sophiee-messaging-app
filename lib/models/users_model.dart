@@ -17,7 +17,9 @@ class UserModel {
   bool? isEmailAuth;
   bool? isFacebookAuth;
   String? token;
-   bool? isFollowing;
+  bool? isFollowing;
+  String? chatbackgroundImage;
+  String? chatbackgroundColor;
 
   UserModel(
       {required this.userName,
@@ -36,7 +38,9 @@ class UserModel {
       this.isEmailAuth,
       this.isFacebookAuth,
       this.token,
-      this.isFollowing
+      this.isFollowing,
+      this.chatbackgroundImage,
+      this.chatbackgroundColor
       });
 
   factory UserModel.fromJson(jsonData) {
@@ -57,7 +61,9 @@ class UserModel {
         isEmailAuth: jsonData['isEmailAuth'],
         isFacebookAuth: jsonData['isFacebookAuth'],
         token: jsonData['token'],
-        isFollowing:jsonData['isFollowing']
+        isFollowing: jsonData['isFollowing'],
+        chatbackgroundImage:jsonData['chatbackgroundImage'],
+        chatbackgroundColor:jsonData['chatbackgroundColor']
         );
   }
   Map<String, dynamic> toMap() {
@@ -77,7 +83,8 @@ class UserModel {
       'isGoogleAuth': isGoogleAuth,
       'isEmailAuth': isEmailAuth,
       'isFacebookAuth': isFacebookAuth,
-      'token': token
+      'token': token,
+      
     };
   }
 

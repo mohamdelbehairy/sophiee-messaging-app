@@ -39,6 +39,8 @@ class StoreUserDateCubit extends Cubit<StoreUserDateState> {
         'isStory': false,
         'isEmailAuth': isEmailAuth,
         'token': token,
+        'chatbackgroundImage': null,
+        'chatbackgroundColor': null
       });
       await FirebaseFirestore.instance
           .collection('users')

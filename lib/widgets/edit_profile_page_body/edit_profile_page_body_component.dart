@@ -38,7 +38,9 @@ class EditProfilePageBodyComponent extends StatelessWidget {
           child: Column(
             children: [
               SettingsPageAppBar(
+                appParTitle: 'Edit Profile',
                 size: size,
+                fontSize: size.height * .03,
                 arrowIcon:
                     const Icon(Icons.arrow_back, color: Colors.white, size: 35),
                 onTapArrowIcon: () {

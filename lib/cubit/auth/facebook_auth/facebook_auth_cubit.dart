@@ -31,7 +31,7 @@ class FacebookAuthCubit extends Cubit<FacebookAuthState> {
 
           if ((!await isUserDataStored(userID: userCredential.user!.uid))) {
             await facebookAuthStoreUserData(
-              token: token,
+                token: token,
                 userCredentail: userCredential,
                 profileImage: userData['picture']['data']['url']);
           }
@@ -56,7 +56,8 @@ class FacebookAuthCubit extends Cubit<FacebookAuthState> {
 
   Future<void> facebookAuthStoreUserData(
       {required UserCredential userCredentail,
-      required String profileImage,required String? token}) async {
+      required String profileImage,
+      required String? token}) async {
     UserModel userModel = UserModel.fromJson({
       'userName': userCredentail.user!.displayName,
       'emailAddress': userCredentail.user!.email,
@@ -66,7 +67,9 @@ class FacebookAuthCubit extends Cubit<FacebookAuthState> {
       'onlineStatue': Timestamp.now(),
       'isStory': false,
       'isFacebookAuth': true,
-      'token': token
+      'token': token,
+      'chatbackgroundImage': null,
+      'chatbackgroundColor': null
     });
     await FirebaseFirestore.instance
         .collection('users')

@@ -64,7 +64,9 @@ class GoogleAuthCubit extends Cubit<GoogleAuthState> {
       'onlineStatue': Timestamp.now(),
       'isStory': false,
       'isGoogleAuth': true,
-      'token': token
+      'token': token,
+      'chatbackgroundImage': null,
+      'chatbackgroundColor': null
     });
     await FirebaseFirestore.instance
         .collection('users')

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import '../../../models/general_setting_card_model.dart';
-import '../custom_items_two.dart';
+import '../../models/setting_card_model.dart';
+import 'custom_items_two.dart';
 
 class CardBodyDetails extends StatelessWidget {
   const CardBodyDetails(
@@ -11,7 +11,7 @@ class CardBodyDetails extends StatelessWidget {
       required this.size,
       required this.isDark});
 
-  final List<GeneralSettingCardModel> items;
+  final List<SettingCardModel> items;
   final Size size;
   final bool isDark;
 
@@ -25,7 +25,7 @@ class CardBodyDetails extends StatelessWidget {
                 color: e.value.color,
                 icon: e.value.icon,
                 icon2: FontAwesomeIcons.chevronRight,
-                iconSize: e.key == 2 ? size.width * .04 : size.width * .05,
+                iconSize: e.key == 2 ? size.width * .04 : size.width * .045,
                 text: e.value.text,
                 size: size,
                 textColor: isDark ? Colors.white : Colors.black,

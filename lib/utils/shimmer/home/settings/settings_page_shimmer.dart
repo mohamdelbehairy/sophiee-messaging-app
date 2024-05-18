@@ -14,7 +14,7 @@ class SettingsPageShimmer extends StatelessWidget {
     var isDark = context.read<LoginCubit>().isDark;
     return Column(
       children: [
-        SettingsPageAppBar(size: size),
+        SettingsPageAppBar(size: size,appParTitle: 'Setting'),
         SettingsPageCardOneShimmer(isDark: isDark,size: size),
         SettingsPageCardTwoShimmer(isDark: isDark,size: size),
       ],
