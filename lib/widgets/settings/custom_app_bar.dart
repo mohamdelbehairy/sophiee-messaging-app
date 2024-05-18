@@ -15,7 +15,8 @@ class CustomAppBarSetting extends StatelessWidget {
       required this.controller,
       this.arrowIcon,
       required this.size,
-      this.mainAxisAlignment});
+      this.mainAxisAlignment,
+      this.onTapArrowIcon});
   final String appParTitle;
   final EdgeInsets padding;
   final Widget? widget;
@@ -27,6 +28,7 @@ class CustomAppBarSetting extends StatelessWidget {
   final TextEditingController controller;
   final Size size;
   final MainAxisAlignment? mainAxisAlignment;
+  final Function()? onTapArrowIcon;
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +44,9 @@ class CustomAppBarSetting extends StatelessWidget {
             Row(
               mainAxisAlignment: mainAxisAlignment ?? MainAxisAlignment.start,
               children: [
-                if (arrowIcon != null) arrowIcon!,
+                if (arrowIcon != null)
+                  GestureDetector(
+                      onTap: () => Navigator.pop(context), child: arrowIcon!),
                 if (arrowIcon != null) SizedBox(width: size.width * .02),
                 Padding(
                   padding: padding,

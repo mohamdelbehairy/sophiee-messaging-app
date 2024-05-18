@@ -38,17 +38,16 @@ class EditProfilePageBodyComponent extends StatelessWidget {
           child: Column(
             children: [
               SettingsPageAppBar(
-                  size: size,
-                  arrowIcon: GestureDetector(
-                    onTap: () {
-                      if (pickImage.state is PickImageSucccess) {
-                       InitialState.initPickImageState(context);
-                      }
-                      Navigator.pop(context);
-                    },
-                    child: const Icon(Icons.arrow_back,
-                        color: Colors.white, size: 35),
-                  )),
+                size: size,
+                arrowIcon:
+                    const Icon(Icons.arrow_back, color: Colors.white, size: 35),
+                onTapArrowIcon: () {
+                  if (pickImage.state is PickImageSucccess) {
+                    InitialState.initPickImageState(context);
+                  }
+                  Navigator.pop(context);
+                },
+              ),
               EditProfileComponentDetails(
                   size: size,
                   pickImage: pickImage,

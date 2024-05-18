@@ -7,14 +7,14 @@ import '../cubit/upload/upload_image/upload_image_cubit.dart';
 import '../widgets/edit_profile_page_body/edit_profile_page_body.dart';
 
 class EditProfilePage extends StatelessWidget {
-  const EditProfilePage({super.key, required this.size});
-  final Size size;
+  const EditProfilePage({super.key});
 
   @override
   Widget build(BuildContext context) {
     var pickImage = context.read<PickImageCubit>();
     var updateUserData = context.read<UpdateUserDataCubit>();
     var uploadImage = context.read<UploadImageCubit>();
+    var size = MediaQuery.sizeOf(context);
 
     return PopScope(
         canPop: false,

@@ -7,11 +7,12 @@ class SettingsPageAppBar extends StatefulWidget {
       required this.size,
       this.widget,
       this.arrowIcon,
-       this.mainAxisAlignment});
+       this.mainAxisAlignment, this.onTapArrowIcon});
   final Size size;
   final Widget? widget;
   final Widget? arrowIcon;
   final MainAxisAlignment? mainAxisAlignment;
+  final Function()? onTapArrowIcon;
 
   @override
   State<SettingsPageAppBar> createState() => _SettingsPageAppBarState();
@@ -29,6 +30,7 @@ class _SettingsPageAppBarState extends State<SettingsPageAppBar> {
   @override
   Widget build(BuildContext context) {
     return CustomAppBarSetting(
+      onTapArrowIcon: widget.onTapArrowIcon,
       arrowIcon: widget.arrowIcon,
       mainAxisAlignment: widget.mainAxisAlignment,
       size: widget.size,

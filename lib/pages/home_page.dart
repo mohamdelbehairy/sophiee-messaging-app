@@ -11,7 +11,7 @@ import 'package:sophiee/cubit/notification/notification_setting/notification_set
 import 'package:sophiee/cubit/notification/story_notification/story_notification_cubit.dart';
 import 'package:sophiee/pages/chats/all_chats_page.dart';
 import 'package:sophiee/pages/profile_page.dart';
-import 'package:sophiee/pages/settings_page.dart';
+import 'package:sophiee/pages/setting/settings_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
