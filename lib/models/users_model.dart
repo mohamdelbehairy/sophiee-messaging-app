@@ -40,8 +40,7 @@ class UserModel {
       this.token,
       this.isFollowing,
       this.chatbackgroundImage,
-      this.chatbackgroundColor
-      });
+      this.chatbackgroundColor});
 
   factory UserModel.fromJson(jsonData) {
     return UserModel(
@@ -62,9 +61,8 @@ class UserModel {
         isFacebookAuth: jsonData['isFacebookAuth'],
         token: jsonData['token'],
         isFollowing: jsonData['isFollowing'],
-        chatbackgroundImage:jsonData['chatbackgroundImage'],
-        chatbackgroundColor:jsonData['chatbackgroundColor']
-        );
+        chatbackgroundImage: jsonData['chatbackgroundImage'],
+        chatbackgroundColor: jsonData['chatbackgroundColor']);
   }
   Map<String, dynamic> toMap() {
     return {
@@ -84,7 +82,6 @@ class UserModel {
       'isEmailAuth': isEmailAuth,
       'isFacebookAuth': isFacebookAuth,
       'token': token,
-      
     };
   }
 

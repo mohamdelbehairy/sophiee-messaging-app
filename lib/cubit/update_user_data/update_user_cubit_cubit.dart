@@ -38,4 +38,19 @@ class UpdateUserDataCubit extends Cubit<UpdateUserDataStates> {
       debugPrint('error from update user data method: ${e.toString()}');
     }
   }
+
+  Future<void> updateUserField(
+      {required String fieldName, required String? fieldValue}) async {
+    try {
+      await FirebaseFirestore.instance
+          .collection(userCollection)
+          .doc(FirebaseAuth.instance.currentUser!.uid)
+          .update({fieldName: fieldValue});
+      emit(UpdateUserDataSuccess());
+    } catch (e) {
+      emit(UpdateUserFailure(errorMessage: e.toString()));
+
+      debugPrint('error from update user field method: ${e.toString()}');
+    }
+  }
 }
