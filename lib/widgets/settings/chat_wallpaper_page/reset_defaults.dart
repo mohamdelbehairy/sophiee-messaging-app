@@ -42,7 +42,7 @@ class ChatWallPaperResetDefaults extends StatelessWidget {
                       onPressed: () async {
                         Navigator.of(context).pop(false);
                         await resetColor.updateUserField(
-                            fieldName: 'chatbackgroundColor', fieldValue: null);
+                            colorValue: null, imageUrl: null);
                       },
                       child: const Text("Reset",
                           style: TextStyle(color: Colors.white)),

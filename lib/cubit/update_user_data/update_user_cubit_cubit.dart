@@ -39,13 +39,15 @@ class UpdateUserDataCubit extends Cubit<UpdateUserDataStates> {
     }
   }
 
-  Future<void> updateUserField(
-      {required String fieldName, required int? fieldValue}) async {
+  Future<void> updateUserField({int? colorValue, String? imageUrl}) async {
     try {
       await FirebaseFirestore.instance
           .collection(userCollection)
           .doc(FirebaseAuth.instance.currentUser!.uid)
-          .update({fieldName: fieldValue});
+          .update({
+        'chatbackgroundColor': colorValue,
+        'chatbackgroundImage': imageUrl
+      });
       emit(UpdateUserDataSuccess());
     } catch (e) {
       emit(UpdateUserFailure(errorMessage: e.toString()));
