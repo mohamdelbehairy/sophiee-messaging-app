@@ -129,10 +129,12 @@ class _AddStoryImageState extends State<AddStoryImage> {
                         var data = items2!
                             .firstWhere((e) => e.userID == element.userID);
 
-                        await storyNotification.sendStoryNotification(
-                            receiverToken: data.token,
-                            senderName: user!.userName,
-                            senderId: user!.userID);
+                        if (data.isStoryNotify) {
+                          await storyNotification.sendStoryNotification(
+                              receiverToken: data.token,
+                              senderName: user!.userName,
+                              senderId: user!.userID);
+                        }
                       }
                     },
                     child: const AddStoryShareBottom(),
