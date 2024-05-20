@@ -1,25 +1,25 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class UserModel {
-  final String userName;
-  final String emailAddress;
-  final String userID;
-  final String bio;
-  final String nickName;
-  final String dateOfBirth;
-  final String gender;
-  String? phoneNumber;
-  final String profileImage;
+  final String userName,
+      emailAddress,
+      userID,
+      bio,
+      nickName,
+      dateOfBirth,
+      gender,
+      profileImage;
   final DateTime onlineStatue;
-  final bool isStory;
   Map<String, dynamic>? lastMessage;
-  bool? isGoogleAuth;
-  bool? isEmailAuth;
-  bool? isFacebookAuth;
-  String? token;
-  bool? isFollowing;
-  String? chatbackgroundImage;
+  bool? isGoogleAuth, isEmailAuth, isFacebookAuth, isFollowing;
+  String? phoneNumber, token, chatbackgroundImage;
   int? chatbackgroundColor;
+  final bool isStory,
+      isChatNotify,
+      isGroupNotify,
+      isStoryNotify,
+      isLivesNotify,
+      isPinnedMessageNotify;
 
   UserModel(
       {required this.userName,
@@ -40,7 +40,12 @@ class UserModel {
       this.token,
       this.isFollowing,
       this.chatbackgroundImage,
-      this.chatbackgroundColor});
+      this.chatbackgroundColor,
+      required this.isChatNotify,
+      required this.isGroupNotify,
+      required this.isStoryNotify,
+      required this.isLivesNotify,
+      required this.isPinnedMessageNotify});
 
   factory UserModel.fromJson(jsonData) {
     return UserModel(
@@ -62,7 +67,12 @@ class UserModel {
         token: jsonData['token'],
         isFollowing: jsonData['isFollowing'],
         chatbackgroundImage: jsonData['chatbackgroundImage'],
-        chatbackgroundColor: jsonData['chatbackgroundColor']);
+        chatbackgroundColor: jsonData['chatbackgroundColor'],
+        isChatNotify: jsonData['isChatNotify'] ?? false,
+        isGroupNotify: jsonData['isGroupNotify'] ?? false,
+        isStoryNotify: jsonData['isStoryNotify'] ?? false,
+        isLivesNotify: jsonData['isLivesNotify'] ?? false,
+        isPinnedMessageNotify: jsonData['isPinnedMessageNotify'] ?? false);
   }
   Map<String, dynamic> toMap() {
     return {
@@ -82,6 +92,11 @@ class UserModel {
       'isEmailAuth': isEmailAuth,
       'isFacebookAuth': isFacebookAuth,
       'token': token,
+      'isChatNotify': isChatNotify,
+      'isGroupNotify': isGroupNotify,
+      'isStoryNotify': isStoryNotify,
+      'isLivesNotify': isLivesNotify,
+      'isPinnedMessageNotify': isPinnedMessageNotify
     };
   }
 

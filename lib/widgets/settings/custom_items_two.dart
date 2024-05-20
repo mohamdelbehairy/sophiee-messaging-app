@@ -8,25 +8,26 @@ class CustomItemsTwo extends StatelessWidget {
       required this.iconSize,
       required this.text,
       this.icon2,
-      this.enableFeedback = true,
+      this.enableFeedback,
       required this.textColor,
       required this.size,
-      required this.onTap, this.widget});
+      this.onTap,
+      this.widget});
   final Color color;
   final IconData icon;
   final double iconSize;
   final String text;
   final IconData? icon2;
   final Widget? widget;
-  final bool enableFeedback;
+  final bool? enableFeedback;
   final Color textColor;
   final Size size;
-  final Function() onTap;
+  final Function()? onTap;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      enableFeedback: enableFeedback,
+      enableFeedback: enableFeedback ?? false,
       splashColor: Colors.transparent,
       highlightColor: Colors.transparent,
       onTap: onTap,
