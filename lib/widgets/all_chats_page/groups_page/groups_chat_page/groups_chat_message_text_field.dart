@@ -3,6 +3,7 @@ import 'package:sophiee/cubit/auth/login/login_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:sophiee/models/users_model.dart';
 
 class GroupChatMessageTextField extends StatelessWidget {
   const GroupChatMessageTextField(
@@ -10,11 +11,13 @@ class GroupChatMessageTextField extends StatelessWidget {
       required this.controller,
       required this.onChanged,
       required this.onPressed,
-      required this.focusNode});
+      required this.focusNode,
+      required this.userDataModel});
   final TextEditingController controller;
   final Function(String) onChanged;
   final Function() onPressed;
   final FocusNode focusNode;
+  final UserModel userDataModel;
 
   @override
   Widget build(BuildContext context) {
@@ -35,18 +38,24 @@ class GroupChatMessageTextField extends StatelessWidget {
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(size.width * .08),
             borderSide: BorderSide(
-              color: const Color(0xff2b2c33).withOpacity(.1),
+              color: userDataModel.chatbackgroundImage != null
+                    ? kPrimaryColor
+                    : const Color(0xff2b2c33).withOpacity(.1),
             ),
           ),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(size.width * .08),
             borderSide:
-                BorderSide(color: const Color(0xff2b2c33).withOpacity(.1)),
+                BorderSide(color: userDataModel.chatbackgroundImage != null
+                    ? kPrimaryColor
+                    : const Color(0xff2b2c33).withOpacity(.1)),
           ),
           filled: true,
-          fillColor: isDark ? messageFriendColorDarkMode: const Color(0xff2b2c33).withOpacity(.1),
+          fillColor: isDark
+              ? messageFriendColorDarkMode
+              : const Color(0xff2b2c33).withOpacity(.1),
           hintText: 'Type your message',
-          hintStyle: TextStyle(color: isDark ? Colors.white70: Colors.grey),
+          hintStyle: TextStyle(color: isDark ? Colors.white70 : Colors.grey),
           prefixIcon: IconButton(
             splashColor: Colors.transparent,
             highlightColor: Colors.transparent,

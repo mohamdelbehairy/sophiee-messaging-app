@@ -27,13 +27,14 @@ class GroupsChatPageBodyDetails extends StatefulWidget {
       required this.controller,
       required this.isShowSendButton,
       required this.onChanged,
-      required this.size});
+      required this.size, required this.userDataModel});
   final GroupModel groupModel;
   final ScrollController scrollController;
   final TextEditingController controller;
   final bool isShowSendButton;
   final Function(String) onChanged;
   final Size size;
+  final UserModel userDataModel;
 
   @override
   State<GroupsChatPageBodyDetails> createState() =>
@@ -213,6 +214,7 @@ class _GroupsChatPageBodyDetailsState extends State<GroupsChatPageBodyDetails> {
                         }
                       }
                       return GroupsChatPageCustomSendMedia(
+                        userDataModel: widget.userDataModel,
                         userData: userData,
                         messageModel: messageModel,
                         isSwip: isSwip,

@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:sophiee/constants.dart';
 import 'package:sophiee/cubit/pick_contact/pick_contact_cubit.dart';
@@ -41,8 +42,6 @@ class GroupsChatPageBody extends StatelessWidget {
           final userData = state.userModel.firstWhere((element) =>
               element.userID == FirebaseAuth.instance.currentUser!.uid);
           return Scaffold(
-            // backgroundColor:
-            //     isDark ? chatDarkModeBackground : chatLightModeBackground,
             backgroundColor: userData.chatbackgroundColor != null
                 ? Color(userData.chatbackgroundColor!)
                 : isDark && userData.chatbackgroundColor == null
@@ -82,13 +81,22 @@ class GroupsChatPageBody extends StatelessWidget {
                                 .toString()));
                   });
                 }
-                return GroupsChatPageBodyDetails(
-                    size: size,
-                    onChanged: onChanged,
-                    groupModel: groupModel,
-                    scrollController: scrollController,
-                    controller: controller,
-                    isShowSendButton: isShowSendButton);
+                return Container(
+                  decoration: userData.chatbackgroundImage != null
+                      ? BoxDecoration(
+                          image: DecorationImage(
+                              image: CachedNetworkImageProvider(
+                                  userData.chatbackgroundImage!),fit: BoxFit.cover))
+                      : null,
+                  child: GroupsChatPageBodyDetails(
+                    userDataModel: userData,
+                      size: size,
+                      onChanged: onChanged,
+                      groupModel: groupModel,
+                      scrollController: scrollController,
+                      controller: controller,
+                      isShowSendButton: isShowSendButton),
+                );
               },
             ),
           );

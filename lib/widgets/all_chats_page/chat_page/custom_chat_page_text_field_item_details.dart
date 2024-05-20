@@ -14,7 +14,7 @@ class CustomChatPageTextFieldItemDetails extends StatelessWidget {
       required this.isSwip,
       required this.messageModel,
       required this.userData,
-      required this.onChanged});
+      required this.onChanged, required this.userDataModel});
 
   final ChatPageBodyDetails widget;
   final TextEditingController textEditingController;
@@ -24,10 +24,13 @@ class CustomChatPageTextFieldItemDetails extends StatelessWidget {
   final MessageModel? messageModel;
   final UserModel? userData;
   final Function(String) onChanged;
+  final UserModel userDataModel;
+
 
   @override
   Widget build(BuildContext context) {
     return ChatPageTextFieldItem(
+      userData: userDataModel,
         size: widget.size,
         user: widget.user,
         textEditingController: textEditingController,

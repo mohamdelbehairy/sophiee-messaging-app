@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sophiee/cubit/auth/login/login_cubit.dart';
@@ -31,10 +32,13 @@ class HighLightListViewItem extends StatelessWidget {
           final currentUser = message.senderID;
           final data = state.userModel
               .firstWhere((element) => element.userID == currentUser);
+          final userDataModel = state.userModel.firstWhere((element) =>
+              element.userID == FirebaseAuth.instance.currentUser!.uid);
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               HighLightListTile(
+                  userDataModel: userDataModel,
                   isDark: isDark,
                   userData: userData,
                   message: message,

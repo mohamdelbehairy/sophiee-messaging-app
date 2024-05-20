@@ -15,7 +15,7 @@ class GroupsChatPageCustomSendMedia extends StatelessWidget {
     required this.size,
     required this.scrollController,
     required this.controller,
-    required this.groupModel,
+    required this.groupModel, required this.userDataModel,
   });
 
   final UserModel? userData;
@@ -27,10 +27,12 @@ class GroupsChatPageCustomSendMedia extends StatelessWidget {
   final ScrollController scrollController;
   final TextEditingController controller;
   final GroupModel groupModel;
+  final UserModel userDataModel;
 
   @override
   Widget build(BuildContext context) {
     return GroupsChatPageSendMedia(
+      userDataModel: userDataModel,
         userData: userData,
         replayTextMessage: isSwip ? messageModel!.messageText : '',
         friendNameReplay: isSwip

@@ -35,7 +35,7 @@ class GroupsChatPageSendMedia extends StatefulWidget {
       required this.replayContactMessage,
       required this.replayMessageID,
       required this.replaySoundMessage,
-      required this.replayRecordMessage});
+      required this.replayRecordMessage, required this.userDataModel});
   final Size size;
   final ScrollController scrollController;
   final GroupModel groupModel;
@@ -52,6 +52,7 @@ class GroupsChatPageSendMedia extends StatefulWidget {
   final String replayMessageID;
   final String replaySoundMessage;
   final String replayRecordMessage;
+  final UserModel userDataModel;
 
   @override
   State<GroupsChatPageSendMedia> createState() =>
@@ -162,6 +163,7 @@ class _GroupsChatPageSendMediaState extends State<GroupsChatPageSendMedia> {
                       right: widget.size.width * .12,
                       bottom: widget.size.width * .01),
                   child: GroupChatMessageTextField(
+                    userDataModel: widget.userDataModel,
                       focusNode: widget.focusNode,
                       controller: widget.controller,
                       onChanged: widget.onChanged,

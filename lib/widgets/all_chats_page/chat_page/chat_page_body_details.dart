@@ -21,9 +21,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ChatPageBodyDetails extends StatefulWidget {
   const ChatPageBodyDetails(
-      {super.key, required this.user, required this.size});
+      {super.key, required this.user, required this.size, required this.userDataModel});
   final UserModel user;
   final Size size;
+  final UserModel userDataModel;
 
   @override
   State<ChatPageBodyDetails> createState() => _ChatPageBodyDetailsState();
@@ -217,6 +218,7 @@ class _ChatPageBodyDetailsState extends State<ChatPageBodyDetails> {
                           }
                         },
                         child: CustomChatPageTextFieldItemDetails(
+                          userDataModel: widget.userDataModel,
                             onChanged: (value) {
                               setState(() {
                                 isShowSendButton = value.trim().isNotEmpty;

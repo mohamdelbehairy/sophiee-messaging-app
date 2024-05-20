@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sophiee/cubit/auth/login/login_cubit.dart';
@@ -50,6 +51,15 @@ class ChatPageBody extends StatelessWidget {
             ChatsIconsAppBarButton(icon: Icons.error),
           ],
         ),
-        body: ChatPageBodyComponent(user: user, size: size));
+        body: Container(
+            decoration: BoxDecoration(
+                image: userData.chatbackgroundImage != null
+                    ? DecorationImage(
+                        image: CachedNetworkImageProvider(
+                            userData.chatbackgroundImage!),
+                        fit: BoxFit.cover)
+                    : null),
+            child: ChatPageBodyComponent(
+                user: user, size: size, userDataModel: userData)));
   }
 }

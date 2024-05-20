@@ -10,9 +10,13 @@ import 'package:flutter/material.dart';
 import 'package:sophiee/widgets/all_chats_page/chat_page/pick_chat_items/pick_contact_bottom_sheet.dart';
 
 class ChatPageBodyComponent extends StatelessWidget {
-  const ChatPageBodyComponent({super.key, required this.user, required this.size});
+  const ChatPageBodyComponent(
+      {super.key,
+      required this.user,
+      required this.size,
+      required this.userDataModel});
 
-  final UserModel user;
+  final UserModel user, userDataModel;
   final Size size;
 
   @override
@@ -37,9 +41,11 @@ class ChatPageBodyComponent extends StatelessWidget {
         return BlocBuilder<ConnectivityCubit, ConnectivityResult>(
           builder: (context, connectivityState) {
             if (connectivityState == ConnectivityResult.mobile ||
-                connectivityState == ConnectivityResult.wifi) {
+                connectivityState == ConnectivityResult.wifi ||
+                connectivityState == ConnectivityResult.vpn) {
               return SafeArea(
-                  child: ChatPageBodyDetails(user: user, size: size));
+                  child: ChatPageBodyDetails(
+                      user: user, size: size, userDataModel: userDataModel));
             } else {
               return const MessagePageShimmer();
             }

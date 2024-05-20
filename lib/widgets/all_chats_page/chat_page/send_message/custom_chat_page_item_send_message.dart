@@ -34,7 +34,7 @@ class ChatPageTextFieldItem extends StatefulWidget {
     required this.replayMessageID,
     required this.onChanged,
     required this.replaySoundMessage,
-    required this.replayRecordMessage,
+    required this.replayRecordMessage, required this.userData,
   });
   final Size size;
   final UserModel user;
@@ -50,6 +50,7 @@ class ChatPageTextFieldItem extends StatefulWidget {
   final String replaySoundMessage;
   final String replayRecordMessage;
   final Function(String) onChanged;
+  final UserModel userData;
   @override
   State<ChatPageTextFieldItem> createState() => _ChatPageTextFieldItemState();
 }
@@ -152,6 +153,7 @@ class _ChatPageTextFieldItemState extends State<ChatPageTextFieldItem> {
                       right: widget.size.width * .15,
                       left: widget.size.width * .05),
                   child: MessageTextField(
+                    userData: widget.userData,
                       onPressed: () {
                         setState(() {
                           isClick = !isClick;
