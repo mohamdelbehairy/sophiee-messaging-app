@@ -11,12 +11,13 @@ class CustomItemsTwo extends StatelessWidget {
       this.enableFeedback = true,
       required this.textColor,
       required this.size,
-      required this.onTap});
+      required this.onTap, this.widget});
   final Color color;
   final IconData icon;
   final double iconSize;
   final String text;
   final IconData? icon2;
+  final Widget? widget;
   final bool enableFeedback;
   final Color textColor;
   final Size size;
@@ -49,7 +50,8 @@ class CustomItemsTwo extends StatelessWidget {
               ],
             ),
             if (icon2 != null)
-              Icon(icon2, size: size.width * .044, color: Colors.grey)
+              Icon(icon2, size: size.width * .044, color: Colors.grey),
+            if (widget != null) widget!
           ],
         ),
       ),

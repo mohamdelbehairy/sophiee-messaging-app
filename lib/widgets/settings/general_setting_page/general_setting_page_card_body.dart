@@ -6,6 +6,7 @@ import 'package:sophiee/pages/setting/chat_wallpaper_page.dart';
 
 import '../../../constants.dart';
 import '../../../models/setting_card_model.dart';
+import '../../../pages/setting/notification_setting_page.dart';
 import '../card_body_details.dart';
 
 class GeneralSettingPageCardBody extends StatelessWidget {
@@ -26,7 +27,8 @@ class GeneralSettingPageCardBody extends StatelessWidget {
         icon: Icons.notifications_active,
         text: 'Notifications',
         color: Colors.pink.shade400,
-        onTap: () {}),
+        onTap: () => getnav.Get.to(() => const NotificationSettingPage(),
+            transition: getnav.Transition.rightToLeft)),
     SettingCardModel(
         icon: FontAwesomeIcons.image,
         text: 'Chat Wallpaper',
