@@ -36,8 +36,9 @@ class GroupsChatPageTopIconsBottomSheet extends StatelessWidget {
               context,
               MaterialPageRoute(
                   builder: (context) => GroupsChatPickImagePage(
-                    tokens: [],
-                    senderName: '',
+                        tokens: const [],
+                        isNotify: const [],
+                        senderName: '',
                         image: state.image,
                         groupModel: groupModel,
                         replayTextMessage: '',
@@ -58,9 +59,11 @@ class GroupsChatPageTopIconsBottomSheet extends StatelessWidget {
                 context,
                 MaterialPageRoute(
                     builder: (context) => GroupsChatPickVideoPage(
-                       tokens: [],
-                    senderName: '',
-                        video: state.video, groupModel: groupModel)));
+                        tokens: const [],
+                        isNotify: const [],
+                        senderName: '',
+                        video: state.video,
+                        groupModel: groupModel)));
           }
         },
         child: BlocListener<PickFileCubit, PickFileState>(
@@ -70,8 +73,9 @@ class GroupsChatPageTopIconsBottomSheet extends StatelessWidget {
                   context,
                   MaterialPageRoute(
                       builder: (context) => GroupsChatPickFilePage(
-                         tokens: [],
-                    senderName: '',
+                            tokens: const [],
+                            isNotify: const [],
+                            senderName: '',
                             groupModel: groupModel,
                             file: state.file,
                             replayTextMessage: '',

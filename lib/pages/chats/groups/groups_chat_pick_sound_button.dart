@@ -29,7 +29,8 @@ class GroupsChatPickSoundButton extends StatefulWidget {
       required this.replaySoundMessage,
       required this.replayRecordMessage,
       required this.tokens,
-      required this.senderName});
+      required this.senderName,
+      required this.isNotify});
   final Size size;
   final File sound;
   final GroupModel groupModel;
@@ -44,6 +45,7 @@ class GroupsChatPickSoundButton extends StatefulWidget {
   final String replayRecordMessage;
   final List<String> tokens;
   final String senderName;
+  final List<bool> isNotify;
 
   @override
   State<GroupsChatPickSoundButton> createState() =>
@@ -104,11 +106,16 @@ class _GroupsChatPickSoundButtonState extends State<GroupsChatPickSoundButton> {
                 replaySoundMessage: widget.replaySoundMessage,
                 replayRecordMessage: widget.replayRecordMessage);
             for (var element in widget.tokens) {
-              await sendGroupMessageNotify.sendGroupMessageNotification(
-                  receiverToken: element,
-                  senderName: widget.groupModel.groupName,
-                  message: '${widget.senderName.split(' ')[0]} sent a sound',
-                  senderId: widget.groupModel.groupID);
+              for (var notify in widget.isNotify) {
+                if (notify) {
+                  await sendGroupMessageNotify.sendGroupMessageNotification(
+                      receiverToken: element,
+                      senderName: widget.groupModel.groupName,
+                      message:
+                          '${widget.senderName.split(' ')[0]} sent a sound',
+                      senderId: widget.groupModel.groupID);
+                }
+              }
             }
             await storeMedia.storeVoice(
                 groupID: widget.groupModel.groupID,

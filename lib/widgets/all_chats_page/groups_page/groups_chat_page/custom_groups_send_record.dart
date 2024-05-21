@@ -24,7 +24,8 @@ class CustomGroupsSendRecord extends StatelessWidget {
       this.userData,
       this.stopRecording,
       required this.tokens,
-      required this.senderName});
+      required this.senderName,
+      required this.isNotify});
 
   final Size size;
   final GroupMessageCubit groupChat;
@@ -35,6 +36,7 @@ class CustomGroupsSendRecord extends StatelessWidget {
   final Function(String)? stopRecording;
   final List<String> tokens;
   final String senderName;
+  final List<bool> isNotify;
 
   @override
   Widget build(BuildContext context) {
@@ -86,13 +88,17 @@ class CustomGroupsSendRecord extends StatelessWidget {
         );
 
         for (var element in tokens) {
-          debugPrint('token: $element');
-
-          await sendGroupChatNotify.sendGroupMessageNotification(
-              receiverToken: element,
-              senderName: groupModel.groupName,
-              message: '${senderName.split(' ')[0]} sent a voice message',
-              senderId: groupModel.groupID);
+          for (var notify in isNotify) {
+            debugPrint('token: $element');
+            debugPrint('notify: $notify');
+            if (notify) {
+              await sendGroupChatNotify.sendGroupMessageNotification(
+                  receiverToken: element,
+                  senderName: groupModel.groupName,
+                  message: '${senderName.split(' ')[0]} sent a voice message',
+                  senderId: groupModel.groupID);
+            }
+          }
         }
         await storeVoice.storeVoice(
             messageID: messageID,

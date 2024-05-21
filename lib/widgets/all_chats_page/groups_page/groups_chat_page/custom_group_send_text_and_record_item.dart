@@ -20,7 +20,8 @@ class CustomGroupSendTextAndRecordItem extends StatelessWidget {
       this.userData,
       this.stopRecording,
       required this.tokens,
-      required this.senderName});
+      required this.senderName,
+      required this.isNotify});
 
   final bool isShowSendButton;
   final TextEditingController controller;
@@ -33,6 +34,7 @@ class CustomGroupSendTextAndRecordItem extends StatelessWidget {
   final Function(String)? stopRecording;
   final List<String> tokens;
   final String senderName;
+  final List<bool> isNotify;
 
   @override
   Widget build(BuildContext context) {
@@ -42,6 +44,7 @@ class CustomGroupSendTextAndRecordItem extends StatelessWidget {
         right: 5,
         child: isShowSendButton
             ? CustomSendTextMessageButtonDetails(
+                isNotify: isNotify,
                 senderName: senderName,
                 tokens: tokens,
                 groupChat: groupChat,
@@ -52,6 +55,7 @@ class CustomGroupSendTextAndRecordItem extends StatelessWidget {
                 messageModel: messageModel,
                 userData: userData)
             : CustomGroupsSendRecord(
+                isNotify: isNotify,
                 senderName: senderName,
                 tokens: tokens,
                 stopRecording: stopRecording,

@@ -23,7 +23,8 @@ class CustomSendTextMessageButton extends StatelessWidget {
       required this.replaySoundMessage,
       required this.replayRecordMessage,
       required this.tokens,
-      required this.senderName});
+      required this.senderName,
+      required this.isNotify});
 
   final GroupMessageCubit groupChat;
   final TextEditingController controller;
@@ -39,6 +40,7 @@ class CustomSendTextMessageButton extends StatelessWidget {
   final String replayRecordMessage;
   final List<String> tokens;
   final String senderName;
+  final List<bool> isNotify;
 
   @override
   Widget build(BuildContext context) {
@@ -46,6 +48,7 @@ class CustomSendTextMessageButton extends StatelessWidget {
     var sendGroupChatNotify = context.read<GroupNotificationCubit>();
     return SendMessageButton(
         onTap: () async {
+          debugPrint(isNotify.toString());
           String messageID = const Uuid().v4();
           groupChat.sendGroupMessage(
               messageID: messageID,
@@ -63,13 +66,19 @@ class CustomSendTextMessageButton extends StatelessWidget {
               replayRecordMessage: replayRecordMessage);
 
           for (var element in tokens) {
-            debugPrint('token: $element');
+            for (var notify in isNotify) {
+              debugPrint('token: $element');
+              debugPrint('notify: $notify');
 
-            await sendGroupChatNotify.sendGroupMessageNotification(
-                receiverToken: element,
-                senderName: groupModel.groupName,
-                message: '${senderName.split(' ')[0]} sent ${controller.text}',
-                senderId: groupModel.groupID);
+              if (notify) {
+                sendGroupChatNotify.sendGroupMessageNotification(
+                    receiverToken: element,
+                    senderName: groupModel.groupName,
+                    message:
+                        '${senderName.split(' ')[0]} sent ${controller.text}',
+                    senderId: groupModel.groupID);
+              }
+            }
           }
 
           if (controller.text.startsWith('http') ||

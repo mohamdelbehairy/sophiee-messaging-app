@@ -20,7 +20,7 @@ class GroupNotificationCubit extends Cubit<GroupNotificationState> {
     FirebaseMessaging.onMessage.listen((message) async {
       debugPrint('title: ${message.notification!.title}');
       debugPrint('body: ${message.notification!.body}');
-      
+
       if (message.data['page'] == 'groupChat ') {
         await showGroupMessageNotification(
             title: message.notification!.title.toString(),
@@ -71,7 +71,7 @@ class GroupNotificationCubit extends Cubit<GroupNotificationState> {
       {required String title, required String body}) async {
     try {
       AndroidNotificationDetails android = const AndroidNotificationDetails(
-          "com.example.sophiee", "myChannel",
+          "GroupChat", "groupChat",
           importance: Importance.max, priority: Priority.high);
 
       NotificationDetails notificationDetails =

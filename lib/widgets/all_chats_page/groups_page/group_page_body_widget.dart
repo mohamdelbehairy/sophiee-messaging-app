@@ -29,8 +29,8 @@ class GroupPageBodyWidget extends StatelessWidget {
             } else if (index != 0 && filteredGroups.isNotEmpty) {
               return GestureDetector(
                   onTap: () => getnav.Get.to(
-                      () =>
-                          GroupsChatPage(groupModel: filteredGroups[index - 1]),
+                      () => GroupsChatPage(
+                          groupID: filteredGroups[index - 1].groupID),
                       transition: getnav.Transition.rightToLeft),
                   child: CustomMyGroups(groupModel: filteredGroups[index - 1]));
             } else {

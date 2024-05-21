@@ -10,16 +10,18 @@ class GroupsChatPickVideoPage extends StatelessWidget {
       required this.video,
       required this.groupModel,
       required this.tokens,
-      required this.senderName});
+      required this.senderName, required this.isNotify});
   final File video;
   final GroupModel groupModel;
   final List<String> tokens;
   final String senderName;
+  final List<bool> isNotify;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: GroupsChatPickVideoPageBody(
+        isNotify: isNotify,
           video: video,
           groupModel: groupModel,
           tokens: tokens,

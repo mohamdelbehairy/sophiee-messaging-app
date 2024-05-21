@@ -30,7 +30,8 @@ class GroupsChatPickFilePageBody extends StatefulWidget {
       required this.replaySoundMessage,
       required this.replayRecordMessage,
       required this.tokens,
-      required this.senderName});
+      required this.senderName,
+      required this.isNotify});
   final File file;
   final String messageFileName;
   final bool isClick;
@@ -45,6 +46,7 @@ class GroupsChatPickFilePageBody extends StatefulWidget {
   final String replayRecordMessage;
   final List<String> tokens;
   final String senderName;
+  final List<bool> isNotify;
 
   @override
   State<GroupsChatPickFilePageBody> createState() =>
@@ -116,12 +118,16 @@ class _GroupsPagePickFilePageBodyState
                     replaySoundMessage: widget.replaySoundMessage,
                     replayRecordMessage: widget.replayRecordMessage);
                 for (var element in widget.tokens) {
-                  await sendGroupMessageNotify.sendGroupMessageNotification(
-                      receiverToken: element,
-                      senderName: widget.groupModel.groupName,
-                      message:
-                          '${widget.senderName.split(' ')[0]} sent a file',
-                      senderId: widget.groupModel.groupID);
+                  for (var notify in widget.isNotify) {
+                    if (notify) {
+                      await sendGroupMessageNotify.sendGroupMessageNotification(
+                          receiverToken: element,
+                          senderName: widget.groupModel.groupName,
+                          message:
+                              '${widget.senderName.split(' ')[0]} sent a file',
+                          senderId: widget.groupModel.groupID);
+                    }
+                  }
                 }
 
                 await storeMedia.storeFile(

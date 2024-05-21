@@ -5,7 +5,6 @@ import 'package:sophiee/cubit/pick_contact/pick_contact_cubit.dart';
 import 'package:sophiee/cubit/pick_contact/pick_contact_state.dart';
 import 'package:sophiee/cubit/user_date/get_user_data/get_user_data_cubit.dart';
 import 'package:sophiee/cubit/user_date/get_user_data/get_user_data_state.dart';
-import 'package:sophiee/models/group_model.dart';
 import 'package:sophiee/utils/initial_state.dart';
 import 'package:sophiee/widgets/all_chats_page/chat_page/chats_icons_app_bar_button.dart';
 import 'package:sophiee/widgets/all_chats_page/groups_page/groups_chat_page/groups_chat_page_app_bar.dart';
@@ -16,17 +15,19 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../../../cubit/auth/login/login_cubit.dart';
+import '../../../../cubit/groups/get_groups_member/get_groups_member_cubit.dart';
+import '../../../../cubit/groups/get_groups_member/get_groups_member_state.dart';
 
 class GroupsChatPageBody extends StatelessWidget {
   const GroupsChatPageBody(
       {super.key,
-      required this.groupModel,
+      required this.groupID,
       required this.size,
       required this.scrollController,
       required this.controller,
       required this.isShowSendButton,
       required this.onChanged});
-  final GroupModel groupModel;
+  final String groupID;
   final Size size;
   final ScrollController scrollController;
   final TextEditingController controller;
@@ -36,69 +37,83 @@ class GroupsChatPageBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var isDark = context.read<LoginCubit>().isDark;
-    return BlocBuilder<GetUserDataCubit, GetUserDataStates>(
-      builder: (context, state) {
-        if (state is GetUserDataSuccess && state.userModel.isNotEmpty) {
-          final userData = state.userModel.firstWhere((element) =>
-              element.userID == FirebaseAuth.instance.currentUser!.uid);
-          return Scaffold(
-            backgroundColor: userData.chatbackgroundColor != null
-                ? Color(userData.chatbackgroundColor!)
-                : isDark && userData.chatbackgroundColor == null
-                    ? chatDarkModeBackground
-                    : chatLightModeBackground,
-            appBar: AppBar(
-              titleSpacing: -8,
-              backgroundColor: kPrimaryColor,
-              elevation: 0,
-              title: GroupsChatPageAppBar(
-                  groupData: groupModel, isDark: isDark, size: size),
-              actions: const [
-                ChatsIconsAppBarButton(icon: Icons.call),
-                ChatsIconsAppBarButton(icon: FontAwesomeIcons.video),
-                ChatsIconsAppBarButton(icon: Icons.error)
-              ],
-              leading: GestureDetector(
-                onTap: () {
-                  InitialState.initPickContactState(context);
-                  Navigator.pop(context);
-                },
-                child: const Icon(Icons.arrow_back, color: Colors.white),
-              ),
-            ),
-            body: BlocBuilder<PickContactCubit, PickContactState>(
-              builder: (context, state) {
-                if (state is PickContactSuccess) {
-                  WidgetsBinding.instance.addPostFrameCallback((_) {
-                    showModalBottomSheet(
-                        context: context,
-                        builder: (context) => GroupsChatPickContactBottomSheet(
-                            groupModel: groupModel,
-                            phoneContactName:
-                                state.phoneContact.fullName!.toString(),
-                            phoneContactNumber: state
-                                .phoneContact.phoneNumber!.number
-                                .toString()));
-                  });
-                }
-                return Container(
-                  decoration: userData.chatbackgroundImage != null
-                      ? BoxDecoration(
-                          image: DecorationImage(
-                              image: CachedNetworkImageProvider(
-                                  userData.chatbackgroundImage!),fit: BoxFit.cover))
-                      : null,
-                  child: GroupsChatPageBodyDetails(
-                    userDataModel: userData,
-                      size: size,
-                      onChanged: onChanged,
-                      groupModel: groupModel,
-                      scrollController: scrollController,
-                      controller: controller,
-                      isShowSendButton: isShowSendButton),
+    return BlocBuilder<GetGroupsMemberCubit, GetGroupsMemberState>(
+      builder: (context, groupState) {
+        if (groupState is GetGroupsMemberSuccess &&
+            groupState.groupsList.isNotEmpty) {
+          final groupData = groupState.groupsList
+              .firstWhere((element) => element.groupID == groupID);
+          return BlocBuilder<GetUserDataCubit, GetUserDataStates>(
+            builder: (context, state) {
+              if (state is GetUserDataSuccess && state.userModel.isNotEmpty) {
+                final userData = state.userModel.firstWhere((element) =>
+                    element.userID == FirebaseAuth.instance.currentUser!.uid);
+                return Scaffold(
+                  backgroundColor: userData.chatbackgroundColor != null
+                      ? Color(userData.chatbackgroundColor!)
+                      : isDark && userData.chatbackgroundColor == null
+                          ? chatDarkModeBackground
+                          : chatLightModeBackground,
+                  appBar: AppBar(
+                    titleSpacing: -8,
+                    backgroundColor: kPrimaryColor,
+                    elevation: 0,
+                    title: GroupsChatPageAppBar(
+                        groupData: groupData, isDark: isDark, size: size),
+                    actions: const [
+                      ChatsIconsAppBarButton(icon: Icons.call),
+                      ChatsIconsAppBarButton(icon: FontAwesomeIcons.video),
+                      ChatsIconsAppBarButton(icon: Icons.error)
+                    ],
+                    leading: GestureDetector(
+                      onTap: () {
+                        InitialState.initPickContactState(context);
+                        Navigator.pop(context);
+                      },
+                      child: const Icon(Icons.arrow_back, color: Colors.white),
+                    ),
+                  ),
+                  body: BlocBuilder<PickContactCubit, PickContactState>(
+                    builder: (context, state) {
+                      if (state is PickContactSuccess) {
+                        WidgetsBinding.instance.addPostFrameCallback((_) {
+                          showModalBottomSheet(
+                              context: context,
+                              builder: (context) =>
+                                  GroupsChatPickContactBottomSheet(
+                                      groupModel: groupData,
+                                      phoneContactName: state
+                                          .phoneContact.fullName!
+                                          .toString(),
+                                      phoneContactNumber: state
+                                          .phoneContact.phoneNumber!.number
+                                          .toString()));
+                        });
+                      }
+                      return Container(
+                        decoration: userData.chatbackgroundImage != null
+                            ? BoxDecoration(
+                                image: DecorationImage(
+                                    image: CachedNetworkImageProvider(
+                                        userData.chatbackgroundImage!),
+                                    fit: BoxFit.cover))
+                            : null,
+                        child: GroupsChatPageBodyDetails(
+                            userDataModel: userData,
+                            size: size,
+                            onChanged: onChanged,
+                            groupModel: groupData,
+                            scrollController: scrollController,
+                            controller: controller,
+                            isShowSendButton: isShowSendButton),
+                      );
+                    },
+                  ),
                 );
-              },
-            ),
+              } else {
+                return Container();
+              }
+            },
           );
         } else {
           return Container();

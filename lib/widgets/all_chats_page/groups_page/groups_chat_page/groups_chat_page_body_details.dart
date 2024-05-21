@@ -49,6 +49,7 @@ class _GroupsChatPageBodyDetailsState extends State<GroupsChatPageBodyDetails> {
   UserModel? userData;
   late FocusNode focusNode;
   List<String> tokens = [];
+  List<bool> isNotify = [];
   String senderName = '';
 
   @override
@@ -209,6 +210,7 @@ class _GroupsChatPageBodyDetailsState extends State<GroupsChatPageBodyDetails> {
                       if (state is GetUserDataSuccess &&
                           state.userModel.isNotEmpty) {
                         tokens = [];
+                        isNotify = [];
                         for (var usersID in widget.groupModel.usersID) {
                           if (usersID !=
                               FirebaseAuth.instance.currentUser!.uid) {
@@ -216,6 +218,7 @@ class _GroupsChatPageBodyDetailsState extends State<GroupsChatPageBodyDetails> {
                                 (element) => element.userID == usersID);
 
                             tokens.add(groupData.token ?? '');
+                            isNotify.add(groupData.isGroupNotify);
                           }
                         }
                         var userName = state.userModel.firstWhere((element) =>
@@ -230,6 +233,7 @@ class _GroupsChatPageBodyDetailsState extends State<GroupsChatPageBodyDetails> {
                         }
                       }
                       return GroupsChatPageCustomSendMedia(
+                        isNotify: isNotify,
                         tokens: tokens,
                         senderName: senderName,
                         userDataModel: widget.userDataModel,
@@ -261,6 +265,7 @@ class _GroupsChatPageBodyDetailsState extends State<GroupsChatPageBodyDetails> {
             widget.groupModel.adminsID
                 .contains(FirebaseAuth.instance.currentUser!.uid))
           CustomGroupSendTextAndRecordItem(
+              isNotify: isNotify,
               tokens: tokens,
               senderName: senderName,
               stopRecording: (value) {

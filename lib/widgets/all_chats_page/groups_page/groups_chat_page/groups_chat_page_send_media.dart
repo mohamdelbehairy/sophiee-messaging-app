@@ -38,7 +38,8 @@ class GroupsChatPageSendMedia extends StatefulWidget {
       required this.replayRecordMessage,
       required this.userDataModel,
       required this.tokens,
-      required this.senderName});
+      required this.senderName,
+      required this.isNotify});
   final Size size;
   final ScrollController scrollController;
   final GroupModel groupModel;
@@ -58,6 +59,7 @@ class GroupsChatPageSendMedia extends StatefulWidget {
   final UserModel userDataModel;
   final List<String> tokens;
   final String senderName;
+  final List<bool> isNotify;
 
   @override
   State<GroupsChatPageSendMedia> createState() =>
@@ -76,6 +78,7 @@ class _GroupsChatPageSendMediaState extends State<GroupsChatPageSendMedia> {
             if (state is PickImageSucccess && isClick) {
               getnav.Get.to(
                   () => GroupsChatPickImagePage(
+                      isNotify: widget.isNotify,
                       tokens: widget.tokens,
                       senderName: widget.senderName,
                       replayTextMessage: widget.replayTextMessage,
@@ -107,6 +110,7 @@ class _GroupsChatPageSendMediaState extends State<GroupsChatPageSendMedia> {
                     file.path.toLowerCase().endsWith('.txt'))) {
                   getnav.Get.to(
                       () => GroupsChatPickFilePage(
+                            isNotify: widget.isNotify,
                             tokens: widget.tokens,
                             senderName: widget.senderName,
                             file: state.file,
@@ -126,8 +130,9 @@ class _GroupsChatPageSendMediaState extends State<GroupsChatPageSendMedia> {
                 }
                 if (file.path.toLowerCase().endsWith('.mp3')) {
                   getnav.Get.to(() => GroupsChatPickSoundPage(
-                    senderName: widget.senderName,
-                    tokens: widget.tokens,
+                        isNotify: widget.isNotify,
+                        senderName: widget.senderName,
+                        tokens: widget.tokens,
                         sound: file,
                         size: widget.size,
                         groupModel: widget.groupModel,
@@ -154,9 +159,11 @@ class _GroupsChatPageSendMediaState extends State<GroupsChatPageSendMedia> {
                 if (state is PickVideoSuccess) {
                   getnav.Get.to(
                       () => GroupsChatPickVideoPage(
-                        senderName: widget.senderName,
-                        tokens:  widget.tokens,
-                          video: state.video, groupModel: widget.groupModel),
+                          isNotify: widget.isNotify,
+                          senderName: widget.senderName,
+                          tokens: widget.tokens,
+                          video: state.video,
+                          groupModel: widget.groupModel),
                       transition: getnav.Transition.rightToLeft);
                   setState(() {
                     isClick = false;

@@ -28,7 +28,8 @@ class GroupsChatPickImagePageBody extends StatefulWidget {
       required this.replaySoundMessage,
       required this.replayRecordMessage,
       required this.tokens,
-      required this.senderName});
+      required this.senderName,
+      required this.isNotify});
   final File image;
   final GroupModel groupModel;
   final String replayTextMessage;
@@ -41,6 +42,7 @@ class GroupsChatPickImagePageBody extends StatefulWidget {
   final String replayRecordMessage;
   final List<String> tokens;
   final String senderName;
+  final List<bool> isNotify;
 
   @override
   State<GroupsChatPickImagePageBody> createState() =>
@@ -112,12 +114,16 @@ class _GroupsChatPickImagePageBodyState
                     replaySoundMessage: widget.replaySoundMessage,
                     replayRecordMessage: widget.replayRecordMessage);
                 for (var element in widget.tokens) {
-                  await sendGroupMessageNotify.sendGroupMessageNotification(
-                      receiverToken: element,
-                      senderName: widget.groupModel.groupName,
-                      message:
-                          '${widget.senderName.split(' ')[0]} sent an image',
-                      senderId: widget.groupModel.groupID);
+                  for (var notify in widget.isNotify) {
+                    if (notify) {
+                      await sendGroupMessageNotify.sendGroupMessageNotification(
+                          receiverToken: element,
+                          senderName: widget.groupModel.groupName,
+                          message:
+                              '${widget.senderName.split(' ')[0]} sent an image',
+                          senderId: widget.groupModel.groupID);
+                    }
+                  }
                 }
 
                 await storeMedia.storeMedia(

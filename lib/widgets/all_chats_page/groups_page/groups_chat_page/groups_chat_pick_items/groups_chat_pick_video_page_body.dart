@@ -21,11 +21,13 @@ class GroupsChatPickVideoPageBody extends StatefulWidget {
       required this.video,
       required this.groupModel,
       required this.tokens,
-      required this.senderName});
+      required this.senderName,
+      required this.isNotify});
   final File video;
   final GroupModel groupModel;
   final List<String> tokens;
   final String senderName;
+  final List<bool> isNotify;
 
   @override
   State<GroupsChatPickVideoPageBody> createState() =>
@@ -142,12 +144,16 @@ class _GroupsChatPickVideoPageBodyState
                       friendNameReplay: '',
                       replayMessageID: '');
                   for (var element in widget.tokens) {
-                    await sendGroupMessageNotify.sendGroupMessageNotification(
-                        receiverToken: element,
-                        senderName: widget.groupModel.groupName,
-                        message:
-                            '${widget.senderName.split(' ')[0]} sent a video',
-                        senderId: widget.groupModel.groupID);
+                    for (var notify in widget.isNotify) {
+                      if (notify) {
+                        await sendGroupMessageNotify.sendGroupMessageNotification(
+                            receiverToken: element,
+                            senderName: widget.groupModel.groupName,
+                            message:
+                                '${widget.senderName.split(' ')[0]} sent a video',
+                            senderId: widget.groupModel.groupID);
+                      }
+                    }
                   }
                   await storeMedia.storeMedia(
                       groupID: widget.groupModel.groupID,

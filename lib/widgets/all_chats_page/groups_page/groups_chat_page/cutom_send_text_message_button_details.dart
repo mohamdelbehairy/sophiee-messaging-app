@@ -14,7 +14,10 @@ class CustomSendTextMessageButtonDetails extends StatelessWidget {
       required this.scrollController,
       required this.isSwip,
       required this.messageModel,
-      required this.userData, required this.tokens, required this.senderName});
+      required this.userData,
+      required this.tokens,
+      required this.senderName,
+      required this.isNotify});
 
   final GroupMessageCubit groupChat;
   final TextEditingController controller;
@@ -25,11 +28,12 @@ class CustomSendTextMessageButtonDetails extends StatelessWidget {
   final UserModel? userData;
   final List<String> tokens;
   final String senderName;
+  final List<bool> isNotify;
 
   @override
   Widget build(BuildContext context) {
-    
     return CustomSendTextMessageButton(
+      isNotify: isNotify,
       senderName: senderName,
       tokens: tokens,
       groupChat: groupChat,
