@@ -16,7 +16,7 @@ class GroupsChatPickImagePage extends StatelessWidget {
       required this.friendNameReplay,
       required this.replayMessageID,
       required this.replaySoundMessage,
-      required this.replayRecordMessage});
+      required this.replayRecordMessage, required this.tokens, required this.senderName});
   final File image;
   final GroupModel groupModel;
   final String replayTextMessage;
@@ -27,12 +27,16 @@ class GroupsChatPickImagePage extends StatelessWidget {
   final String replayMessageID;
   final String replaySoundMessage;
   final String replayRecordMessage;
+  final List<String> tokens;
+  final String senderName;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
       body: GroupsChatPickImagePageBody(
+        tokens: tokens,
+        senderName: senderName,
         image: image,
         groupModel: groupModel,
         replayTextMessage: replayTextMessage,

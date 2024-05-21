@@ -6,14 +6,24 @@ import 'package:flutter/material.dart';
 
 class GroupsChatPickVideoPage extends StatelessWidget {
   const GroupsChatPickVideoPage(
-      {super.key, required this.video, required this.groupModel});
+      {super.key,
+      required this.video,
+      required this.groupModel,
+      required this.tokens,
+      required this.senderName});
   final File video;
   final GroupModel groupModel;
+  final List<String> tokens;
+  final String senderName;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: GroupsChatPickVideoPageBody(video: video, groupModel: groupModel),
+      body: GroupsChatPickVideoPageBody(
+          video: video,
+          groupModel: groupModel,
+          tokens: tokens,
+          senderName: senderName),
     );
   }
 }

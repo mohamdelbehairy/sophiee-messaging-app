@@ -17,7 +17,10 @@ class CustomGroupSendTextAndRecordItem extends StatelessWidget {
       required this.size,
       required this.isSwip,
       this.messageModel,
-      this.userData, this.stopRecording});
+      this.userData,
+      this.stopRecording,
+      required this.tokens,
+      required this.senderName});
 
   final bool isShowSendButton;
   final TextEditingController controller;
@@ -27,7 +30,9 @@ class CustomGroupSendTextAndRecordItem extends StatelessWidget {
   final bool isSwip;
   final MessageModel? messageModel;
   final UserModel? userData;
-   final Function(String)? stopRecording;
+  final Function(String)? stopRecording;
+  final List<String> tokens;
+  final String senderName;
 
   @override
   Widget build(BuildContext context) {
@@ -37,6 +42,8 @@ class CustomGroupSendTextAndRecordItem extends StatelessWidget {
         right: 5,
         child: isShowSendButton
             ? CustomSendTextMessageButtonDetails(
+                senderName: senderName,
+                tokens: tokens,
                 groupChat: groupChat,
                 controller: controller,
                 groupModel: groupModel,
@@ -45,7 +52,9 @@ class CustomGroupSendTextAndRecordItem extends StatelessWidget {
                 messageModel: messageModel,
                 userData: userData)
             : CustomGroupsSendRecord(
-              stopRecording: stopRecording,
+                senderName: senderName,
+                tokens: tokens,
+                stopRecording: stopRecording,
                 isSwip: isSwip,
                 userData: userData,
                 messageModel: messageModel,

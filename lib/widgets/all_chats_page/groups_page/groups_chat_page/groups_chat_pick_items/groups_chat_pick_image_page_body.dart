@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:sophiee/cubit/groups/groups_mdeia_files/group_store_media_files/group_store_media_files_cubit.dart';
+import 'package:sophiee/cubit/notification/group_notification/group_notification_cubit.dart';
 import 'package:sophiee/cubit/upload/upload_image/upload_image_cubit.dart';
 import 'package:sophiee/utils/navigation.dart';
 import 'package:sophiee/cubit/groups/message_group/group_message_cubit.dart';
@@ -25,7 +26,9 @@ class GroupsChatPickImagePageBody extends StatefulWidget {
       required this.replayContactMessage,
       required this.replayMessageID,
       required this.replaySoundMessage,
-      required this.replayRecordMessage});
+      required this.replayRecordMessage,
+      required this.tokens,
+      required this.senderName});
   final File image;
   final GroupModel groupModel;
   final String replayTextMessage;
@@ -36,6 +39,8 @@ class GroupsChatPickImagePageBody extends StatefulWidget {
   final String replayMessageID;
   final String replaySoundMessage;
   final String replayRecordMessage;
+  final List<String> tokens;
+  final String senderName;
 
   @override
   State<GroupsChatPickImagePageBody> createState() =>
@@ -62,6 +67,7 @@ class _GroupsChatPickImagePageBodyState
     var sendMessage = context.read<GroupMessageCubit>();
     var uploadImage = context.read<UploadImageCubit>();
     var storeMedia = context.read<GroupStoreMediaFilesCubit>();
+    var sendGroupMessageNotify = context.read<GroupNotificationCubit>();
 
     return Stack(
       children: [
@@ -105,6 +111,14 @@ class _GroupsChatPickImagePageBodyState
                     replayTextMessage: widget.replayTextMessage,
                     replaySoundMessage: widget.replaySoundMessage,
                     replayRecordMessage: widget.replayRecordMessage);
+                for (var element in widget.tokens) {
+                  await sendGroupMessageNotify.sendGroupMessageNotification(
+                      receiverToken: element,
+                      senderName: widget.groupModel.groupName,
+                      message:
+                          '${widget.senderName.split(' ')[0]} sent an image',
+                      senderId: widget.groupModel.groupID);
+                }
 
                 await storeMedia.storeMedia(
                     groupID: widget.groupModel.groupID,

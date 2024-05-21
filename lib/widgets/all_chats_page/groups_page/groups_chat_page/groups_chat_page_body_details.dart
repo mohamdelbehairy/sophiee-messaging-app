@@ -27,7 +27,8 @@ class GroupsChatPageBodyDetails extends StatefulWidget {
       required this.controller,
       required this.isShowSendButton,
       required this.onChanged,
-      required this.size, required this.userDataModel});
+      required this.size,
+      required this.userDataModel});
   final GroupModel groupModel;
   final ScrollController scrollController;
   final TextEditingController controller;
@@ -47,11 +48,11 @@ class _GroupsChatPageBodyDetailsState extends State<GroupsChatPageBodyDetails> {
   MessageModel? messageModel;
   UserModel? userData;
   late FocusNode focusNode;
+  List<String> tokens = [];
+  String senderName = '';
 
   @override
   void initState() {
-    
-
     super.initState();
     focusNode = FocusNode();
   }
@@ -207,6 +208,21 @@ class _GroupsChatPageBodyDetailsState extends State<GroupsChatPageBodyDetails> {
                     builder: (context, state) {
                       if (state is GetUserDataSuccess &&
                           state.userModel.isNotEmpty) {
+                        tokens = [];
+                        for (var usersID in widget.groupModel.usersID) {
+                          if (usersID !=
+                              FirebaseAuth.instance.currentUser!.uid) {
+                            var groupData = state.userModel.firstWhere(
+                                (element) => element.userID == usersID);
+
+                            tokens.add(groupData.token ?? '');
+                          }
+                        }
+                        var userName = state.userModel.firstWhere((element) =>
+                            element.userID ==
+                            FirebaseAuth.instance.currentUser!.uid);
+                        senderName = userName.userName;
+
                         if (isSwip) {
                           final currentUser = messageModel!.senderID;
                           userData = state.userModel.firstWhere(
@@ -214,6 +230,8 @@ class _GroupsChatPageBodyDetailsState extends State<GroupsChatPageBodyDetails> {
                         }
                       }
                       return GroupsChatPageCustomSendMedia(
+                        tokens: tokens,
+                        senderName: senderName,
                         userDataModel: widget.userDataModel,
                         userData: userData,
                         messageModel: messageModel,
@@ -243,6 +261,8 @@ class _GroupsChatPageBodyDetailsState extends State<GroupsChatPageBodyDetails> {
             widget.groupModel.adminsID
                 .contains(FirebaseAuth.instance.currentUser!.uid))
           CustomGroupSendTextAndRecordItem(
+              tokens: tokens,
+              senderName: senderName,
               stopRecording: (value) {
                 setState(() {
                   isSwip = false;

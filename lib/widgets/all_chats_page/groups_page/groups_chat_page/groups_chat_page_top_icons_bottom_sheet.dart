@@ -36,6 +36,8 @@ class GroupsChatPageTopIconsBottomSheet extends StatelessWidget {
               context,
               MaterialPageRoute(
                   builder: (context) => GroupsChatPickImagePage(
+                    tokens: [],
+                    senderName: '',
                         image: state.image,
                         groupModel: groupModel,
                         replayTextMessage: '',
@@ -56,6 +58,8 @@ class GroupsChatPageTopIconsBottomSheet extends StatelessWidget {
                 context,
                 MaterialPageRoute(
                     builder: (context) => GroupsChatPickVideoPage(
+                       tokens: [],
+                    senderName: '',
                         video: state.video, groupModel: groupModel)));
           }
         },
@@ -66,6 +70,8 @@ class GroupsChatPageTopIconsBottomSheet extends StatelessWidget {
                   context,
                   MaterialPageRoute(
                       builder: (context) => GroupsChatPickFilePage(
+                         tokens: [],
+                    senderName: '',
                             groupModel: groupModel,
                             file: state.file,
                             replayTextMessage: '',

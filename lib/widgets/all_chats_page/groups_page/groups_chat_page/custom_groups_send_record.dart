@@ -11,6 +11,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:uuid/uuid.dart';
 
+import '../../../../cubit/notification/group_notification/group_notification_cubit.dart';
+
 class CustomGroupsSendRecord extends StatelessWidget {
   const CustomGroupsSendRecord(
       {super.key,
@@ -20,7 +22,9 @@ class CustomGroupsSendRecord extends StatelessWidget {
       required this.isSwip,
       this.messageModel,
       this.userData,
-      this.stopRecording});
+      this.stopRecording,
+      required this.tokens,
+      required this.senderName});
 
   final Size size;
   final GroupMessageCubit groupChat;
@@ -29,10 +33,15 @@ class CustomGroupsSendRecord extends StatelessWidget {
   final MessageModel? messageModel;
   final UserModel? userData;
   final Function(String)? stopRecording;
+  final List<String> tokens;
+  final String senderName;
+
   @override
   Widget build(BuildContext context) {
     var uploadAudio = context.read<UploadAudioCubit>();
     var storeVoice = context.read<GroupStoreMediaFilesCubit>();
+    var sendGroupChatNotify = context.read<GroupNotificationCubit>();
+
     return RecorderItem(
       size: size,
       stopRecording: stopRecording,
@@ -41,7 +50,6 @@ class CustomGroupsSendRecord extends StatelessWidget {
             audioFile: soundFile, audioField: 'groups_messages_audio');
         String messageID = const Uuid().v4();
         await groupChat.sendGroupMessage(
-          
           messageID: messageID,
           recordTime: time,
           recordUrl: audioUrl,
@@ -76,6 +84,16 @@ class CustomGroupsSendRecord extends StatelessWidget {
               ? messageModel!.messageRecord!
               : '',
         );
+
+        for (var element in tokens) {
+          debugPrint('token: $element');
+
+          await sendGroupChatNotify.sendGroupMessageNotification(
+              receiverToken: element,
+              senderName: groupModel.groupName,
+              message: '${senderName.split(' ')[0]} sent a voice message',
+              senderId: groupModel.groupID);
+        }
         await storeVoice.storeVoice(
             messageID: messageID,
             groupID: groupModel.groupID,

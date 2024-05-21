@@ -14,7 +14,7 @@ class CustomSendTextMessageButtonDetails extends StatelessWidget {
       required this.scrollController,
       required this.isSwip,
       required this.messageModel,
-      required this.userData});
+      required this.userData, required this.tokens, required this.senderName});
 
   final GroupMessageCubit groupChat;
   final TextEditingController controller;
@@ -23,10 +23,15 @@ class CustomSendTextMessageButtonDetails extends StatelessWidget {
   final bool isSwip;
   final MessageModel? messageModel;
   final UserModel? userData;
+  final List<String> tokens;
+  final String senderName;
 
   @override
   Widget build(BuildContext context) {
+    
     return CustomSendTextMessageButton(
+      senderName: senderName,
+      tokens: tokens,
       groupChat: groupChat,
       controller: controller,
       groupModel: groupModel,

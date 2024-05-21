@@ -35,7 +35,10 @@ class GroupsChatPageSendMedia extends StatefulWidget {
       required this.replayContactMessage,
       required this.replayMessageID,
       required this.replaySoundMessage,
-      required this.replayRecordMessage, required this.userDataModel});
+      required this.replayRecordMessage,
+      required this.userDataModel,
+      required this.tokens,
+      required this.senderName});
   final Size size;
   final ScrollController scrollController;
   final GroupModel groupModel;
@@ -53,6 +56,8 @@ class GroupsChatPageSendMedia extends StatefulWidget {
   final String replaySoundMessage;
   final String replayRecordMessage;
   final UserModel userDataModel;
+  final List<String> tokens;
+  final String senderName;
 
   @override
   State<GroupsChatPageSendMedia> createState() =>
@@ -71,6 +76,8 @@ class _GroupsChatPageSendMediaState extends State<GroupsChatPageSendMedia> {
             if (state is PickImageSucccess && isClick) {
               getnav.Get.to(
                   () => GroupsChatPickImagePage(
+                      tokens: widget.tokens,
+                      senderName: widget.senderName,
                       replayTextMessage: widget.replayTextMessage,
                       friendNameReplay: widget.userData != null
                           ? widget.userData!.userName
@@ -83,7 +90,7 @@ class _GroupsChatPageSendMediaState extends State<GroupsChatPageSendMedia> {
                       replayRecordMessage: widget.replayRecordMessage,
                       image: state.image,
                       groupModel: widget.groupModel),
-                  transition: getnav.Transition.leftToRight);
+                  transition: getnav.Transition.rightToLeft);
 
               setState(() {
                 isClick = false;
@@ -100,6 +107,8 @@ class _GroupsChatPageSendMediaState extends State<GroupsChatPageSendMedia> {
                     file.path.toLowerCase().endsWith('.txt'))) {
                   getnav.Get.to(
                       () => GroupsChatPickFilePage(
+                            tokens: widget.tokens,
+                            senderName: widget.senderName,
                             file: state.file,
                             groupModel: widget.groupModel,
                             replayTextMessage: widget.replayTextMessage,
@@ -113,10 +122,12 @@ class _GroupsChatPageSendMediaState extends State<GroupsChatPageSendMedia> {
                             replaySoundMessage: widget.replaySoundMessage,
                             replayRecordMessage: widget.replayRecordMessage,
                           ),
-                      transition: getnav.Transition.leftToRight);
+                      transition: getnav.Transition.rightToLeft);
                 }
                 if (file.path.toLowerCase().endsWith('.mp3')) {
                   getnav.Get.to(() => GroupsChatPickSoundPage(
+                    senderName: widget.senderName,
+                    tokens: widget.tokens,
                         sound: file,
                         size: widget.size,
                         groupModel: widget.groupModel,
@@ -143,8 +154,10 @@ class _GroupsChatPageSendMediaState extends State<GroupsChatPageSendMedia> {
                 if (state is PickVideoSuccess) {
                   getnav.Get.to(
                       () => GroupsChatPickVideoPage(
+                        senderName: widget.senderName,
+                        tokens:  widget.tokens,
                           video: state.video, groupModel: widget.groupModel),
-                      transition: getnav.Transition.leftToRight);
+                      transition: getnav.Transition.rightToLeft);
                   setState(() {
                     isClick = false;
                   });
@@ -163,7 +176,7 @@ class _GroupsChatPageSendMediaState extends State<GroupsChatPageSendMedia> {
                       right: widget.size.width * .12,
                       bottom: widget.size.width * .01),
                   child: GroupChatMessageTextField(
-                    userDataModel: widget.userDataModel,
+                      userDataModel: widget.userDataModel,
                       focusNode: widget.focusNode,
                       controller: widget.controller,
                       onChanged: widget.onChanged,

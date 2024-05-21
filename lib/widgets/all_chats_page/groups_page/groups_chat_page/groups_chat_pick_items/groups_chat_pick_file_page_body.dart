@@ -12,6 +12,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_pdfview/flutter_pdfview.dart';
 import 'package:uuid/uuid.dart';
 
+import '../../../../../cubit/notification/group_notification/group_notification_cubit.dart';
+
 class GroupsChatPickFilePageBody extends StatefulWidget {
   const GroupsChatPickFilePageBody(
       {super.key,
@@ -26,7 +28,9 @@ class GroupsChatPickFilePageBody extends StatefulWidget {
       required this.replayMessageID,
       required this.replayContactMessage,
       required this.replaySoundMessage,
-      required this.replayRecordMessage});
+      required this.replayRecordMessage,
+      required this.tokens,
+      required this.senderName});
   final File file;
   final String messageFileName;
   final bool isClick;
@@ -39,6 +43,8 @@ class GroupsChatPickFilePageBody extends StatefulWidget {
   final String replayContactMessage;
   final String replaySoundMessage;
   final String replayRecordMessage;
+  final List<String> tokens;
+  final String senderName;
 
   @override
   State<GroupsChatPickFilePageBody> createState() =>
@@ -59,6 +65,7 @@ class _GroupsPagePickFilePageBodyState
     var sendMessage = context.read<GroupMessageCubit>();
     var uploadFile = context.read<UploadFileCubit>();
     var storeMedia = context.read<GroupStoreMediaFilesCubit>();
+    var sendGroupMessageNotify = context.read<GroupNotificationCubit>();
 
     return Stack(
       children: [
@@ -108,6 +115,14 @@ class _GroupsPagePickFilePageBodyState
                     replayTextMessage: widget.replayTextMessage,
                     replaySoundMessage: widget.replaySoundMessage,
                     replayRecordMessage: widget.replayRecordMessage);
+                for (var element in widget.tokens) {
+                  await sendGroupMessageNotify.sendGroupMessageNotification(
+                      receiverToken: element,
+                      senderName: widget.groupModel.groupName,
+                      message:
+                          '${widget.senderName.split(' ')[0]} sent a file',
+                      senderId: widget.groupModel.groupID);
+                }
 
                 await storeMedia.storeFile(
                     groupID: widget.groupModel.groupID,

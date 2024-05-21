@@ -13,11 +13,19 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:uuid/uuid.dart';
 import 'package:video_player/video_player.dart';
 
+import '../../../../../cubit/notification/group_notification/group_notification_cubit.dart';
+
 class GroupsChatPickVideoPageBody extends StatefulWidget {
   const GroupsChatPickVideoPageBody(
-      {super.key, required this.video, required this.groupModel});
+      {super.key,
+      required this.video,
+      required this.groupModel,
+      required this.tokens,
+      required this.senderName});
   final File video;
   final GroupModel groupModel;
+  final List<String> tokens;
+  final String senderName;
 
   @override
   State<GroupsChatPickVideoPageBody> createState() =>
@@ -72,6 +80,7 @@ class _GroupsChatPickVideoPageBodyState
     var sendMessage = context.read<GroupMessageCubit>();
     var uploadVideo = context.read<UploadVideoCubit>();
     var storeMedia = context.read<GroupStoreMediaFilesCubit>();
+    var sendGroupMessageNotify = context.read<GroupNotificationCubit>();
 
     return GestureDetector(
       onTap: () {
@@ -97,7 +106,8 @@ class _GroupsChatPickVideoPageBodyState
               left: size.width * .05,
               child: GestureDetector(
                   onTap: () => Navigator.pop(context),
-                  child: const Icon(FontAwesomeIcons.xmark, color: Colors.white))),
+                  child:
+                      const Icon(FontAwesomeIcons.xmark, color: Colors.white))),
           Positioned(
             height: size.height * .18,
             width: size.width,
@@ -131,6 +141,14 @@ class _GroupsChatPickVideoPageBodyState
                       replayImageMessage: '',
                       friendNameReplay: '',
                       replayMessageID: '');
+                  for (var element in widget.tokens) {
+                    await sendGroupMessageNotify.sendGroupMessageNotification(
+                        receiverToken: element,
+                        senderName: widget.groupModel.groupName,
+                        message:
+                            '${widget.senderName.split(' ')[0]} sent a video',
+                        senderId: widget.groupModel.groupID);
+                  }
                   await storeMedia.storeMedia(
                       groupID: widget.groupModel.groupID,
                       messageID: messageID,

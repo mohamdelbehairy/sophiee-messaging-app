@@ -11,6 +11,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:uuid/uuid.dart';
 
+import '../../../cubit/notification/group_notification/group_notification_cubit.dart';
+
 class GroupsChatPickSoundButton extends StatefulWidget {
   const GroupsChatPickSoundButton(
       {super.key,
@@ -25,7 +27,9 @@ class GroupsChatPickSoundButton extends StatefulWidget {
       required this.replayMessageID,
       required this.replayContactMessage,
       required this.replaySoundMessage,
-      required this.replayRecordMessage});
+      required this.replayRecordMessage,
+      required this.tokens,
+      required this.senderName});
   final Size size;
   final File sound;
   final GroupModel groupModel;
@@ -38,6 +42,8 @@ class GroupsChatPickSoundButton extends StatefulWidget {
   final String replayContactMessage;
   final String replaySoundMessage;
   final String replayRecordMessage;
+  final List<String> tokens;
+  final String senderName;
 
   @override
   State<GroupsChatPickSoundButton> createState() =>
@@ -66,6 +72,7 @@ class _GroupsChatPickSoundButtonState extends State<GroupsChatPickSoundButton> {
     var uploadAudio = context.read<UploadAudioCubit>();
     var sendMessage = context.read<GroupMessageCubit>();
     var storeMedia = context.read<GroupStoreMediaFilesCubit>();
+    var sendGroupMessageNotify = context.read<GroupNotificationCubit>();
 
     return Positioned(
       bottom: widget.size.height * .1,
@@ -80,25 +87,29 @@ class _GroupsChatPickSoundButtonState extends State<GroupsChatPickSoundButton> {
                 audioField: 'groups_messages_sound', audioFile: widget.sound);
             String? audioTime = await computeAndPrintDuration();
             String messageID = const Uuid().v4();
-           
-              await sendMessage.sendGroupMessage(
-                 
-                  messageID: messageID,
-                  audioUrl: audioUrl,
-                  audioName: widget.audioName,
-                  audioTime: audioTime,
-                  messageText: '',
-                  groupID: widget.groupModel.groupID,
-                  replayImageMessage: widget.replayImageMessage,
-                  friendNameReplay: widget.friendNameReplay,
-                  replayMessageID: widget.replayMessageID,
-                  replayContactMessage: widget.replayContactMessage,
-                  replayFileMessage: widget.replayFileMessage,
-                  replayTextMessage: widget.replayTextMessage,
-                  replaySoundMessage: widget.replaySoundMessage,
-                  replayRecordMessage: widget.replayRecordMessage);
-            
 
+            await sendMessage.sendGroupMessage(
+                messageID: messageID,
+                audioUrl: audioUrl,
+                audioName: widget.audioName,
+                audioTime: audioTime,
+                messageText: '',
+                groupID: widget.groupModel.groupID,
+                replayImageMessage: widget.replayImageMessage,
+                friendNameReplay: widget.friendNameReplay,
+                replayMessageID: widget.replayMessageID,
+                replayContactMessage: widget.replayContactMessage,
+                replayFileMessage: widget.replayFileMessage,
+                replayTextMessage: widget.replayTextMessage,
+                replaySoundMessage: widget.replaySoundMessage,
+                replayRecordMessage: widget.replayRecordMessage);
+            for (var element in widget.tokens) {
+              await sendGroupMessageNotify.sendGroupMessageNotification(
+                  receiverToken: element,
+                  senderName: widget.groupModel.groupName,
+                  message: '${widget.senderName.split(' ')[0]} sent a sound',
+                  senderId: widget.groupModel.groupID);
+            }
             await storeMedia.storeVoice(
                 groupID: widget.groupModel.groupID,
                 messageID: messageID,

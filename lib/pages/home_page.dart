@@ -6,6 +6,7 @@ import 'package:sophiee/cubit/get_followers/get_followers_cubit.dart';
 import 'package:sophiee/cubit/get_following/get_following_cubit.dart';
 import 'package:sophiee/cubit/get_friends/get_friends_cubit.dart';
 import 'package:sophiee/cubit/notification/follower_notification/follower_notification_cubit.dart';
+import 'package:sophiee/cubit/notification/group_notification/group_notification_cubit.dart';
 import 'package:sophiee/cubit/notification/message_notification/message_notification_cubit.dart';
 import 'package:sophiee/cubit/notification/notification_setting/notification_setting_cubit.dart';
 import 'package:sophiee/cubit/notification/story_notification/story_notification_cubit.dart';
@@ -44,7 +45,8 @@ class _HomePageState extends State<HomePage> {
     context.read<FollowerNotificationCubit>().initFollowerNotification();
     context.read<MessageNotificationCubit>().initMessageNotification();
     context.read<StoryNotificationCubit>().initStoryNotification();
-    
+    context.read<GroupNotificationCubit>().initGroupMessageNotification();
+
     initLocalNotification.appState(context);
 
     context.read<ChatsCubit>().chats();

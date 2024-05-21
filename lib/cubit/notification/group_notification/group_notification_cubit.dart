@@ -7,31 +7,30 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:http/http.dart' as http;
 import 'package:sophiee/constants.dart';
 
-part 'message_notification_state.dart';
+part 'group_notification_state.dart';
 
-class MessageNotificationCubit extends Cubit<MessageNotificationState> {
-  MessageNotificationCubit() : super(MessageNotificationInitial());
+class GroupNotificationCubit extends Cubit<GroupNotificationState> {
+  GroupNotificationCubit() : super(GroupNotificationInitial());
 
   final FlutterLocalNotificationsPlugin _flutterLocalNotificationsPlugin =
       FlutterLocalNotificationsPlugin();
 
-  // init follower notification
-  void initMessageNotification() {
-    debugPrint('init message notification');
+  // init group message notification
+  void initGroupMessageNotification() {
     FirebaseMessaging.onMessage.listen((message) async {
       debugPrint('title: ${message.notification!.title}');
       debugPrint('body: ${message.notification!.body}');
       
-      if (message.data['page'] == 'chat') {
-        await showMessageNotification(
+      if (message.data['page'] == 'groupChat ') {
+        await showGroupMessageNotification(
             title: message.notification!.title.toString(),
             body: message.notification!.body.toString());
       }
     });
   }
 
-  // send message notification
-  Future<void> sendMessageNotification(
+  // send group message notification
+  Future<void> sendGroupMessageNotification(
       {required String? receiverToken,
       required String senderName,
       required String message,
@@ -47,40 +46,47 @@ class MessageNotificationCubit extends Cubit<MessageNotificationState> {
           'click_action': 'FLUTTER_NOTIFICATION_CLICK',
           'status': 'done',
           'senderId': senderId,
-          'page': 'chat',
+          'page': 'groupChat',
         }
       };
 
-      await http.post(Uri.parse(serverUrl), body: jsonEncode(data), headers: {
-        'Content-Type': contentType,
-        'Authorization': 'key=$serverKey',
-      });
-      emit(SendMessageNotificationSuccess());
+      await http.post(
+        Uri.parse(serverUrl),
+        body: jsonEncode(data),
+        headers: {
+          'Content-Type': contentType,
+          'Authorization': 'key=$serverKey',
+        },
+      );
+      emit(SendGroupNotificationSuccess());
     } catch (e) {
-      emit(MessageNotificationFailure(errorMessage: e.toString()));
+      emit(GroupNotificationFailure(errorMessage: e.toString()));
       debugPrint(
-          'error from send message notification method: ${e.toString()}');
+          'error from send group message notification method: ${e.toString()}');
     }
   }
 
-  // show message notification
-  Future<void> showMessageNotification(
+  // show group message notification
+  Future<void> showGroupMessageNotification(
       {required String title, required String body}) async {
     try {
       AndroidNotificationDetails android = const AndroidNotificationDetails(
           "com.example.sophiee", "myChannel",
           importance: Importance.max, priority: Priority.high);
 
-      NotificationDetails details = NotificationDetails(android: android);
+      NotificationDetails notificationDetails =
+          NotificationDetails(android: android);
 
       await _flutterLocalNotificationsPlugin.show(
-          DateTime.now().microsecondsSinceEpoch, title, body, details);
-
-      emit(ShowMessageNotificationSuccess());
+          DateTime.now().microsecondsSinceEpoch,
+          title,
+          body,
+          notificationDetails);
+      emit(ShowGroupNotificationSuccess());
     } catch (e) {
-      emit(MessageNotificationFailure(errorMessage: e.toString()));
+      emit(GroupNotificationFailure(errorMessage: e.toString()));
       debugPrint(
-          'error from show message notification method: ${e.toString()}');
+          'error from show group message notification method: ${e.toString()}');
     }
   }
 }

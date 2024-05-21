@@ -18,7 +18,7 @@ class GroupsChatPickSoundPage extends StatelessWidget {
       required this.replayMessageID,
       required this.replayContactMessage,
       required this.replaySoundMessage,
-      required this.replayRecordMessage});
+      required this.replayRecordMessage, required this.tokens, required this.senderName});
   final File sound;
   final Size size;
   final GroupModel groupModel;
@@ -30,6 +30,8 @@ class GroupsChatPickSoundPage extends StatelessWidget {
   final String replayContactMessage;
   final String replaySoundMessage;
   final String replayRecordMessage;
+   final List<String> tokens;
+  final String senderName;
 
   @override
   Widget build(BuildContext context) {
@@ -51,6 +53,8 @@ class GroupsChatPickSoundPage extends StatelessWidget {
         children: [
           PickSoundPageBody(size: size, file: sound),
           GroupsChatPickSoundButton(
+            tokens: tokens,
+            senderName: senderName,
               replayContactMessage: replayContactMessage,
               replayFileMessage: replayFileMessage,
               replayImageMessage: replayImageMessage,
