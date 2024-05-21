@@ -96,11 +96,15 @@ class _PickVideoSendVideoMessageButtonState
                         messageText: widget.controller.text.isEmpty
                             ? widget.controller.text
                             : null);
-                    await sendMessageNotification.sendMessageNotification(
-                        receiverToken: friendData.token,
-                        senderName: userData.userName,
-                        message: '${userData.userName.split(' ')[0]} sent a video',
-                        senderId: userData.userID);
+                    if (widget.user.isChatNotify) {
+                      await sendMessageNotification.sendMessageNotification(
+                          receiverToken: friendData.token,
+                          senderName: userData.userName,
+                          message:
+                              '${userData.userName.split(' ')[0]} sent a video',
+                          senderId: userData.userID);
+                    }
+
                     if (widget.controller.text.startsWith('http') ||
                         widget.controller.text.startsWith('https')) {
                       storeMedia.storeLink(

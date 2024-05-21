@@ -123,12 +123,15 @@ class _PickSoundPageButtonState extends State<PickSoundPageButton> {
                         messageSound: audioUrl,
                         messageSoundName: widget.audioName);
 
-                    await sendMessageNotification.sendMessageNotification(
-                        receiverToken: friendData.token,
-                        senderName: userData.userName,
-                        message:
-                            '${userData.userName.split(' ')[0]} sent sound',
-                        senderId: userData.userID);
+                    if (widget.user.isChatNotify) {
+                      await sendMessageNotification.sendMessageNotification(
+                          receiverToken: friendData.token,
+                          senderName: userData.userName,
+                          message:
+                              '${userData.userName.split(' ')[0]} sent sound',
+                          senderId: userData.userID);
+                    }
+
                     navigation();
                   } finally {
                     setState(() {

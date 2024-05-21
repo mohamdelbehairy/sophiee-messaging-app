@@ -148,12 +148,16 @@ class _GroupsPagePickFilePageBodyState extends State<PickFilePageBody> {
                                   await widget.file.length() / 1024 < 1024
                                       ? 'KB'
                                       : 'MB');
-                          await sendMessageNotification.sendMessageNotification(
-                              receiverToken: friendData.token,
-                              senderName: userData.userName,
-                              message:
-                                  '${userData.userName.split(' ')[0]} sent file',
-                              senderId: userData.userID);
+
+                          if (widget.user.isChatNotify) {
+                            await sendMessageNotification.sendMessageNotification(
+                                receiverToken: friendData.token,
+                                senderName: userData.userName,
+                                message:
+                                    '${userData.userName.split(' ')[0]} sent file',
+                                senderId: userData.userID);
+                          }
+
                           if (controller.text.startsWith('http') ||
                               controller.text.startsWith('https')) {
                             storeMedia.storeLink(

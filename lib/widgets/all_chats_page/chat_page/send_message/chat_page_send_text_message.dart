@@ -49,7 +49,8 @@ class ChatPageSendTextMessageButton extends StatelessWidget {
         if (state is GetUserDataSuccess && state.userModel.isNotEmpty) {
           final currentUser = FirebaseAuth.instance.currentUser;
           final friendUser = user.userID;
-          final friendData = state.userModel.firstWhere((element) => element.userID == friendUser);
+          final friendData = state.userModel
+              .firstWhere((element) => element.userID == friendUser);
           if (currentUser != null) {
             final userData = state.userModel
                 .firstWhere((element) => element.userID == currentUser.uid);
@@ -76,11 +77,13 @@ class ChatPageSendTextMessageButton extends StatelessWidget {
                   debugPrint('userToken: ${friendData.token}');
                   debugPrint('userID: ${user.userID}');
                   debugPrint('userName: ${user.userName}');
-                   sendMessageNotification.sendMessageNotification(
-                      receiverToken: friendData.token,
-                      senderName: userData.userName,
-                      message: textEditingController.text,
-                      senderId: userData.userID);
+                  if (user.isChatNotify) {
+                    sendMessageNotification.sendMessageNotification(
+                        receiverToken: friendData.token,
+                        senderName: userData.userName,
+                        message: textEditingController.text,
+                        senderId: userData.userID);
+                  }
 
                   if (textEditingController.text.startsWith('http') ||
                       textEditingController.text.startsWith('https')) {

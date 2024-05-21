@@ -96,12 +96,15 @@ class CustomChatSendRecord extends StatelessWidget {
                         isSwip && messageModel!.messageRecord != null
                             ? messageModel!.messageRecord
                             : '');
-                sendMessageNotification.sendMessageNotification(
-                    receiverToken: friendData.token,
-                    senderName: data.userName,
-                    message:
-                        "${data.userName.split(' ')[0]} sent a voice message",
-                    senderId: data.userID);
+                if (widget.user.isChatNotify) {
+                  sendMessageNotification.sendMessageNotification(
+                      receiverToken: friendData.token,
+                      senderName: data.userName,
+                      message:
+                          "${data.userName.split(' ')[0]} sent a voice message",
+                      senderId: data.userID);
+                }
+
                 await storeMedia.storeVoice(
                     friendID: widget.user.userID,
                     messageID: messageID,

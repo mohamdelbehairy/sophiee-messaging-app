@@ -79,7 +79,7 @@ class _ChatPageTextFieldItemState extends State<ChatPageTextFieldItem> {
                         replaySoundMessage: widget.replaySoundMessage,
                         replayRecordMessage: widget.replayRecordMessage,
                       ),
-                  transition: getnav.Transition.leftToRight);
+                  transition: getnav.Transition.rightToLeft);
               setState(() {
                 isClick = false;
               });
@@ -90,7 +90,7 @@ class _ChatPageTextFieldItemState extends State<ChatPageTextFieldItem> {
               if (state is PickVideoSuccess) {
                 getnav.Get.to(
                     () => PickVideoPage(video: state.video, user: widget.user),
-                    transition: getnav.Transition.leftToRight);
+                    transition: getnav.Transition.rightToLeft);
               }
               setState(() {
                 isClick = false;
@@ -116,7 +116,7 @@ class _ChatPageTextFieldItemState extends State<ChatPageTextFieldItem> {
                               replaySoundMessage: widget.replaySoundMessage,
                               replayRecordMessage: widget.replayRecordMessage,
                             ),
-                        transition: getnav.Transition.leftToRight);
+                        transition: getnav.Transition.rightToLeft);
                   }
                   if (file.path.toLowerCase().endsWith('.mp3')) {
                     getnav.Get.to(
@@ -132,7 +132,7 @@ class _ChatPageTextFieldItemState extends State<ChatPageTextFieldItem> {
                             size: widget.size,
                             file: state.file,
                             user: widget.user),
-                        transition: getnav.Transition.leftToRight);
+                        transition: getnav.Transition.rightToLeft);
                   }
                 }
                 setState(() {

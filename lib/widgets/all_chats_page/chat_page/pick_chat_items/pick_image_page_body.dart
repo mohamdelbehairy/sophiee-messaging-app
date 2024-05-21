@@ -130,12 +130,15 @@ class _PickImagePageBodyState extends State<PickImagePageBody> {
                               messageText: controller.text.isEmpty
                                   ? controller.text
                                   : null);
-                          await sendMessageNotification.sendMessageNotification(
-                              receiverToken: friendData.token,
-                              senderName: userData.userName,
-                              message:
-                                  '${userData.userName.split(' ')[0]} sent an image',
-                              senderId: userData.userID);
+                          if (widget.user.isChatNotify) {
+                            await sendMessageNotification.sendMessageNotification(
+                                receiverToken: friendData.token,
+                                senderName: userData.userName,
+                                message:
+                                    '${userData.userName.split(' ')[0]} sent an image',
+                                senderId: userData.userID);
+                          }
+
                           if (controller.text.startsWith('http') ||
                               controller.text.startsWith('https')) {
                             storeMedia.storeLink(

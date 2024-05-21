@@ -66,7 +66,8 @@ class _MessageForwardButtonState extends State<MessageForwardButton> {
                   if (selectedFriend.selectedFriendList.isNotEmpty) {
                     String messageID = const Uuid().v4();
                     for (var friend in selectedFriend.selectedFriendList) {
-                      final friendData = state.userModel.firstWhere((element) => element.userID == friend.userID);
+                      final friendData = state.userModel.firstWhere(
+                          (element) => element.userID == friend.userID);
                       if (widget.message != null) {
                         await sendMessage.sendMessage(
                             messageID: messageID,
@@ -97,7 +98,8 @@ class _MessageForwardButtonState extends State<MessageForwardButton> {
                             replayTextMessage: '',
                             replayRecordMessage: '',
                             replaySoundMessage: '');
-                        if (widget.message!.phoneContactNumber != null) {
+                        if (widget.message!.phoneContactNumber != null &&
+                            friendData.isChatNotify) {
                           await sendMessageNotification.sendMessageNotification(
                               receiverToken: friendData.token,
                               senderName: userData.userName,
@@ -105,7 +107,8 @@ class _MessageForwardButtonState extends State<MessageForwardButton> {
                                   '${userData.userName.split(' ')[0]} shared a contact',
                               senderId: userData.userID);
                         }
-                        if (widget.message!.messageSound != null) {
+                        if (widget.message!.messageSound != null &&
+                            friendData.isChatNotify) {
                           await sendMessageNotification.sendMessageNotification(
                               receiverToken: friendData.token,
                               senderName: userData.userName,
@@ -113,17 +116,19 @@ class _MessageForwardButtonState extends State<MessageForwardButton> {
                                   '${userData.userName.split(' ')[0]} sent a sound',
                               senderId: userData.userID);
                         }
-                        if (widget.message!.messageRecord != null) {
+                        if (widget.message!.messageRecord != null &&
+                            friendData.isChatNotify) {
                           await sendMessageNotification.sendMessageNotification(
                               receiverToken: friendData.token,
                               senderName: userData.userName,
                               message:
-                                  '${userData.userName.split(' ')[0]} sent a record',
+                                  '${userData.userName.split(' ')[0]} sent a voice message',
                               senderId: userData.userID);
                         }
                         if (widget.message!.messageImage != null ||
                             widget.message!.messageVideo != null) {
-                          if (widget.message!.messageVideo != null) {
+                          if (widget.message!.messageVideo != null &&
+                              friendData.isChatNotify) {
                             await sendMessageNotification.sendMessageNotification(
                                 receiverToken: friendData.token,
                                 senderName: userData.userName,
@@ -131,12 +136,14 @@ class _MessageForwardButtonState extends State<MessageForwardButton> {
                                     '${userData.userName.split(' ')[0]} sent video',
                                 senderId: userData.userID);
                           } else {
-                            await sendMessageNotification.sendMessageNotification(
-                                receiverToken: friendData.token,
-                                senderName: userData.userName,
-                                message:
-                                    '${userData.userName.split(' ')[0]} sent an image',
-                                senderId: userData.userID);
+                            if (friendData.isChatNotify) {
+                              await sendMessageNotification.sendMessageNotification(
+                                  receiverToken: friendData.token,
+                                  senderName: userData.userName,
+                                  message:
+                                      '${userData.userName.split(' ')[0]} sent an image',
+                                  senderId: userData.userID);
+                            }
                           }
                           await storeChatMedia.storeMedia(
                             friendID: friend.userID,
@@ -152,12 +159,14 @@ class _MessageForwardButtonState extends State<MessageForwardButton> {
                               friendID: friend.userID,
                               messageID: messageID,
                               messageLink: widget.message!.messageText);
-
-                          await sendMessageNotification.sendMessageNotification(
-                              receiverToken: friendData.token,
-                              senderName: userData.userName,
-                              message: widget.message!.messageText,
-                              senderId: userData.userID);
+                          if (friendData.isChatNotify) {
+                            await sendMessageNotification
+                                .sendMessageNotification(
+                                    receiverToken: friendData.token,
+                                    senderName: userData.userName,
+                                    message: widget.message!.messageText,
+                                    senderId: userData.userID);
+                          }
                         }
                       } else {
                         await sendMessage.sendMessage(
@@ -192,7 +201,8 @@ class _MessageForwardButtonState extends State<MessageForwardButton> {
                             replayTextMessage: '',
                             replayRecordMessage: '',
                             replaySoundMessage: '');
-                        if (widget.mediaFiles!.messageVideo != null) {
+                        if (widget.mediaFiles!.messageVideo != null &&
+                            friendData.isChatNotify) {
                           await sendMessageNotification.sendMessageNotification(
                               receiverToken: friendData.token,
                               senderName: userData.userName,
@@ -200,12 +210,14 @@ class _MessageForwardButtonState extends State<MessageForwardButton> {
                                   '${userData.userName.split(' ')[0]} sent a video',
                               senderId: userData.userID);
                         } else {
-                          await sendMessageNotification.sendMessageNotification(
-                              receiverToken: friendData.token,
-                              senderName: userData.userName,
-                              message:
-                                  '${userData.userName.split(' ')[0]} sent an image',
-                              senderId: userData.userID);
+                          if (friendData.isChatNotify) {
+                            await sendMessageNotification.sendMessageNotification(
+                                receiverToken: friendData.token,
+                                senderName: userData.userName,
+                                message:
+                                    '${userData.userName.split(' ')[0]} sent an image',
+                                senderId: userData.userID);
+                          }
                         }
                         await storeChatMedia.storeMedia(
                             friendID: friend.userID,
