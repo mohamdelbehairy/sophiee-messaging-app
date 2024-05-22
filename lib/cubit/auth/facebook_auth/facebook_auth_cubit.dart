@@ -69,7 +69,12 @@ class FacebookAuthCubit extends Cubit<FacebookAuthState> {
       'isFacebookAuth': true,
       'token': token,
       'chatbackgroundImage': null,
-      'chatbackgroundColor': null
+      'chatbackgroundColor': null,
+      'isChatNotify': true,
+      'isGroupNotify': true,
+      'isStoryNotify': false,
+      'isLivesNotify': true,
+      'isPinnedMessageNotify': true
     });
     await FirebaseFirestore.instance
         .collection('users')

@@ -9,7 +9,8 @@ class SettingsPageAppBar extends StatefulWidget {
       this.arrowIcon,
       this.mainAxisAlignment,
       this.onTapArrowIcon,
-      required this.appParTitle, this.fontSize});
+      required this.appParTitle,
+      this.fontSize});
   final Size size;
   final Widget? widget;
   final Widget? arrowIcon;

@@ -4,6 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart' as getnav;
 import 'package:sophiee/cubit/auth/login/login_cubit.dart';
 import 'package:sophiee/pages/setting/general_setting_page.dart';
+import 'package:sophiee/pages/setting/privacy_setting_page.dart';
 import 'package:sophiee/widgets/settings/custom_items_two.dart';
 
 class CardOneItemsTwo extends StatelessWidget {
@@ -42,7 +43,8 @@ class CardOneItemsTwo extends StatelessWidget {
                 : Colors.black),
         const SizedBox(height: 2),
         CustomItemsTwo(
-            onTap: () {},
+            onTap: () => getnav.Get.to(() => const PrivacySettingPage(),
+                transition: getnav.Transition.rightToLeft),
             size: size,
             textColor:
                 context.read<LoginCubit>().isDark ? Colors.white : Colors.black,

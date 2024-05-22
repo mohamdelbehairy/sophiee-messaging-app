@@ -70,7 +70,7 @@ class StoryNotificationCubit extends Cubit<StoryNotificationState> {
       NotificationDetails details = NotificationDetails(android: android);
 
       await _flutterLocalNotificationsPlugin.show(
-          DateTime.now().microsecondsSinceEpoch, title, body, details);
+          DateTime.now().second, title, body, details);
 
       emit(ShowStoryNotificationSuccess());
     } catch (e) {
