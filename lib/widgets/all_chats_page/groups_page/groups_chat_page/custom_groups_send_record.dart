@@ -87,17 +87,13 @@ class CustomGroupsSendRecord extends StatelessWidget {
               : '',
         );
 
-        for (var element in tokens) {
-          for (var notify in isNotify) {
-            debugPrint('token: $element');
-            debugPrint('notify: $notify');
-            if (notify) {
-              await sendGroupChatNotify.sendGroupMessageNotification(
-                  receiverToken: element,
-                  senderName: groupModel.groupName,
-                  message: '${senderName.split(' ')[0]} sent a voice message',
-                  senderId: groupModel.groupID);
-            }
+        for (int i = 0; i < tokens.length; i++) {
+          if (isNotify[i]) {
+            sendGroupChatNotify.sendGroupMessageNotification(
+                receiverToken: tokens[i],
+                senderName: groupModel.groupName,
+                message: '${senderName.split(' ')[0]} sent a voice message',
+                senderId: groupModel.groupID);
           }
         }
         await storeVoice.storeVoice(

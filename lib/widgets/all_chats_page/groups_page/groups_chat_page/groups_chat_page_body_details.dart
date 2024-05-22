@@ -81,6 +81,9 @@ class _GroupsChatPageBodyDetailsState extends State<GroupsChatPageBodyDetails> {
                     isSwip = false;
                   });
                 }
+                if (state is SendMessageGroupSuccess) {
+                  isNotify = [];
+                }
               },
               builder: (context, state) {
                 return Expanded(

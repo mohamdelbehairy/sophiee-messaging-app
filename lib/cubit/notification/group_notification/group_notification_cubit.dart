@@ -21,7 +21,7 @@ class GroupNotificationCubit extends Cubit<GroupNotificationState> {
       debugPrint('title: ${message.notification!.title}');
       debugPrint('body: ${message.notification!.body}');
 
-      if (message.data['page'] == 'groupChat ') {
+      if (message.data['page'] == 'groupChat') {
         await showGroupMessageNotification(
             title: message.notification!.title.toString(),
             body: message.notification!.body.toString());
@@ -78,10 +78,7 @@ class GroupNotificationCubit extends Cubit<GroupNotificationState> {
           NotificationDetails(android: android);
 
       await _flutterLocalNotificationsPlugin.show(
-          DateTime.now().microsecondsSinceEpoch,
-          title,
-          body,
-          notificationDetails);
+          DateTime.now().second, title, body, notificationDetails);
       emit(ShowGroupNotificationSuccess());
     } catch (e) {
       emit(GroupNotificationFailure(errorMessage: e.toString()));

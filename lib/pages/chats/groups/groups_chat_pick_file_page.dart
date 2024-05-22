@@ -18,7 +18,8 @@ class GroupsChatPickFilePage extends StatelessWidget {
       required this.replaySoundMessage,
       required this.replayRecordMessage,
       required this.tokens,
-      required this.senderName, required this.isNotify});
+      required this.senderName,
+      required this.isNotify});
   final File file;
   final GroupModel groupModel;
   final String replayTextMessage;
@@ -52,7 +53,7 @@ class GroupsChatPickFilePage extends StatelessWidget {
         ),
       ),
       body: GroupsChatPickFilePageBody(
-        isNotify: isNotify,
+          isNotify: isNotify,
           senderName: senderName,
           tokens: tokens,
           replayContactMessage: replayContactMessage,

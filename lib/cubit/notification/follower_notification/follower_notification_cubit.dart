@@ -20,9 +20,11 @@ class FollowerNotificationCubit extends Cubit<FolloweNotificationState> {
     FirebaseMessaging.onMessage.listen((message) async {
       debugPrint('title: ${message.notification!.title}');
       debugPrint('body: ${message.notification!.body}');
-      await showFollowerNotification(
-          title: message.notification!.title.toString(),
-          body: message.notification!.body.toString());
+      if (message.data['page'] == 'follower') {
+        await showFollowerNotification(
+            title: message.notification!.title.toString(),
+            body: message.notification!.body.toString());
+      }
     });
   }
 
@@ -57,13 +59,20 @@ class FollowerNotificationCubit extends Cubit<FolloweNotificationState> {
   // show follower notification
   Future<void> showFollowerNotification(
       {required String title, required String body}) async {
-    AndroidNotificationDetails android = const AndroidNotificationDetails(
-        "com.example.sophiee", "myChannel",
-        importance: Importance.max, priority: Priority.high);
+    try {
+      AndroidNotificationDetails android = const AndroidNotificationDetails(
+          "Follower", "follower",
+          importance: Importance.max, priority: Priority.high);
 
-    NotificationDetails details = NotificationDetails(android: android);
+      NotificationDetails details = NotificationDetails(android: android);
 
-    await _flutterLocalNotificationsPlugin.show(0, title, body, details);
-    emit(ShowFollowerNotificationSuccess());
+      await _flutterLocalNotificationsPlugin.show(
+          DateTime.now().second, title, body, details);
+      emit(ShowFollowerNotificationSuccess());
+    }  catch (e) {
+        emit(FolloweNotificationFailure(errorMessage: e.toString()));
+      debugPrint(
+          'error from show follower notification method: ${e.toString()}');
+    }
   }
 }

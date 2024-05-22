@@ -105,16 +105,14 @@ class _GroupsChatPickSoundButtonState extends State<GroupsChatPickSoundButton> {
                 replayTextMessage: widget.replayTextMessage,
                 replaySoundMessage: widget.replaySoundMessage,
                 replayRecordMessage: widget.replayRecordMessage);
-            for (var element in widget.tokens) {
-              for (var notify in widget.isNotify) {
-                if (notify) {
-                  await sendGroupMessageNotify.sendGroupMessageNotification(
-                      receiverToken: element,
-                      senderName: widget.groupModel.groupName,
-                      message:
-                          '${widget.senderName.split(' ')[0]} sent a sound',
-                      senderId: widget.groupModel.groupID);
-                }
+
+            for (int i = 0; i < widget.tokens.length; i++) {
+              if (widget.isNotify[i]) {
+                sendGroupMessageNotify.sendGroupMessageNotification(
+                    receiverToken: widget.tokens[i],
+                    senderName: widget.groupModel.groupName,
+                    message: '${widget.senderName.split(' ')[0]} sent a sound',
+                    senderId: widget.groupModel.groupID);
               }
             }
             await storeMedia.storeVoice(
