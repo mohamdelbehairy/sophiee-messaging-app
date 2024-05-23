@@ -56,7 +56,7 @@ class UpdateUserDataCubit extends Cubit<UpdateUserDataStates> {
     }
   }
 
-  Future<void> updateNotifyField(
+  Future<void> updateField(
       {required String fieldName, required bool fieldValue}) async {
     try {
       await FirebaseFirestore.instance

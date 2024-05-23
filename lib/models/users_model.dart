@@ -19,7 +19,13 @@ class UserModel {
       isGroupNotify,
       isStoryNotify,
       isLivesNotify,
-      isPinnedMessageNotify;
+      isPinnedMessageNotify,
+      isPhoneAndEmail,
+      isLastSeendAndOnline,
+      isProfilePhotos,
+      isDateOfBirth,
+      isBioAndNickName,
+      isAudioAndVideoCall;
 
   UserModel(
       {required this.userName,
@@ -45,7 +51,14 @@ class UserModel {
       required this.isGroupNotify,
       required this.isStoryNotify,
       required this.isLivesNotify,
-      required this.isPinnedMessageNotify});
+      required this.isPinnedMessageNotify,
+      required this.isPhoneAndEmail,
+      required this.isLastSeendAndOnline,
+      required this.isProfilePhotos,
+      required this.isDateOfBirth,
+      required this.isBioAndNickName,
+      required this.isAudioAndVideoCall
+      });
 
   factory UserModel.fromJson(jsonData) {
     return UserModel(
@@ -72,7 +85,14 @@ class UserModel {
         isGroupNotify: jsonData['isGroupNotify'] ?? false,
         isStoryNotify: jsonData['isStoryNotify'] ?? false,
         isLivesNotify: jsonData['isLivesNotify'] ?? false,
-        isPinnedMessageNotify: jsonData['isPinnedMessageNotify'] ?? false);
+        isPinnedMessageNotify: jsonData['isPinnedMessageNotify'] ?? false,
+        isPhoneAndEmail: jsonData['isPhoneAndEmail'] ?? false,
+        isLastSeendAndOnline: jsonData['isLastSeendAndOnline'] ?? false,
+        isProfilePhotos: jsonData['isProfilePhotos'] ?? false,
+        isDateOfBirth: jsonData['isDateOfBirth'] ?? false,
+        isBioAndNickName: jsonData['isBioAndNickName'] ?? false,
+        isAudioAndVideoCall: jsonData['isAudioAndVideoCall'] ?? false 
+        );
   }
   Map<String, dynamic> toMap() {
     return {
@@ -96,7 +116,13 @@ class UserModel {
       'isGroupNotify': isGroupNotify,
       'isStoryNotify': isStoryNotify,
       'isLivesNotify': isLivesNotify,
-      'isPinnedMessageNotify': isPinnedMessageNotify
+      'isPinnedMessageNotify': isPinnedMessageNotify,
+      'isPhoneAndEmail': isPhoneAndEmail,
+      'isLastSeendAndOnline': isLastSeendAndOnline,
+      'isProfilePhotos': isProfilePhotos,
+      'isDateOfBirth': isDateOfBirth,
+      'isBioAndNickName': isBioAndNickName,
+      'isAudioAndVideoCall': isAudioAndVideoCall
     };
   }
 

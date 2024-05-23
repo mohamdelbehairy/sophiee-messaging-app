@@ -25,7 +25,7 @@ class RegisterCubit extends Cubit<RegisterState> {
         emit(RegisterFailure(errorMessage: 'email-already-in-use'));
       }
     } catch (e) {
-      debugPrint('error from register cubit: ${e.toString()}');
+      debugPrint('error from register cubit: $e');
       emit(RegisterFailure(errorMessage: e.toString()));
     }
   }

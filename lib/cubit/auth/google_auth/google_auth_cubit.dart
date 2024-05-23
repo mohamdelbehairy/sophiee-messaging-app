@@ -71,7 +71,13 @@ class GoogleAuthCubit extends Cubit<GoogleAuthState> {
       'isGroupNotify': true,
       'isStoryNotify': false,
       'isLivesNotify': true,
-      'isPinnedMessageNotify': true
+      'isPinnedMessageNotify': true,
+      'isPhoneAndEmail': true,
+      'isLastSeendAndOnline': true,
+      'isProfilePhotos': true,
+      'isDateOfBirth': false,
+      'isBioAndNickName': true,
+      'isAudioAndVideoCall': true
     });
     await FirebaseFirestore.instance
         .collection('users')

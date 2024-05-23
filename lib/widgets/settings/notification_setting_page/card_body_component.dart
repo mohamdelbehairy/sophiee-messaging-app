@@ -32,7 +32,7 @@ class CardBodyComponent extends StatelessWidget {
               widget: CustomSwitchIcon(
                   size: size,
                   onChanged: (value) async {
-                    await updateNotify.updateNotifyField(
+                    await updateNotify.updateField(
                         fieldName: 'isChatNotify', fieldValue: value);
                   },
                   value: userData.isChatNotify),
@@ -47,7 +47,7 @@ class CardBodyComponent extends StatelessWidget {
               widget: CustomSwitchIcon(
                   size: size,
                   onChanged: (value) async {
-                    await updateNotify.updateNotifyField(
+                    await updateNotify.updateField(
                         fieldName: 'isGroupNotify', fieldValue: value);
                   },
                   value: userData.isGroupNotify),
@@ -62,7 +62,7 @@ class CardBodyComponent extends StatelessWidget {
               widget: CustomSwitchIcon(
                   size: size,
                   onChanged: (value) async {
-                    await updateNotify.updateNotifyField(
+                    await updateNotify.updateField(
                         fieldName: 'isStoryNotify', fieldValue: value);
                   },
                   value: userData.isStoryNotify),
@@ -77,7 +77,7 @@ class CardBodyComponent extends StatelessWidget {
               widget: CustomSwitchIcon(
                   size: size,
                   onChanged: (value) async {
-                    await updateNotify.updateNotifyField(
+                    await updateNotify.updateField(
                         fieldName: 'isLivesNotify', fieldValue: value);
                   },
                   value: userData.isLivesNotify),
@@ -92,7 +92,7 @@ class CardBodyComponent extends StatelessWidget {
               widget: CustomSwitchIcon(
                   size: size,
                   onChanged: (value) async {
-                    await updateNotify.updateNotifyField(
+                    await updateNotify.updateField(
                         fieldName: 'isPinnedMessageNotify', fieldValue: value);
                   },
                   value: userData.isPinnedMessageNotify),
