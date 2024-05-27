@@ -44,9 +44,20 @@ class _StoryViewPageState extends State<StoryViewPage> {
                     (url) {
                       if (url.storyImage != null) {
                         return StoryItem.pageImage(
-                            url: url.storyImage!, controller: controller);
+                            caption: Text(url.storyText,
+                                textAlign: TextAlign.center,
+                                style: const TextStyle(
+                                    color: Colors.white, fontSize: 18)),
+                            url: url.storyImage!,
+                            controller: controller);
                       } else if (url.storyVideo != null) {
-                        return StoryItem.pageVideo(url.storyVideo!,
+                        return StoryItem.pageVideo(
+                          duration:  Duration(seconds: url.storyVideoTime!),
+                            caption: Text(url.storyText,
+                                textAlign: TextAlign.center,
+                                style: const TextStyle(
+                                    color: Colors.white, fontSize: 18)),
+                            url.storyVideo!,
                             controller: controller);
                       }
                     },
@@ -68,8 +79,8 @@ class _StoryViewPageState extends State<StoryViewPage> {
                       final userData = state.userModel.firstWhere(
                           (element) => element.userID == widget.userID);
                       return Positioned(
-                        top: size.height * .08,
-                        left: size.width * .03,
+                        top: 40,
+                        left: 12,
                         child: SizedBox(
                           height: size.height * .08,
                           width: size.width,

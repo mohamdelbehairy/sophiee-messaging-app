@@ -11,7 +11,10 @@ class StoryCubit extends Cubit<StoryState> {
   StoryCubit() : super(AddStoryInitial());
 
   Future<void> addStory(
-      {String? imageUrl, String? videoUrl, required String storyText}) async {
+      {String? imageUrl,
+      String? videoUrl,
+      required String storyText,
+      int? storyVideoTime}) async {
     try {
       StoryModel storyModel = StoryModel.fromJson({
         'storyImage': imageUrl,
@@ -20,6 +23,7 @@ class StoryCubit extends Cubit<StoryState> {
         'storyDataTime': Timestamp.now(),
         'storyExpirationTime':
             Timestamp.fromDate(DateTime.now().add(const Duration(days: 1))),
+        'storyVideoTime': storyVideoTime
       });
       await FirebaseFirestore.instance
           .collection('stories')

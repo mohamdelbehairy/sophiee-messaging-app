@@ -13,7 +13,7 @@ class AddStory extends StatelessWidget {
     return Column(
       children: [
         CircleAvatar(
-            radius: 25,
+            radius: size.height *.031,
             backgroundColor:
                 isDark ? const Color(0xff4a4b50) : Colors.grey.withOpacity(.15),
             child: PopupMenuButton(

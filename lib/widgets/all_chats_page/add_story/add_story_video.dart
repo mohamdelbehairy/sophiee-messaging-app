@@ -28,6 +28,7 @@ class AddStoryVideo extends StatefulWidget {
 class _AddStoryVideoState extends State<AddStoryVideo> {
   late VideoPlayerController _controller;
   TextEditingController controller = TextEditingController();
+  Duration? videoDuration;
 
   @override
   void initState() {
@@ -41,6 +42,7 @@ class _AddStoryVideoState extends State<AddStoryVideo> {
     )..initialize().then((_) {
         setState(() {
           _controller.play();
+          videoDuration = _controller.value.duration;
         });
       });
   }
@@ -49,6 +51,7 @@ class _AddStoryVideoState extends State<AddStoryVideo> {
   void dispose() {
     super.dispose();
     _controller.dispose();
+    controller.dispose();
   }
 
   List<UserModel>? items;
@@ -126,7 +129,8 @@ class _AddStoryVideoState extends State<AddStoryVideo> {
                       await story.addStory(
                           imageUrl: null,
                           videoUrl: videoUrl,
-                          storyText: controller.text);
+                          storyText: controller.text,
+                          storyVideoTime: videoDuration?.inSeconds);
                       await story.updateIsStory(isStory: true);
 
                       for (var element in items!) {

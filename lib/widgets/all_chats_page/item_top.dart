@@ -88,7 +88,7 @@ class ChatItemTop extends StatelessWidget {
                                   : const Color(0xfff1f2f2),
                               child: CircleAvatar(
                                   backgroundColor: color,
-                                  radius: size.width * .013)))
+                                  radius: size.width * .0135)))
                     ],
                   )),
               const SizedBox(height: 2),
