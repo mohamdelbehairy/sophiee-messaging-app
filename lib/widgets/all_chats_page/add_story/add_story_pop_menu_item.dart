@@ -17,8 +17,8 @@ class AddStoryPopoverItem extends StatelessWidget {
       onTap: onTap,
       child: Row(
         children: [
-          Icon(icon, color: isDark ? Colors.white : Colors.black87),
-          SizedBox(width: size.width * .04),
+          Icon(icon, color: isDark ? Colors.white : Colors.black87,size: 20),
+          const SizedBox(width: 16),
           Text(
             text,
             style: TextStyle(

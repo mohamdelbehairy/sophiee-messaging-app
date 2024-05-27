@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../constants.dart';
 import '../../../utils/widget/no_result_found.dart';
 
 class NoFollowingPageFoundWidget extends StatelessWidget {
@@ -11,6 +12,7 @@ class NoFollowingPageFoundWidget extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         CustomNoResultFound(
+          image: emptyImageUrl,
             textOne: 'No Following Found',
             textTwo:
                 'You didn\'t find any following yet,\nplease follow someone.'),

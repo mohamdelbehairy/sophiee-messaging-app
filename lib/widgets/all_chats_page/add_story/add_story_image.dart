@@ -7,7 +7,6 @@ import 'package:sophiee/cubit/story/story_state.dart';
 import 'package:sophiee/cubit/user_date/get_user_data/get_user_data_cubit.dart';
 import 'package:sophiee/cubit/user_date/get_user_data/get_user_data_state.dart';
 import 'package:sophiee/models/users_model.dart';
-import 'package:sophiee/pages/home_page.dart';
 import 'package:sophiee/utils/initial_state.dart';
 import 'package:sophiee/widgets/all_chats_page/add_story/add_story_share_bottom.dart';
 import 'package:sophiee/widgets/all_chats_page/custom_chat_text_field.dart';
@@ -38,6 +37,10 @@ class _AddStoryImageState extends State<AddStoryImage> {
     super.initState();
   }
 
+  List<UserModel>? items;
+  List<UserModel>? items2;
+  UserModel? user;
+  
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -46,20 +49,16 @@ class _AddStoryImageState extends State<AddStoryImage> {
     var storeImage = context.read<StoreImageCubit>();
     var storyNotification = context.read<StoryNotificationCubit>();
 
-    List<UserModel>? items;
-    List<UserModel>? items2;
-
-    UserModel? user;
     return Scaffold(
       backgroundColor: Colors.black87,
       body: BlocListener<StoryCubit, StoryState>(
         listener: (context, state) {
           if (state is AddStorySuccess) {
             InitialState.initPickImageState(context);
-            Navigator.pushAndRemoveUntil(
-                context,
-                MaterialPageRoute(builder: (context) => const HomePage()),
-                (route) => false);
+            // Navigator.pushAndRemoveUntil(
+            //     context,
+            //     MaterialPageRoute(builder: (context) => const HomePage()),
+            //     (route) => false);
           }
         },
         child: Stack(
@@ -114,6 +113,10 @@ class _AddStoryImageState extends State<AddStoryImage> {
                     splashColor: Colors.transparent,
                     highlightColor: Colors.transparent,
                     onTap: () async {
+                      await Future.delayed(const Duration(seconds: 1), () {
+                        Navigator.pop(context);
+                        Navigator.pop(context);
+                      });
                       String storyImage = await uploadImage.uploadImage(
                           imageFile: widget.image, fieldName: 'stories_images');
                       storeImage.storeImage(

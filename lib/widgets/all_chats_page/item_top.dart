@@ -22,8 +22,10 @@ class ChatItemTop extends StatelessWidget {
     var isStory =
         context.read<StoryCubit>().checkIsStory(friendId: user.userID);
     navigatorPush() {
-      Navigator.push(context,
-          MaterialPageRoute(builder: (context) => StoryViewPage(userID: user.userID)));
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => StoryViewPage(userID: user.userID)));
     }
 
     return BlocBuilder<GetUserDataCubit, GetUserDataStates>(
@@ -54,14 +56,13 @@ class ChatItemTop extends StatelessWidget {
                     alignment: Alignment.bottomRight,
                     children: [
                       CircleAvatar(
-                          radius: size.height * .034,
+                          radius: size.height * .035,
                           backgroundColor:
-                              data.isStory ? kPrimaryColor : Colors.transparent,
+                              data.isStory ? kPrimaryColor : Colors.grey,
                           child: CircleAvatar(
                               radius: size.height * .033,
-                              backgroundColor: data.isStory
-                                  ? Colors.white
-                                  : Colors.transparent,
+                              backgroundColor:
+                                  isDark ? cardDarkModeBackground : Colors.white,
                               child: CircleAvatar(
                                   radius: size.height * .031,
                                   backgroundColor: Colors.transparent,
@@ -81,16 +82,16 @@ class ChatItemTop extends StatelessWidget {
                           padding: EdgeInsetsDirectional.only(
                               bottom: size.width * .01),
                           child: CircleAvatar(
-                              radius: size.width * .02,
+                              radius: size.width * .018,
                               backgroundColor: isDark
                                   ? cardDarkModeBackground
                                   : const Color(0xfff1f2f2),
                               child: CircleAvatar(
                                   backgroundColor: color,
-                                  radius: size.width * .015)))
+                                  radius: size.width * .013)))
                     ],
                   )),
-              SizedBox(height: size.width * .01),
+              const SizedBox(height: 2),
               SizedBox(
                 width: size.width * .16,
                 child: Center(

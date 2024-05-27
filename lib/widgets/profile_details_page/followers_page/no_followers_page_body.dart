@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../constants.dart';
 import '../../../utils/widget/no_result_found.dart';
 
 class NoFollowersPageFoundWidget extends StatelessWidget {
@@ -10,6 +11,7 @@ class NoFollowersPageFoundWidget extends StatelessWidget {
     return const Row(
       children: [
         CustomNoResultFound(
+          image: emptyImageUrl,
             textOne: 'No Followers Found',
             textTwo: "You didn't find any followers yet,"),
       ],

@@ -1,4 +1,3 @@
-import 'package:sophiee/constants.dart';
 import 'package:sophiee/cubit/auth/login/login_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -14,7 +13,8 @@ class CustomNoResultFound extends StatelessWidget {
       this.sizedBoxHeightOne,
       this.textOneFontSize,
       this.textTwoFontSize,
-      this.sizedBoxHeightTwo});
+      this.sizedBoxHeightTwo,
+      this.image});
   final String textOne;
   final String textTwo;
   final Widget? widget;
@@ -24,6 +24,7 @@ class CustomNoResultFound extends StatelessWidget {
   final double? sizedBoxHeightTwo;
   final double? textOneFontSize;
   final double? textTwoFontSize;
+  final String? image;
 
   @override
   Widget build(BuildContext context) {
@@ -33,13 +34,16 @@ class CustomNoResultFound extends StatelessWidget {
     return Column(
       mainAxisAlignment: mainAxisAlignment ?? MainAxisAlignment.center,
       children: [
-        Container(
-            height: height ?? size.height * .25,
-            width: size.width * .8,
-            alignment: Alignment.center,
-            decoration: const BoxDecoration(
-                image: DecorationImage(image: AssetImage(emptyImageUrl)))),
-        SizedBox(height: sizedBoxHeightOne ?? size.height * .02),
+        if (image != null)
+          Container(
+              height: height ?? size.height * .25,
+              width: size.width * .8,
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                  image: DecorationImage(image: AssetImage(image!)))),
+        if (image != null)
+          SizedBox(height: sizedBoxHeightOne ?? size.height * .02),
+        if (image == null) SizedBox(height: size.height * .2),
         Text(textOne,
             style: TextStyle(
                 color: isDark ? Colors.white : Colors.black,

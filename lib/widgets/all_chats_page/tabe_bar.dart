@@ -22,17 +22,6 @@ class _CustomTabBarState extends State<CustomTabBar> {
     'Calls',
   ];
 
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   context
-  //       .read<GetFollowingCubit>()
-  //       .getFollowing(userID: FirebaseAuth.instance.currentUser!.uid);
-  //   context
-  //       .read<GetFollowersCubit>()
-  //       .getFollowers(userID: FirebaseAuth.instance.currentUser!.uid);
-  // }
-
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;

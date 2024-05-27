@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sophiee/utils/widget/no_result_found.dart';
 
+import '../../../constants.dart';
 import '../../../cubit/user_date/image/get_image/get_image_cubit.dart';
 import 'card_three_all_page/card_three_grid_view.dart';
 
@@ -39,6 +40,7 @@ class CardThreeCustomScrollItemTwo extends StatelessWidget {
                   textOneFontSize: size.height * .022,
                   textTwoFontSize: size.height * .012,
                   mainAxisAlignment: MainAxisAlignment.start,
+                  image: emptyImageUrl,
                   textOne: 'No Images here',
                   textTwo: 'We didn\'t find any images yet \n Please add a new image');
             }

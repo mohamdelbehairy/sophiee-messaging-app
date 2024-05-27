@@ -152,6 +152,7 @@ class _SearchPageBodyState extends State<SearchPageBody> {
                           .toList()
                           .isEmpty
                       ? const CustomNoResultFound(
+                        image: emptyImageUrl,
                           textOne: 'No Result Found',
                           textTwo:
                               "You didn't find any results with this name yet,\nplease enter a success username or email.",
