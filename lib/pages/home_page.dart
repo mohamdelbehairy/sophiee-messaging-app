@@ -72,39 +72,42 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: screens[index],
-      bottomNavigationBar: BlocBuilder<LoginCubit, LoginState>(
-        builder: (context, state) {
-          return NavigationBar(
-            backgroundColor: context.read<LoginCubit>().isDark
-                ? kDarkModeBackgroundColor
-                : Colors.white10,
-            onDestinationSelected: (selectedIndex) {
-              setState(() {
-                index = selectedIndex;
-              });
-            },
-            indicatorColor: Colors.transparent,
-            selectedIndex: index,
-            destinations: const [
-              NavigationDestination(
-                  selectedIcon: Icon(Icons.person, color: kPrimaryColor),
-                  icon: Icon(Icons.person_outline_outlined),
-                  label: ''),
-              NavigationDestination(
-                  selectedIcon:
-                      Icon(FontAwesomeIcons.solidComment, color: kPrimaryColor),
-                  icon: Icon(FontAwesomeIcons.comment),
-                  label: ''),
-              NavigationDestination(
-                  selectedIcon:
-                      Icon(FontAwesomeIcons.gear, color: kPrimaryColor),
-                  icon: Icon(Icons.settings_outlined),
-                  label: ''),
-            ],
-          );
-        },
+    return PopScope(
+      canPop: false,
+      child: Scaffold(
+        body: screens[index],
+        bottomNavigationBar: BlocBuilder<LoginCubit, LoginState>(
+          builder: (context, state) {
+            return NavigationBar(
+              backgroundColor: context.read<LoginCubit>().isDark
+                  ? kDarkModeBackgroundColor
+                  : Colors.white10,
+              onDestinationSelected: (selectedIndex) {
+                setState(() {
+                  index = selectedIndex;
+                });
+              },
+              indicatorColor: Colors.transparent,
+              selectedIndex: index,
+              destinations: const [
+                NavigationDestination(
+                    selectedIcon: Icon(Icons.person, color: kPrimaryColor),
+                    icon: Icon(Icons.person_outline_outlined),
+                    label: ''),
+                NavigationDestination(
+                    selectedIcon:
+                        Icon(FontAwesomeIcons.solidComment, color: kPrimaryColor),
+                    icon: Icon(FontAwesomeIcons.comment),
+                    label: ''),
+                NavigationDestination(
+                    selectedIcon:
+                        Icon(FontAwesomeIcons.gear, color: kPrimaryColor),
+                    icon: Icon(Icons.settings_outlined),
+                    label: ''),
+              ],
+            );
+          },
+        ),
       ),
     );
   }

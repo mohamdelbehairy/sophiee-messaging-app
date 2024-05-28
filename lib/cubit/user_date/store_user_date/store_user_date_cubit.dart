@@ -47,11 +47,12 @@ class StoreUserDateCubit extends Cubit<StoreUserDateState> {
         'isLivesNotify': true,
         'isPinnedMessageNotify': true,
         'isPhoneAndEmail': true,
-      'isLastSeendAndOnline': true,
-      'isProfilePhotos': true,
-      'isDateOfBirth': false,
-      'isBioAndNickName': true,
-      'isAudioAndVideoCall': true
+        'isLastSeendAndOnline': true,
+        'isProfilePhotos': true,
+        'isDateOfBirth': false,
+        'isBioAndNickName': true,
+        'isAudioAndVideoCall': true,
+        'muteUsers': const []
       });
       await FirebaseFirestore.instance
           .collection('users')

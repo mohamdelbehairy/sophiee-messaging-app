@@ -8,9 +8,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ItemBottomListTileTitle extends StatelessWidget {
   const ItemBottomListTileTitle(
-      {super.key, required this.data, required this.user});
+      {super.key,
+      required this.data,
+      required this.user,
+      required this.isMute});
   final UserModel data;
   final UserModel user;
+  final bool isMute;
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +49,11 @@ class ItemBottomListTileTitle extends StatelessWidget {
                   radius: size.width * .014,
                   backgroundColor: kPrimaryColor,
                 ),
-              )
+              ),
+            if (isMute) const SizedBox(width: 8),
+            if (isMute)
+              Icon(Icons.volume_off,
+                  color: isDark ? Colors.white54 : Colors.grey),
           ],
         ),
         Text(

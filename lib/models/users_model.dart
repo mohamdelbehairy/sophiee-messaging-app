@@ -26,6 +26,7 @@ class UserModel {
       isDateOfBirth,
       isBioAndNickName,
       isAudioAndVideoCall;
+  List<dynamic> muteUsers;
 
   UserModel(
       {required this.userName,
@@ -57,8 +58,8 @@ class UserModel {
       required this.isProfilePhotos,
       required this.isDateOfBirth,
       required this.isBioAndNickName,
-      required this.isAudioAndVideoCall
-      });
+      required this.isAudioAndVideoCall,
+      required this.muteUsers});
 
   factory UserModel.fromJson(jsonData) {
     return UserModel(
@@ -91,8 +92,8 @@ class UserModel {
         isProfilePhotos: jsonData['isProfilePhotos'] ?? false,
         isDateOfBirth: jsonData['isDateOfBirth'] ?? false,
         isBioAndNickName: jsonData['isBioAndNickName'] ?? false,
-        isAudioAndVideoCall: jsonData['isAudioAndVideoCall'] ?? false 
-        );
+        isAudioAndVideoCall: jsonData['isAudioAndVideoCall'] ?? false,
+        muteUsers: jsonData['muteUsers'] ?? []);
   }
   Map<String, dynamic> toMap() {
     return {
@@ -122,7 +123,8 @@ class UserModel {
       'isProfilePhotos': isProfilePhotos,
       'isDateOfBirth': isDateOfBirth,
       'isBioAndNickName': isBioAndNickName,
-      'isAudioAndVideoCall': isAudioAndVideoCall
+      'isAudioAndVideoCall': isAudioAndVideoCall,
+      'muteUsers': muteUsers
     };
   }
 

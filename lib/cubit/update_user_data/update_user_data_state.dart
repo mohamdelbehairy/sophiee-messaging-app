@@ -10,9 +10,12 @@ class UpdateUserDataLoading extends UpdateUserDataStates {
 
 class UpdateUserDataSuccess extends UpdateUserDataStates {}
 
-
 class UpdateUserFailure extends UpdateUserDataStates {
   final String errorMessage;
 
   UpdateUserFailure({required this.errorMessage});
 }
+
+class MuteUserSuccess extends UpdateUserDataStates {}
+
+class UnMuteUserSuccess extends UpdateUserDataStates {}

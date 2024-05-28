@@ -80,7 +80,8 @@ class FacebookAuthCubit extends Cubit<FacebookAuthState> {
       'isProfilePhotos': true,
       'isDateOfBirth': false,
       'isBioAndNickName': true,
-      'isAudioAndVideoCall': true
+      'isAudioAndVideoCall': true,
+      'muteUsers': const []
     });
     await FirebaseFirestore.instance
         .collection('users')

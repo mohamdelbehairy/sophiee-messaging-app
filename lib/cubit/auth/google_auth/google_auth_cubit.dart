@@ -77,7 +77,8 @@ class GoogleAuthCubit extends Cubit<GoogleAuthState> {
       'isProfilePhotos': true,
       'isDateOfBirth': false,
       'isBioAndNickName': true,
-      'isAudioAndVideoCall': true
+      'isAudioAndVideoCall': true,
+      'muteUsers': const []
     });
     await FirebaseFirestore.instance
         .collection('users')

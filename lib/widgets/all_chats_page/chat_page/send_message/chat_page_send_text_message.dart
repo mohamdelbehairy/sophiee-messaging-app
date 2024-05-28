@@ -77,7 +77,8 @@ class ChatPageSendTextMessageButton extends StatelessWidget {
                   debugPrint('userToken: ${friendData.token}');
                   debugPrint('userID: ${user.userID}');
                   debugPrint('userName: ${user.userName}');
-                  if (user.isChatNotify) {
+                  if (user.isChatNotify &&
+                      !friendData.muteUsers.contains(userData.userID)) {
                     sendMessageNotification.sendMessageNotification(
                         receiverToken: friendData.token,
                         senderName: userData.userName,

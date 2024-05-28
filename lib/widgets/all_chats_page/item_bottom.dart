@@ -11,8 +11,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ItemBottom extends StatelessWidget {
-  const ItemBottom({super.key, required this.user});
+  const ItemBottom({super.key, required this.user, required this.isMute});
   final UserModel user;
+  final bool isMute;
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +34,8 @@ class ItemBottom extends StatelessWidget {
             color = Colors.grey;
           }
           return ListTile(
-              title: ItemBottomListTileTitle(data: data, user: user),
+              title: ItemBottomListTileTitle(
+                  data: data, user: user, isMute: isMute),
               leading: Stack(
                 children: [
                   CircleAvatar(
@@ -56,8 +58,9 @@ class ItemBottom extends StatelessWidget {
                     right: 0.0,
                     child: CircleAvatar(
                         radius: size.width * .02,
-                        backgroundColor:
-                            isDark ? cardDarkModeBackground : const Color(0xfff1f2f2),
+                        backgroundColor: isDark
+                            ? cardDarkModeBackground
+                            : const Color(0xfff1f2f2),
                         child: CircleAvatar(
                             backgroundColor: color, radius: size.width * .015)),
                   )

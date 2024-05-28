@@ -70,4 +70,36 @@ class UpdateUserDataCubit extends Cubit<UpdateUserDataStates> {
       debugPrint('error from update user notification method: ${e.toString()}');
     }
   }
+
+  Future<void> muteUsers({required String userID}) async {
+    try {
+      await FirebaseFirestore.instance
+          .collection(userCollection)
+          .doc(FirebaseAuth.instance.currentUser!.uid)
+          .update({
+        'muteUsers': FieldValue.arrayUnion([userID])
+      });
+      emit(MuteUserSuccess());
+    } catch (e) {
+      emit(UpdateUserFailure(errorMessage: e.toString()));
+
+      debugPrint('error from mute users method: ${e.toString()}');
+    }
+  }
+
+  Future<void> unMuteUsers({required String userID}) async {
+    try {
+      await FirebaseFirestore.instance
+          .collection(userCollection)
+          .doc(FirebaseAuth.instance.currentUser!.uid)
+          .update({
+        'muteUsers': FieldValue.arrayRemove([userID])
+      });
+      emit(UnMuteUserSuccess());
+    } catch (e) {
+      emit(UpdateUserFailure(errorMessage: e.toString()));
+
+      debugPrint('error from un mute users method: ${e.toString()}');
+    }
+  }
 }

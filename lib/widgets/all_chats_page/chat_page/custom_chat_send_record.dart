@@ -96,7 +96,8 @@ class CustomChatSendRecord extends StatelessWidget {
                         isSwip && messageModel!.messageRecord != null
                             ? messageModel!.messageRecord
                             : '');
-                if (widget.user.isChatNotify) {
+                if (widget.user.isChatNotify &&
+                    !friendData.muteUsers.contains(data.userID)) {
                   sendMessageNotification.sendMessageNotification(
                       receiverToken: friendData.token,
                       senderName: data.userName,
