@@ -1,3 +1,4 @@
+import 'package:get/get.dart' as getnav;
 import 'package:sophiee/constants.dart';
 import 'package:sophiee/cubit/auth/login/login_cubit.dart';
 import 'package:sophiee/cubit/user_date/get_user_data/get_user_data_cubit.dart';
@@ -21,12 +22,6 @@ class ChatItemTop extends StatelessWidget {
     Color color;
     var isStory =
         context.read<StoryCubit>().checkIsStory(friendId: user.userID);
-    navigatorPush() {
-      Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context) => StoryViewPage(userID: user.userID)));
-    }
 
     return BlocBuilder<GetUserDataCubit, GetUserDataStates>(
       builder: (context, state) {
@@ -37,19 +32,18 @@ class ChatItemTop extends StatelessWidget {
 
           int differenceInMinutes =
               Timestamp.now().toDate().difference(data.onlineStatue).inMinutes;
-          if (differenceInMinutes < 1) {
+          if (differenceInMinutes < 1 && data.isLastSeendAndOnline) {
             color = kPrimaryColor;
           } else {
             color = Colors.grey;
           }
           return Column(
             children: [
-              InkWell(
-                  splashColor: Colors.transparent,
-                  highlightColor: Colors.transparent,
+              GestureDetector(
                   onTap: () async {
                     if (await isStory) {
-                      navigatorPush();
+                      getnav.Get.to(() => StoryViewPage(userID: user.userID),
+                          transition: getnav.Transition.downToUp);
                     }
                   },
                   child: Stack(
@@ -61,8 +55,9 @@ class ChatItemTop extends StatelessWidget {
                               data.isStory ? kPrimaryColor : Colors.grey,
                           child: CircleAvatar(
                               radius: size.height * .033,
-                              backgroundColor:
-                                  isDark ? cardDarkModeBackground : Colors.white,
+                              backgroundColor: isDark
+                                  ? cardDarkModeBackground
+                                  : Colors.white,
                               child: CircleAvatar(
                                   radius: size.height * .031,
                                   backgroundColor: Colors.transparent,
@@ -77,7 +72,9 @@ class ChatItemTop extends StatelessWidget {
                                           shimmerHighlightColor: isDark
                                               ? Colors.white24
                                               : Colors.grey.shade100,
-                                          imageUrl: data.profileImage))))),
+                                          imageUrl: !data.isProfilePhotos
+                                              ? defaultProfileImageUrl
+                                              : data.profileImage))))),
                       Padding(
                           padding: EdgeInsetsDirectional.only(
                               bottom: size.width * .01),

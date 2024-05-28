@@ -11,9 +11,9 @@ class ItemBottomListTileTitle extends StatelessWidget {
       {super.key,
       required this.data,
       required this.user,
-      required this.isMute});
-  final UserModel data;
-  final UserModel user;
+      required this.isMute, required this.userData});
+  final UserModel data, user, userData;
+
   final bool isMute;
 
   @override
@@ -51,7 +51,7 @@ class ItemBottomListTileTitle extends StatelessWidget {
                 ),
               ),
             if (isMute) const SizedBox(width: 8),
-            if (isMute)
+            if (isMute || !userData.isChatNotify)
               Icon(Icons.volume_off,
                   color: isDark ? Colors.white54 : Colors.grey),
           ],

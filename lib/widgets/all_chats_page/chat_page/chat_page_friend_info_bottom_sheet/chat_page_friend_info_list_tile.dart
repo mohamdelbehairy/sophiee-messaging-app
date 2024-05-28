@@ -26,7 +26,8 @@ class ChatPageFriendInfoListTile extends StatelessWidget {
         ),
         leading: CircleAvatar(
             backgroundColor: Colors.transparent,
-            backgroundImage: CachedNetworkImageProvider(user.profileImage)),
+            backgroundImage: CachedNetworkImageProvider(
+                !user.isProfilePhotos ? defaultProfileImageUrl : user.profileImage)),
         subtitle: Text(user.nickName.isNotEmpty ? user.nickName : user.bio,
             style: const TextStyle(color: Colors.blue)),
       ),

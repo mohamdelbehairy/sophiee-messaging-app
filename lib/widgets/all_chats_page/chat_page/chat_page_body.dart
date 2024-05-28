@@ -26,8 +26,6 @@ class ChatPageBody extends StatelessWidget {
   Widget build(BuildContext context) {
     var isDark = context.read<LoginCubit>().isDark;
     return Scaffold(
-        // backgroundColor:
-        //     isDark ? chatDarkModeBackground : chatLightModeBackground,
         backgroundColor: userData.chatbackgroundColor != null
             ? Color(userData.chatbackgroundColor!)
             : isDark && userData.chatbackgroundColor == null

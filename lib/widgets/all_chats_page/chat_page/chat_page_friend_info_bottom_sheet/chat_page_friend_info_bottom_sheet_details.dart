@@ -21,10 +21,11 @@ class ChatPageFriendInfoBottomSheetDetails extends StatelessWidget {
       padding: const EdgeInsets.only(top: 22),
       child: Column(
         children: [
-          if (user.emailAddress.isNotEmpty) EmailAdressBottomSheet(user: user),
-          if (user.emailAddress.isNotEmpty) const SizedBox(height: 8),
-          if (user.phoneNumber != null) PhoneNumberBottomSheet(user: user),
-          if (user.phoneNumber != null) const SizedBox(height: 12),
+          if (user.emailAddress.isNotEmpty && user.isPhoneAndEmail)
+            EmailAdressBottomSheet(user: user),
+          if (user.emailAddress.isNotEmpty && user.isPhoneAndEmail) const SizedBox(height: 8),
+          if (user.phoneNumber != null && user.isPhoneAndEmail) PhoneNumberBottomSheet(user: user),
+          if (user.phoneNumber != null && user.isPhoneAndEmail) const SizedBox(height: 12),
           MediaFilesBottomSheet(size: size, user: user),
           const SizedBox(height: 12),
           HighlightsBottomSheet(user: user, size: size, isDark: isDark),

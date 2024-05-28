@@ -1,5 +1,6 @@
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
+import 'package:sophiee/constants.dart';
 
 import '../../models/users_model.dart';
 
@@ -31,7 +32,9 @@ class ProfileDetailsListTileLeading extends StatelessWidget {
                         isDark ? Colors.white12 : Colors.grey.shade300,
                     shimmerHighlightColor:
                         isDark ? Colors.white24 : Colors.grey.shade100,
-                    imageUrl: data.profileImage))),
+                    imageUrl: !data.isProfilePhotos
+                        ? defaultProfileImageUrl
+                        : data.profileImage))),
         if (widget != null) widget!
       ],
     );

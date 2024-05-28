@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:sophiee/constants.dart';
 import 'package:sophiee/cubit/auth/login/login_cubit.dart';
 import 'package:sophiee/cubit/user_date/get_user_data/get_user_data_cubit.dart';
@@ -26,16 +27,18 @@ class ItemBottom extends StatelessWidget {
           final currentUser = user.userID;
           final data = state.userModel
               .firstWhere((element) => element.userID == currentUser);
+          final userData = state.userModel.firstWhere((element) =>
+              element.userID == FirebaseAuth.instance.currentUser!.uid);
           int differenceInMinutes =
               Timestamp.now().toDate().difference(data.onlineStatue).inMinutes;
-          if (differenceInMinutes < 1) {
+          if (differenceInMinutes < 1 && data.isLastSeendAndOnline) {
             color = kPrimaryColor;
           } else {
             color = Colors.grey;
           }
           return ListTile(
               title: ItemBottomListTileTitle(
-                  data: data, user: user, isMute: isMute),
+                  userData: userData, data: data, user: user, isMute: isMute),
               leading: Stack(
                 children: [
                   CircleAvatar(
@@ -52,7 +55,9 @@ class ItemBottom extends StatelessWidget {
                               shimmerHighlightColor: isDark
                                   ? Colors.white24
                                   : Colors.grey.shade100,
-                              imageUrl: data.profileImage))),
+                              imageUrl: !data.isProfilePhotos
+                                  ? defaultProfileImageUrl
+                                  : data.profileImage))),
                   Positioned(
                     bottom: 0.0,
                     right: 0.0,

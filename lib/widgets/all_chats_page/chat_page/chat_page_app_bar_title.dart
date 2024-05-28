@@ -10,6 +10,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../constants.dart';
+
 class ChatPageAppBarTitle extends StatelessWidget {
   const ChatPageAppBarTitle({super.key, required this.user});
   final UserModel user;
@@ -32,8 +34,9 @@ class ChatPageAppBarTitle extends StatelessWidget {
               Timestamp.now().toDate().difference(data.onlineStatue).inHours;
           int differenceInDays =
               Timestamp.now().toDate().difference(data.onlineStatue).inDays;
-
-          if (differenceInMinutes < 1) {
+          if (!user.isLastSeendAndOnline) {
+            text = 'Last seen recently';
+          } else if (differenceInMinutes < 1) {
             text = 'Active Now';
           } else if (differenceInMinutes < 60) {
             if (differenceInMinutes == 1) {
@@ -78,16 +81,17 @@ class ChatPageAppBarTitle extends StatelessWidget {
                               ChatPageFriendBottomSheetInfo(user: data)),
                       child: CircleAvatar(
                           backgroundColor: Colors.transparent,
-                          backgroundImage:
-                              CachedNetworkImageProvider(data.profileImage))),
+                          backgroundImage: CachedNetworkImageProvider(
+                              !data.isProfilePhotos
+                                  ? defaultProfileImageUrl
+                                  : data.profileImage))),
                   SizedBox(width: size.width * .02),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        data.userName,
-                        style: TextStyle(fontSize: size.width * .04),
-                      ),
+                      Text(data.userName,
+                          style: TextStyle(fontSize: size.width * .04)),
+                      const SizedBox(height: 2),
                       BlocBuilder<MessageCubit, MessageState>(
                         builder: (context, state) {
                           if (state is TypingSuccess) {
@@ -96,7 +100,9 @@ class ChatPageAppBarTitle extends StatelessWidget {
                               style: TextStyle(
                                   fontSize: state.isTyping
                                       ? size.width * .025
-                                      : size.width * .02),
+                                      : !user.isLastSeendAndOnline
+                                          ? size.width * .022
+                                          : size.width * .02),
                             );
                           } else {
                             return Text(text,

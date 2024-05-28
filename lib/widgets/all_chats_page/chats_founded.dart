@@ -57,27 +57,27 @@ class ChatsFounded extends StatelessWidget {
                           await message.deleteChat(
                               friendID: chat.chatsList[index].userID);
                         }),
-                        CustomSlidableActionItem(
-                            lable: userData.muteUsers
-                                    .contains(chat.chatsList[index].userID)
-                                ? 'unmute'
-                                : 'mute',
-                            icon: userData.muteUsers
-                                    .contains(chat.chatsList[index].userID)
-                                ? Icons.volume_up
-                                : Icons.volume_off,
-                            // volume_up
-                            iconColor: Colors.blue,
-                            onPressed: (context) async {
-                              if (userData.muteUsers
-                                  .contains(chat.chatsList[index].userID)) {
-                                await muteAndunMute.unMuteUsers(
-                                    userID: chat.chatsList[index].userID);
-                              } else {
-                                await muteAndunMute.muteUsers(
-                                    userID: chat.chatsList[index].userID);
-                              }
-                            }),
+                        if (userData.isChatNotify)
+                          CustomSlidableActionItem(
+                              lable: userData.muteUsers
+                                      .contains(chat.chatsList[index].userID)
+                                  ? 'unmute'
+                                  : 'mute',
+                              icon: userData.muteUsers
+                                      .contains(chat.chatsList[index].userID)
+                                  ? Icons.volume_up
+                                  : Icons.volume_off,
+                              iconColor: Colors.blue,
+                              onPressed: (context) async {
+                                if (userData.muteUsers
+                                    .contains(chat.chatsList[index].userID)) {
+                                  await muteAndunMute.unMuteUsers(
+                                      userID: chat.chatsList[index].userID);
+                                } else {
+                                  await muteAndunMute.muteUsers(
+                                      userID: chat.chatsList[index].userID);
+                                }
+                              }),
                       ],
                     ),
                     child: ItemBottom(

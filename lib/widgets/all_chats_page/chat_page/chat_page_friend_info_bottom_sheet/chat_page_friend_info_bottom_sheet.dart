@@ -42,7 +42,8 @@ class _ChatPageFriendBottomSheetInfoState
             transition: getnav.Transition.downToUp);
       },
       child: Container(
-        height: size.height * .42,
+        height:
+            !widget.user.isPhoneAndEmail ? size.height * .3 : size.height * .42,
         width: size.width,
         decoration: BoxDecoration(
             color: isDark ? cardDarkModeBackground : Colors.white,
