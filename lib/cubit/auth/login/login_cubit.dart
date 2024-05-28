@@ -13,11 +13,12 @@ class LoginCubit extends Cubit<LoginState> {
     });
   }
 
+  bool isLoading = false;
   Future<void> login(
       {required String emailAddress,
       required String password,
       required BuildContext context}) async {
-    emit(LoginLoading());
+    emit(LoginLoading(isLoading: true));
     try {
       final userCredential = await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: emailAddress, password: password);
@@ -27,13 +28,17 @@ class LoginCubit extends Cubit<LoginState> {
         prefs.setString('userID', userCredential.user!.uid);
         debugPrint(userCredential.user!.uid);
         emit(LoginSuccess());
+        emit(LoginLoading(isLoading: false));
       }
     } on FirebaseAuthException catch (e) {
       if (e.code == 'invalid-credential') {
         emit(LoginFailure(errorMessage: 'invalid-credential'));
       }
+      emit(LoginLoading(isLoading: false));
     } catch (e) {
       emit(LoginFailure(errorMessage: e.toString()));
+      debugPrint('error from login cubit: ${e.toString()}');
+      emit(LoginLoading(isLoading: false));
     }
   }
 

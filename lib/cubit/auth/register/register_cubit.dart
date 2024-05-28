@@ -7,9 +7,10 @@ part 'register_state.dart';
 class RegisterCubit extends Cubit<RegisterState> {
   RegisterCubit() : super(RegisterInitial());
 
+  bool isLoading = false;
   Future<void> register(
       {required String emailAddress, required String password}) async {
-    emit(RegisterLoading());
+    emit(RegisterLoading(isLoading: true));
     try {
       final userCredential = await FirebaseAuth.instance
           .createUserWithEmailAndPassword(
@@ -17,6 +18,7 @@ class RegisterCubit extends Cubit<RegisterState> {
 
       if (userCredential.user != null) {
         emit(RegisterSuccess());
+        emit(RegisterLoading(isLoading: false));
       }
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
@@ -24,9 +26,11 @@ class RegisterCubit extends Cubit<RegisterState> {
       } else if (e.code == 'email-already-in-use') {
         emit(RegisterFailure(errorMessage: 'email-already-in-use'));
       }
+      emit(RegisterLoading(isLoading: false));
     } catch (e) {
       debugPrint('error from register cubit: $e');
       emit(RegisterFailure(errorMessage: e.toString()));
+      emit(RegisterLoading(isLoading: false));
     }
   }
 }

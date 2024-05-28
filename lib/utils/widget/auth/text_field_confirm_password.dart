@@ -3,14 +3,19 @@ import 'package:sophiee/widgets/text_field.dart';
 
 class TextFieldConfirmPassword extends StatelessWidget {
   const TextFieldConfirmPassword(
-      {super.key, required this.confirmPassword, required this.password});
+      {super.key,
+      required this.confirmPassword,
+      required this.password,
+      required this.isLoading});
 
   final TextEditingController confirmPassword;
   final TextEditingController password;
+  final bool isLoading;
 
   @override
   Widget build(BuildContext context) {
     return CustomTextField(
+        isLoading: isLoading,
         controller: confirmPassword,
         validator: (value) {
           if (value!.isEmpty) {

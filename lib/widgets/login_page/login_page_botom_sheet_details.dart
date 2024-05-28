@@ -13,8 +13,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart' as getnav;
 
 class LoginPageBottomSheetBody extends StatefulWidget {
-  const LoginPageBottomSheetBody({super.key, required this.isDark});
+  const LoginPageBottomSheetBody(
+      {super.key, required this.isDark, required this.isLoading});
   final bool isDark;
+  final bool isLoading;
+
   @override
   State<LoginPageBottomSheetBody> createState() =>
       _LoginPageBottomSheetBodyState();
@@ -24,7 +27,6 @@ class _LoginPageBottomSheetBodyState extends State<LoginPageBottomSheetBody> {
   GlobalKey<FormState> globalKey = GlobalKey();
   TextEditingController emailAddress = TextEditingController();
   TextEditingController password = TextEditingController();
-  bool isLoading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -40,49 +42,39 @@ class _LoginPageBottomSheetBodyState extends State<LoginPageBottomSheetBody> {
             children: [
               AuthBottomSheetTopText(isDark: widget.isDark, text: 'Get Login'),
               const SizedBox(height: 16),
-              TextFieldEmail(emailAddress: emailAddress),
+              TextFieldEmail(emailAddress: emailAddress,isLoading: !widget.isLoading),
               const SizedBox(height: 8),
-              TextFieldPassword(password: password),
+              TextFieldPassword(password: password, isLoading: !widget.isLoading),
               const SizedBox(height: 22),
               CustomBottom(
-                width: double.infinity,
-                borderRadius: BorderRadius.circular(32),
+                  width: double.infinity,
+                  borderRadius: BorderRadius.circular(32),
                   onPressed: () async {
                     if (globalKey.currentState!.validate()) {
-                      try {
-                        setState(() {
-                          isLoading = true;
-                        });
-                        globalKey.currentState!.save();
-                        await login.login(
+                      globalKey.currentState!.save();
+                      await login.login(
+                          context: context,
+                          emailAddress: emailAddress.text,
+                          password: password.text);
+                      if (login.state is LoginSuccess &&
+                          FirebaseAuth.instance.currentUser!.emailVerified) {
+                        emailAddress.clear();
+                        password.clear();
+                      } else {
+                        showTopSnackBarFailure(
                             context: context,
-                            emailAddress: emailAddress.text,
-                            password: password.text);
-                        if (login.state is LoginSuccess &&
-                            FirebaseAuth.instance.currentUser!.emailVerified) {
-                          emailAddress.clear();
-                          password.clear();
-                        } else {
-                          showTopSnackBarFailure(
-                              context: context,
-                              maxLines: 3,
-                              onTap: () {
-                                getnav.Get.to(
-                                    () =>
-                                        VerificationPage(isDark: widget.isDark),
-                                    transition: getnav.Transition.leftToRight);
-                              },
-                              message:
-                                  "Please verified you email and login again.");
-                        }
-                      } finally {
-                        setState(() {
-                          isLoading = false;
-                        });
+                            maxLines: 3,
+                            onTap: () {
+                              getnav.Get.to(
+                                  () => VerificationPage(isDark: widget.isDark),
+                                  transition: getnav.Transition.leftToRight);
+                            },
+                            message:
+                                "Please verified you email and login again.");
                       }
                     }
                   },
-                  isLoading: isLoading,
+                  isLoading: widget.isLoading,
                   colorText: Colors.white,
                   colorBottom: kPrimaryColor,
                   text: 'Get Login'),

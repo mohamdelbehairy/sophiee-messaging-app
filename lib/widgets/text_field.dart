@@ -10,18 +10,21 @@ class CustomTextField extends StatelessWidget {
       this.textInputType,
       this.onChanged,
       required this.validator,
-      this.controller});
+      this.controller,
+      this.isLoading});
   final String hintText;
   final bool obscureText;
   final TextInputType? textInputType;
   final Function(String?)? onChanged;
   final String? Function(String?) validator;
   final TextEditingController? controller;
+  final bool? isLoading;
 
   @override
   Widget build(BuildContext context) {
     final isDark = context.read<LoginCubit>().isDark;
     return TextFormField(
+      enabled: isLoading,
       controller: controller,
       validator: validator,
       onChanged: onChanged,
@@ -29,7 +32,8 @@ class CustomTextField extends StatelessWidget {
       keyboardType: textInputType,
       cursorColor: const Color(0xff2b2c33),
       decoration: InputDecoration(
-        contentPadding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
+        contentPadding:
+            const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
         filled: true,
         fillColor: const Color(0xff2b2c33).withOpacity(.1),
         border: InputBorder.none,

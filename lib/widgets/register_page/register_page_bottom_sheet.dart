@@ -13,7 +13,7 @@ class RegisterPageBottomSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool isLoading = false;
+    var isLoading = context.read<RegisterCubit>().isLoading;
     return DraggableScrollableSheet(
       initialChildSize: 0.90,
       minChildSize: 0.70,
@@ -28,7 +28,7 @@ class RegisterPageBottomSheet extends StatelessWidget {
           child: BlocConsumer<RegisterCubit, RegisterState>(
             listener: (context, state) {
               if (state is RegisterLoading) {
-                isLoading = true;
+                isLoading = state.isLoading;
               }
               if (state is RegisterFailure) {
                 if (state.errorMessage == 'weak-password') {
@@ -41,23 +41,17 @@ class RegisterPageBottomSheet extends StatelessWidget {
                       message:
                           'Ops, The account already exists for that email.');
                 }
-                isLoading = false;
               } else if (state is RegisterSuccess) {
                 getnav.Get.to(() => const AddUserDataPage(),
-                    transition: getnav.Transition.leftToRight);
-                isLoading = false;
-                // Navigator.pushAndRemoveUntil(
-                //     context,
-                //     MaterialPageRoute(
-                //         builder: (context) => VerificationPage(isDark: isDark)),
-                //     (route) => false);
+                    transition: getnav.Transition.rightToLeft);
               }
             },
             builder: (context, state) {
               return Column(
                 children: [
                   const SizedBox(width: 50, child: Divider(thickness: 5)),
-                  RegisterPageBottomSheetBody(isLoading: isLoading),
+                  RegisterPageBottomSheetBody(
+                      isLoading: isLoading, enable: isLoading),
                 ],
               );
             },

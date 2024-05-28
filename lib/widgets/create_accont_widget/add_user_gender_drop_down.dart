@@ -28,7 +28,10 @@ class AddUserGenderDropDown extends StatelessWidget {
                 icon: Icon(FontAwesomeIcons.caretDown,
                     color: iconColor, size: size.width * .045),
                 items: items.map((item) {
-                  return DropdownMenuItem(value: item, child: Text(item));
+                  return DropdownMenuItem(
+                      value: item,
+                      child:
+                          SizedBox(width: size.width * .8, child: Text(item)));
                 }).toList(),
                 onChanged: (value) {
                   if (value != null) {

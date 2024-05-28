@@ -11,8 +11,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class RegisterPageBottomSheetBody extends StatefulWidget {
-  const RegisterPageBottomSheetBody({super.key, required this.isLoading});
+  const RegisterPageBottomSheetBody(
+      {super.key, required this.isLoading, required this.enable});
   final bool isLoading;
+  final bool enable;
 
   @override
   State<RegisterPageBottomSheetBody> createState() =>
@@ -43,12 +45,13 @@ class _RegisterPageBottomSheetBodyState
             children: [
               AuthBottomSheetTopText(isDark: isDark, text: 'Signup'),
               const SizedBox(height: 16),
-              TextFieldEmail(emailAddress: emailAddress),
+              TextFieldEmail(
+                  emailAddress: emailAddress, isLoading: !widget.enable),
               const SizedBox(height: 8),
-              TextFieldPassword(password: password),
+              TextFieldPassword(password: password, isLoading: !widget.enable),
               const SizedBox(height: 8),
               TextFieldConfirmPassword(
-                  confirmPassword: confirmPassword, password: password),
+                  confirmPassword: confirmPassword, password: password,isLoading: !widget.enable),
               CustomTextBottomSheetReadAndAgree(
                   onTap: () {
                     setState(() {

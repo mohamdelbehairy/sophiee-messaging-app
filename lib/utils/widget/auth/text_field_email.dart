@@ -3,13 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:sophiee/widgets/text_field.dart';
 
 class TextFieldEmail extends StatelessWidget {
-  const TextFieldEmail({super.key, required this.emailAddress});
+  const TextFieldEmail({super.key, required this.emailAddress, this.isLoading});
 
   final TextEditingController emailAddress;
+  final bool? isLoading;
 
   @override
   Widget build(BuildContext context) {
     return CustomTextField(
+        isLoading: isLoading,
         controller: emailAddress,
         validator: (value) {
           if (value!.isEmpty) {

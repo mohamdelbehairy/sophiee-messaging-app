@@ -34,8 +34,9 @@ class _AddUserDateOfBirthState extends State<AddUserDateOfBirth> {
 
   void updateIconColor() {
     setState(() {
-      iconColor =
-          widget.dateOfBirth.text.isEmpty ? const Color(0xffc3c5c5) : Colors.black;
+      iconColor = widget.dateOfBirth.text.isEmpty
+          ? const Color(0xffc3c5c5)
+          : Colors.black;
     });
   }
 
@@ -53,6 +54,7 @@ class _AddUserDateOfBirthState extends State<AddUserDateOfBirth> {
       onTap: () {
         if (widget.enabled) {
           showDatePicker(
+                  // barrierColor: Colors.amber,
                   context: context,
                   initialDate: DateTime.now(),
                   firstDate: DateTime(2000),

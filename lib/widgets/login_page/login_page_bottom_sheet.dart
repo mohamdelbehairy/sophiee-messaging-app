@@ -14,6 +14,7 @@ class LoginPageBottomSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var token = context.read<UserTokenCubit>();
+    var isLoading = context.read<LoginCubit>().isLoading;
     return DraggableScrollableSheet(
       initialChildSize: 0.88,
       minChildSize: 0.75,
@@ -27,6 +28,9 @@ class LoginPageBottomSheet extends StatelessWidget {
                   topLeft: Radius.circular(16), topRight: Radius.circular(16))),
           child: BlocConsumer<LoginCubit, LoginState>(
             listener: (context, state) async {
+              if (state is LoginLoading) {
+                isLoading = state.isLoading;
+              }
               if (state is LoginFailure &&
                   state.errorMessage == 'invalid-credential') {
                 showTopSnackBarFailure(
@@ -48,7 +52,8 @@ class LoginPageBottomSheet extends StatelessWidget {
               return Column(
                 children: [
                   const SizedBox(width: 50, child: Divider(thickness: 5)),
-                  LoginPageBottomSheetBody(isDark: isDark),
+                  LoginPageBottomSheetBody(
+                      isDark: isDark, isLoading: isLoading),
                 ],
               );
             },
