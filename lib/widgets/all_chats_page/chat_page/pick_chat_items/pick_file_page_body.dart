@@ -149,7 +149,8 @@ class _GroupsPagePickFilePageBodyState extends State<PickFilePageBody> {
                                       ? 'KB'
                                       : 'MB');
 
-                          if (widget.user.isChatNotify) {
+                          if (widget.user.isChatNotify &&
+                              !friendData.muteUsers.contains(userData.userID)) {
                             await sendMessageNotification.sendMessageNotification(
                                 receiverToken: friendData.token,
                                 senderName: userData.userName,

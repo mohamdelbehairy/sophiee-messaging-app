@@ -96,7 +96,8 @@ class _PickVideoSendVideoMessageButtonState
                         messageText: widget.controller.text.isEmpty
                             ? widget.controller.text
                             : null);
-                    if (widget.user.isChatNotify) {
+                    if (widget.user.isChatNotify &&
+                        !friendData.muteUsers.contains(userData.userID)) {
                       await sendMessageNotification.sendMessageNotification(
                           receiverToken: friendData.token,
                           senderName: userData.userName,

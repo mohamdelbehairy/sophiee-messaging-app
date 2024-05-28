@@ -130,7 +130,8 @@ class _PickImagePageBodyState extends State<PickImagePageBody> {
                               messageText: controller.text.isEmpty
                                   ? controller.text
                                   : null);
-                          if (widget.user.isChatNotify) {
+                          if (widget.user.isChatNotify &&
+                              !friendData.muteUsers.contains(userData.userID)) {
                             await sendMessageNotification.sendMessageNotification(
                                 receiverToken: friendData.token,
                                 senderName: userData.userName,
