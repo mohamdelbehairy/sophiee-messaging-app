@@ -37,41 +37,44 @@ class _FriendsPageBodyState extends State<FriendsPageBody> {
                         () => MyFriendPage(user: state.friends[index]),
                         transition: getnav.Transition.rightToLeft);
                   },
-                  child: ListViewListTile(
-                    user: state.friends[index],
-                    size: widget.size,
-                    widget: BlocBuilder<GetUserDataCubit, GetUserDataStates>(
-                      builder: (context, userState) {
-                        if (userState is GetUserDataSuccess &&
-                            userState.userModel.isNotEmpty) {
-                          final currentUser = state.friends[index].userID;
-                          final userData = userState.userModel.firstWhere(
-                              (element) => element.userID == currentUser);
-                          int differenceInMinutes = Timestamp.now()
-                              .toDate()
-                              .difference(userData.onlineStatue)
-                              .inMinutes;
-                          if (differenceInMinutes < 1 && userData.isLastSeendAndOnline) {
-                            color = kPrimaryColor;
-                          } else {
-                            color = Colors.grey;
-                          }
+                  child: BlocBuilder<GetUserDataCubit, GetUserDataStates>(
+                    builder: (context, userState) {
+                      if (userState is GetUserDataSuccess &&
+                          userState.userModel.isNotEmpty) {
+                        final friendData = userState.userModel.firstWhere(
+                            (element) =>
+                                element.userID == state.friends[index].userID);
+                        int differenceInMinutes = Timestamp.now()
+                            .toDate()
+                            .difference(friendData.onlineStatue)
+                            .inMinutes;
+                        if (differenceInMinutes < 1 &&
+                            friendData.isLastSeendAndOnline) {
+                          color = kPrimaryColor;
+                        } else {
+                          color = Colors.grey;
                         }
-                        return Positioned(
-                          right: 0.0,
-                          bottom: 0.0,
-                          child: CircleAvatar(
-                            radius: widget.size.width * .02,
-                            backgroundColor: isDark
-                                ? cardDarkModeBackground
-                                : const Color(0xfff1f2f2),
+                        return ListViewListTile(
+                          friendData: friendData,
+                          size: widget.size,
+                          widget: Positioned(
+                            right: 0.0,
+                            bottom: 0.0,
                             child: CircleAvatar(
-                                radius: widget.size.width * .015,
-                                backgroundColor: color),
+                              radius: widget.size.width * .02,
+                              backgroundColor: isDark
+                                  ? cardDarkModeBackground
+                                  : const Color(0xfff1f2f2),
+                              child: CircleAvatar(
+                                  radius: widget.size.width * .015,
+                                  backgroundColor: color),
+                            ),
                           ),
                         );
-                      },
-                    ),
+                      } else {
+                        return Container();
+                      }
+                    },
                   ),
                 );
               });
@@ -80,7 +83,7 @@ class _FriendsPageBodyState extends State<FriendsPageBody> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               CustomNoResultFound(
-                image: emptyImageUrl,
+                  image: emptyImageUrl,
                   textOne: 'No Friend Found',
                   textTwo:
                       'We didn\'t find any friends yet \n Please add a new friend'),

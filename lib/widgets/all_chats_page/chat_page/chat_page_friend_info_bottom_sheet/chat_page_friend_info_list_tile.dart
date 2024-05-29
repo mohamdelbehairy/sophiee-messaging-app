@@ -18,17 +18,30 @@ class ChatPageFriendInfoListTile extends StatelessWidget {
       child: ListTile(
         title: Row(
           children: [
-            Text(user.userName,
-                style: TextStyle(color: isDark ? Colors.white : Colors.black)),
+            Padding(
+              padding: EdgeInsets.only(top: !user.isBioAndNickName ? 8 : 0.0),
+              child: Text(user.userName,
+                  style:
+                      TextStyle(color: isDark ? Colors.white : Colors.black)),
+            ),
             const SizedBox(width: 4),
-            const CircleAvatar(radius: 4, backgroundColor: kPrimaryColor)
+            Padding(
+                padding: EdgeInsets.only(top: !user.isBioAndNickName ? 8 : 0.0),
+                child: const CircleAvatar(
+                    radius: 4, backgroundColor: kPrimaryColor))
           ],
         ),
         leading: CircleAvatar(
             backgroundColor: Colors.transparent,
-            backgroundImage: CachedNetworkImageProvider(
-                !user.isProfilePhotos ? defaultProfileImageUrl : user.profileImage)),
-        subtitle: Text(user.nickName.isNotEmpty ? user.nickName : user.bio,
+            backgroundImage: CachedNetworkImageProvider(!user.isProfilePhotos
+                ? defaultProfileImageUrl
+                : user.profileImage)),
+        subtitle: Text(
+            user.isBioAndNickName
+                ? user.nickName.isNotEmpty
+                    ? user.nickName
+                    : user.bio
+                : '',
             style: const TextStyle(color: Colors.blue)),
       ),
     );

@@ -7,8 +7,7 @@ import '../../../../cubit/follower/follower_cubit.dart';
 import '../../../../cubit/get_followers/get_followers_cubit.dart';
 import '../../../../cubit/get_following/get_following_cubit.dart';
 import '../../../../cubit/get_friends/get_friends_cubit.dart';
-import '../custom_following_trailing_widget.dart';
-import '../list_view_list_tile.dart';
+import 'following_page_list_view.dart';
 
 class FollowingPageBodyListView extends StatelessWidget {
   const FollowingPageBodyListView(
@@ -21,30 +20,20 @@ class FollowingPageBodyListView extends StatelessWidget {
   Widget build(BuildContext context) {
     var follower = context.read<FollowerCubit>();
     return BlocListener<FollowerCubit, FollowerState>(
-      listener: (context, state) {
-        if (state is DeleteFollowerSuccess) {
-          context
-              .read<GetFriendsCubit>()
-              .getFriends(userID: FirebaseAuth.instance.currentUser!.uid);
-          context
-              .read<GetFollowersCubit>()
-              .getFollowers(userID: FirebaseAuth.instance.currentUser!.uid);
-          context
-              .read<GetFollowingCubit>()
-              .getFollowing(userID: FirebaseAuth.instance.currentUser!.uid);
-        }
-      },
-      child: ListView.builder(
-          itemCount: following.followingList.length,
-          itemBuilder: (context, index) {
-            return ListViewListTile(
-                user: following.followingList[index],
-                size: size,
-                trailingWidget: FollowingCustomTrailingWidget(
-                    size: size,
-                    user: following.followingList[index],
-                    follower: follower));
-          }),
-    );
+        listener: (context, state) {
+          if (state is DeleteFollowerSuccess) {
+            context
+                .read<GetFriendsCubit>()
+                .getFriends(userID: FirebaseAuth.instance.currentUser!.uid);
+            context
+                .read<GetFollowersCubit>()
+                .getFollowers(userID: FirebaseAuth.instance.currentUser!.uid);
+            context
+                .read<GetFollowingCubit>()
+                .getFollowing(userID: FirebaseAuth.instance.currentUser!.uid);
+          }
+        },
+        child: FollowingPageListView(
+            following: following, size: size, follower: follower));
   }
 }

@@ -24,7 +24,7 @@ class ProfilePageCardThreeBody extends StatelessWidget {
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(size.width * .02)),
       child: CustomScrollView(
-        physics: getImage.imageList.isEmpty || getImage.imageList.length > 10
+        physics: getImage.imageList.isEmpty || getImage.imageList.length > 15
             ? const NeverScrollableScrollPhysics()
             : const BouncingScrollPhysics(),
         slivers: [

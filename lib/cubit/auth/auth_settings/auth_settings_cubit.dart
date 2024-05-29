@@ -26,7 +26,7 @@ class AuthSettingsCubit extends Cubit<AuthSettingsState> {
     try {
       await FirebaseAuth.instance.signOut();
       SharedPreferences prefs = await SharedPreferences.getInstance();
-      prefs.clear();
+      prefs.remove('userID');
       emit(EmailSignOutSuccess());
     } catch (e) {
       emit(AuthSettingsFailure(errorMessage: e.toString()));
@@ -40,7 +40,7 @@ class AuthSettingsCubit extends Cubit<AuthSettingsState> {
       GoogleSignIn googleSignIn = GoogleSignIn();
       await googleSignIn.signOut();
       SharedPreferences prefs = await SharedPreferences.getInstance();
-      prefs.clear();
+      prefs.remove('userID');
       emit(GoogleSignOutSuccess());
     } catch (e) {
       emit(AuthSettingsFailure(errorMessage: e.toString()));
@@ -53,7 +53,7 @@ class AuthSettingsCubit extends Cubit<AuthSettingsState> {
       FacebookAuth facebookAuth = FacebookAuth.instance;
       await facebookAuth.logOut();
       SharedPreferences prefs = await SharedPreferences.getInstance();
-      prefs.clear();
+      prefs.remove('userID');
       emit(FacebookSignOutSuccess());
     } catch (e) {
       emit(AuthSettingsFailure(errorMessage: e.toString()));

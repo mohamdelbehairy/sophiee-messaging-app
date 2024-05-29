@@ -37,7 +37,7 @@ class FollowingCustomTrailingWidget extends StatelessWidget {
                 await friend.deleteFriends(friendID: user.userID);
               }
             },
-            buttonName: 'Un Follow');
+            buttonName: 'Remove');
       },
     );
   }

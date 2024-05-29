@@ -9,12 +9,12 @@ class ProfileDetailsListTileLeading extends StatelessWidget {
       {super.key,
       required this.size,
       required this.isDark,
-      required this.data,
+      required this.friendData,
       required this.widget});
 
   final Size size;
   final bool isDark;
-  final UserModel data;
+  final UserModel friendData;
   final Widget? widget;
 
   @override
@@ -32,9 +32,9 @@ class ProfileDetailsListTileLeading extends StatelessWidget {
                         isDark ? Colors.white12 : Colors.grey.shade300,
                     shimmerHighlightColor:
                         isDark ? Colors.white24 : Colors.grey.shade100,
-                    imageUrl: !data.isProfilePhotos
+                    imageUrl: !friendData.isProfilePhotos
                         ? defaultProfileImageUrl
-                        : data.profileImage))),
+                        : friendData.profileImage))),
         if (widget != null) widget!
       ],
     );

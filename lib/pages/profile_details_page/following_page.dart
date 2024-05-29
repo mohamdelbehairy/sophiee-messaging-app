@@ -15,24 +15,22 @@ class FollowingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-          titleSpacing: size.width * -.02,
-          backgroundColor: kPrimaryColor,
-          title: const Text('Following',
-              style: TextStyle(fontWeight: FontWeight.w400, fontSize: 22)),
-          leading: GestureDetector(
-              onTap: () {
-                context.read<GetFollowingCubit>().getFollowing(
-                    userID: FirebaseAuth.instance.currentUser!.uid);
-                context.read<GetFollowersCubit>().getFollowers(
-                    userID: FirebaseAuth.instance.currentUser!.uid);
-                context
-                    .read<GetFriendsCubit>()
-                    .getFriends(userID: FirebaseAuth.instance.currentUser!.uid);
-                Navigator.pop(context);
-              },
-              child: const Icon(Icons.arrow_back))),
-      body: FollowingPageBody(size: size),
-    );
+        appBar: AppBar(
+            titleSpacing: size.width * -.02,
+            backgroundColor: kPrimaryColor,
+            title: const Text('Following',
+                style: TextStyle(fontWeight: FontWeight.w400, fontSize: 22)),
+            leading: GestureDetector(
+                onTap: () {
+                  context.read<GetFollowingCubit>().getFollowing(
+                      userID: FirebaseAuth.instance.currentUser!.uid);
+                  context.read<GetFollowersCubit>().getFollowers(
+                      userID: FirebaseAuth.instance.currentUser!.uid);
+                  context.read<GetFriendsCubit>().getFriends(
+                      userID: FirebaseAuth.instance.currentUser!.uid);
+                  Navigator.pop(context);
+                },
+                child: const Icon(Icons.arrow_back))),
+        body: FollowingPageBody(size: size));
   }
 }

@@ -5,11 +5,11 @@ import '../../models/users_model.dart';
 class ProfileDetailsListTileTitle extends StatelessWidget {
   const ProfileDetailsListTileTitle(
       {super.key,
-      required this.data,
+      required this.friendData,
       required this.size,
       required this.isDark});
 
-  final UserModel data;
+  final UserModel friendData;
   final Size size;
   final bool isDark;
 
@@ -17,10 +17,10 @@ class ProfileDetailsListTileTitle extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
         padding: EdgeInsets.only(
-            top: data.bio.isEmpty && data.nickName.isEmpty
+            top: friendData.bio.isEmpty && friendData.nickName.isEmpty  || !friendData.isBioAndNickName
                 ? size.width * .02
                 : 0),
-        child: Text(data.userName,
+        child: Text(friendData.userName,
             style: TextStyle(
                 color: isDark ? Colors.white : Colors.black,
                 fontSize: size.width * .038)));

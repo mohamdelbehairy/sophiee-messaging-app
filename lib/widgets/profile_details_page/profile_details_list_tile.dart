@@ -9,13 +9,13 @@ class ProfileDetailsListTile extends StatelessWidget {
   const ProfileDetailsListTile(
       {super.key,
       required this.size,
-      required this.data,
+      required this.friendData,
       required this.isDark,
       required this.widget,
       this.trailingWidget});
 
   final Size size;
-  final UserModel data;
+  final UserModel friendData;
   final bool isDark;
   final Widget? widget;
   final Widget? trailingWidget;
@@ -24,10 +24,10 @@ class ProfileDetailsListTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
         title:
-            ProfileDetailsListTileTitle(data: data, size: size, isDark: isDark),
+            ProfileDetailsListTileTitle(friendData: friendData, size: size, isDark: isDark),
         leading: ProfileDetailsListTileLeading(
-            size: size, isDark: isDark, data: data, widget: widget),
-        subtitle: ProfileDetailsListTileSubTitle(data: data, size: size),
+            size: size, isDark: isDark, friendData: friendData, widget: widget),
+        subtitle: ProfileDetailsListTileSubTitle(friendData: friendData, size: size),
         trailing: trailingWidget);
   }
 }
