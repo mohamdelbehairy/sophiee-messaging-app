@@ -9,9 +9,7 @@ import 'package:sophiee/utils/widget/messages/slider_sound.dart';
 import 'package:sophiee/widgets/all_chats_page/chat_page/pick_chat_items/pick_sound_page/custom_sound_time.dart';
 
 class PickSoundPageBody extends StatefulWidget {
-  const PickSoundPageBody({super.key, required this.size, 
-  required this.file
-  });
+  const PickSoundPageBody({super.key, required this.size, required this.file});
   final Size size;
   final File file;
 

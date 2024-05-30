@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
 class PickChatTextField extends StatelessWidget {
-  const PickChatTextField({super.key, required this.controller, required this.hintText});
+  const PickChatTextField({super.key, required this.controller, required this.hintText, required this.isLoading});
   final TextEditingController controller;
   final String hintText;
+  final bool isLoading;
 
   @override
   Widget build(BuildContext context) {
@@ -14,12 +15,16 @@ class PickChatTextField extends StatelessWidget {
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: size.height *.025),
         child: TextField(
+          enabled: isLoading,
           controller: controller,
           decoration: InputDecoration(
               filled: true,
               fillColor: const Color(0xff1e2c32),
               contentPadding: EdgeInsets.symmetric(horizontal: size.height *.025),
-              border: InputBorder.none,
+              border: OutlineInputBorder(
+                borderSide: BorderSide.none,
+                borderRadius: BorderRadius.circular(size.height *.032),
+              ),
               enabledBorder: OutlineInputBorder(
                 borderSide: BorderSide.none,
                 borderRadius: BorderRadius.circular(size.height *.032),

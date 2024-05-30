@@ -8,8 +8,10 @@ part 'upload_video_state.dart';
 class UploadVideoCubit extends Cubit<UploadVideoState> {
   UploadVideoCubit() : super(UploadVideoInitial());
 
-  Future<String> uploadVideo({required File videoFile,required String fieldName}) async {
-    emit(UploadVideoLoading());
+  bool isLoading = false;
+  Future<String> uploadVideo(
+      {required File videoFile, required String fieldName}) async {
+    emit(UploadVideoLoading(isLoading: true));
     try {
       String videoName = DateTime.now().millisecondsSinceEpoch.toString();
       Reference reference =
@@ -18,9 +20,11 @@ class UploadVideoCubit extends Cubit<UploadVideoState> {
       await reference.putFile(videoFile);
       String videoUrl = await reference.getDownloadURL();
       emit(UploadVideoSuccess());
+      emit(UploadVideoLoading(isLoading: false));
       return videoUrl;
     } catch (e) {
       emit(UploadVideoFailure(errorMessage: e.toString()));
+      emit(UploadVideoLoading(isLoading: false));
       debugPrint('error from upload video cubit: ${e.toString()}');
       return '';
     }

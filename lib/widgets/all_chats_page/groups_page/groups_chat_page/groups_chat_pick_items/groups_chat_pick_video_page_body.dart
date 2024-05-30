@@ -115,6 +115,7 @@ class _GroupsChatPickVideoPageBodyState
             width: size.width,
             bottom: 0.0,
             child: PickChatTextField(
+                 isLoading: true,
               controller: controller,
               hintText: 'Enter a message..',
             ),

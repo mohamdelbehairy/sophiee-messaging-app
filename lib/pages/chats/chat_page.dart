@@ -6,20 +6,33 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sophiee/widgets/all_chats_page/chat_page/chat_page_body.dart';
 
-class ChatPage extends StatelessWidget {
+import '../../cubit/message/message_cubit.dart';
+
+class ChatPage extends StatefulWidget {
   const ChatPage({super.key, required this.userID});
   final String userID;
 
   @override
+  State<ChatPage> createState() => _ChatPageState();
+}
+
+class _ChatPageState extends State<ChatPage> {
+  @override
+  void initState() {
+    context.read<MessageCubit>().getMessage(receiverID: widget.userID);
+    context.read<ChatsCubit>().chats();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-    context.read<ChatsCubit>().chats();
 
     return BlocBuilder<GetUserDataCubit, GetUserDataStates>(
       builder: (context, state) {
         if (state is GetUserDataSuccess && state.userModel.isNotEmpty) {
-          final user =
-              state.userModel.firstWhere((element) => element.userID == userID);
+          final user = state.userModel
+              .firstWhere((element) => element.userID == widget.userID);
           final userData = state.userModel.firstWhere((element) =>
               element.userID == FirebaseAuth.instance.currentUser!.uid);
           return ChatPageBody(size: size, user: user, userData: userData);

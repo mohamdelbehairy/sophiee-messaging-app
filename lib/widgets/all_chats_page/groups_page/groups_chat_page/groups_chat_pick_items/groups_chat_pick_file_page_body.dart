@@ -84,6 +84,7 @@ class _GroupsPagePickFilePageBodyState
             width: size.width,
             bottom: 0.0,
             child: PickChatTextField(
+                 isLoading: true,
                 controller: controller, hintText: 'Add a caption...')),
         Positioned(
           width: size.width,
