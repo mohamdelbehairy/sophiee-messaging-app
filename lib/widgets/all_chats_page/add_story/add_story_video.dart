@@ -2,9 +2,8 @@ import 'dart:io';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:sophiee/cubit/story/story_cubit.dart';
-import 'package:sophiee/cubit/story/story_state.dart';
 import 'package:sophiee/widgets/all_chats_page/add_story/add_story_share_bottom.dart';
-import 'package:sophiee/widgets/all_chats_page/custom_chat_text_field.dart';
+import 'package:sophiee/widgets/all_chats_page/add_story/add_story_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:video_player/video_player.dart';
@@ -16,6 +15,7 @@ import '../../../cubit/upload/upload_video/upload_video_cubit.dart';
 import '../../../cubit/user_date/get_user_data/get_user_data_cubit.dart';
 import '../../../cubit/user_date/get_user_data/get_user_data_state.dart';
 import '../../../models/users_model.dart';
+import '../chat_page/pick_chat_items/pick_video_page/pick_video_play.dart';
 
 class AddStoryVideo extends StatefulWidget {
   const AddStoryVideo({super.key, required this.video});
@@ -26,31 +26,21 @@ class AddStoryVideo extends StatefulWidget {
 }
 
 class _AddStoryVideoState extends State<AddStoryVideo> {
-  late VideoPlayerController _controller;
+  late VideoPlayerController videoPlayerController;
   TextEditingController controller = TextEditingController();
   Duration? videoDuration;
+  late bool _isPlaying;
 
   @override
   void initState() {
-    context
-        .read<GetFriendsCubit>()
-        .getFriends(userID: FirebaseAuth.instance.currentUser!.uid);
-    context.read<GetUserDataCubit>().getUserData();
+    addStoryVideoInit();
     super.initState();
-    _controller = VideoPlayerController.file(
-      File(widget.video.path),
-    )..initialize().then((_) {
-        setState(() {
-          _controller.play();
-          videoDuration = _controller.value.duration;
-        });
-      });
   }
 
   @override
   void dispose() {
     super.dispose();
-    _controller.dispose();
+    videoPlayerController.dispose();
     controller.dispose();
   }
 
@@ -65,39 +55,23 @@ class _AddStoryVideoState extends State<AddStoryVideo> {
     var uploadVideo = context.read<UploadVideoCubit>();
     var storyNotification = context.read<StoryNotificationCubit>();
 
-    return BlocListener<StoryCubit, StoryState>(
-      listener: (context, state) {
-        if (state is AddStorySuccess) {
-          // Navigator.pushAndRemoveUntil(
-          //     context,
-          //     MaterialPageRoute(builder: (context) => const HomePage()),
-          //     (route) => false);
-        }
-      },
-      child: Scaffold(
-        body: Stack(
+    return Scaffold(
+      appBar: AppBar(backgroundColor: Colors.black),
+      body: GestureDetector(
+        onTap: () {
+          setState(() {
+            if (videoPlayerController.value.isPlaying) {
+              videoPlayerController.pause();
+            } else {
+              videoPlayerController.play();
+            }
+            _isPlaying = !_isPlaying;
+          });
+        },
+        child: Stack(
           children: [
-            VideoPlayer(_controller),
-            Positioned(
-              top: size.height * .09,
-              child: IconButton(
-                splashColor: Colors.transparent,
-                highlightColor: Colors.transparent,
-                onPressed: () => Navigator.pop(context),
-                icon: const Icon(
-                  Icons.close,
-                  color: Colors.white,
-                ),
-              ),
-            ),
-            Positioned(
-              bottom: size.height * 0.02,
-              width: size.width,
-              child: CustomChatTextField(
-                hintText: 'Enter Type ....',
-                controller: controller,
-              ),
-            ),
+            VideoPlayer(videoPlayerController),
+            AddStoryTextField(size: size, controller: controller),
             Positioned(
               bottom: size.height * .02,
               right: size.width * .02,
@@ -150,9 +124,50 @@ class _AddStoryVideoState extends State<AddStoryVideo> {
                 ),
               ),
             ),
+            if (!videoPlayerController.value.isPlaying)
+              PickVideoPlayVideo(size: size),
           ],
         ),
       ),
     );
+  }
+
+  void addStoryVideoInit() {
+    context
+        .read<GetFriendsCubit>()
+        .getFriends(userID: FirebaseAuth.instance.currentUser!.uid);
+    context.read<GetUserDataCubit>().getUserData();
+    super.initState();
+    _isPlaying = false;
+    videoPlayerController = VideoPlayerController.file(
+      File(widget.video.path),
+    )..initialize().then((_) {
+        setState(() {
+          videoPlayerController.setLooping(false);
+          _isPlaying = true;
+          videoPlayerController.addListener(_videoListener);
+        });
+      });
+  }
+
+  VideoPlayerController videoPayerMethod() {
+    return VideoPlayerController.file(
+      File(widget.video.path),
+    )..initialize().then((_) {
+        videoPlayerController.setLooping(false);
+        _isPlaying = true;
+        videoPlayerController.addListener(_videoListener);
+      });
+  }
+
+  void _videoListener() {
+    if (videoPlayerController.value.position ==
+        videoPlayerController.value.duration) {
+      setState(() {
+        _isPlaying = false;
+        videoPlayerController.pause();
+        videoPlayerController.seekTo(Duration.zero);
+      });
+    }
   }
 }

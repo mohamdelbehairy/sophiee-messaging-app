@@ -23,14 +23,12 @@ class CardThreeCustomScrollItemOne extends StatelessWidget {
         isDark: isDark,
         textOne: 'Photos',
         textTwo: 'See all',
-        onPressed: () {
-          getnav.Get.to(
-              () => CardThreeSeeAllPage(
-                    isDark: isDark,
-                    getImage: getImage,
-                    size: size,
-                  ),
-              transition: getnav.Transition.downToUp);
-        });
+        onPressed: () => getnav.Get.to(
+            () => CardThreeSeeAllPage(
+                  isDark: isDark,
+                  getImage: getImage,
+                  size: size,
+                ),
+            transition: getnav.Transition.downToUp));
   }
 }
