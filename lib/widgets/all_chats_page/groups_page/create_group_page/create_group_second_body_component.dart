@@ -12,16 +12,15 @@ import '../../../../utils/initial_state.dart';
 import 'create_group_second_card_two.dart';
 
 class CreateGroupSecondBodyComponenet extends StatelessWidget {
-  const CreateGroupSecondBodyComponenet({
-    super.key,
-    required this.size,
-    required this.createGroup,
-    required this.globalKey,
-    required this.groupNameController,
-    required this.groupsMembersSelected,
-    required this.selectedImage,
-    required this.descriptionController,
-  });
+  const CreateGroupSecondBodyComponenet(
+      {super.key,
+      required this.size,
+      required this.createGroup,
+      required this.globalKey,
+      required this.groupNameController,
+      required this.groupsMembersSelected,
+      required this.selectedImage,
+      required this.descriptionController});
 
   final Size size;
   final CreateGroupsCubit createGroup;

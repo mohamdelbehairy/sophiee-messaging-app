@@ -16,13 +16,13 @@ class ItemBottomSubTitleListTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final isDark = context.read<LoginCubit>().isDark;
     final size = MediaQuery.of(context).size;
-    context.read<MessageCubit>().isTyping(receiverID: data.userID);
+    // context.read<MessageCubit>().isTyping(receiverID: data.userID);
     return BlocBuilder<MessageCubit, MessageState>(
       builder: (context, state) {
-        if (state is TypingSuccess && state.isTyping == true) {
-          return Text('type...',
-              style: TextStyle(color: isDark ? Colors.white : Colors.black));
-        }
+        // if (state is TypingSuccess && state.isTyping == true) {
+        //   return Text('type...',
+        //       style: TextStyle(color: isDark ? Colors.white : Colors.black));
+        // }
         return Row(
           children: [
            

@@ -4,6 +4,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../constants.dart';
+
 class FriendsSelectedListViewHorzItem extends StatelessWidget {
   const FriendsSelectedListViewHorzItem(
       {super.key, required this.size, required this.userID});
@@ -26,8 +28,10 @@ class FriendsSelectedListViewHorzItem extends StatelessWidget {
                 CircleAvatar(
                     radius: size.height * .03,
                     backgroundColor: Colors.transparent,
-                    backgroundImage:
-                        CachedNetworkImageProvider(userData.profileImage)),
+                    backgroundImage: CachedNetworkImageProvider(
+                        userData.isProfilePhotos
+                            ? userData.profileImage
+                            : defaultProfileImageUrl)),
                 Text(userData.userName.split(' ')[0],
                     style: TextStyle(
                         color: Colors.grey, fontSize: size.width * .03)),

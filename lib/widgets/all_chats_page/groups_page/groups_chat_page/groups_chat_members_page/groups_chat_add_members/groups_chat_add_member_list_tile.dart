@@ -102,27 +102,28 @@ class _GroupsChatAddMembersListTileState
                     ),
                   ),
                   leading: CircleAvatar(
-                    radius: widget.size.height * .028,
-                    backgroundColor: Colors.transparent,
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(30),
-                      child: FancyShimmerImage(
-                          boxFit: BoxFit.cover,
-                          shimmerBaseColor: widget.isDark
-                              ? Colors.white12
-                              : Colors.grey.shade300,
-                          shimmerHighlightColor: widget.isDark
-                              ? Colors.white24
-                              : Colors.grey.shade100,
-                          imageUrl: data.profileImage),
-                    ),
-                  ),
+                      radius: widget.size.height * .028,
+                      backgroundColor: Colors.transparent,
+                      child: ClipRRect(
+                          borderRadius: BorderRadius.circular(30),
+                          child: FancyShimmerImage(
+                              boxFit: BoxFit.cover,
+                              shimmerBaseColor: widget.isDark
+                                  ? Colors.white12
+                                  : Colors.grey.shade300,
+                              shimmerHighlightColor: widget.isDark
+                                  ? Colors.white24
+                                  : Colors.grey.shade100,
+                              imageUrl: data.isProfilePhotos
+                                  ? data.profileImage
+                                  : defaultProfileImageUrl))),
                   subtitle: Text(
                       widget.groupModel.usersID.contains(widget.user.userID)
                           ? 'Already added to the group'
                           : data.bio,
                       style: TextStyle(
-                          color: widget.isDark ? Colors.white60 : Colors.grey,fontSize: 12)),
+                          color: widget.isDark ? Colors.white60 : Colors.grey,
+                          fontSize: 12)),
                 );
               } else {
                 return Container();

@@ -32,7 +32,7 @@ class GroupsChatMembersPageListView extends StatelessWidget {
                         .toDate()
                         .difference(userData.onlineStatue)
                         .inMinutes;
-                    if (differenceInMinutes < 1) {
+                    if (differenceInMinutes < 1 && userData.isLastSeendAndOnline) {
                       color = kPrimaryColor;
                     } else {
                       color = Colors.grey;

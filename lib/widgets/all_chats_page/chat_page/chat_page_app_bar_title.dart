@@ -19,7 +19,7 @@ class ChatPageAppBarTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    context.read<MessageCubit>().isTyping(receiverID: user.userID);
+    
     return BlocBuilder<GetUserDataCubit, GetUserDataStates>(
       builder: (context, state) {
         if (state is GetUserDataSuccess && state.userModel.isNotEmpty) {
@@ -102,7 +102,7 @@ class ChatPageAppBarTitle extends StatelessWidget {
                                       ? size.width * .025
                                       : !user.isLastSeendAndOnline
                                           ? size.width * .022
-                                          : size.width * .02),
+                                          : size.width * .022),
                             );
                           } else {
                             return Text(text,

@@ -16,16 +16,15 @@ class GroupsChatMembersPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-          centerTitle: true,
-          backgroundColor: kPrimaryColor,
-          title: const Text('Actions',
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 22,
-                  fontWeight: FontWeight.w400))),
-      body: GroupsChatMembersPageBody(
-          size: size, groupModel: groupModel, isDark: isDark),
-    );
+        appBar: AppBar(
+            centerTitle: true,
+            backgroundColor: kPrimaryColor,
+            title: const Text('Actions',
+                style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 22,
+                    fontWeight: FontWeight.w400))),
+        body: GroupsChatMembersPageBody(
+            size: size, groupModel: groupModel, isDark: isDark));
   }
 }

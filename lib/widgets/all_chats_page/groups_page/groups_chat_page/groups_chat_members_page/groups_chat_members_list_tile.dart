@@ -1,3 +1,4 @@
+import 'package:sophiee/constants.dart';
 import 'package:sophiee/cubit/auth/login/login_cubit.dart';
 import 'package:sophiee/models/group_model.dart';
 import 'package:sophiee/models/users_model.dart';
@@ -30,11 +31,16 @@ class GroupsChatMembersListTile extends StatelessWidget {
         SizedBox(
           width: size.width * .72,
           child: ListTile(
-            title: Text(userData.userName,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                style: TextStyle(color: isDark ? Colors.white : Colors.black)),
-            subtitle: Text(userData.bio,
+            title: Padding(
+              padding:
+                  EdgeInsets.only(top: !userData.isBioAndNickName ? 8 : 0.0),
+              child: Text(userData.userName,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style:
+                      TextStyle(color: isDark ? Colors.white : Colors.black)),
+            ),
+            subtitle: Text(userData.isBioAndNickName ? userData.bio : '',
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(
@@ -43,18 +49,18 @@ class GroupsChatMembersListTile extends StatelessWidget {
             leading: Stack(
               children: [
                 CircleAvatar(
-                  backgroundColor: Colors.transparent,
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(50),
-                    child: FancyShimmerImage(
-                        boxFit: BoxFit.cover,
-                        shimmerBaseColor:
-                            isDark ? Colors.white12 : Colors.grey.shade300,
-                        shimmerHighlightColor:
-                            isDark ? Colors.white24 : Colors.grey.shade100,
-                        imageUrl: userData.profileImage),
-                  ),
-                ),
+                    backgroundColor: Colors.transparent,
+                    child: ClipRRect(
+                        borderRadius: BorderRadius.circular(50),
+                        child: FancyShimmerImage(
+                            boxFit: BoxFit.cover,
+                            shimmerBaseColor:
+                                isDark ? Colors.white12 : Colors.grey.shade300,
+                            shimmerHighlightColor:
+                                isDark ? Colors.white24 : Colors.grey.shade100,
+                            imageUrl: userData.isProfilePhotos
+                                ? userData.profileImage
+                                : defaultProfileImageUrl))),
                 Positioned(
                     right: 0.0,
                     bottom: 0.0,

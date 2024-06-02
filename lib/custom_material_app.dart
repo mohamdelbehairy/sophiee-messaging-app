@@ -137,7 +137,7 @@ class CustomMaterialApp extends StatelessWidget {
         BlocProvider(create: (context) => GetImageCubit()..getImage()),
         BlocProvider(create: (context) => DeleteImageCubit()),
         BlocProvider(create: (context) => StoryNotificationCubit()),
-        BlocProvider(create: (context) => GroupNotificationCubit())
+        BlocProvider(create: (context) => GroupNotificationCubit()),
       ],
       child: BlocBuilder<LoginCubit, LoginState>(
         builder: (context, state) {

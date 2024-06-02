@@ -1,3 +1,4 @@
+import 'package:sophiee/constants.dart';
 import 'package:sophiee/cubit/user_date/get_user_data/get_user_data_cubit.dart';
 import 'package:sophiee/cubit/user_date/get_user_data/get_user_data_state.dart';
 import 'package:sophiee/cubit/groups/groups_member_selected/groups_member_selected_cubit.dart';
@@ -17,8 +18,8 @@ class CreateGroupSecondGridView extends StatelessWidget {
     return Expanded(
       child: GridView.builder(
           itemCount: groupMember.getGroupsMemberSelectedFriendsList.length,
-          gridDelegate:
-              const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 4),
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 4),
           itemBuilder: (context, index) {
             return BlocBuilder<GetUserDataCubit, GetUserDataStates>(
               builder: (context, state) {
@@ -33,7 +34,9 @@ class CreateGroupSecondGridView extends StatelessWidget {
                           radius: size.height * .033,
                           backgroundColor: Colors.transparent,
                           backgroundImage: CachedNetworkImageProvider(
-                              userData.profileImage)),
+                              userData.isProfilePhotos
+                                  ? userData.profileImage
+                                  : defaultProfileImageUrl)),
                       SizedBox(height: size.width * .01),
                       Text(userData.userName.split(' ')[0],
                           style: const TextStyle(color: Colors.grey))

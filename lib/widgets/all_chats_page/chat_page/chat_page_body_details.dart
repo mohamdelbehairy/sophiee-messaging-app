@@ -21,7 +21,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ChatPageBodyDetails extends StatefulWidget {
   const ChatPageBodyDetails(
-      {super.key, required this.user, required this.size, required this.userDataModel});
+      {super.key,
+      required this.user,
+      required this.size,
+      required this.userDataModel});
   final UserModel user;
   final Size size;
   final UserModel userDataModel;
@@ -90,7 +93,7 @@ class _ChatPageBodyDetailsState extends State<ChatPageBodyDetails> {
           }
         },
         builder: (context, state) {
-          if(state is MessageLoading) {
+          if (state is MessageLoading) {
             return const MessagePageShimmer();
           }
           return Stack(
@@ -218,10 +221,19 @@ class _ChatPageBodyDetailsState extends State<ChatPageBodyDetails> {
                           }
                         },
                         child: CustomChatPageTextFieldItemDetails(
-                          userDataModel: widget.userDataModel,
+                            userDataModel: widget.userDataModel,
                             onChanged: (value) {
                               setState(() {
                                 isShowSendButton = value.trim().isNotEmpty;
+                                // if (value.isNotEmpty) {
+                                //   messages.updateIsTyping(
+                                //       receiverID: widget.user.userID,
+                                //       isTyping: true);
+                                // } else {
+                                //   messages.updateIsTyping(
+                                //       receiverID: widget.user.userID,
+                                //       isTyping: false);
+                                // }
                               });
                             },
                             widget: widget,

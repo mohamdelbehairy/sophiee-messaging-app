@@ -25,9 +25,12 @@ class CreateGroupCustomLIstTileVert extends StatelessWidget {
       title: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(userData.userName,
-              style: TextStyle(
-                  color: widget.isDark ? Colors.white : Colors.black)),
+          Padding(
+            padding: EdgeInsets.only(top: !userData.isBioAndNickName ? 8 : 0.0),
+            child: Text(userData.userName,
+                style: TextStyle(
+                    color: widget.isDark ? Colors.white : Colors.black)),
+          ),
           Container(
             height: widget.size.height * .022,
             width: widget.size.width * .05,
@@ -47,7 +50,11 @@ class CreateGroupCustomLIstTileVert extends StatelessWidget {
         ],
       ),
       subtitle: Text(
-          userData.nickName.isNotEmpty ? userData.nickName : userData.bio,
+          userData.isBioAndNickName
+              ? userData.nickName.isNotEmpty
+                  ? userData.nickName
+                  : userData.bio
+              : '',
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
           style: const TextStyle(color: Colors.grey)),
@@ -62,7 +69,9 @@ class CreateGroupCustomLIstTileVert extends StatelessWidget {
                   widget.isDark ? Colors.white12 : Colors.grey.shade300,
               shimmerHighlightColor:
                   widget.isDark ? Colors.white24 : Colors.grey.shade100,
-              imageUrl: userData.profileImage),
+              imageUrl: userData.isProfilePhotos
+                  ? userData.profileImage
+                  : defaultProfileImageUrl),
         ),
       ),
     );

@@ -66,7 +66,7 @@ class MessageCubit extends Cubit<MessageState> {
         'replayMessageID': replayMessageID,
         'replaySoundMessage': replaySoundMessage,
         'replayRecordMessage': replayRecordMessage,
-        'highlightChatMessage':false,
+        'highlightChatMessage': false,
       });
       await FirebaseFirestore.instance
           .collection('users')
@@ -306,8 +306,9 @@ class MessageCubit extends Cubit<MessageState> {
           .listen((snapshot) {
         if (snapshot.data() != null &&
             snapshot.data()!.containsKey('isTyping')) {
-          bool isTyping = snapshot.data()!['isTyping'] ?? false;
-          emit(TypingSuccess(isTyping: isTyping));
+          bool isType = snapshot.data()!['isTyping'] ?? false;
+          debugPrint('isType: $isType');
+          emit(TypingSuccess(isTyping:isType));
         }
       });
     } catch (e) {

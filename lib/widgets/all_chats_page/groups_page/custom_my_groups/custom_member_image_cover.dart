@@ -44,7 +44,9 @@ class CustomMemberImageCover extends StatelessWidget {
                               isDark ? Colors.white12 : Colors.grey.shade300,
                           shimmerHighlightColor:
                               isDark ? Colors.white24 : Colors.grey.shade100,
-                          imageUrl: userData.profileImage)));
+                          imageUrl: userData.isProfilePhotos
+                              ? userData.profileImage
+                              : defaultProfileImageUrl)));
             } else {
               return Container();
             }
