@@ -17,16 +17,16 @@ class CardTwoBodyComponenet extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: size.width * .035),
       child: Container(
-        height: size.height * .15,
         width: size.width,
         decoration: const BoxDecoration(
             color: Colors.transparent,
             boxShadow: [BoxShadow(blurRadius: 0, color: Colors.transparent)]),
         child: Card(
-          color:
-              context.read<LoginCubit>().isDark ? cardDarkModeBackground : Colors.white,
+          color: context.read<LoginCubit>().isDark
+              ? cardDarkModeBackground
+              : Colors.white,
           elevation: context.read<LoginCubit>().isDark ? 1 : 0,
-           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
           child: Padding(
             padding: EdgeInsets.only(
                 left: size.width * .045,

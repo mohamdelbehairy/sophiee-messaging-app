@@ -24,15 +24,15 @@ class MessagePageShimmer extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 16),
         child: Column(
           children: [
-            SizedBox(height: size.width * .04),
-            MessageSenderItemShimmer(size: size),
-            SizedBox(height: size.width * .03),
-            MessageReceiverItemShimmer(size: size),
             SizedBox(height: size.width * .03),
             MessageSenderItemShimmer(size: size),
-            SizedBox(height: size.width * .03),
+            SizedBox(height: size.width * .02),
             MessageReceiverItemShimmer(size: size),
-            SizedBox(height: size.width * .03),
+            SizedBox(height: size.width * .02),
+            MessageSenderItemShimmer(size: size),
+            SizedBox(height: size.width * .02),
+            MessageReceiverItemShimmer(size: size),
+            SizedBox(height: size.width * .02),
             const CustomMediumItemShimmer(
                 width: 220,
                 alignment: Alignment.centerRight,
@@ -43,9 +43,9 @@ class MessagePageShimmer extends StatelessWidget {
             Align(
                 alignment: Alignment.centerRight,
                 child: CustomItemInfoCardOneShimmer(width: size.width / 8)),
-            SizedBox(height: size.width * .03),
+            SizedBox(height: size.width * .02),
             CustomReceiverItemTwo(size: size),
-             SizedBox(height: size.width * .03),
+             SizedBox(height: size.width * .02),
             const MessagePageSendMessageItemShimmer(),
           ],
         ),

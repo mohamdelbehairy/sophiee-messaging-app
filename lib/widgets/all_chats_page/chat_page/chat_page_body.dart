@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sophiee/cubit/auth/login/login_cubit.dart';
@@ -9,7 +10,9 @@ import 'package:sophiee/widgets/all_chats_page/chat_page/chats_icons_app_bar_but
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:sophiee/constants.dart';
 
+import '../../../cubit/connectivity/connectivity_cubit.dart';
 import '../../../utils/initial_state.dart';
+import '../../../utils/shimmer/home/all_chats/chat_page/message_page_shimmer.dart';
 
 class ChatPageBody extends StatelessWidget {
   const ChatPageBody(
@@ -49,15 +52,25 @@ class ChatPageBody extends StatelessWidget {
             ChatsIconsAppBarButton(icon: Icons.error),
           ],
         ),
-        body: Container(
-            decoration: BoxDecoration(
-                image: userData.chatbackgroundImage != null
-                    ? DecorationImage(
-                        image: CachedNetworkImageProvider(
-                            userData.chatbackgroundImage!),
-                        fit: BoxFit.cover)
-                    : null),
-            child: ChatPageBodyComponent(
-                user: user, size: size, userDataModel: userData)));
+        body: BlocBuilder<ConnectivityCubit, ConnectivityResult>(
+          builder: (context, connectivityState) {
+            if (connectivityState == ConnectivityResult.mobile ||
+                connectivityState == ConnectivityResult.wifi ||
+                connectivityState == ConnectivityResult.vpn) {
+              return Container(
+                  decoration: BoxDecoration(
+                      image: userData.chatbackgroundImage != null
+                          ? DecorationImage(
+                              image: CachedNetworkImageProvider(
+                                  userData.chatbackgroundImage!),
+                              fit: BoxFit.cover)
+                          : null),
+                  child: ChatPageBodyComponent(
+                      user: user, size: size, userDataModel: userData));
+            } else {
+              return const MessagePageShimmer();
+            }
+          },
+        ));
   }
 }

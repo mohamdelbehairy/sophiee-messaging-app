@@ -19,6 +19,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:swipe_to/swipe_to.dart';
 
+import '../../../../utils/shimmer/home/all_chats/chat_page/message_page_shimmer.dart';
+
 class GroupsChatPageBodyDetails extends StatefulWidget {
   const GroupsChatPageBodyDetails(
       {super.key,
@@ -67,26 +69,29 @@ class _GroupsChatPageBodyDetailsState extends State<GroupsChatPageBodyDetails> {
   @override
   Widget build(BuildContext context) {
     var groupChat = context.read<GroupMessageCubit>();
-    return Stack(
-      children: [
-        Column(
+    return BlocConsumer<GroupMessageCubit, GroupMessageState>(
+      listener: (context, state) {
+        if (state is GetMessageGroupsSuccess ||
+            state is SendMessageGroupSuccess) {
+          setState(() {
+            isSwip = false;
+          });
+        }
+        if (state is SendMessageGroupSuccess) {
+          isNotify = [];
+        }
+      },
+      builder: (context, state) {
+        if (state is GetMessageGroupsLoading) {
+          return const MessagePageShimmer();
+        }
+        return Stack(
           children: [
-            // GroupsChatPageBodyListView(
-            //     scrollController: scrollController, groupModel: groupModel),
-            BlocConsumer<GroupMessageCubit, GroupMessageState>(
-              listener: (context, state) {
-                if (state is GetMessageGroupsSuccess ||
-                    state is SendMessageGroupSuccess) {
-                  setState(() {
-                    isSwip = false;
-                  });
-                }
-                if (state is SendMessageGroupSuccess) {
-                  isNotify = [];
-                }
-              },
-              builder: (context, state) {
-                return Expanded(
+            Column(
+              children: [
+                // GroupsChatPageBodyListView(
+                //     scrollController: scrollController, groupModel: groupModel),
+                Expanded(
                   child: ListView.builder(
                       reverse: true,
                       controller: widget.scrollController,
@@ -120,171 +125,173 @@ class _GroupsChatPageBodyDetailsState extends State<GroupsChatPageBodyDetails> {
                               size: widget.size),
                         );
                       }),
-                );
-              },
-            ),
+                ),
 
-            SizedBox(height: widget.size.height * .01),
+                SizedBox(height: widget.size.height * .01),
+                if (widget.groupModel.isSendMessages ||
+                    widget.groupModel.groupOwnerID ==
+                        FirebaseAuth.instance.currentUser!.uid ||
+                    widget.groupModel.adminsID
+                        .contains(FirebaseAuth.instance.currentUser!.uid))
+                  Column(
+                    children: [
+                      if (isSwip)
+                        if (messageModel!.messageText != '' &&
+                            messageModel!.messageImage == null &&
+                            messageModel!.messageFileName == null)
+                          ReplayTextMessage(
+                              groupModel: widget.groupModel,
+                              messageModel: messageModel!,
+                              onTap: () {
+                                setState(() {
+                                  isSwip = false;
+                                });
+                              }),
+                      if (isSwip)
+                        if (messageModel!.messageImage != null &&
+                            messageModel!.messageText == '')
+                          ReplayImageMessage(
+                              messageModel: messageModel!,
+                              groupModel: widget.groupModel,
+                              onTap: () {
+                                setState(() {
+                                  isSwip = false;
+                                });
+                              }),
+                      if (isSwip)
+                        if (messageModel!.messageImage != null &&
+                            messageModel!.messageText != '')
+                          ReplayImageMessage(
+                              messageModel: messageModel!,
+                              groupModel: widget.groupModel,
+                              onTap: () {
+                                setState(() {
+                                  isSwip = false;
+                                });
+                              }),
+                      if (isSwip)
+                        if (messageModel!.messageFile != null)
+                          ReplayFileMessage(
+                            messageModel: messageModel!,
+                            groupModel: widget.groupModel,
+                            onTap: () {
+                              setState(() {
+                                isSwip = false;
+                              });
+                            },
+                          ),
+                      if (isSwip)
+                        if (messageModel!.phoneContactNumber != null)
+                          ReplayContactMessage(
+                              messageModel: messageModel!,
+                              groupModel: widget.groupModel,
+                              onTap: () {
+                                setState(() {
+                                  isSwip = false;
+                                });
+                              }),
+                      if (isSwip)
+                        if (messageModel!.messageSound != null)
+                          ReplayAudioMessage(
+                              messageModel: messageModel!,
+                              groupModel: widget.groupModel,
+                              onTap: () {
+                                setState(() {
+                                  isSwip = false;
+                                });
+                              }),
+                      if (isSwip)
+                        if (messageModel!.messageRecord != null)
+                          ReplayAudioMessage(
+                              messageModel: messageModel!,
+                              groupModel: widget.groupModel,
+                              onTap: () {
+                                setState(() {
+                                  isSwip = false;
+                                });
+                              }),
+                      if (isSwip) SizedBox(height: widget.size.width * .01),
+                      BlocBuilder<GetUserDataCubit, GetUserDataStates>(
+                        builder: (context, state) {
+                          if (state is GetUserDataSuccess &&
+                              state.userModel.isNotEmpty) {
+                            tokens = [];
+                            isNotify = [];
+                            for (var usersID in widget.groupModel.usersID) {
+                              if (usersID !=
+                                  FirebaseAuth.instance.currentUser!.uid) {
+                                var groupData = state.userModel.firstWhere(
+                                    (element) => element.userID == usersID);
+
+                                tokens.add(groupData.token ?? '');
+                                isNotify.add(groupData.isGroupNotify);
+                              }
+                            }
+                            var userName = state.userModel.firstWhere(
+                                (element) =>
+                                    element.userID ==
+                                    FirebaseAuth.instance.currentUser!.uid);
+                            senderName = userName.userName;
+
+                            if (isSwip) {
+                              final currentUser = messageModel!.senderID;
+                              userData = state.userModel.firstWhere(
+                                  (element) => element.userID == currentUser);
+                            }
+                          }
+                          return GroupsChatPageCustomSendMedia(
+                            isNotify: isNotify,
+                            tokens: tokens,
+                            senderName: senderName,
+                            userDataModel: widget.userDataModel,
+                            userData: userData,
+                            messageModel: messageModel,
+                            isSwip: isSwip,
+                            focusNode: focusNode,
+                            onChanged: widget.onChanged,
+                            scrollController: widget.scrollController,
+                            controller: widget.controller,
+                            size: widget.size,
+                            groupModel: widget.groupModel,
+                          );
+                        },
+                      ),
+                    ],
+                  ),
+                if (!widget.groupModel.isSendMessages &&
+                    widget.groupModel.groupOwnerID !=
+                        FirebaseAuth.instance.currentUser!.uid &&
+                    !widget.groupModel.adminsID
+                        .contains(FirebaseAuth.instance.currentUser!.uid))
+                  GroupsChatPageNotSendMessage(size: widget.size)
+              ],
+            ),
             if (widget.groupModel.isSendMessages ||
                 widget.groupModel.groupOwnerID ==
                     FirebaseAuth.instance.currentUser!.uid ||
                 widget.groupModel.adminsID
                     .contains(FirebaseAuth.instance.currentUser!.uid))
-              Column(
-                children: [
-                  if (isSwip)
-                    if (messageModel!.messageText != '' &&
-                        messageModel!.messageImage == null &&
-                        messageModel!.messageFileName == null)
-                      ReplayTextMessage(
-                          groupModel: widget.groupModel,
-                          messageModel: messageModel!,
-                          onTap: () {
-                            setState(() {
-                              isSwip = false;
-                            });
-                          }),
-                  if (isSwip)
-                    if (messageModel!.messageImage != null &&
-                        messageModel!.messageText == '')
-                      ReplayImageMessage(
-                          messageModel: messageModel!,
-                          groupModel: widget.groupModel,
-                          onTap: () {
-                            setState(() {
-                              isSwip = false;
-                            });
-                          }),
-                  if (isSwip)
-                    if (messageModel!.messageImage != null &&
-                        messageModel!.messageText != '')
-                      ReplayImageMessage(
-                          messageModel: messageModel!,
-                          groupModel: widget.groupModel,
-                          onTap: () {
-                            setState(() {
-                              isSwip = false;
-                            });
-                          }),
-                  if (isSwip)
-                    if (messageModel!.messageFile != null)
-                      ReplayFileMessage(
-                        messageModel: messageModel!,
-                        groupModel: widget.groupModel,
-                        onTap: () {
-                          setState(() {
-                            isSwip = false;
-                          });
-                        },
-                      ),
-                  if (isSwip)
-                    if (messageModel!.phoneContactNumber != null)
-                      ReplayContactMessage(
-                          messageModel: messageModel!,
-                          groupModel: widget.groupModel,
-                          onTap: () {
-                            setState(() {
-                              isSwip = false;
-                            });
-                          }),
-                  if (isSwip)
-                    if (messageModel!.messageSound != null)
-                      ReplayAudioMessage(
-                          messageModel: messageModel!,
-                          groupModel: widget.groupModel,
-                          onTap: () {
-                            setState(() {
-                              isSwip = false;
-                            });
-                          }),
-                  if (isSwip)
-                    if (messageModel!.messageRecord != null)
-                      ReplayAudioMessage(
-                          messageModel: messageModel!,
-                          groupModel: widget.groupModel,
-                          onTap: () {
-                            setState(() {
-                              isSwip = false;
-                            });
-                          }),
-                  if (isSwip) SizedBox(height: widget.size.width * .01),
-                  BlocBuilder<GetUserDataCubit, GetUserDataStates>(
-                    builder: (context, state) {
-                      if (state is GetUserDataSuccess &&
-                          state.userModel.isNotEmpty) {
-                        tokens = [];
-                        isNotify = [];
-                        for (var usersID in widget.groupModel.usersID) {
-                          if (usersID !=
-                              FirebaseAuth.instance.currentUser!.uid) {
-                            var groupData = state.userModel.firstWhere(
-                                (element) => element.userID == usersID);
-
-                            tokens.add(groupData.token ?? '');
-                            isNotify.add(groupData.isGroupNotify);
-                          }
-                        }
-                        var userName = state.userModel.firstWhere((element) =>
-                            element.userID ==
-                            FirebaseAuth.instance.currentUser!.uid);
-                        senderName = userName.userName;
-
-                        if (isSwip) {
-                          final currentUser = messageModel!.senderID;
-                          userData = state.userModel.firstWhere(
-                              (element) => element.userID == currentUser);
-                        }
-                      }
-                      return GroupsChatPageCustomSendMedia(
-                        isNotify: isNotify,
-                        tokens: tokens,
-                        senderName: senderName,
-                        userDataModel: widget.userDataModel,
-                        userData: userData,
-                        messageModel: messageModel,
-                        isSwip: isSwip,
-                        focusNode: focusNode,
-                        onChanged: widget.onChanged,
-                        scrollController: widget.scrollController,
-                        controller: widget.controller,
-                        size: widget.size,
-                        groupModel: widget.groupModel,
-                      );
-                    },
-                  ),
-                ],
-              ),
-            if (!widget.groupModel.isSendMessages &&
-                widget.groupModel.groupOwnerID !=
-                    FirebaseAuth.instance.currentUser!.uid &&
-                !widget.groupModel.adminsID
-                    .contains(FirebaseAuth.instance.currentUser!.uid))
-              GroupsChatPageNotSendMessage(size: widget.size)
+              CustomGroupSendTextAndRecordItem(
+                  isNotify: isNotify,
+                  tokens: tokens,
+                  senderName: senderName,
+                  stopRecording: (value) {
+                    setState(() {
+                      isSwip = false;
+                    });
+                  },
+                  userData: userData,
+                  messageModel: messageModel,
+                  isSwip: isSwip,
+                  isShowSendButton: widget.isShowSendButton,
+                  controller: widget.controller,
+                  groupModel: widget.groupModel,
+                  scrollController: widget.scrollController,
+                  size: widget.size),
           ],
-        ),
-        if (widget.groupModel.isSendMessages ||
-            widget.groupModel.groupOwnerID ==
-                FirebaseAuth.instance.currentUser!.uid ||
-            widget.groupModel.adminsID
-                .contains(FirebaseAuth.instance.currentUser!.uid))
-          CustomGroupSendTextAndRecordItem(
-              isNotify: isNotify,
-              tokens: tokens,
-              senderName: senderName,
-              stopRecording: (value) {
-                setState(() {
-                  isSwip = false;
-                });
-              },
-              userData: userData,
-              messageModel: messageModel,
-              isSwip: isSwip,
-              isShowSendButton: widget.isShowSendButton,
-              controller: widget.controller,
-              groupModel: widget.groupModel,
-              scrollController: widget.scrollController,
-              size: widget.size),
-      ],
+        );
+    
+      },
     );
   }
 }
