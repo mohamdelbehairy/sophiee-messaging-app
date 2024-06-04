@@ -63,6 +63,7 @@ class GoogleAuthCubit extends Cubit<GoogleAuthState> {
       'profileImage': userCredentail.user!.photoURL,
       'onlineStatue': Timestamp.now(),
       'isStory': false,
+      'isLive':false,
       'isGoogleAuth': true,
       'token': token,
       'chatbackgroundImage': null,

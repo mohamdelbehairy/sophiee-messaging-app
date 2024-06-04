@@ -1,7 +1,7 @@
 import 'package:sophiee/cubit/get_friends/get_friends_cubit.dart';
 import 'package:sophiee/cubit/get_friends/get_friends_state.dart';
 import 'package:sophiee/widgets/all_chats_page/add_story/add_story.dart';
-import 'package:sophiee/widgets/all_chats_page/item_top.dart';
+import 'package:sophiee/widgets/all_chats_page/item_top/item_top.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

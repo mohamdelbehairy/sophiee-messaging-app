@@ -37,6 +37,7 @@ class StoreUserDateCubit extends Cubit<StoreUserDateState> {
         'phoneNumber': phoneNumber,
         'onlineStatue': Timestamp.now(),
         'isStory': false,
+        'isLive': false,
         'isEmailAuth': isEmailAuth,
         'token': token,
         'chatbackgroundImage': null,

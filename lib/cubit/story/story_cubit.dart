@@ -65,14 +65,15 @@ class StoryCubit extends Cubit<StoryState> {
     }
   }
 
-  Future<bool> checkIsStory({required String friendId}) async {
+  Future<bool> checkIsStory(
+      {required String friendId, required String story}) async {
     var userData = await FirebaseFirestore.instance
         .collection('users')
         .doc(friendId)
         .get();
     if (userData.exists) {
       Map<String, dynamic> userField = userData.data() as Map<String, dynamic>;
-      bool isStory = userField['isStory'];
+      bool isStory = userField[story];
       return isStory;
     }
     return false;

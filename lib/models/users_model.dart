@@ -15,6 +15,7 @@ class UserModel {
   String? phoneNumber, token, chatbackgroundImage;
   int? chatbackgroundColor;
   final bool isStory,
+  isLive,
       isChatNotify,
       isGroupNotify,
       isStoryNotify,
@@ -40,6 +41,7 @@ class UserModel {
       required this.onlineStatue,
       required this.dateOfBirth,
       required this.isStory,
+      required this.isLive,
       this.lastMessage,
       this.isGoogleAuth,
       this.isEmailAuth,
@@ -74,6 +76,7 @@ class UserModel {
         gender: jsonData['gender'] ?? '',
         onlineStatue: (jsonData['onlineStatue'] ?? Timestamp.now()).toDate(),
         isStory: jsonData['isStory'] ?? false,
+         isLive: jsonData['isLive'] ?? false,
         lastMessage: jsonData['lastMessage'],
         isGoogleAuth: jsonData['isGoogleAuth'],
         isEmailAuth: jsonData['isEmailAuth'],
@@ -108,6 +111,7 @@ class UserModel {
       'phoneNumber': phoneNumber,
       'onlineStatue': onlineStatue,
       'isStory': isStory,
+      'isLive':isLive,
       // 'lastMessage': lastMessage,
       'isGoogleAuth': isGoogleAuth,
       'isEmailAuth': isEmailAuth,

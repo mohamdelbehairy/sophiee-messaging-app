@@ -7,7 +7,7 @@ import '../../cubit/chats/chats_state.dart';
 import '../../cubit/get_friends/get_friends_cubit.dart';
 import '../../cubit/get_friends/get_friends_state.dart';
 import 'list_view_bottom.dart';
-import 'list_view_top.dart';
+import 'item_top/list_view_top.dart';
 import 'no_chats_founded.dart';
 
 class AllChatsComponent extends StatelessWidget {

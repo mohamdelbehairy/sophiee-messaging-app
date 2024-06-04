@@ -66,6 +66,7 @@ class FacebookAuthCubit extends Cubit<FacebookAuthState> {
       'profileImage': profileImage,
       'onlineStatue': Timestamp.now(),
       'isStory': false,
+      'isLive': false,
       'isFacebookAuth': true,
       'token': token,
       'chatbackgroundImage': null,
