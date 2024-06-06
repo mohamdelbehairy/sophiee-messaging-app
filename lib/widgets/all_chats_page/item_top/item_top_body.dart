@@ -4,7 +4,7 @@ import 'package:get/get.dart' as getnav;
 
 import '../../../cubit/story/story_cubit.dart';
 import '../../../models/users_model.dart';
-import '../../../pages/story_view_page.dart';
+import '../../../pages/story/story_view_page.dart';
 import 'item_top_component.dart';
 import 'item_top_text.dart';
 

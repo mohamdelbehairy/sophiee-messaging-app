@@ -8,8 +8,9 @@ import 'package:sophiee/widgets/all_chats_page/add_story/add_story_pop_menu_item
 import 'package:sophiee/widgets/all_chats_page/add_story/add_story_video.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:image_picker/image_picker.dart';
+
+import 'add_story_live.dart';
 
 class AddStoryPopMenuButton extends StatelessWidget {
   const AddStoryPopMenuButton({super.key});
@@ -52,8 +53,7 @@ class AddStoryPopMenuButton extends StatelessWidget {
                     await pickVideo.pickVideo(source: ImageSource.gallery);
                   }),
               SizedBox(height: size.height * .01),
-              AddStoryPopoverItem(
-                  text: 'live', icon: FontAwesomeIcons.youtube, onTap: () {}),
+              const AddStoryLive(),
             ],
           ),
         ),
@@ -61,3 +61,4 @@ class AddStoryPopMenuButton extends StatelessWidget {
     );
   }
 }
+

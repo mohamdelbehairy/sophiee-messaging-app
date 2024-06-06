@@ -8,7 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:story_view/story_view.dart';
 
-import '../cubit/auth/login/login_cubit.dart';
+import '../../cubit/auth/login/login_cubit.dart';
+
 
 class StoryViewPage extends StatefulWidget {
   const StoryViewPage({super.key, required this.userID});
