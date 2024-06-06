@@ -43,7 +43,7 @@ class _ChatPageFriendBottomSheetInfoState
       },
       child: Container(
         height:
-            !widget.user.isPhoneAndEmail ? size.height * .3 : size.height * .42,
+            !widget.user.isPhoneAndEmail ? size.height * .3 : size.height * .44,
         width: size.width,
         decoration: BoxDecoration(
             color: isDark ? cardDarkModeBackground : Colors.white,

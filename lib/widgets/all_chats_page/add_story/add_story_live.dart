@@ -21,7 +21,7 @@ class AddStoryLive extends StatefulWidget {
 }
 
 class _AddStoryLiveState extends State<AddStoryLive> {
-  UserModel? user;
+  UserModel? userData;
 
   @override
   void initState() {
@@ -36,7 +36,7 @@ class _AddStoryLiveState extends State<AddStoryLive> {
         if (state is GetUserDataSuccess) {
           final currentUser = FirebaseAuth.instance.currentUser;
           if (currentUser != null) {
-            user = state.userModel
+            userData = state.userModel
                 .firstWhere((element) => element.userID == currentUser.uid);
           }
         }
@@ -45,16 +45,16 @@ class _AddStoryLiveState extends State<AddStoryLive> {
           text: 'live',
           icon: FontAwesomeIcons.youtube,
           onTap: () {
-            log('userName: ${user!.userName}');
+            log('userName: ${userData!.userName}');
             Navigator.pop(context);
-            if (user != null) {
+            if (userData != null) {
               getnav.Get.to(
                   () => LivePage(
                       liveModel: LiveModel(
                           isHost: true,
-                          liveID: user!.userID,
-                          userID: user!.userID,
-                          userName: user!.userName)),
+                          liveID: userData!.userID,
+                          userID: userData!.userID,
+                          userName: userData!.userName)),
                   transition: getnav.Transition.downToUp);
             }
           }),

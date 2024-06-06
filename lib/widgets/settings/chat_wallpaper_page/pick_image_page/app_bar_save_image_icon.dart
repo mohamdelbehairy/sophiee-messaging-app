@@ -21,7 +21,7 @@ class AppBarSaveImageIcon extends StatelessWidget {
         String imageUrl = await uploadImage.uploadImage(
             imageFile: imageFile, fieldName: 'chat_wallpaper_image');
 
-        await updateUserField.updateUserField(
+        await updateUserField.updateBackgrounChatField(
             imageUrl: imageUrl, colorValue: null);
       },
       icon: const Icon(Icons.done),

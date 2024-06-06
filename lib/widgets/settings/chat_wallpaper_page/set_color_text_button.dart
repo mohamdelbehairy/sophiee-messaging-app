@@ -19,7 +19,7 @@ class SetColorTextButton extends StatelessWidget {
           int colorValue = selectedColor.value;
           debugPrint('selected color value: ${Color(colorValue)}');
 
-          await updateColor.updateUserField(
+          await updateColor.updateBackgrounChatField(
               colorValue: colorValue, imageUrl: null);
         },
         child: const Text('SELECT', style: TextStyle(color: Colors.black)));

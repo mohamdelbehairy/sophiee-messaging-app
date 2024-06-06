@@ -33,7 +33,7 @@ class PrivacySettingPageCardBody extends StatelessWidget {
                 widget: CustomSwitchIcon(
                     size: size,
                     onChanged: (value) async {
-                      await updateField.updateField(
+                      await updateField.updateUserField(
                           fieldName: 'isPhoneAndEmail', fieldValue: value);
                     },
                     value: userData.isPhoneAndEmail),
@@ -48,7 +48,7 @@ class PrivacySettingPageCardBody extends StatelessWidget {
                 widget: CustomSwitchIcon(
                     size: size,
                     onChanged: (value) async {
-                      await updateField.updateField(
+                      await updateField.updateUserField(
                           fieldName: 'isLastSeendAndOnline', fieldValue: value);
                     },
                     value: userData.isLastSeendAndOnline),
@@ -63,7 +63,7 @@ class PrivacySettingPageCardBody extends StatelessWidget {
                 widget: CustomSwitchIcon(
                     size: size,
                     onChanged: (value) async {
-                      await updateField.updateField(
+                      await updateField.updateUserField(
                           fieldName: 'isProfilePhotos', fieldValue: value);
                     },
                     value: userData.isProfilePhotos),
@@ -78,7 +78,7 @@ class PrivacySettingPageCardBody extends StatelessWidget {
                 widget: CustomSwitchIcon(
                     size: size,
                     onChanged: (value) async {
-                      await updateField.updateField(
+                      await updateField.updateUserField(
                           fieldName: 'isDateOfBirth', fieldValue: value);
                     },
                     value: userData.isDateOfBirth),
@@ -93,7 +93,7 @@ class PrivacySettingPageCardBody extends StatelessWidget {
                 widget: CustomSwitchIcon(
                     size: size,
                     onChanged: (value) async {
-                      await updateField.updateField(
+                      await updateField.updateUserField(
                           fieldName: 'isBioAndNickName', fieldValue: value);
                     },
                     value: userData.isBioAndNickName),
@@ -108,7 +108,7 @@ class PrivacySettingPageCardBody extends StatelessWidget {
                 widget: CustomSwitchIcon(
                     size: size,
                     onChanged: (value) async {
-                      await updateField.updateField(
+                      await updateField.updateUserField(
                           fieldName: 'isAudioAndVideoCall', fieldValue: value);
                     },
                     value: userData.isAudioAndVideoCall),

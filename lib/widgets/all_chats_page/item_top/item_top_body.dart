@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart' as getnav;
+import 'package:sophiee/models/live_model.dart';
+import 'package:sophiee/pages/story/live_page.dart';
 
 import '../../../cubit/story/story_cubit.dart';
 import '../../../models/users_model.dart';
@@ -15,10 +17,11 @@ class ItemTopBody extends StatelessWidget {
       required this.data,
       required this.size,
       required this.isDark,
-      required this.color});
+      required this.color,
+      required this.userData});
 
-  final UserModel user;
-  final UserModel data;
+  final UserModel user, data, userData;
+
   final Size size;
   final bool isDark;
   final Color color;
@@ -39,7 +42,15 @@ class ItemTopBody extends StatelessWidget {
                 getnav.Get.to(() => StoryViewPage(userID: user.userID),
                     transition: getnav.Transition.downToUp);
               }
-              if (await isLive) {}
+              if (await isLive) {
+                getnav.Get.to(
+                    () => LivePage(
+                        liveModel: LiveModel(
+                            liveID: data.userID,
+                            userID: userData.userID,
+                            userName: userData.userName)),
+                    transition: getnav.Transition.downToUp);
+              }
             },
             child: ItemTopComponent(
                 data: data, size: size, isDark: isDark, color: color)),

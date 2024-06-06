@@ -14,16 +14,15 @@ class ChatPageFriendInfoListTile extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     final isDark = context.read<LoginCubit>().isDark;
     return SizedBox(
-      width: size.width * .7,
+      width: size.width * .72,
       child: ListTile(
         title: Row(
           children: [
             Padding(
-              padding: EdgeInsets.only(top: !user.isBioAndNickName ? 8 : 0.0),
-              child: Text(user.userName,
-                  style:
-                      TextStyle(color: isDark ? Colors.white : Colors.black)),
-            ),
+                padding: EdgeInsets.only(top: !user.isBioAndNickName ? 8 : 0.0),
+                child: Text(user.userName,
+                    style: TextStyle(
+                        color: isDark ? Colors.white : Colors.black))),
             const SizedBox(width: 4),
             Padding(
                 padding: EdgeInsets.only(top: !user.isBioAndNickName ? 8 : 0.0),

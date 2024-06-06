@@ -45,14 +45,14 @@ class AddStoryPopMenuButton extends StatelessWidget {
                   onTap: () async {
                     await pickImage.pickImage(source: ImageSource.gallery);
                   }),
-              SizedBox(height: size.height * .01),
+              const SizedBox(height: 12),
               AddStoryPopoverItem(
                   text: 'video',
                   icon: Icons.video_collection,
                   onTap: () async {
                     await pickVideo.pickVideo(source: ImageSource.gallery);
                   }),
-              SizedBox(height: size.height * .01),
+              const SizedBox(height: 12),
               const AddStoryLive(),
             ],
           ),
@@ -61,4 +61,3 @@ class AddStoryPopMenuButton extends StatelessWidget {
     );
   }
 }
-

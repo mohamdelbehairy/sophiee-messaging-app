@@ -39,7 +39,7 @@ class UpdateUserDataCubit extends Cubit<UpdateUserDataStates> {
     }
   }
 
-  Future<void> updateUserField({int? colorValue, String? imageUrl}) async {
+  Future<void> updateBackgrounChatField({int? colorValue, String? imageUrl}) async {
     try {
       await FirebaseFirestore.instance
           .collection(userCollection)
@@ -56,7 +56,7 @@ class UpdateUserDataCubit extends Cubit<UpdateUserDataStates> {
     }
   }
 
-  Future<void> updateField(
+  Future<void> updateUserField(
       {required String fieldName, required bool fieldValue}) async {
     try {
       await FirebaseFirestore.instance
