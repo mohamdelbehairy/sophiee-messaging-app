@@ -1,6 +1,7 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:sophiee/pages/chats/groups/groups_chat_page/groups_chat_page.dart';
+import 'package:sophiee/pages/story/live_page.dart';
 
 import '../pages/chats/chat_page.dart';
 import '../pages/story/story_view_page.dart';
@@ -29,6 +30,14 @@ class NavigationNotify {
           MaterialPageRoute(
               builder: (context) =>
                   GroupsChatPage(groupID: message.data['senderId'])));
+    }
+
+    if (message.data['page'] == 'live') {
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) =>
+                  LivePage(liveID: message.data['senderId'])));
     }
   }
 }

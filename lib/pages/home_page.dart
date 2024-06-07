@@ -7,6 +7,7 @@ import 'package:sophiee/cubit/get_following/get_following_cubit.dart';
 import 'package:sophiee/cubit/get_friends/get_friends_cubit.dart';
 import 'package:sophiee/cubit/notification/follower_notification/follower_notification_cubit.dart';
 import 'package:sophiee/cubit/notification/group_notification/group_notification_cubit.dart';
+import 'package:sophiee/cubit/notification/live_notification/live_notification_cubit.dart';
 import 'package:sophiee/cubit/notification/message_notification/message_notification_cubit.dart';
 import 'package:sophiee/cubit/notification/notification_setting/notification_setting_cubit.dart';
 import 'package:sophiee/cubit/notification/story_notification/story_notification_cubit.dart';
@@ -46,6 +47,7 @@ class _HomePageState extends State<HomePage> {
     context.read<MessageNotificationCubit>().initMessageNotification();
     context.read<StoryNotificationCubit>().initStoryNotification();
     context.read<GroupNotificationCubit>().initGroupMessageNotification();
+    context.read<LiveNotificationCubit>().initLiveNotification();
 
     initLocalNotification.appState(context);
 
@@ -95,8 +97,8 @@ class _HomePageState extends State<HomePage> {
                     icon: Icon(Icons.person_outline_outlined),
                     label: ''),
                 NavigationDestination(
-                    selectedIcon:
-                        Icon(FontAwesomeIcons.solidComment, color: kPrimaryColor),
+                    selectedIcon: Icon(FontAwesomeIcons.solidComment,
+                        color: kPrimaryColor),
                     icon: Icon(FontAwesomeIcons.comment),
                     label: ''),
                 NavigationDestination(

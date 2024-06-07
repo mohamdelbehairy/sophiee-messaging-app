@@ -35,6 +35,7 @@ import 'package:sophiee/cubit/groups/high_light_group_message/hight_light_messag
 import 'package:sophiee/cubit/groups/message_group/group_message_cubit.dart';
 import 'package:sophiee/cubit/message/message_cubit.dart';
 import 'package:sophiee/cubit/network_error_status/network_error_status_cubit.dart';
+import 'package:sophiee/cubit/notification/live_notification/live_notification_cubit.dart';
 import 'package:sophiee/cubit/notification/message_notification/message_notification_cubit.dart';
 import 'package:sophiee/cubit/notification/notification_setting/notification_setting_cubit.dart';
 import 'package:sophiee/cubit/open_files/open_files_cubit.dart';
@@ -138,6 +139,7 @@ class CustomMaterialApp extends StatelessWidget {
         BlocProvider(create: (context) => DeleteImageCubit()),
         BlocProvider(create: (context) => StoryNotificationCubit()),
         BlocProvider(create: (context) => GroupNotificationCubit()),
+        BlocProvider(create: (context) => LiveNotificationCubit()),
       ],
       child: BlocBuilder<LoginCubit, LoginState>(
         builder: (context, state) {

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart' as getnav;
-import 'package:sophiee/models/live_model.dart';
 import 'package:sophiee/pages/story/live_page.dart';
 
 import '../../../cubit/story/story_cubit.dart';
@@ -43,12 +42,7 @@ class ItemTopBody extends StatelessWidget {
                     transition: getnav.Transition.downToUp);
               }
               if (await isLive) {
-                getnav.Get.to(
-                    () => LivePage(
-                        liveModel: LiveModel(
-                            liveID: data.userID,
-                            userID: userData.userID,
-                            userName: userData.userName)),
+                getnav.Get.to(() => LivePage(liveID: data.userID),
                     transition: getnav.Transition.downToUp);
               }
             },
