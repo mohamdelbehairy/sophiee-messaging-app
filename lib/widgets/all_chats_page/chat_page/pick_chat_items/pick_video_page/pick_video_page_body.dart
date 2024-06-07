@@ -1,8 +1,10 @@
 import 'dart:io';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sophiee/models/users_model.dart';
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 
+import '../../../../../cubit/upload/upload_video/upload_video_cubit.dart';
 import 'pick_video_component.dart';
 
 class PickVideoPageBody extends StatefulWidget {
@@ -37,21 +39,37 @@ class _PickVideoPageBodyState extends State<PickVideoPageBody> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    var isLoading = context.read<UploadVideoCubit>().isLoading;
 
-    return PickVideoComponent(
-      size: size,
-      videoPlayerController: videoPlayerController,
-      controller: controller,
-      widget: widget,
-      onTap: () {
-        setState(() {
-          if (videoPlayerController.value.isPlaying) {
-            videoPlayerController.pause();
-          } else {
-            videoPlayerController.play();
-          }
-          _isPlaying = !_isPlaying;
-        });
+    return BlocConsumer<UploadVideoCubit, UploadVideoState>(
+      listener: (context, state) {
+        if (state is UploadVideoLoading) {
+          isLoading = state.isLoading;
+        }
+        if (state is UploadVideoSuccess) {
+          Navigator.pop(context);
+        }
+      },
+      builder: (context, state) {
+        return PickVideoComponent(
+          isLoading: isLoading,
+          size: size,
+          videoPlayerController: videoPlayerController,
+          controller: controller,
+          widget: widget,
+          onTap: () {
+            if (!isLoading) {
+              setState(() {
+                if (videoPlayerController.value.isPlaying) {
+                  videoPlayerController.pause();
+                } else {
+                  videoPlayerController.play();
+                }
+                _isPlaying = !_isPlaying;
+              });
+            }
+          },
+        );
       },
     );
   }

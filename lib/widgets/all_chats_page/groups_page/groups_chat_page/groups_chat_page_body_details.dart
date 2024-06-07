@@ -89,8 +89,6 @@ class _GroupsChatPageBodyDetailsState extends State<GroupsChatPageBodyDetails> {
           children: [
             Column(
               children: [
-                // GroupsChatPageBodyListView(
-                //     scrollController: scrollController, groupModel: groupModel),
                 Expanded(
                   child: ListView.builder(
                       reverse: true,
@@ -126,7 +124,6 @@ class _GroupsChatPageBodyDetailsState extends State<GroupsChatPageBodyDetails> {
                         );
                       }),
                 ),
-
                 SizedBox(height: widget.size.height * .01),
                 if (widget.groupModel.isSendMessages ||
                     widget.groupModel.groupOwnerID ==
@@ -290,7 +287,6 @@ class _GroupsChatPageBodyDetailsState extends State<GroupsChatPageBodyDetails> {
                   size: widget.size),
           ],
         );
-    
       },
     );
   }

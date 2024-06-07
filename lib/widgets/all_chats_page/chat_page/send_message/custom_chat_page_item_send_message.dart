@@ -19,23 +19,23 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart' as getnav;
 
 class ChatPageTextFieldItem extends StatefulWidget {
-  const ChatPageTextFieldItem({
-    super.key,
-    required this.size,
-    required this.user,
-    required this.textEditingController,
-    required this.scrollController,
-    required this.focusNode,
-    required this.replayTextMessage,
-    required this.friendNameReplay,
-    required this.replayImageMessage,
-    required this.replayFileMessage,
-    required this.replayContactMessage,
-    required this.replayMessageID,
-    required this.onChanged,
-    required this.replaySoundMessage,
-    required this.replayRecordMessage, required this.userData,
-  });
+  const ChatPageTextFieldItem(
+      {super.key,
+      required this.size,
+      required this.user,
+      required this.textEditingController,
+      required this.scrollController,
+      required this.focusNode,
+      required this.replayTextMessage,
+      required this.friendNameReplay,
+      required this.replayImageMessage,
+      required this.replayFileMessage,
+      required this.replayContactMessage,
+      required this.replayMessageID,
+      required this.onChanged,
+      required this.replaySoundMessage,
+      required this.replayRecordMessage,
+      required this.userData});
   final Size size;
   final UserModel user;
   final TextEditingController textEditingController;
@@ -104,18 +104,17 @@ class _ChatPageTextFieldItemState extends State<ChatPageTextFieldItem> {
                       file.path.toLowerCase().endsWith('.doc')) {
                     getnav.Get.to(
                         () => PickFilePage(
-                              size: widget.size,
-                              replayContactMessage: widget.replayContactMessage,
-                              friendNameReplay: widget.friendNameReplay,
-                              replayMessageID: widget.replayMessageID,
-                              file: state.file,
-                              user: widget.user,
-                              replayTextMessage: widget.replayTextMessage,
-                              replayImageMessage: widget.replayImageMessage,
-                              replayFileMessage: widget.replayFileMessage,
-                              replaySoundMessage: widget.replaySoundMessage,
-                              replayRecordMessage: widget.replayRecordMessage,
-                            ),
+                            size: widget.size,
+                            replayContactMessage: widget.replayContactMessage,
+                            friendNameReplay: widget.friendNameReplay,
+                            replayMessageID: widget.replayMessageID,
+                            file: state.file,
+                            user: widget.user,
+                            replayTextMessage: widget.replayTextMessage,
+                            replayImageMessage: widget.replayImageMessage,
+                            replayFileMessage: widget.replayFileMessage,
+                            replaySoundMessage: widget.replaySoundMessage,
+                            replayRecordMessage: widget.replayRecordMessage),
                         transition: getnav.Transition.rightToLeft);
                   }
                   if (file.path.toLowerCase().endsWith('.mp3')) {
@@ -153,7 +152,7 @@ class _ChatPageTextFieldItemState extends State<ChatPageTextFieldItem> {
                       right: widget.size.width * .15,
                       left: widget.size.width * .05),
                   child: MessageTextField(
-                    userData: widget.userData,
+                      userData: widget.userData,
                       onPressed: () {
                         setState(() {
                           isClick = !isClick;

@@ -110,22 +110,21 @@ class _GroupsChatPageSendMediaState extends State<GroupsChatPageSendMedia> {
                     file.path.toLowerCase().endsWith('.txt'))) {
                   getnav.Get.to(
                       () => GroupsChatPickFilePage(
-                            isNotify: widget.isNotify,
-                            tokens: widget.tokens,
-                            senderName: widget.senderName,
-                            file: state.file,
-                            groupModel: widget.groupModel,
-                            replayTextMessage: widget.replayTextMessage,
-                            friendNameReplay: widget.userData != null
-                                ? widget.userData!.userName
-                                : '',
-                            replayImageMessage: widget.replayImageMessage,
-                            replayFileMessage: widget.replayFileMessage,
-                            replayContactMessage: widget.replayContactMessage,
-                            replayMessageID: widget.replayMessageID,
-                            replaySoundMessage: widget.replaySoundMessage,
-                            replayRecordMessage: widget.replayRecordMessage,
-                          ),
+                          isNotify: widget.isNotify,
+                          tokens: widget.tokens,
+                          senderName: widget.senderName,
+                          file: state.file,
+                          groupModel: widget.groupModel,
+                          replayTextMessage: widget.replayTextMessage,
+                          friendNameReplay: widget.userData != null
+                              ? widget.userData!.userName
+                              : '',
+                          replayImageMessage: widget.replayImageMessage,
+                          replayFileMessage: widget.replayFileMessage,
+                          replayContactMessage: widget.replayContactMessage,
+                          replayMessageID: widget.replayMessageID,
+                          replaySoundMessage: widget.replaySoundMessage,
+                          replayRecordMessage: widget.replayRecordMessage),
                       transition: getnav.Transition.rightToLeft);
                 }
                 if (file.path.toLowerCase().endsWith('.mp3')) {

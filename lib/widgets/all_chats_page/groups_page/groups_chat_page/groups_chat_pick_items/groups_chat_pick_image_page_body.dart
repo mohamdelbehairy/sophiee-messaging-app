@@ -3,16 +3,14 @@ import 'dart:io';
 import 'package:sophiee/cubit/groups/groups_mdeia_files/group_store_media_files/group_store_media_files_cubit.dart';
 import 'package:sophiee/cubit/notification/group_notification/group_notification_cubit.dart';
 import 'package:sophiee/cubit/upload/upload_image/upload_image_cubit.dart';
-import 'package:sophiee/utils/navigation.dart';
 import 'package:sophiee/cubit/groups/message_group/group_message_cubit.dart';
 import 'package:sophiee/models/group_model.dart';
-import 'package:sophiee/widgets/all_chats_page/chat_page/pick_chat_items/pick_chat_text_field.dart';
-import 'package:sophiee/widgets/all_chats_page/chat_page/pick_chat_items/pick_image_page_bottom.dart';
-import 'package:sophiee/widgets/all_chats_page/groups_page/groups_chat_page/groups_chat_page_send_chat_items.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:uuid/uuid.dart';
+
+import '../../../chat_page/pick_chat_items/pick_image_page/pick_image_custom_image.dart';
+import '../../../chat_page/pick_chat_items/pick_items_text_field.dart';
+import 'group_chat_pick_image_button.dart';
 
 class GroupsChatPickImagePageBody extends StatefulWidget {
   const GroupsChatPickImagePageBody(
@@ -29,20 +27,23 @@ class GroupsChatPickImagePageBody extends StatefulWidget {
       required this.replayRecordMessage,
       required this.tokens,
       required this.senderName,
-      required this.isNotify});
+      required this.isNotify,
+      required this.isLoading});
   final File image;
   final GroupModel groupModel;
-  final String replayTextMessage;
-  final String friendNameReplay;
-  final String replayImageMessage;
-  final String replayFileMessage;
-  final String replayContactMessage;
-  final String replayMessageID;
-  final String replaySoundMessage;
-  final String replayRecordMessage;
+  final String replayTextMessage,
+      friendNameReplay,
+      replayImageMessage,
+      replayFileMessage,
+      replayContactMessage,
+      replayMessageID,
+      replaySoundMessage,
+      replayRecordMessage,
+      senderName;
+
   final List<String> tokens;
-  final String senderName;
   final List<bool> isNotify;
+  final bool isLoading;
 
   @override
   State<GroupsChatPickImagePageBody> createState() =>
@@ -52,10 +53,6 @@ class GroupsChatPickImagePageBody extends StatefulWidget {
 class _GroupsChatPickImagePageBodyState
     extends State<GroupsChatPickImagePageBody> {
   TextEditingController controller = TextEditingController();
-  bool isClick = false;
-  navigation() {
-    Navigation.navigationOnePop(context: context);
-  }
 
   @override
   void dispose() {
@@ -73,90 +70,17 @@ class _GroupsChatPickImagePageBodyState
 
     return Stack(
       children: [
-        Container(
-            margin: EdgeInsets.only(top: size.height * .05),
-            decoration: BoxDecoration(
-                image: DecorationImage(
-                    image: FileImage(widget.image), fit: BoxFit.fitWidth))),
-        Positioned(
-            height: size.height * .18,
-            width: size.width,
-            bottom: 0.0,
-            child: PickChatTextField(
-                 isLoading: true,
-                controller: controller, hintText: 'Enter a message...')),
-        Positioned(
-          width: size.width,
-          bottom: size.height * .015,
-          child: GroupsChatSendItemChatBottom(
-            groupModel: widget.groupModel,
-            isClick: isClick,
-            onTap: () async {
-              try {
-                setState(() {
-                  isClick = true;
-                });
-                String imageUrl = await uploadImage.uploadImage(
-                    imageFile: widget.image,
-                    fieldName: 'groups_messages_images');
-                String messageID = const Uuid().v4();
-                await sendMessage.sendGroupMessage(
-                    messageID: messageID,
-                    imageUrl: imageUrl,
-                    videoUrl: null,
-                    messageText: controller.text,
-                    groupID: widget.groupModel.groupID,
-                    replayImageMessage: widget.replayImageMessage,
-                    friendNameReplay: widget.friendNameReplay,
-                    replayMessageID: widget.replayMessageID,
-                    replayContactMessage: widget.replayContactMessage,
-                    replayFileMessage: widget.replayFileMessage,
-                    replayTextMessage: widget.replayTextMessage,
-                    replaySoundMessage: widget.replaySoundMessage,
-                    replayRecordMessage: widget.replayRecordMessage);
-                for (int i = 0; i < widget.tokens.length; i++) {
-                  if (widget.isNotify[i]) {
-                    sendGroupMessageNotify.sendGroupMessageNotification(
-                        receiverToken: widget.tokens[i],
-                        senderName: widget.groupModel.groupName,
-                        message:
-                            '${widget.senderName.split(' ')[0]} sent an image',
-                        senderId: widget.groupModel.groupID);
-                  }
-                }
-
-                await storeMedia.storeMedia(
-                    groupID: widget.groupModel.groupID,
-                    messageImage: imageUrl,
-                    messageID: messageID,
-                    messageText:
-                        controller.text.isEmpty ? controller.text : null);
-                if (controller.text.startsWith('http') ||
-                    controller.text.startsWith('https')) {
-                  await storeMedia.storeLink(
-                      groupID: widget.groupModel.groupID,
-                      messageID: messageID,
-                      messageLink: controller.text);
-                }
-
-                navigation();
-              } finally {
-                setState(() {
-                  isClick = false;
-                });
-              }
-            },
-          ),
-        ),
-        Positioned(
-          top: size.height * .15,
-          left: size.width * .04,
-          child: PickImagePageBottom(
-            icon: FontAwesomeIcons.xmark,
-            color: Colors.transparent,
-            onTap: () => Navigator.pop(context),
-          ),
-        ),
+        PickImageCustomImage(image: widget.image),
+        PickItemsTextField(
+            size: size, isLoading: widget.isLoading, controller: controller),
+        GroupChatPickImageButton(
+            size: size,
+            widget: widget,
+            uploadImage: uploadImage,
+            sendMessage: sendMessage,
+            controller: controller,
+            sendGroupMessageNotify: sendGroupMessageNotify,
+            storeMedia: storeMedia),
       ],
     );
   }

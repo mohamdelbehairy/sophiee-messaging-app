@@ -26,7 +26,7 @@ class GroupChatCustomMessageFriendImage extends StatelessWidget {
                 : messageModel.messageVideo != null
                     ? size.width * .0
                     : size.width * .015,
-        left: size.width * .03,
+        left: size.width * .02,
         child: GestureDetector(
           onTap: () => getnav.Get.to(() => MyFriendPage(user: user),
               transition: getnav.Transition.downToUp,

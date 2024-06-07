@@ -56,7 +56,7 @@ class MessageDateTime extends StatelessWidget {
                               ? differenceInDays == 1
                                   ? '$differenceInDays d'
                                   : '$differenceInDays d'
-                              : '',
+                              : '$differenceInDays d',
               style: const TextStyle(color: Colors.grey)),
           if (message.senderID != FirebaseAuth.instance.currentUser!.uid)
             SizedBox(width: size.width * .01),

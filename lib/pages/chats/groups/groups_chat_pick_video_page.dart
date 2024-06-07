@@ -10,7 +10,8 @@ class GroupsChatPickVideoPage extends StatelessWidget {
       required this.video,
       required this.groupModel,
       required this.tokens,
-      required this.senderName, required this.isNotify});
+      required this.senderName,
+      required this.isNotify});
   final File video;
   final GroupModel groupModel;
   final List<String> tokens;
@@ -20,12 +21,13 @@ class GroupsChatPickVideoPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: GroupsChatPickVideoPageBody(
-        isNotify: isNotify,
-          video: video,
-          groupModel: groupModel,
-          tokens: tokens,
-          senderName: senderName),
-    );
+        backgroundColor: Colors.black,
+        appBar: AppBar(backgroundColor: Colors.transparent),
+        body: GroupsChatPickVideoPageBody(
+            isNotify: isNotify,
+            video: video,
+            groupModel: groupModel,
+            tokens: tokens,
+            senderName: senderName));
   }
 }
