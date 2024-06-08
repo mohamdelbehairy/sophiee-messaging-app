@@ -1,3 +1,4 @@
+import 'package:sophiee/constants.dart';
 import 'package:sophiee/models/message_model.dart';
 import 'package:sophiee/models/users_model.dart';
 import 'package:sophiee/pages/my_friend_page.dart';
@@ -39,7 +40,9 @@ class GroupChatCustomMessageFriendImage extends StatelessWidget {
                       shimmerBaseColor: Colors.grey.shade100,
                       shimmerHighlightColor: Colors.grey.shade300,
                       boxFit: BoxFit.cover,
-                      imageUrl: user.profileImage))),
+                      imageUrl: user.isProfilePhotos
+                          ? user.profileImage
+                          : defaultProfileImageUrl))),
         ));
   }
 }
