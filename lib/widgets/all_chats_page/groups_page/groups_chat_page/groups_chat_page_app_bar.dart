@@ -1,63 +1,47 @@
-import 'package:sophiee/models/group_model.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sophiee/pages/chats/groups/groups_chat_page/groups_chat_page_info.dart';
-import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart' as getnav;
+
+import '../../../../cubit/groups/get_groups_member/get_groups_member_cubit.dart';
+import '../../../../cubit/groups/get_groups_member/get_groups_member_state.dart';
+import '../../../../models/group_model.dart';
+import 'groups_chat_app_bar_body.dart';
 
 class GroupsChatPageAppBar extends StatelessWidget {
   const GroupsChatPageAppBar(
       {super.key,
-      required this.groupData,
+      required this.groupID,
       required this.isDark,
-      required this.size});
-  final GroupModel groupData;
+      required this.size,
+      this.groupModel});
+  final String groupID;
   final bool isDark;
   final Size size;
+  final GroupModel? groupModel;
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        getnav.Get.to(
-            () => GroupsChatPageInfo(
-                groupModel: groupData, isDark: isDark, size: size),
-            transition: getnav.Transition.rightToLeft);
+    return BlocBuilder<GetGroupsMemberCubit, GetGroupsMemberState>(
+      builder: (context, state) {
+        if (state is GetGroupsMemberSuccess && state.groupsList.isNotEmpty) {
+          final groupData = state.groupsList
+              .firstWhere((element) => element.groupID == groupID);
+          return GestureDetector(
+              onTap: () {
+                getnav.Get.to(
+                    () => GroupsChatPageInfo(
+                        groupModel: groupData, isDark: isDark, size: size),
+                    transition: getnav.Transition.rightToLeft);
+              },
+              child: GroupsChatAppBarBody(
+                  isDark: isDark, groupData: groupData, size: size));
+        } else {
+          return GroupsChatAppBarBody(
+              isDark: isDark, groupData: groupModel!, size: size);
+        }
       },
-      child: Row(
-        children: [
-          CircleAvatar(
-            backgroundColor: Colors.transparent,
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(50),
-              child: FancyShimmerImage(
-                  boxFit: BoxFit.cover,
-                  shimmerBaseColor:
-                      isDark ? Colors.white12 : Colors.grey.shade300,
-                  shimmerHighlightColor:
-                      isDark ? Colors.white24 : Colors.grey.shade100,
-                  imageUrl: groupData.groupImage!),
-            ),
-          ),
-          SizedBox(width: size.width * .03),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(
-                width: size.width * .4,
-                child: Text(groupData.groupName,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyle(
-                        color: Colors.white, fontSize: size.width * .04)),
-              ),
-              SizedBox(height: size.width * .005),
-              Text('${groupData.usersID.length} members',
-                  style: TextStyle(
-                      color: Colors.white70, fontSize: size.width * .03))
-            ],
-          ),
-        ],
-      ),
     );
   }
 }
+

@@ -100,7 +100,8 @@ class CustomMaterialApp extends StatelessWidget {
         BlocProvider(create: (context) => GroupsMemberSelectedCubit()),
         BlocProvider(create: (context) => CreateGroupsCubit()),
         BlocProvider(create: (context) => GroupMessageCubit()),
-        BlocProvider(create: (context) => GetGroupsMemberCubit()),
+        BlocProvider(
+            create: (context) => GetGroupsMemberCubit()..getGroupsMember()),
         BlocProvider(create: (context) => UpdateGroupsDetailsCubit()),
         BlocProvider(create: (context) => GroupsMembersDetailsCubit()),
         BlocProvider(create: (context) => DeleteGroupsCubit()),

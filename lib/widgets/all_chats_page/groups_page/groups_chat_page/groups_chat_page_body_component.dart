@@ -21,8 +21,8 @@ import 'package:swipe_to/swipe_to.dart';
 
 import '../../../../utils/shimmer/home/all_chats/chat_page/message_page_shimmer.dart';
 
-class GroupsChatPageBodyDetails extends StatefulWidget {
-  const GroupsChatPageBodyDetails(
+class GroupsChatPageBodyComponent extends StatefulWidget {
+  const GroupsChatPageBodyComponent(
       {super.key,
       required this.groupModel,
       required this.scrollController,
@@ -40,11 +40,11 @@ class GroupsChatPageBodyDetails extends StatefulWidget {
   final UserModel userDataModel;
 
   @override
-  State<GroupsChatPageBodyDetails> createState() =>
-      _GroupsChatPageBodyDetailsState();
+  State<GroupsChatPageBodyComponent> createState() =>
+      _GroupsChatPageBodyComponentState();
 }
 
-class _GroupsChatPageBodyDetailsState extends State<GroupsChatPageBodyDetails> {
+class _GroupsChatPageBodyComponentState extends State<GroupsChatPageBodyComponent> {
   bool isSwip = false;
 
   MessageModel? messageModel;

@@ -13,7 +13,7 @@ class MessageSenderItemShimmer extends StatelessWidget {
         Align(
           alignment: Alignment.centerRight,
           child: Container(
-            height: 65,
+            height: size.height * .075,
             width: 320,
             decoration: const BoxDecoration(
                 color: Colors.white,
@@ -24,10 +24,11 @@ class MessageSenderItemShimmer extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 2),
-        const CustomMediumItemShimmer(
+        CustomMediumItemShimmer(
+          size: size,
           width: 280,
           alignment: Alignment.centerRight,
-          borderRadius: BorderRadius.only(
+          borderRadius: const BorderRadius.only(
             topLeft: Radius.circular(32),
             bottomLeft: Radius.circular(32),
           ),

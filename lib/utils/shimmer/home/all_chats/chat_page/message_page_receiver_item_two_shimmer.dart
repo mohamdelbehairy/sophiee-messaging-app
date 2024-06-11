@@ -11,10 +11,11 @@ class CustomReceiverItemTwo extends StatelessWidget {
       children: [
         Column(
           children: [
-            const CustomMediumItemShimmer(
+             CustomMediumItemShimmer(
+               size: size,
                 width: 270,
                 alignment: Alignment.centerLeft,
-                borderRadius: BorderRadius.only(
+                borderRadius: const BorderRadius.only(
                     bottomRight: Radius.circular(32),
                     topRight: Radius.circular(32))),
             const SizedBox(height: 4),

@@ -1,12 +1,14 @@
-import 'package:sophiee/cubit/groups/get_groups_member/get_groups_member_cubit.dart';
 import 'package:sophiee/cubit/groups/message_group/group_message_cubit.dart';
 import 'package:sophiee/pages/chats/groups/groups_chat_page/groups_chat_page_body.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../models/group_model.dart';
+
 class GroupsChatPage extends StatefulWidget {
-  const GroupsChatPage({super.key, required this.groupID});
+  const GroupsChatPage({super.key, required this.groupID, this.groupModel});
   final String groupID;
+  final GroupModel? groupModel;
 
   @override
   State<GroupsChatPage> createState() => _GroupsChatPageState();
@@ -21,7 +23,6 @@ class _GroupsChatPageState extends State<GroupsChatPage> {
   void initState() {
     controller = TextEditingController();
     context.read<GroupMessageCubit>().getGroupMessage(groupID: widget.groupID);
-    context.read<GetGroupsMemberCubit>().getGroupsMember();
     super.initState();
   }
 
@@ -37,6 +38,7 @@ class _GroupsChatPageState extends State<GroupsChatPage> {
     final size = MediaQuery.of(context).size;
 
     return GroupsChatPageBody(
+      groupModel: widget.groupModel,
       groupID: widget.groupID,
       size: size,
       scrollController: scrollController,
