@@ -99,6 +99,10 @@ class _MessageForwardButtonState extends State<MessageForwardButton> {
                                 userID: friend.userID,
                                 myUserName: userData.userName,
                                 myProfileImage: userData.profileImage,
+                                messageFileSize:
+                                    widget.message!.messageFileSize,
+                                messageFileType:
+                                    widget.message!.messageFileType,
                                 friendNameReplay: '',
                                 replayMessageID: '',
                                 replayContactMessage: '',
@@ -107,6 +111,28 @@ class _MessageForwardButtonState extends State<MessageForwardButton> {
                                 replayTextMessage: '',
                                 replayRecordMessage: '',
                                 replaySoundMessage: '');
+
+                            if (widget.message!.messageFile != null) {
+                              await storeChatMedia.storeFile(
+                                  friendID: friend.userID,
+                                  messageID: messageID,
+                                  messageFile: widget.message!.messageFile,
+                                  messageFileName:
+                                      widget.message!.messageFileName,
+                                  messageFileSize:
+                                      widget.message!.messageFileSize,
+                                  messageFileType:
+                                      widget.message!.messageFileType);
+                              if (friendData.isChatNotify) {
+                                await sendMessageNotification
+                                    .sendMessageNotification(
+                                        receiverToken: friendData.token,
+                                        senderName: userData.userName,
+                                        message:
+                                            '${userData.userName.split(' ')[0]} sent a file',
+                                        senderId: userData.userID);
+                              }
+                            }
                             if (widget.message!.phoneContactNumber != null &&
                                 friendData.isChatNotify) {
                               await sendMessageNotification.sendMessageNotification(
@@ -116,23 +142,37 @@ class _MessageForwardButtonState extends State<MessageForwardButton> {
                                       '${userData.userName.split(' ')[0]} shared a contact',
                                   senderId: userData.userID);
                             }
-                            if (widget.message!.messageSound != null &&
-                                friendData.isChatNotify) {
-                              await sendMessageNotification.sendMessageNotification(
-                                  receiverToken: friendData.token,
-                                  senderName: userData.userName,
-                                  message:
-                                      '${userData.userName.split(' ')[0]} sent a sound',
-                                  senderId: userData.userID);
+                            if (widget.message!.messageSound != null) {
+                              await storeChatMedia.storeVoice(
+                                  friendID: friend.userID,
+                                  messageID: messageID,
+                                  messageSound: widget.message!.messageSound,
+                                  messageSoundName:
+                                      widget.message!.messageFileName);
+                              if (friendData.isChatNotify) {
+                                await sendMessageNotification
+                                    .sendMessageNotification(
+                                        receiverToken: friendData.token,
+                                        senderName: userData.userName,
+                                        message:
+                                            '${userData.userName.split(' ')[0]} sent a sound',
+                                        senderId: userData.userID);
+                              }
                             }
-                            if (widget.message!.messageRecord != null &&
-                                friendData.isChatNotify) {
-                              await sendMessageNotification.sendMessageNotification(
-                                  receiverToken: friendData.token,
-                                  senderName: userData.userName,
-                                  message:
-                                      '${userData.userName.split(' ')[0]} sent a voice message',
-                                  senderId: userData.userID);
+                            if (widget.message!.messageRecord != null) {
+                              await storeChatMedia.storeVoice(
+                                  friendID: friend.userID,
+                                  messageID: messageID,
+                                  messageRecord: widget.message!.messageRecord);
+                              if (friendData.isChatNotify) {
+                                await sendMessageNotification
+                                    .sendMessageNotification(
+                                        receiverToken: friendData.token,
+                                        senderName: userData.userName,
+                                        message:
+                                            '${userData.userName.split(' ')[0]} sent a voice message',
+                                        senderId: userData.userID);
+                              }
                             }
                             if (widget.message!.messageImage != null ||
                                 widget.message!.messageVideo != null) {
@@ -143,7 +183,7 @@ class _MessageForwardButtonState extends State<MessageForwardButton> {
                                         receiverToken: friendData.token,
                                         senderName: userData.userName,
                                         message:
-                                            '${userData.userName.split(' ')[0]} sent video',
+                                            '${userData.userName.split(' ')[0]} sent a video',
                                         senderId: userData.userID);
                               } else {
                                 if (friendData.isChatNotify) {
@@ -264,7 +304,7 @@ class _MessageForwardButtonState extends State<MessageForwardButton> {
                                     'userName: ${groupuserData.userName}');
                                 debugPrint('token: ${groupuserData.token}');
                                 if (widget.message != null) {
-                                  sendGroupMessage.sendGroupMessage(
+                                  await sendGroupMessage.sendGroupMessage(
                                       groupID: group,
                                       messageID: messageID,
                                       messageText: widget.message!.messageText,
@@ -285,6 +325,10 @@ class _MessageForwardButtonState extends State<MessageForwardButton> {
                                           widget.message!.phoneContactName,
                                       phoneContactNumber:
                                           widget.message!.phoneContactNumber,
+                                      messageFileSize:
+                                          widget.message!.messageFileSize,
+                                      messageFileType:
+                                          widget.message!.messageFileType,
                                       friendNameReplay: '',
                                       replayMessageID: '',
                                       replayContactMessage: '',
@@ -293,6 +337,30 @@ class _MessageForwardButtonState extends State<MessageForwardButton> {
                                       replayTextMessage: '',
                                       replayRecordMessage: '',
                                       replaySoundMessage: '');
+
+                                  if (widget.message!.messageFile != null) {
+                                    await storeGroupMedia.storeFile(
+                                        groupID: group,
+                                        messageID: messageID,
+                                        messageFile:
+                                            widget.message!.messageFile,
+                                        messageFileName:
+                                            widget.message!.messageFileName,
+                                        messageFileSize:
+                                            widget.message!.messageFileSize,
+                                        messageFileType:
+                                            widget.message!.messageFileType);
+                                    if (groupuserData.isGroupNotify) {
+                                      await sendGroupNotification
+                                          .sendGroupMessageNotification(
+                                              receiverToken:
+                                                  groupuserData.token,
+                                              senderName: groupData.groupName,
+                                              message:
+                                                  '${userData.userName.split(' ')[0]} sent a file',
+                                              senderId: groupData.groupID);
+                                    }
+                                  }
                                   if (widget.message!.phoneContactNumber !=
                                           null &&
                                       groupuserData.isGroupNotify) {

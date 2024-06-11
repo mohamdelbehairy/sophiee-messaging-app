@@ -1,5 +1,4 @@
 import 'package:sophiee/cubit/notification/message_notification/message_notification_cubit.dart';
-import 'package:sophiee/utils/navigation.dart';
 import 'package:sophiee/cubit/user_date/get_user_data/get_user_data_cubit.dart';
 import 'package:sophiee/cubit/user_date/get_user_data/get_user_data_state.dart';
 import 'package:sophiee/cubit/message/message_cubit.dart';
@@ -9,6 +8,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:uuid/uuid.dart';
+
+import 'pick_contact_button.dart';
 
 class PickContactBottomSheetButton extends StatelessWidget {
   const PickContactBottomSheetButton(
@@ -28,9 +29,6 @@ class PickContactBottomSheetButton extends StatelessWidget {
     final message = context.read<MessageCubit>();
     final pickContact = context.read<PickContactCubit>();
     var sendMessageNotification = context.read<MessageNotificationCubit>();
-    navigation() {
-      Navigation.navigationOnePop(context: context);
-    }
 
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: size.width * .04),
@@ -45,54 +43,18 @@ class PickContactBottomSheetButton extends StatelessWidget {
               final userData = state.userModel
                   .firstWhere((element) => element.userID == currentUser.uid);
               String messageID = const Uuid().v4();
-              return GestureDetector(
-                onTap: () async {
-                  navigation();
-                  await message.sendMessage(
-                    messageID: messageID,
-                    friendNameReplay: '',
-                    replayMessageID: '',
-                    imageUrl: null,
-                    fileUrl: null,
-                    phoneContactName: phoneContactName,
-                    phoneContactNumber: phoneContactNumber,
-                    receiverID: user.userID,
-                    messageText: '',
-                    replayImageMessage: '',
-                    replayTextMessage: '',
-                    replayFileMessage: '',
-                    replayContactMessage: replayContactMessage,
-                    userName: user.userName,
-                    profileImage: user.profileImage,
-                    userID: user.userID,
-                    myUserName: userData.userName,
-                    myProfileImage: userData.profileImage,
-                    // context: context
-                  );
-                  pickContact.phoneContact == null;
-                  await sendMessageNotification.sendMessageNotification(
-                      receiverToken: friendData.token,
-                      senderName: userData.userName,
-                      message: '${userData.userName.split(' ')[0]} shared a contact',
-                      senderId: userData.userID);
-                },
-                child: Container(
-                  height: size.height * .07,
-                  width: size.width,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(size.width * .03),
-                    color: Colors.blue,
-                  ),
-                  child: const Center(
-                    child: Text(
-                      'Share Contact',
-                      style: TextStyle(
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
-                ),
-              );
+              return PickContactButton(
+                  message: message,
+                  messageID: messageID,
+                  phoneContactName: phoneContactName,
+                  phoneContactNumber: phoneContactNumber,
+                  user: user,
+                  replayContactMessage: replayContactMessage,
+                  userData: userData,
+                  pickContact: pickContact,
+                  sendMessageNotification: sendMessageNotification,
+                  friendData: friendData,
+                  size: size);
             } else {
               return Container();
             }

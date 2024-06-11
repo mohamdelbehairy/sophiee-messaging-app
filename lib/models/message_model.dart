@@ -2,35 +2,35 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:intl/intl.dart';
 
 class MessageModel {
-  final String senderID;
-  final String receiverID;
-  final String messageID;
-  final String messageText;
+  final String senderID, receiverID, messageID, messageText;
+
   final DateTime messageDateTime;
   final bool isSeen;
-  final String? messageImage;
-  final String? messageFile;
-  final String? messageFileName;
-  final String? messageSound;
-  final String? messageSoundName;
-  final String? messageSoundTime;
-  final String? messageRecord;
-  final String? messageRecordTime;
-  final bool? messageSoundPlaying;
-  final String? phoneContactNumber;
-  final String? phoneContactName;
-  final String? messageVideo;
+  String? messageImage,
+      messageFile,
+      messageFileName,
+      messageSound,
+      messageSoundName,
+      messageSoundTime,
+      messageRecord,
+      messageRecordTime,
+      phoneContactNumber,
+      phoneContactName,
+      messageVideo,
+      replayTextMessage,
+      replayImageMessage,
+      replayFileMessage,
+      replayContactMessage,
+      friendNameReplay,
+      replayMessageID,
+      replaySoundMessage,
+      replayRecordMessage,
+      messageFileType;
+
+  bool? messageSoundPlaying, highlightChatMessage;
   List<dynamic> groupChatUsersIDSeen;
-  String? replayTextMessage;
-  String? replayImageMessage;
-  String? replayFileMessage;
-  String? replayContactMessage;
-  String? friendNameReplay;
-  String? replayMessageID;
-  String? replaySoundMessage;
-  String? replayRecordMessage;
   List<dynamic>? highlightMessage;
-  bool? highlightChatMessage;
+  double? messageFileSize;
 
   MessageModel(
       {required this.senderID,
@@ -61,7 +61,9 @@ class MessageModel {
       this.replaySoundMessage,
       this.replayRecordMessage,
       this.highlightMessage,
-      this.highlightChatMessage});
+      this.highlightChatMessage,
+      this.messageFileSize,
+      this.messageFileType});
 
   factory MessageModel.fromJson(jsonData) {
     return MessageModel(
@@ -93,7 +95,9 @@ class MessageModel {
         replaySoundMessage: jsonData['replaySoundMessage'],
         replayRecordMessage: jsonData['replayRecordMessage'],
         highlightMessage: jsonData['highlightMessage'],
-        highlightChatMessage: jsonData['highlightChatMessage']);
+        highlightChatMessage: jsonData['highlightChatMessage'],
+        messageFileSize: jsonData['messageFileSize'],
+        messageFileType: jsonData['messageFileType']);
   }
 
   Map<String, dynamic> toMap() {
@@ -126,7 +130,9 @@ class MessageModel {
       'replaySoundMessage': replaySoundMessage,
       'replayRecordMessage': replayRecordMessage,
       'highlightMessage': highlightMessage,
-      'highlightChatMessage': highlightChatMessage
+      'highlightChatMessage': highlightChatMessage,
+      'messageFileSize': messageFileSize,
+      'messageFileType': messageFileType
     };
   }
 

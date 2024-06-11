@@ -8,30 +8,31 @@ import 'package:sophiee/models/message_model.dart';
 class GroupMessageCubit extends Cubit<GroupMessageState> {
   GroupMessageCubit() : super(GroupMessageInitial());
 
-  Future<void> sendGroupMessage({
-    required String messageText,
-    required String groupID,
-    required String messageID,
-    String? imageUrl,
-    String? videoUrl,
-    String? phoneContactNumber,
-    String? phoneContactName,
-    String? fileUrl,
-    String? messageFileName,
-    String? audioUrl,
-    String? audioName,
-    String? audioTime,
-    String? recordUrl,
-    String? recordTime,
-    String? replayTextMessage,
-    required String replayImageMessage,
-    String? replayFileMessage,
-    String? replayContactMessage,
-    required String friendNameReplay,
-    required String replayMessageID,
-    String? replaySoundMessage,
-    String? replayRecordMessage,
-  }) async {
+  Future<void> sendGroupMessage(
+      {required String messageText,
+      required String groupID,
+      required String messageID,
+      String? imageUrl,
+      String? videoUrl,
+      String? phoneContactNumber,
+      String? phoneContactName,
+      String? fileUrl,
+      String? messageFileName,
+      String? audioUrl,
+      String? audioName,
+      String? audioTime,
+      String? recordUrl,
+      String? recordTime,
+      String? replayTextMessage,
+      required String replayImageMessage,
+      String? replayFileMessage,
+      String? replayContactMessage,
+      required String friendNameReplay,
+      required String replayMessageID,
+      String? replaySoundMessage,
+      String? replayRecordMessage,
+      double? messageFileSize,
+      String? messageFileType}) async {
     try {
       MessageModel message = MessageModel.fromJson({
         'senderID': FirebaseAuth.instance.currentUser!.uid,
@@ -62,6 +63,8 @@ class GroupMessageCubit extends Cubit<GroupMessageState> {
         'replaySoundMessage': replaySoundMessage,
         'replayRecordMessage': replayRecordMessage,
         'highlightMessage': [],
+        'messageFileSize': messageFileSize,
+        'messageFileType': messageFileType
       });
 
       await FirebaseFirestore.instance

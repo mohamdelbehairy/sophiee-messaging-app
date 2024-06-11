@@ -54,6 +54,12 @@ class PickFileButton extends StatelessWidget {
                     String fileUrl = await uploadFile.uploadFile(
                         fieldName: 'messages_files', file: widget.file);
                     String messageID = const Uuid().v4();
+                    double messageFileSize =
+                        await widget.file.length() / 1024 < 1024
+                            ? await widget.file.length() / 1024
+                            : await widget.file.length() / 1024 / 1024;
+                    String messageFileType =
+                        await widget.file.length() / 1024 < 1024 ? 'KB' : 'MB';
                     await message.sendMessage(
                         messageID: messageID,
                         friendNameReplay: widget.friendNameReplay,
@@ -76,20 +82,16 @@ class PickFileButton extends StatelessWidget {
                         replayImageMessage: widget.replayImageMessage,
                         replayContactMessage: widget.replayContactMessage,
                         replaySoundMessage: widget.replaySoundMessage,
-                        replayRecordMessage: widget.replayRecordMessage);
+                        replayRecordMessage: widget.replayRecordMessage,
+                        messageFileSize: messageFileSize,
+                        messageFileType: messageFileType);
                     await storeMedia.storeFile(
                         friendID: widget.user.userID,
                         messageID: messageID,
                         messageFile: fileUrl,
                         messageFileName: widget.messageFileName,
-                        messageFileSize:
-                            await widget.file.length() / 1024 < 1024
-                                ? await widget.file.length() / 1024
-                                : await widget.file.length() / 1024 / 1024,
-                        messageFileType:
-                            await widget.file.length() / 1024 < 1024
-                                ? 'KB'
-                                : 'MB');
+                        messageFileSize: messageFileSize,
+                        messageFileType: messageFileType);
 
                     if (widget.user.isChatNotify &&
                         !friendData.muteUsers.contains(userData.userID)) {

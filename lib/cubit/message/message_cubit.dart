@@ -36,6 +36,8 @@ class MessageCubit extends Cubit<MessageState> {
     String? audioTime,
     String? recordUrl,
     String? recordTime,
+    double? messageFileSize,
+    String? messageFileType
   }) async {
     try {
       MessageModel message = MessageModel.fromJson({
@@ -67,6 +69,8 @@ class MessageCubit extends Cubit<MessageState> {
         'replaySoundMessage': replaySoundMessage,
         'replayRecordMessage': replayRecordMessage,
         'highlightChatMessage': false,
+        'messageFileSize':messageFileSize,
+        'messageFileType':messageFileType
       });
       await FirebaseFirestore.instance
           .collection('users')

@@ -4,7 +4,7 @@ import 'package:sophiee/cubit/pick_contact/pick_contact_state.dart';
 import 'package:sophiee/models/users_model.dart';
 import 'package:sophiee/widgets/all_chats_page/chat_page/chat_page_body_details.dart';
 import 'package:flutter/material.dart';
-import 'package:sophiee/widgets/all_chats_page/chat_page/pick_chat_items/pick_contact_bottom_sheet.dart';
+import 'package:sophiee/widgets/all_chats_page/chat_page/pick_chat_items/pick_contact/pick_contact_bottom_sheet.dart';
 
 class ChatPageBodyComponent extends StatelessWidget {
   const ChatPageBodyComponent(

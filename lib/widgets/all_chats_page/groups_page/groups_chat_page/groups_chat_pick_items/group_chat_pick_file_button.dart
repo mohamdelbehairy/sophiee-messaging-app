@@ -39,6 +39,11 @@ class GroupChatPickFileButton extends StatelessWidget {
           String fileUrl = await uploadFile.uploadFile(
               fieldName: 'groups_messages_files', file: widget.file);
           String messageID = const Uuid().v4();
+          double messageFileSize = await widget.file.length() / 1024 < 1024
+              ? await widget.file.length() / 1024
+              : await widget.file.length() / 1024 / 1024;
+          String messageFileType =
+              await widget.file.length() / 1024 < 1024 ? 'KB' : 'MB';
           await sendMessage.sendGroupMessage(
               messageID: messageID,
               messageText: controller.text,
@@ -56,7 +61,9 @@ class GroupChatPickFileButton extends StatelessWidget {
               replayFileMessage: widget.replayFileMessage,
               replayTextMessage: widget.replayTextMessage,
               replaySoundMessage: widget.replaySoundMessage,
-              replayRecordMessage: widget.replayRecordMessage);
+              replayRecordMessage: widget.replayRecordMessage,
+              messageFileSize: messageFileSize,
+              messageFileType: messageFileType);
           for (int i = 0; i < widget.tokens.length; i++) {
             if (widget.isNotify[i]) {
               sendGroupMessageNotify.sendGroupMessageNotification(
@@ -72,11 +79,8 @@ class GroupChatPickFileButton extends StatelessWidget {
               messageID: messageID,
               messageFile: fileUrl,
               messageFileName: widget.messageFileName,
-              messageFileSize: await widget.file.length() / 1024 < 1024
-                  ? await widget.file.length() / 1024
-                  : await widget.file.length() / 1024 / 1024,
-              messageFileType:
-                  await widget.file.length() / 1024 < 1024 ? 'KB' : 'MB');
+              messageFileSize: messageFileSize,
+              messageFileType: messageFileType);
           if (controller.text.isNotEmpty &&
               (controller.text.startsWith('http') ||
                   controller.text.startsWith('https'))) {
