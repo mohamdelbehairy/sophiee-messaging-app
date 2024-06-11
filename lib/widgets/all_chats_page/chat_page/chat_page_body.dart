@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sophiee/cubit/auth/login/login_cubit.dart';
@@ -11,6 +12,9 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:sophiee/constants.dart';
 
 import '../../../cubit/connectivity/connectivity_cubit.dart';
+import '../../../cubit/get_followers/get_followers_cubit.dart';
+import '../../../cubit/get_following/get_following_cubit.dart';
+import '../../../cubit/user_date/image/get_image/get_image_cubit.dart';
 import '../../../utils/initial_state.dart';
 import '../../../utils/shimmer/home/all_chats/chat_page/message_page_shimmer.dart';
 
@@ -44,6 +48,13 @@ class ChatPageBody extends StatelessWidget {
               onTap: () {
                 InitialState.initPickContactState(context);
                 Navigator.pop(context);
+                context.read<GetFollowersCubit>().getFollowers(
+                    userID: FirebaseAuth.instance.currentUser!.uid);
+                context.read<GetFollowingCubit>().getFollowing(
+                    userID: FirebaseAuth.instance.currentUser!.uid);
+                context
+                    .read<GetImageCubit>()
+                    .getImage(userID: FirebaseAuth.instance.currentUser!.uid);
               },
               child: const Icon(Icons.arrow_back)),
           actions: const [

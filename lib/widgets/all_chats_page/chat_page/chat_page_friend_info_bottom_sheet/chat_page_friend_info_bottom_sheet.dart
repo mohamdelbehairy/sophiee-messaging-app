@@ -2,6 +2,7 @@ import 'package:sophiee/cubit/auth/login/login_cubit.dart';
 import 'package:sophiee/cubit/connectivity/connectivity_cubit.dart';
 import 'package:sophiee/cubit/get_followers/get_followers_cubit.dart';
 import 'package:sophiee/cubit/get_following/get_following_cubit.dart';
+import 'package:sophiee/cubit/user_date/image/get_image/get_image_cubit.dart';
 import 'package:sophiee/models/users_model.dart';
 import 'package:sophiee/pages/my_friend_page.dart';
 import 'package:sophiee/utils/shimmer/home/all_chats/chat_page/chat_page_friend_info_shimmer.dart';
@@ -29,6 +30,7 @@ class _ChatPageFriendBottomSheetInfoState
     super.initState();
     context.read<GetFollowersCubit>().getFollowers(userID: widget.user.userID);
     context.read<GetFollowingCubit>().getFollowing(userID: widget.user.userID);
+    context.read<GetImageCubit>().getImage(userID: widget.user.userID);
   }
 
   @override
@@ -43,7 +45,7 @@ class _ChatPageFriendBottomSheetInfoState
       },
       child: Container(
         height:
-            !widget.user.isPhoneAndEmail ? size.height * .3 : size.height * .44,
+            !widget.user.isPhoneAndEmail ? size.height * .3 : size.height * .4,
         // width: size.width,
         decoration: BoxDecoration(
             color: isDark ? cardDarkModeBackground : Colors.white,

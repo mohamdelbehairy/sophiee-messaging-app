@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -11,12 +10,12 @@ class GetImageCubit extends Cubit<GetImageState> {
   GetImageCubit() : super(GetImageInitial());
 
   List<ImageModel> imageList = [];
-  void getImage() {
+  void getImage({required String userID}) {
     emit(GetImageLoading());
     try {
       FirebaseFirestore.instance
           .collection('images')
-          .doc(FirebaseAuth.instance.currentUser!.uid)
+          .doc(userID)
           .collection('Images')
           .orderBy('dateTime', descending: true)
           .snapshots()

@@ -19,14 +19,14 @@ class ChatPageAppBarTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    
+
     return BlocBuilder<GetUserDataCubit, GetUserDataStates>(
       builder: (context, state) {
         if (state is GetUserDataSuccess && state.userModel.isNotEmpty) {
           final currentUser = user.userID;
           final data = state.userModel
               .firstWhere((element) => element.userID == currentUser);
-          // context.read<MessageCubit>().isTyping(receiverID: data.userID);
+              
           String text;
           int differenceInMinutes =
               Timestamp.now().toDate().difference(data.onlineStatue).inMinutes;
@@ -58,14 +58,14 @@ class ChatPageAppBarTitle extends StatelessWidget {
             }
           } else {
             int weeks = differenceInDays ~/ 7;
-            int remainingDays = differenceInDays % 7;
+            // int remainingDays = differenceInDays % 7;
             if (weeks == 1) {
               text = 'Last Active 1 week ago';
             } else {
               text = 'Last Active $weeks weeks';
-              if (remainingDays > 0) {
-                text += ' and $remainingDays days';
-              }
+              // if (remainingDays > 0) {
+              //   // text += ' and $remainingDays days';
+              // }
               text += ' ago';
             }
           }

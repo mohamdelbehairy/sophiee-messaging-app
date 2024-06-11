@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
@@ -136,7 +137,9 @@ class CustomMaterialApp extends StatelessWidget {
         BlocProvider(create: (context) => FollowerNotificationCubit()),
         BlocProvider(create: (context) => MessageNotificationCubit()),
         BlocProvider(create: (context) => StoreImageCubit()),
-        BlocProvider(create: (context) => GetImageCubit()..getImage()),
+        BlocProvider(
+            create: (context) => GetImageCubit()
+              ..getImage(userID: FirebaseAuth.instance.currentUser!.uid)),
         BlocProvider(create: (context) => DeleteImageCubit()),
         BlocProvider(create: (context) => StoryNotificationCubit()),
         BlocProvider(create: (context) => GroupNotificationCubit()),
