@@ -1,38 +1,38 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../models/users_model.dart';
-import 'contact_bottom_sheet_body.dart';
-import '../../../../../utils/widget/messages/pick_contact/contact_icon_close.dart';
+import '../../../../../../models/group_model.dart';
+import '../../../../../../utils/widget/messages/pick_contact/contact_icon_close.dart';
+import 'contact_bottom_sheet_group_body.dart';
 
-class ContactBottomSheetStack extends StatelessWidget {
-  const ContactBottomSheetStack(
+class ContactBottomSheetGroupStack extends StatelessWidget {
+  const ContactBottomSheetGroupStack(
       {super.key,
       required this.size,
       required this.phoneContactName,
       required this.isDark,
       required this.formattedPhoneNumber,
-      required this.phoneContactNumber,
-      required this.user});
+      required this.groupModel,
+      required this.phoneContactNumber});
 
   final Size size;
   final String phoneContactName;
   final bool isDark;
   final String formattedPhoneNumber;
+  final GroupModel groupModel;
   final String phoneContactNumber;
-  final UserModel user;
 
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        ContactBottomSheetBody(
+        ContactBottomSheetGroupBody(
             size: size,
             phoneContactName: phoneContactName,
             isDark: isDark,
             formattedPhoneNumber: formattedPhoneNumber,
-            phoneContactNumber: phoneContactNumber,
-            user: user),
-        ContactIconClose(size: size, isDark: isDark)
+            groupModel: groupModel,
+            phoneContactNumber: phoneContactNumber),
+        ContactIconClose(size: size, isDark: isDark),
       ],
     );
   }

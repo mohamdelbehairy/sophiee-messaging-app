@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'contact_name.dart';
-import 'contact_number.dart';
+import '../../../../../utils/widget/messages/pick_contact/contact_name.dart';
+import '../../../../../utils/widget/messages/pick_contact/contact_number.dart';
 
 class ContactDetails extends StatelessWidget {
   const ContactDetails(

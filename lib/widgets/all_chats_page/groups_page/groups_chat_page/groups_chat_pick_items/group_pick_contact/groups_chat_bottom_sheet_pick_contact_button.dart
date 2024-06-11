@@ -1,4 +1,3 @@
-import 'package:sophiee/utils/navigation.dart';
 import 'package:sophiee/cubit/groups/message_group/group_message_cubit.dart';
 import 'package:sophiee/cubit/pick_contact/pick_contact_cubit.dart';
 import 'package:sophiee/models/group_model.dart';
@@ -6,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:uuid/uuid.dart';
 
-class GroupsChatBottomSheetPickContactButton extends StatefulWidget {
+class GroupsChatBottomSheetPickContactButton extends StatelessWidget {
   const GroupsChatBottomSheetPickContactButton(
       {super.key,
       required this.groupModel,
@@ -17,17 +16,6 @@ class GroupsChatBottomSheetPickContactButton extends StatefulWidget {
   final String phoneContactName;
 
   @override
-  State<GroupsChatBottomSheetPickContactButton> createState() =>
-      _GroupsChatBottomSheetPickContactButtonState();
-}
-
-class _GroupsChatBottomSheetPickContactButtonState
-    extends State<GroupsChatBottomSheetPickContactButton> {
-  navigation() {
-    Navigation.navigationOnePop(context: context);
-  }
-
-  @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final pickContact = context.read<PickContactCubit>();
@@ -36,15 +24,15 @@ class _GroupsChatBottomSheetPickContactButtonState
       padding: EdgeInsets.symmetric(horizontal: size.width * .04),
       child: GestureDetector(
         onTap: () async {
-          navigation();
+          Navigator.pop(context);
           await sendMessage.sendGroupMessage(
               messageID: const Uuid().v4(),
               messageText: '',
               imageUrl: null,
               videoUrl: null,
-              phoneContactNumber: widget.phoneContactNumber,
-              phoneContactName: widget.phoneContactName,
-              groupID: widget.groupModel.groupID,
+              phoneContactNumber: phoneContactNumber,
+              phoneContactName: phoneContactName,
+              groupID: groupModel.groupID,
               replayImageMessage: '',
               friendNameReplay: '',
               replayMessageID: '');
@@ -54,9 +42,8 @@ class _GroupsChatBottomSheetPickContactButtonState
           height: size.height * .07,
           width: size.width,
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(size.width * .03),
-            color: Colors.blue,
-          ),
+              borderRadius: BorderRadius.circular(size.width * .03),
+              color: Colors.blue),
           child: const Center(
             child: Text(
               'Share Contact',

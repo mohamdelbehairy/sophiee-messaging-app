@@ -7,7 +7,7 @@ import 'package:sophiee/cubit/user_date/get_user_data/get_user_data_state.dart';
 import 'package:sophiee/utils/initial_state.dart';
 import 'package:sophiee/widgets/all_chats_page/chat_page/chats_icons_app_bar_button.dart';
 import 'package:sophiee/widgets/all_chats_page/groups_page/groups_chat_page/groups_chat_page_app_bar.dart';
-import 'package:sophiee/widgets/all_chats_page/groups_page/groups_chat_page/groups_chat_pick_items/groups_chat_bottom_sheet_contact.dart';
+import 'package:sophiee/widgets/all_chats_page/groups_page/groups_chat_page/groups_chat_pick_items/group_pick_contact/groups_chat_bottom_sheet_contact.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -106,7 +106,7 @@ class GroupsChatPageBody extends StatelessWidget {
             },
           );
         } else {
-          return Container();
+          return const Scaffold();
         }
       },
     );
