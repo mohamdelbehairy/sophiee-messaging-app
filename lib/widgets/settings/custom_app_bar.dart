@@ -1,5 +1,5 @@
 import 'package:sophiee/constants.dart';
-import 'package:sophiee/widgets/settings/search_item.dart';
+import 'package:sophiee/widgets/settings/search_text_field.dart';
 import 'package:flutter/material.dart';
 
 class CustomAppBarSetting extends StatelessWidget {
@@ -39,7 +39,7 @@ class CustomAppBarSetting extends StatelessWidget {
       width: size.width,
       decoration: const BoxDecoration(color: kPrimaryColor),
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: size.width * .04),
+        padding: const EdgeInsets.symmetric(horizontal: 16),
         child: Column(
           children: [
             SizedBox(height: size.height * .045),
@@ -51,18 +51,17 @@ class CustomAppBarSetting extends StatelessWidget {
                       onTap: () => Navigator.pop(context), child: arrowIcon!),
                 if (arrowIcon != null) SizedBox(width: size.width * .02),
                 Padding(
-                  padding: padding,
-                  child: Text(appParTitle,
-                      style: TextStyle(
-                          fontSize: fontSize ?? size.height * .034,
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold)),
-                ),
+                    padding: padding,
+                    child: Text(appParTitle,
+                        style: TextStyle(
+                            fontSize: fontSize ?? size.height * .034,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold))),
                 if (widget != null) widget!,
               ],
             ),
-            SizedBox(height: size.width * .02),
-            SearchItem(
+            const SizedBox(height: 8),
+            SearchTextField(
                 controller: controller,
                 onTap: onTap,
                 hintText: hintText,

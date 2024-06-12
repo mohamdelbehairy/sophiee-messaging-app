@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class SearchItem extends StatelessWidget {
-  const SearchItem(
+class SearchTextField extends StatelessWidget {
+  const SearchTextField(
       {super.key,
       required this.hintText,
       required this.onChanged,
@@ -19,15 +19,13 @@ class SearchItem extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     return Container(
       height: size.height * .045,
-      padding: EdgeInsets.all(size.width * .02),
+      padding: const EdgeInsets.only(left: 12, top: 1, bottom: 1),
       decoration: BoxDecoration(
-        color: Colors.white24,
-        borderRadius: BorderRadius.circular(size.height * .022),
-      ),
+          color: Colors.white24, borderRadius: BorderRadius.circular(22)),
       child: Row(
         children: [
           const Icon(Icons.search, color: Colors.white),
-          SizedBox(width: size.width * .035),
+          const SizedBox(width: 14),
           Expanded(
             child: TextField(
               controller: controller,
