@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:sophiee/cubit/auth/auth_settings/auth_settings_cubit.dart';
+import 'package:sophiee/cubit/auth/login/login_cubit.dart';
 import 'package:sophiee/models/users_model.dart';
 import 'package:sophiee/pages/home_page.dart';
 import 'package:sophiee/pages/login_page.dart';
@@ -12,8 +13,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart' as getnav;
 
 class VerificationPage extends StatefulWidget {
-  const VerificationPage({super.key, required this.isDark, this.userData});
-  final bool isDark;
+  const VerificationPage({super.key, this.userData});
   final UserModel? userData;
 
   @override
@@ -46,6 +46,7 @@ class _VerificationPageState extends State<VerificationPage> {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
+    var isDark = context.read<LoginCubit>().isDark;
     return PopScope(
         canPop: false,
         child: Scaffold(
@@ -56,15 +57,13 @@ class _VerificationPageState extends State<VerificationPage> {
                 systemOverlayStyle: SystemUiOverlayStyle(
                     statusBarColor: Colors.transparent,
                     statusBarIconBrightness:
-                        widget.isDark ? Brightness.light : Brightness.dark,
+                        isDark ? Brightness.light : Brightness.dark,
                     systemNavigationBarColor:
-                        widget.isDark ? Colors.white : Colors.black,
+                        isDark ? Colors.white : Colors.black,
                     systemNavigationBarIconBrightness:
-                        widget.isDark ? Brightness.light : Brightness.dark)),
+                        isDark ? Brightness.light : Brightness.dark)),
             body: VerificationPageBody(
-                size: size,
-                isDark: widget.isDark,
-                isEmailVerified: isEmailVerified)));
+                size: size, isDark: isDark, isEmailVerified: isEmailVerified)));
   }
 
   Future checkEmailVerified({UserModel? userData}) async {

@@ -22,8 +22,7 @@ class CustomTextUserEmail extends StatelessWidget {
                 .firstWhere((element) => element.userID == currentUser.uid);
             return CustomTextVerificationPage(
                 text: userData.emailAddress,
-                isDark: isDark,
-                color: isDark ? Colors.white : const Color(0xff3a4352),
+                color: isDark ? Colors.white38 : const Color(0xff3a4352),
                 fontWeight: FontWeight.bold,
                 fontSize: size.height * .018);
           } else {

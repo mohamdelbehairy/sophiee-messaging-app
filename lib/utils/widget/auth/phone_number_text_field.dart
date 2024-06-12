@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:intl_phone_field/phone_number.dart';
+import 'package:sophiee/cubit/auth/login/login_cubit.dart';
+
+import '../../../constants.dart';
 
 class PhoneNumberTextField extends StatelessWidget {
   const PhoneNumberTextField(
@@ -24,6 +28,7 @@ class PhoneNumberTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var isDark = context.read<LoginCubit>().isDark;
     return Padding(
       padding: EdgeInsets.only(bottom: size.width * .045),
       child: ClipRRect(
@@ -38,10 +43,11 @@ class PhoneNumberTextField extends StatelessWidget {
               dropdownIcon: Icon(Icons.expand_more, color: dropDownColor),
               dropdownTextStyle: TextStyle(color: dropDownColor),
               style: TextStyle(
-                  color: Colors.black,
+                  color: isDark ? Colors.white : Colors.black,
                   fontWeight: FontWeight.w300,
                   fontSize: size.width * .035),
               decoration: InputDecoration(
+                  contentPadding: const EdgeInsets.symmetric(vertical: 12),
                   border: InputBorder.none,
                   hintText: hintText,
                   hintStyle: TextStyle(
@@ -49,7 +55,7 @@ class PhoneNumberTextField extends StatelessWidget {
                       fontWeight: FontWeight.w100,
                       fontSize: size.width * .035),
                   filled: true,
-                  fillColor: fillColor))),
+                  fillColor: isDark ? messageFriendColorDarkMode : fillColor))),
     );
   }
 }

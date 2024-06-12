@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:sophiee/cubit/auth/facebook_auth/facebook_auth_cubit.dart';
-import 'package:sophiee/cubit/auth/login/login_cubit.dart';
 import 'package:sophiee/cubit/user_date/get_user_data/get_user_data_cubit.dart';
 import 'package:sophiee/cubit/user_date/get_user_data/get_user_data_state.dart';
 import 'package:sophiee/cubit/user_date/user_token/user_token_cubit.dart';
@@ -26,8 +25,8 @@ class _FacebookAuthWayState extends State<FacebookAuthWay> {
   @override
   Widget build(BuildContext context) {
     var signInWithFacebook = context.read<FacebookAuthCubit>();
-    var isDark = context.read<LoginCubit>().isDark;
     var token = context.read<UserTokenCubit>();
+
     return BlocListener<GetUserDataCubit, GetUserDataStates>(
       listener: (context, userDataState) {
         if (userDataState is GetUserDataSuccess &&
@@ -52,8 +51,7 @@ class _FacebookAuthWayState extends State<FacebookAuthWay> {
               getnav.Get.to(() => const HomePage(),
                   transition: getnav.Transition.rightToLeft);
             } else {
-              getnav.Get.to(
-                  () => VerificationPage(isDark: isDark, userData: userData),
+              getnav.Get.to(() => VerificationPage(userData: userData),
                   transition: getnav.Transition.rightToLeft);
             }
           }

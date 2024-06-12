@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart' as getnav;
 
+import '../../constants.dart';
+
 class RegisterPageBottomSheet extends StatelessWidget {
   const RegisterPageBottomSheet({super.key, required this.isDark});
 
@@ -22,7 +24,7 @@ class RegisterPageBottomSheet extends StatelessWidget {
         reverse: true,
         child: Container(
           decoration: BoxDecoration(
-              color: isDark ? Colors.black : Colors.white,
+              color: isDark ? kDarkModeBackgroundColor : Colors.white,
               borderRadius: const BorderRadius.only(
                   topLeft: Radius.circular(16), topRight: Radius.circular(16))),
           child: BlocConsumer<RegisterCubit, RegisterState>(
@@ -49,7 +51,11 @@ class RegisterPageBottomSheet extends StatelessWidget {
             builder: (context, state) {
               return Column(
                 children: [
-                  const SizedBox(width: 50, child: Divider(thickness: 5)),
+                  SizedBox(
+                      width: 40,
+                      child: Divider(
+                          thickness: 5,
+                          color: isDark ? messageFriendColorDarkMode: Colors.grey)),
                   RegisterPageBottomSheetBody(
                       isLoading: isLoading, enable: isLoading),
                 ],

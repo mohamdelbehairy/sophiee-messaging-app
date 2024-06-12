@@ -3,13 +3,11 @@ import 'package:flutter/material.dart';
 class CustomTextVerificationPage extends StatelessWidget {
   const CustomTextVerificationPage(
       {super.key,
-      required this.isDark,
       required this.fontSize,
       required this.text,
       required this.fontWeight,
       required this.color});
 
-  final bool isDark;
   final double fontSize;
   final String text;
   final FontWeight fontWeight;

@@ -15,7 +15,9 @@ const messageFriendColorDarkMode = Color(0xff2c2a30);
 const cardLightModeBackground = Color(0xfffefeff);
 const cardDarkModeBackground = Color(0xff1e1e1e);
 
+
 // 0xff2b2c33
+// 2d2c36
 
 // Firebase
 const userCollection = 'users';

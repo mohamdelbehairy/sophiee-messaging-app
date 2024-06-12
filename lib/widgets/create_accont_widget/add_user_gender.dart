@@ -1,6 +1,9 @@
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sophiee/widgets/create_accont_widget/add_user_gender_drop_down.dart';
 import 'package:sophiee/widgets/create_accont_widget/add_user_text_filed.dart';
 import 'package:flutter/material.dart';
+
+import '../../cubit/auth/login/login_cubit.dart';
 
 class AddUserGender extends StatefulWidget {
   const AddUserGender(
@@ -34,7 +37,11 @@ class _AddUserGenderState extends State<AddUserGender> {
 
   void updateIconColor() {
     setState(() {
-      iconColor = widget.gender.text.isEmpty ? const Color(0xffc3c5c5) : Colors.black;
+      iconColor = widget.gender.text.isEmpty
+          ? const Color(0xffc3c5c5)
+          : context.read<LoginCubit>().isDark
+              ? Colors.white
+              : Colors.black;
     });
   }
 

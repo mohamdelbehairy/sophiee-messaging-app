@@ -23,12 +23,12 @@ class VerificationPageBody extends StatelessWidget {
         children: [
           VerificationPageCustomTopIcon(size: size),
           SizedBox(height: size.width * .05),
-          VerificationPageTexts(isDark: isDark, size: size),
+          VerificationPageTexts(size: size),
           if (isEmailVerified) SizedBox(height: size.width * .15),
           if (isEmailVerified)
             VerificationPageProgressIndicator(isDark: isDark),
           SizedBox(height: size.width * .15),
-          VerificationPageCustomButton(size: size,isDark: isDark)
+          VerificationPageCustomButton(size: size, isDark: isDark)
         ],
       ),
     );

@@ -90,7 +90,7 @@ class AddUserBottom extends StatelessWidget {
             phoneNumber: phoneController.text.isNotEmpty ? phoneNumber! : null,
             profileImage: profileImage);
 
-        getnav.Get.to(() => const VerificationPage(isDark: false),
+        getnav.Get.to(() => const VerificationPage(),
             transition: getnav.Transition.rightToLeft);
       }
       if (FirebaseAuth.instance.currentUser!.phoneNumber != null) {

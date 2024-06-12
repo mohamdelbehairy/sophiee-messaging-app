@@ -29,6 +29,13 @@ class _LoginPageBottomSheetBodyState extends State<LoginPageBottomSheetBody> {
   TextEditingController password = TextEditingController();
 
   @override
+  void dispose() {
+    emailAddress.dispose();
+    password.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     var login = (context).read<LoginCubit>();
     // final isDark = context.read<LoginCubit>().isDark;
@@ -42,9 +49,11 @@ class _LoginPageBottomSheetBodyState extends State<LoginPageBottomSheetBody> {
             children: [
               AuthBottomSheetTopText(isDark: widget.isDark, text: 'Get Login'),
               const SizedBox(height: 16),
-              TextFieldEmail(emailAddress: emailAddress,isLoading: !widget.isLoading),
+              TextFieldEmail(
+                  emailAddress: emailAddress, isLoading: !widget.isLoading),
               const SizedBox(height: 8),
-              TextFieldPassword(password: password, isLoading: !widget.isLoading),
+              TextFieldPassword(
+                  password: password, isLoading: !widget.isLoading),
               const SizedBox(height: 22),
               CustomBottom(
                   width: double.infinity,
@@ -66,7 +75,7 @@ class _LoginPageBottomSheetBodyState extends State<LoginPageBottomSheetBody> {
                             maxLines: 3,
                             onTap: () {
                               getnav.Get.to(
-                                  () => VerificationPage(isDark: widget.isDark),
+                                  () => const VerificationPage(),
                                   transition: getnav.Transition.leftToRight);
                             },
                             message:

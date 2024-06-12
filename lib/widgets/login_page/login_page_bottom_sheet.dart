@@ -7,6 +7,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../constants.dart';
+
 class LoginPageBottomSheet extends StatelessWidget {
   const LoginPageBottomSheet({super.key, required this.isDark});
   final bool isDark;
@@ -23,7 +25,7 @@ class LoginPageBottomSheet extends StatelessWidget {
         reverse: true,
         child: Container(
           decoration: BoxDecoration(
-              color: isDark ? Colors.black : Colors.white,
+              color: isDark ? kDarkModeBackgroundColor : Colors.white,
               borderRadius: const BorderRadius.only(
                   topLeft: Radius.circular(16), topRight: Radius.circular(16))),
           child: BlocConsumer<LoginCubit, LoginState>(
@@ -51,7 +53,13 @@ class LoginPageBottomSheet extends StatelessWidget {
             builder: (context, state) {
               return Column(
                 children: [
-                  const SizedBox(width: 50, child: Divider(thickness: 5)),
+                  SizedBox(
+                      width: 40,
+                      child: Divider(
+                          thickness: 5,
+                          color: isDark
+                              ? messageFriendColorDarkMode
+                              : Colors.grey)),
                   LoginPageBottomSheetBody(
                       isDark: isDark, isLoading: isLoading),
                 ],

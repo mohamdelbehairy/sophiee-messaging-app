@@ -32,6 +32,15 @@ class _RegisterPageBottomSheetBodyState
   TextEditingController confirmPassword = TextEditingController();
 
   @override
+  void dispose() {
+    userName.dispose();
+    emailAddress.dispose();
+    password.dispose();
+    confirmPassword.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     var register = context.read<RegisterCubit>();
     final isDark = context.read<LoginCubit>().isDark;
@@ -51,7 +60,9 @@ class _RegisterPageBottomSheetBodyState
               TextFieldPassword(password: password, isLoading: !widget.enable),
               const SizedBox(height: 8),
               TextFieldConfirmPassword(
-                  confirmPassword: confirmPassword, password: password,isLoading: !widget.enable),
+                  confirmPassword: confirmPassword,
+                  password: password,
+                  isLoading: !widget.enable),
               CustomTextBottomSheetReadAndAgree(
                   onTap: () {
                     setState(() {

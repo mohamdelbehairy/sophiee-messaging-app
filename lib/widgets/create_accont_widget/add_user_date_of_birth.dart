@@ -1,3 +1,5 @@
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sophiee/cubit/auth/login/login_cubit.dart';
 import 'package:sophiee/widgets/create_accont_widget/add_user_text_filed.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -36,7 +38,9 @@ class _AddUserDateOfBirthState extends State<AddUserDateOfBirth> {
     setState(() {
       iconColor = widget.dateOfBirth.text.isEmpty
           ? const Color(0xffc3c5c5)
-          : Colors.black;
+          : context.read<LoginCubit>().isDark
+              ? Colors.white
+              : Colors.black;
     });
   }
 

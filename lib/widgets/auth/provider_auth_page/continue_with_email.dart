@@ -21,7 +21,7 @@ class ContinueWithEmail extends StatelessWidget {
               colorBottom: Colors.white,
               colorText: Colors.black,
               onPressed: () => getnav.Get.to(() => const LoginPage(),
-                  transition: getnav.Transition.rightToLeft,duration: const Duration(seconds: 1)),
+                  transition: getnav.Transition.rightToLeft),
               borderRadius: BorderRadius.circular(32),
               width: size.width)),
       Row(
@@ -34,7 +34,7 @@ class ContinueWithEmail extends StatelessWidget {
                   fontWeight: FontWeight.w100)),
           TextButton(
               onPressed: () => getnav.Get.to(() => const RegisterPage(),
-                  transition: getnav.Transition.rightToLeft,duration: const Duration(seconds: 1)),
+                  transition: getnav.Transition.rightToLeft),
               child: Text('Sign up',
                   style: TextStyle(
                       color: Colors.black, fontSize: size.height * .014)))
