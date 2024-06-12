@@ -1,11 +1,10 @@
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sophiee/cubit/user_date/get_user_data/get_user_data_cubit.dart';
+import 'package:sophiee/cubit/user_date/get_user_data/get_user_data_state.dart';
 import 'package:sophiee/models/users_model.dart';
-import 'package:sophiee/widgets/my_friend_page/my_friend_item_one.dart';
-import 'package:sophiee/widgets/my_friend_page/my_friends_bottom_send_message.dart';
-import 'package:sophiee/widgets/my_friend_page/my_friend_item_bio.dart';
-import 'package:sophiee/widgets/my_friend_page/my_friend_items.dart';
-import 'package:sophiee/widgets/my_friend_page/my_friend_item_two.dart';
-import 'package:sophiee/widgets/my_friend_page/my_friend_list_view.dart';
 import 'package:flutter/material.dart';
+
+import '../widgets/my_friend_page/my_friend_page_body.dart';
 
 class MyFriendPage extends StatelessWidget {
   const MyFriendPage({super.key, required this.user});
@@ -18,27 +17,16 @@ class MyFriendPage extends StatelessWidget {
       canPop: false,
       child: Scaffold(
         body: SingleChildScrollView(
-          child: Column(
-            children: [
-              MyFriendItemOne(user: user),
-              MyFriendItemTwo(
-                  user: user, widget: MyFriendsBottomMessage(user: user)),
-              SizedBox(height: size.height * .007),
-              MyFriendItems(
-                  text: user.userName.split(' ')[0],
-                  textButton: 'More',
-                  onTap: () {}),
-              SizedBox(height: size.height * .02),
-              MyFriendItemBio(user: user),
-              SizedBox(height: size.height * .026),
-              MyFriendItems(
-                  text: 'Friends', textButton: 'See all', onTap: () {}),
-              SizedBox(height: size.height * .004),
-              MyFriendListView(friend: user),
-              SizedBox(height: size.height * .02),
-              MyFriendItems(
-                  text: 'Photos', textButton: 'See all', onTap: () {}),
-            ],
+          child: BlocBuilder<GetUserDataCubit, GetUserDataStates>(
+            builder: (context, state) {
+              if (state is GetUserDataSuccess && state.userModel.isNotEmpty) {
+                final userData = state.userModel
+                    .firstWhere((element) => element.userID == user.userID);
+                return MyFriendPageBody(user: userData, size: size);
+              } else {
+                return Container();
+              }
+            },
           ),
         ),
       ),
