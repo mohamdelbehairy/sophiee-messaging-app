@@ -28,6 +28,7 @@ class MyFriendInfo extends StatelessWidget {
             const UserNameCircle()
           ],
         ),
+        if(user.isBioAndNickName)
         MyFriendNickName(user: user)
       ],
     );

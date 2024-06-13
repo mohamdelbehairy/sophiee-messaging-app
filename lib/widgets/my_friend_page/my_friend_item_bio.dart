@@ -9,15 +9,10 @@ class MyFriendItemBio extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
     final isDark = context.read<LoginCubit>().isDark;
     return Padding(
-      padding:
-          EdgeInsets.only(left: size.width * .04, right: size.width * .002),
-      child: Text(
-        user.bio,
-        style: TextStyle(color: isDark ? Colors.white60 : Colors.grey),
-      ),
-    );
+        padding: const EdgeInsets.only(left: 16, right: 2,top: 2),
+        child: Text(user.bio.isNotEmpty ? user.bio : 'no bio here yet',
+            style: TextStyle(color: isDark ? Colors.white60 : Colors.grey)));
   }
 }

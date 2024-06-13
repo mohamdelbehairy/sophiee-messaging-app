@@ -1,7 +1,6 @@
 import 'package:sophiee/cubit/auth/login/login_cubit.dart';
 import 'package:sophiee/cubit/follow_status/follow_status_cubit.dart';
 import 'package:sophiee/cubit/follower/follower_cubit.dart';
-import 'package:sophiee/cubit/follower/follower_state.dart';
 import 'package:sophiee/cubit/friends/friends_cubit.dart';
 import 'package:sophiee/cubit/user_date/get_user_data/get_user_data_cubit.dart';
 import 'package:sophiee/cubit/user_date/get_user_data/get_user_data_state.dart';
@@ -10,7 +9,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../utils/initial_state.dart';
 import 'my_friend_item_two_body.dart';
 
 class MyFriendItemTwo extends StatefulWidget {
@@ -23,10 +21,6 @@ class MyFriendItemTwo extends StatefulWidget {
 }
 
 class _MyFriendItemTwoState extends State<MyFriendItemTwo> {
-  void initialFriends() {
-    InitialState.initFriendState(context);
-  }
-
   @override
   void initState() {
     context
@@ -49,65 +43,14 @@ class _MyFriendItemTwoState extends State<MyFriendItemTwo> {
         if (currentUser != null) {
           final userData = state.userModel
               .firstWhere((element) => element.userID == currentUser.uid);
-          return BlocConsumer<FollowerCubit, FollowerState>(
-            listener: (context, state) async {
-              if (state is AddFollowerSuccess) {
-                if (state.isFollowing &&
-                    await follower.followerResult(
-                        followerID: widget.user.userID)) {
-                  friend.setFriends(
-                      friendID: widget.user.userID,
-                      userName: widget.user.userName,
-                      profileImage: widget.user.profileImage,
-                      userID: widget.user.userID,
-                      emailAddress: widget.user.emailAddress,
-                      meUserName: userData.userName,
-                      meProfileImage: userData.profileImage,
-                      meEmailAddress: userData.emailAddress);
-                }
-              }
-              if (state is DeleteFollowerSuccess) {
-                if (!state.isFollowing ||
-                    !await follower.followerResult(
-                        followerID: widget.user.userID)) {
-                  await friend.deleteFriends(friendID: widget.user.userID);
-
-                  debugPrint('تم حذف الصداقه');
-                }
-              }
-            },
-            builder: (context, state) {
-              return BlocBuilder<FollowStatusCubit, bool>(
-                builder: (context, isFollowing) {
-                  return MyFriendItemTwoBody(
-                    isFollowing: isFollowing,
-                    widget: widget,
-                    isDark: isDark,
-                    size: size,
-                    onTap: () async {
-                      if (isFollowing) {
-                        await follower.deleteFollower(
-                            followerID: widget.user.userID);
-                        initialFriends();
-                      } else {
-                        follower.addFollower(
-                            followerID: widget.user.userID,
-                            userName: widget.user.userName,
-                            profileImage: widget.user.profileImage,
-                            userID: widget.user.userID,
-                            emailAddress: widget.user.emailAddress,
-                            isFollowing: !isFollowing,
-                            meUserName: userData.userName,
-                            meProfileImage: userData.profileImage,
-                            meEmailAddress: userData.emailAddress);
-                        initialFriends();
-                      }
-                    },
-                  );
-                },
-              );
-            },
-          );
+          return MyFriendItemTwoBody(
+              widget: widget.widget,
+              follower: follower,
+              user: widget.user,
+              friend: friend,
+              userData: userData,
+              isDark: isDark,
+              size: size);
         } else {
           return Container();
         }

@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:sophiee/cubit/all_chats_shimmer_status/all_chats_shimmer_status.dart';
 import 'package:sophiee/cubit/connectivity/connectivity_cubit.dart';
 import 'package:sophiee/cubit/user_date/image/get_image/get_image_cubit.dart';
@@ -21,7 +22,9 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   @override
   void initState() {
-    context.read<GetImageCubit>();
+    context
+        .read<GetImageCubit>()
+        .getImage(userID: FirebaseAuth.instance.currentUser!.uid);
     context.read<GetFriendsCubit>().isFriendFound();
     context.read<GetFollowingCubit>().isFollowingFound();
     context.read<GetFollowersCubit>().isFollowersFound();

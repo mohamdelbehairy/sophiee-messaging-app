@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -41,22 +42,23 @@ class ShowImagePagePopMenuButton extends StatelessWidget {
                   itemName: 'Save Image',
                   size: size,
                   icon: Icons.save),
-              groupsInfoPopMenuItem(
-                  onTap: () async {
-                    customShowDialog(
-                        context: context,
-                        doneButtonText: 'Ok',
-                        backgroundColor: kPrimaryColor,
-                        contentText: 'Are you sure to delete image?',
-                        okFunction: () async {
-                          Navigator.pop(context);
-                          await deleteImage.deleteImage(
-                              imageID: imageModel.imageID);
-                        });
-                  },
-                  itemName: 'Delete Image',
-                  size: size,
-                  icon: FontAwesomeIcons.trash)
+              if (imageModel.userID == FirebaseAuth.instance.currentUser!.uid)
+                groupsInfoPopMenuItem(
+                    onTap: () async {
+                      customShowDialog(
+                          context: context,
+                          doneButtonText: 'Ok',
+                          backgroundColor: kPrimaryColor,
+                          contentText: 'Are you sure to delete image?',
+                          okFunction: () async {
+                            Navigator.pop(context);
+                            await deleteImage.deleteImage(
+                                imageID: imageModel.imageID);
+                          });
+                    },
+                    itemName: 'Delete Image',
+                    size: size,
+                    icon: FontAwesomeIcons.trash)
             ]);
   }
 }

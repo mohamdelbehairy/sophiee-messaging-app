@@ -11,11 +11,17 @@ class MyFriendPageImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CachedNetworkImage(
-        fit: BoxFit.cover,
-        imageUrl: user.profileImage,
-        height: size.height * .55,
-        width: size.width);
+    return GestureDetector(
+      onTap: () {
+        // Get.to(());
+      },
+      child: CachedNetworkImage(
+          fit: BoxFit.cover,
+          filterQuality: FilterQuality.high,
+          imageUrl: user.profileImage,
+          height: size.height * .55,
+          width: size.width),
+    );
   }
 }
   // Container(

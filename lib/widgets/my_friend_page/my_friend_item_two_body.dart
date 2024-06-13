@@ -1,39 +1,71 @@
 import 'package:flutter/material.dart';
-import 'package:sophiee/widgets/my_friend_page/my_friend_button_body.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'my_friend_info.dart';
-import 'my_friend_item_two.dart';
+import '../../cubit/follower/follower_cubit.dart';
+import '../../cubit/follower/follower_state.dart';
+import '../../cubit/friends/friends_cubit.dart';
+import '../../models/users_model.dart';
+import '../../utils/initial_state.dart';
+import 'my_friend_component.dart';
 
 class MyFriendItemTwoBody extends StatelessWidget {
   const MyFriendItemTwoBody(
       {super.key,
-      required this.widget,
+      required this.follower,
+      required this.user,
+      required this.friend,
+      required this.userData,
       required this.isDark,
       required this.size,
-      required this.isFollowing,
-      required this.onTap});
+      required this.widget});
 
-  final MyFriendItemTwo widget;
-  final bool isDark, isFollowing;
+  final FollowerCubit follower;
+
+  final FriendsCubit friend;
+  final UserModel userData, user;
+  final bool isDark;
   final Size size;
-  final Function() onTap;
+  final Widget? widget;
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(16),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          MyFriendInfo(user: widget.user, isDark: isDark, size: size),
-          widget.widget!,
-          InkWell(
-              splashColor: Colors.transparent,
-              highlightColor: Colors.transparent,
-              onTap: onTap,
-              child: MyFriendButtonBody(size: size, isFollowing: isFollowing))
-        ],
-      ),
+    return BlocConsumer<FollowerCubit, FollowerState>(
+      listener: (context, state) async {
+        if (state is AddFollowerSuccess) {
+          if (state.isFollowing &&
+              await follower.followerResult(followerID: user.userID)) {
+            friend.setFriends(
+                friendID: user.userID,
+                userName: user.userName,
+                profileImage: user.profileImage,
+                userID: user.userID,
+                emailAddress: user.emailAddress,
+                meUserName: userData.userName,
+                meProfileImage: userData.profileImage,
+                meEmailAddress: userData.emailAddress);
+            // ignore: use_build_context_synchronously
+            InitialState.initFriendState(context);
+          }
+        }
+        if (state is DeleteFollowerSuccess) {
+          if (!state.isFollowing ||
+              !await follower.followerResult(followerID: user.userID)) {
+            await friend.deleteFriends(friendID: user.userID);
+            // ignore: use_build_context_synchronously
+            InitialState.initFriendState(context);
+            debugPrint('تم حذف الصداقه');
+          }
+        }
+      },
+      builder: (context, state) {
+        return MyFriendItemTwoComponent(
+            widget: widget,
+            user: user,
+            isDark: isDark,
+            size: size,
+            follower: follower,
+            userData: userData);
+      },
     );
   }
 }

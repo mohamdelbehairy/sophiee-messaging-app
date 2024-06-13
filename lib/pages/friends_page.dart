@@ -3,6 +3,7 @@ import 'package:sophiee/cubit/get_friends/get_friends_cubit.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../cubit/user_date/image/get_image/get_image_cubit.dart';
 import '../widgets/friends_page/friends_page_body.dart';
 
 class FriendsPage extends StatelessWidget {
@@ -22,11 +23,12 @@ class FriendsPage extends StatelessWidget {
                 onTap: () {
                   context.read<GetFriendsCubit>().getFriends(
                       userID: FirebaseAuth.instance.currentUser!.uid);
+                  context
+                      .read<GetImageCubit>()
+                      .getImage(userID: FirebaseAuth.instance.currentUser!.uid);
                   Navigator.pop(context);
                 },
                 child: const Icon(Icons.arrow_back))),
         body: FriendsPageBody(size: size));
   }
 }
-
-

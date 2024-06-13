@@ -9,7 +9,6 @@ class MyFriendNickName extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(user.isBioAndNickName ? user.nickName : '',
-        style: const TextStyle(color: Colors.blue));
+    return Text(user.nickName, style: const TextStyle(color: Colors.blue));
   }
 }
