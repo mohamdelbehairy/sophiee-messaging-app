@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:sophiee/constants.dart';
 
 import '../../models/users_model.dart';
 
@@ -11,17 +12,12 @@ class MyFriendPageImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        // Get.to(());
-      },
-      child: CachedNetworkImage(
-          fit: BoxFit.cover,
-          filterQuality: FilterQuality.high,
-          imageUrl: user.profileImage,
-          height: size.height * .55,
-          width: size.width),
-    );
+    return CachedNetworkImage(
+        fit: BoxFit.cover,
+        filterQuality: FilterQuality.high,
+        imageUrl: user.isProfilePhotos ? user.profileImage : defaultProfileImageUrl,
+        height: size.height * .55,
+        width: size.width);
   }
 }
   // Container(

@@ -4,10 +4,10 @@ import 'package:sophiee/models/users_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:sophiee/utils/initial_state.dart';
 
 import 'my_friend_page_icon.dart';
+import 'my_friend_page_icon_elispes.dart';
 import 'my_friend_page_image.dart';
 
 class MyFriendItemOne extends StatelessWidget {
@@ -20,11 +20,7 @@ class MyFriendItemOne extends StatelessWidget {
     return Stack(
       children: [
         MyFriendPageImage(user: user, size: size),
-        MyFriendPageIcon(
-            myFriendIconModel: MyFriendIconModel(
-                right: 8,
-                icon: FontAwesomeIcons.ellipsisVertical,
-                onPressed: () {})),
+        MyFriendPageIconElispes(user: user, size: size),
         MyFriendPageIcon(
             myFriendIconModel: MyFriendIconModel(
                 left: 8,

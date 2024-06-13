@@ -39,7 +39,7 @@ class ShowImagePagePopMenuButton extends StatelessWidget {
                   onTap: () async {
                     await saveImage(imageUrl: imageModel.imageUrl);
                   },
-                  itemName: 'Save Image',
+                  itemName: 'Save to Gallery',
                   size: size,
                   icon: Icons.save),
               if (imageModel.userID == FirebaseAuth.instance.currentUser!.uid)
