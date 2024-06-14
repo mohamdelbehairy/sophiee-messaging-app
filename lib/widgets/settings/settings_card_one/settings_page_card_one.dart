@@ -13,15 +13,11 @@ class SettingsPageCardOne extends StatefulWidget {
 }
 
 class _SettingsPageCardOneState extends State<SettingsPageCardOne> {
-  bool isDarkMode = true;
-
   @override
   void initState() {
     super.initState();
     getDarkMode().then((value) {
-      setState(() {
-        isDarkMode = value ?? true;
-      });
+      setState(() {});
     });
   }
 
@@ -31,12 +27,10 @@ class _SettingsPageCardOneState extends State<SettingsPageCardOne> {
       padding: const EdgeInsets.only(left: 14, right: 14, top: 14, bottom: 0),
       child: SettingsPageCardOneBody(
         size: widget.size,
-        onPressed: () {
-          setState(() {
-            isDarkMode = !isDarkMode;
-          });
-          saveDarkMode(isDarkMode: isDarkMode);
-          if (!isDarkMode) {
+        onPressed: (value) {
+          setState(() {});
+          saveDarkMode(isDarkMode: value);
+          if (!value) {
             context.read<LoginCubit>().changeAppTheme();
           } else {
             context.read<LoginCubit>().changeAppTheme();

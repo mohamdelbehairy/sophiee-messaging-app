@@ -2,6 +2,8 @@ import 'package:sophiee/cubit/auth/login/login_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../all_chats_page/groups_page/groups_chat_page/groups_permissions_page/custom_switch_icon.dart';
+
 class CardOneCustomItemsOne extends StatelessWidget {
   const CardOneCustomItemsOne(
       {super.key,
@@ -10,13 +12,15 @@ class CardOneCustomItemsOne extends StatelessWidget {
       required this.text,
       required this.iconChange,
       required this.onPressed,
-      required this.size});
+      required this.size,
+      required this.value});
   final Color color;
   final IconData icon;
   final String text;
   final IconData iconChange;
-  final Function() onPressed;
+  final Function(bool) onPressed;
   final Size size;
+  final bool value;
 
   @override
   Widget build(BuildContext context) {
@@ -39,12 +43,12 @@ class CardOneCustomItemsOne extends StatelessWidget {
                         : Colors.black))
           ],
         ),
-        // Icon(iconChange)
-        IconButton(
-            splashColor: Colors.transparent,
-            highlightColor: Colors.transparent,
-            onPressed: onPressed,
-            icon: Icon(iconChange)),
+        CustomSwitchIcon(size: size, onChanged: onPressed, value: value),
+        // IconButton(
+        //     splashColor: Colors.transparent,
+        //     highlightColor: Colors.transparent,
+        //     onPressed: onPressed,
+        //     icon: Icon(iconChange)),
       ],
     );
   }

@@ -9,16 +9,17 @@ class CardOneItemsOne extends StatelessWidget {
   const CardOneItemsOne(
       {super.key, required this.onPressed, required this.size});
 
-  final Function() onPressed;
+  final Function(bool) onPressed;
   final Size size;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(right: 4),
+      padding: const EdgeInsets.only(right: 12),
       child: Column(
         children: [
           CardOneCustomItemsOne(
+              value: context.read<LoginCubit>().isDark,
               size: size,
               onPressed: onPressed,
               iconChange: Icons.brightness_4_outlined,
@@ -27,9 +28,11 @@ class CardOneItemsOne extends StatelessWidget {
               color: context.read<LoginCubit>().isDark
                   ? Colors.grey
                   : Colors.black54),
+          const SizedBox(height: 12),
           CardOneCustomItemsOne(
               size: size,
-              onPressed: () {},
+              value: false,
+              onPressed: (value) {},
               iconChange: Icons.lock,
               text: 'Profile Lock',
               icon: Icons.person,

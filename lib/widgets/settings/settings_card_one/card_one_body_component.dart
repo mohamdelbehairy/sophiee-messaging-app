@@ -10,12 +10,14 @@ class CardOneBodyComponenet extends StatelessWidget {
       {super.key, required this.size, required this.onPressed});
 
   final Size size;
-  final Function() onPressed;
+  final Function(bool) onPressed;
 
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: context.read<LoginCubit>().isDark ? cardDarkModeBackground : Colors.white,
+      color: context.read<LoginCubit>().isDark
+          ? cardDarkModeBackground
+          : Colors.white,
       elevation: context.read<LoginCubit>().isDark ? 1 : 0,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
       child: Padding(
@@ -23,7 +25,7 @@ class CardOneBodyComponenet extends StatelessWidget {
         child: Column(
           children: [
             CardOneItemsOne(size: size, onPressed: onPressed),
-            const SizedBox(height: 6),
+            const SizedBox(height: 12),
             CardOneItemsTwo(size: size)
           ],
         ),
