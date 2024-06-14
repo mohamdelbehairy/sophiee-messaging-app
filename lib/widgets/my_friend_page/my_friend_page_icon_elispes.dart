@@ -1,13 +1,13 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:get/get.dart' as getnav;
-import 'package:sophiee/pages/chats/chat_page.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sophiee/cubit/user_date/get_user_data/get_user_data_cubit.dart';
+import 'package:sophiee/cubit/user_date/get_user_data/get_user_data_state.dart';
 
-import '../../constants.dart';
+import '../../cubit/follower/follower_cubit.dart';
+import '../../cubit/friends/friends_cubit.dart';
 import '../../models/users_model.dart';
-import '../../utils/widget/media/save_image.dart';
-import '../../utils/widget/media/share_media.dart';
-import '../../utils/widget/pop_menu_info_item.dart';
+import 'icon_elispes_body.dart';
 
 class MyFriendPageIconElispes extends StatelessWidget {
   const MyFriendPageIconElispes(
@@ -18,43 +18,27 @@ class MyFriendPageIconElispes extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final follower = context.read<FollowerCubit>();
+    final friend = context.read<FriendsCubit>();
     return Positioned(
         right: 8,
-        top: 50,
-        child: PopupMenuButton(
-            color: kPrimaryColor,
-            icon: const Icon(FontAwesomeIcons.ellipsisVertical,
-                color: Colors.white, size: 25),
-            itemBuilder: (context) => [
-                  groupsInfoPopMenuItem(
-                      onTap: () async {
-                        await shareMedia(
-                            mediaUrl: user.profileImage,
-                            mediaType: 'image.jpg');
-                      },
-                      itemName: 'Share Image',
-                      size: size,
-                      icon: Icons.share),
-                  groupsInfoPopMenuItem(
-                      onTap: () async {},
-                      itemName: 'Block ${user.userName.split(' ')[0]}',
-                      size: size,
-                      icon: Icons.block),
-                  groupsInfoPopMenuItem(
-                      onTap: () {
-                        getnav.Get.to(() => ChatPage(userID: user.userID),
-                            transition: getnav.Transition.rightToLeft);
-                      },
-                      itemName: 'Start Chat',
-                      size: size,
-                      icon: Icons.chat_outlined),
-                  groupsInfoPopMenuItem(
-                      onTap: () async {
-                        await saveImage(imageUrl: user.profileImage);
-                      },
-                      itemName: 'Save to Gallery',
-                      size: size,
-                      icon: Icons.save),
-                ]));
+        top: 40,
+        child: BlocBuilder<GetUserDataCubit, GetUserDataStates>(
+          builder: (context, userState) {
+            if (userState is GetUserDataSuccess &&
+                userState.userModel.isNotEmpty) {
+              final userData = userState.userModel.firstWhere((element) =>
+                  element.userID == FirebaseAuth.instance.currentUser!.uid);
+              return IconElispesBody(
+                  follower: follower,
+                  user: user,
+                  friend: friend,
+                  userData: userData,
+                  size: size);
+            } else {
+              return Container();
+            }
+          },
+        ));
   }
 }

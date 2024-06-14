@@ -10,7 +10,7 @@ class MyFriendPageIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Positioned(
-      top: 50,
+      top: 40,
       right: myFriendIconModel.right,
       left: myFriendIconModel.left,
       child: IconButton(

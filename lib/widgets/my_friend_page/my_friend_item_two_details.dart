@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:sophiee/constants.dart';
 import 'package:sophiee/models/users_model.dart';
-import 'package:sophiee/widgets/my_friend_page/my_friend_button_body.dart';
 
 import 'my_friend_info.dart';
 
@@ -28,12 +29,22 @@ class MyFriendItemTwoDetails extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           MyFriendInfo(user: user, isDark: isDark, size: size),
-          widget!,
-          InkWell(
-              splashColor: Colors.transparent,
-              highlightColor: Colors.transparent,
-              onTap: onTap,
-              child: MyFriendButtonBody(size: size, isFollowing: isFollowing))
+          Padding(
+            padding: const EdgeInsets.only(bottom: 10),
+            child: Row(
+              children: [
+                GestureDetector(
+                    onTap: () {},
+                    child:
+                        const Icon(Icons.call, size: 30, color: Colors.blue)),
+                const SizedBox(width: 30),
+                GestureDetector(
+                    onTap: () {},
+                    child: const Icon(FontAwesomeIcons.video,
+                        size: 30, color: kPrimaryColor)),
+              ],
+            ),
+          )
         ],
       ),
     );
