@@ -1,5 +1,4 @@
 import 'package:sophiee/cubit/auth/login/login_cubit.dart';
-import 'package:sophiee/cubit/follow_status/follow_status_cubit.dart';
 import 'package:sophiee/cubit/follower/follower_cubit.dart';
 import 'package:sophiee/cubit/friends/friends_cubit.dart';
 import 'package:sophiee/cubit/user_date/get_user_data/get_user_data_cubit.dart';
@@ -11,23 +10,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'my_friend_item_two_body.dart';
 
-class MyFriendItemTwo extends StatefulWidget {
+class MyFriendItemTwo extends StatelessWidget {
   const MyFriendItemTwo({super.key, required this.user, this.widget});
   final UserModel user;
   final Widget? widget;
-
-  @override
-  State<MyFriendItemTwo> createState() => _MyFriendItemTwoState();
-}
-
-class _MyFriendItemTwoState extends State<MyFriendItemTwo> {
-  @override
-  void initState() {
-    context
-        .read<FollowStatusCubit>()
-        .checkFollowStatus(followerID: widget.user.userID);
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -44,9 +30,9 @@ class _MyFriendItemTwoState extends State<MyFriendItemTwo> {
           final userData = state.userModel
               .firstWhere((element) => element.userID == currentUser.uid);
           return MyFriendItemTwoBody(
-              widget: widget.widget,
+              widget: widget,
               follower: follower,
-              user: widget.user,
+              user: user,
               friend: friend,
               userData: userData,
               isDark: isDark,

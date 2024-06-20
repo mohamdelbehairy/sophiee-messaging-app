@@ -11,14 +11,11 @@ class MyFriendItemTwoDetails extends StatelessWidget {
       required this.user,
       required this.isDark,
       required this.size,
-      required this.isFollowing,
-      required this.onTap,
       required this.widget});
 
   final UserModel user;
-  final bool isDark, isFollowing;
+  final bool isDark;
   final Size size;
-  final Function() onTap;
   final Widget? widget;
 
   @override
@@ -29,22 +26,23 @@ class MyFriendItemTwoDetails extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           MyFriendInfo(user: user, isDark: isDark, size: size),
-          Padding(
-            padding: const EdgeInsets.only(bottom: 10),
-            child: Row(
-              children: [
-                GestureDetector(
-                    onTap: () {},
-                    child:
-                        const Icon(Icons.call, size: 30, color: Colors.blue)),
-                const SizedBox(width: 30),
-                GestureDetector(
-                    onTap: () {},
-                    child: const Icon(FontAwesomeIcons.video,
-                        size: 30, color: kPrimaryColor)),
-              ],
-            ),
-          )
+          if (user.isAudioAndVideoCall)
+            Padding(
+              padding: const EdgeInsets.only(bottom: 10),
+              child: Row(
+                children: [
+                  GestureDetector(
+                      onTap: () {},
+                      child:
+                          const Icon(Icons.call, size: 30, color: Colors.blue)),
+                  const SizedBox(width: 30),
+                  GestureDetector(
+                      onTap: () {},
+                      child: const Icon(FontAwesomeIcons.video,
+                          size: 30, color: kPrimaryColor)),
+                ],
+              ),
+            )
         ],
       ),
     );

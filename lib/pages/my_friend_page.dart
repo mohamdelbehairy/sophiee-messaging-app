@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sophiee/cubit/follow_status/follow_status_cubit.dart';
 import 'package:sophiee/cubit/user_date/get_user_data/get_user_data_cubit.dart';
 import 'package:sophiee/cubit/user_date/get_user_data/get_user_data_state.dart';
 import 'package:sophiee/models/users_model.dart';
@@ -13,6 +14,9 @@ class MyFriendPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    context
+        .read<FollowStatusCubit>()
+        .checkFollowStatus(followerID: user.userID);
     return PopScope(
       canPop: false,
       child: Scaffold(

@@ -19,6 +19,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+
 class ChatPageBodyDetails extends StatefulWidget {
   const ChatPageBodyDetails(
       {super.key,
@@ -63,15 +64,15 @@ class _ChatPageBodyDetailsState extends State<ChatPageBodyDetails> {
   Widget build(BuildContext context) {
     var messages = context.read<MessageCubit>();
     var uploadAudio = context.read<UploadAudioCubit>();
-    // var deleteAllMediaFiles = context.read<DeleteChatMessageCubit>();
+    
 
     return BlocListener<DeleteChatMessageCubit, DeleteChatMessageState>(
       listener: (context, stateDelete) async {
         if (stateDelete is DeleteChatMessageSuccess) {
           if (await messages.isChatsEmpty(friendID: widget.user.userID)) {
-            messages.deleteChat(
-                friendID: widget.user.lastMessage?['lastUserID']);
-            // await deleteAllMediaFiles.deleteChatAllMediaFiles(
+            // messages.deleteChat(
+            //     friendID: widget.user.lastMessage?['lastUserID']);
+            // await deleteAllMediaFiles.removeAllHighLightMessages(
             //     friendID: widget.user.lastMessage?['lastUserID']);
           }
         }

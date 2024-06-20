@@ -120,7 +120,6 @@ class DeleteChatMessageCubit extends Cubit<DeleteChatMessageState> {
           refrence.reference.delete();
         }
       });
-
       await FirebaseFirestore.instance
           .collection('users')
           .doc(FirebaseAuth.instance.currentUser!.uid)
@@ -135,7 +134,6 @@ class DeleteChatMessageCubit extends Cubit<DeleteChatMessageState> {
           refrence.reference.delete();
         }
       });
-
       await FirebaseFirestore.instance
           .collection('users')
           .doc(FirebaseAuth.instance.currentUser!.uid)

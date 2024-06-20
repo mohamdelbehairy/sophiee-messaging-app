@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:get/get.dart' as getnav;
 
+import '../../cubit/chat_high_lights/chat_high_light_message/chat_high_light_message_cubit.dart';
 import '../../cubit/chats/chats_cubit.dart';
 import '../../cubit/delete_messages/delete_chat_message_cubit.dart';
 import '../../cubit/message/message_cubit.dart';
@@ -28,6 +29,7 @@ class ChatsFounded extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var muteAndunMute = context.read<UpdateUserDataCubit>();
+    var deleteHighLight = context.read<ChatHighLightMessageCubit>();
     return BlocBuilder<GetUserDataCubit, GetUserDataStates>(
       builder: (context, state) {
         if (state is GetUserDataSuccess && state.userModel.isNotEmpty) {
@@ -53,6 +55,9 @@ class ChatsFounded extends StatelessWidget {
                       children: [
                         CustomSlidableActionItem(onPressed: (context) async {
                           await deleteAllMediaFiles.deleteChatAllMediaFiles(
+                              friendID: chat.chatsList[index].userID);
+
+                          await deleteHighLight.removeAllHighLightMessages(
                               friendID: chat.chatsList[index].userID);
                           await message.deleteChat(
                               friendID: chat.chatsList[index].userID);

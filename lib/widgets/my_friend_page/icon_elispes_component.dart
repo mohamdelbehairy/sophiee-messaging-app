@@ -33,15 +33,16 @@ class IconElispesComponent extends StatelessWidget {
             icon: const Icon(FontAwesomeIcons.ellipsisVertical,
                 color: Colors.white, size: 25),
             itemBuilder: (context) => [
-                  groupsInfoPopMenuItem(
-                      onTap: () async {
-                        await shareMedia(
-                            mediaUrl: user.profileImage,
-                            mediaType: 'image.jpg');
-                      },
-                      itemName: 'Share Image',
-                      size: size,
-                      icon: Icons.share),
+                  if (!user.isProfileLock)
+                    groupsInfoPopMenuItem(
+                        onTap: () async {
+                          await shareMedia(
+                              mediaUrl: user.profileImage,
+                              mediaType: 'image.jpg');
+                        },
+                        itemName: 'Share Image',
+                        size: size,
+                        icon: Icons.share_outlined),
                   groupsInfoPopMenuItem(
                       onTap: () async {},
                       itemName: 'Block ${user.userName.split(' ')[0]}',
@@ -80,13 +81,14 @@ class IconElispesComponent extends StatelessWidget {
                       icon: isFollowing
                           ? Icons.group_remove_outlined
                           : Icons.group_outlined),
-                  groupsInfoPopMenuItem(
-                      onTap: () async {
-                        await saveImage(imageUrl: user.profileImage);
-                      },
-                      itemName: 'Save to Gallery',
-                      size: size,
-                      icon: Icons.save),
+                  if (!user.isProfileLock)
+                    groupsInfoPopMenuItem(
+                        onTap: () async {
+                          await saveImage(imageUrl: user.profileImage);
+                        },
+                        itemName: 'Save to Gallery',
+                        size: size,
+                        icon: Icons.save_outlined),
                 ]);
       },
     );

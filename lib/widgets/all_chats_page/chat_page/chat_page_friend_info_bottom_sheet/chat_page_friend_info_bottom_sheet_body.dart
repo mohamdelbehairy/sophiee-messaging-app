@@ -19,6 +19,7 @@ class ChatPageFriendInfoBottomSheetBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      mainAxisSize: MainAxisSize.min,
       children: [
         ChatPageDivider(size: size),
         ChatPageFriendListTile(user: user),
