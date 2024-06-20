@@ -43,8 +43,8 @@ class _SettingsPageBodyState extends State<SettingsPageBody> {
         child: Column(
           children: [
             SettingsPageAppBar(
-              appParTitle: 'Setting',
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                appParTitle: 'Setting',
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 size: widget.size,
                 widget: TextButton(
                     onPressed: () {},
@@ -52,7 +52,7 @@ class _SettingsPageBodyState extends State<SettingsPageBody> {
                         style: TextStyle(
                             color: Colors.white,
                             fontSize: widget.size.width * .039)))),
-            SettingsPageCardOne(size: widget.size),
+            SettingsPageCardOne(size: widget.size, userData: widget.user),
             SettingsPageCardTwo(size: widget.size, onPressed: onPressed),
           ],
         ),

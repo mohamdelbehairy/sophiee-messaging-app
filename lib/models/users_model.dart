@@ -15,6 +15,7 @@ class UserModel {
   String? phoneNumber, token, chatbackgroundImage;
   int? chatbackgroundColor;
   final bool isStory,
+ 
   isLive,
       isChatNotify,
       isGroupNotify,
@@ -26,7 +27,7 @@ class UserModel {
       isProfilePhotos,
       isDateOfBirth,
       isBioAndNickName,
-      isAudioAndVideoCall;
+      isAudioAndVideoCall, isProfileLock;
   List<dynamic> muteUsers;
 
   UserModel(
@@ -61,7 +62,9 @@ class UserModel {
       required this.isDateOfBirth,
       required this.isBioAndNickName,
       required this.isAudioAndVideoCall,
-      required this.muteUsers});
+      required this.muteUsers,
+      required this.isProfileLock
+      });
 
   factory UserModel.fromJson(jsonData) {
     return UserModel(
@@ -96,7 +99,9 @@ class UserModel {
         isDateOfBirth: jsonData['isDateOfBirth'] ?? false,
         isBioAndNickName: jsonData['isBioAndNickName'] ?? false,
         isAudioAndVideoCall: jsonData['isAudioAndVideoCall'] ?? false,
-        muteUsers: jsonData['muteUsers'] ?? []);
+        muteUsers: jsonData['muteUsers'] ?? [],
+        isProfileLock:jsonData['isProfileLock'] ?? false
+        );
   }
   Map<String, dynamic> toMap() {
     return {
@@ -128,7 +133,8 @@ class UserModel {
       'isDateOfBirth': isDateOfBirth,
       'isBioAndNickName': isBioAndNickName,
       'isAudioAndVideoCall': isAudioAndVideoCall,
-      'muteUsers': muteUsers
+      'muteUsers': muteUsers,
+      'isProfileLock':isProfileLock
     };
   }
 

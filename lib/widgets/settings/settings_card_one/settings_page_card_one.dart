@@ -4,9 +4,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sophiee/widgets/settings/settings_card_one/settings_page_card_one_body.dart';
 
+import '../../../models/users_model.dart';
+
 class SettingsPageCardOne extends StatefulWidget {
-  const SettingsPageCardOne({super.key, required this.size});
+  const SettingsPageCardOne(
+      {super.key, required this.size, required this.userData});
   final Size size;
+  final UserModel userData;
 
   @override
   State<SettingsPageCardOne> createState() => _SettingsPageCardOneState();
@@ -14,18 +18,11 @@ class SettingsPageCardOne extends StatefulWidget {
 
 class _SettingsPageCardOneState extends State<SettingsPageCardOne> {
   @override
-  void initState() {
-    super.initState();
-    getDarkMode().then((value) {
-      setState(() {});
-    });
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 14, right: 14, top: 14, bottom: 0),
+      padding: const EdgeInsets.only(left: 14, right: 14, top: 14),
       child: SettingsPageCardOneBody(
+        userData: widget.userData,
         size: widget.size,
         onPressed: (value) {
           setState(() {});

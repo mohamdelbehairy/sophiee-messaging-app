@@ -50,7 +50,7 @@ class CustomCardOneShimmer extends StatelessWidget {
               Container(
                 height: size.height * .18,
                 width: size.width,
-                decoration: const BoxDecoration(color: Colors.white),
+                decoration:  BoxDecoration(color: isDark ? Colors.white24 : Colors.grey.shade100),
               ),
               SizedBox(height: size.height * .02),
               Row(

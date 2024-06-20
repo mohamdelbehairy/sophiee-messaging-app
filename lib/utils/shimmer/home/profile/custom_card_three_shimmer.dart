@@ -38,7 +38,7 @@ class CustomCardThreeShimmer extends StatelessWidget {
               const SizedBox(height: 16),
               Expanded(
                 child: Container(
-                  color: Colors.white,
+                   color:  isDark ? Colors.white24 : Colors.grey.shade100,
                 ),
               ),
             ],
