@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart' as getnav;
+import 'package:sophiee/constants.dart';
 import 'package:sophiee/cubit/auth/login/login_cubit.dart';
 
 import '../../cubit/user_date/image/get_image/get_image_cubit.dart';
@@ -28,12 +29,19 @@ class MyFriendPageBody extends StatelessWidget {
         MyFriendItemOne(user: user),
         MyFriendItemTwo(user: user),
         if (!user.isProfileLock) const SizedBox(height: 12),
-        if (user.isProfileLock) SizedBox(height: size.height * .1),
+        // if (user.isProfileLock) SizedBox(height: size.height * .1),
         if (user.isProfileLock)
-          Text('${user.userName} is locked your profile',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                  color: isDark ? Colors.white : Colors.black, fontSize: 20)),
+          Column(
+            children: [
+              Image.asset(profileLockImageurl,
+                  fit: BoxFit.cover, height: size.height * .3),
+              Text('${user.userName.split(' ')[0]} is locked your profile',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                      color: isDark ? Colors.white : Colors.black87,
+                      fontSize: 14,fontWeight: FontWeight.w400)),
+            ],
+          ),
         if (user.isBioAndNickName && !user.isProfileLock)
           MyFriendItems(
               text: 'About ${user.userName.split(' ')[0]}',
