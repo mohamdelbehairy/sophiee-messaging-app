@@ -14,7 +14,8 @@ class MyFriendItemTwoBody extends StatelessWidget {
       required this.userData,
       required this.isDark,
       required this.size,
-      required this.widget});
+      required this.infoCalls,
+      this.followButton});
 
   final FollowerCubit follower;
 
@@ -22,12 +23,13 @@ class MyFriendItemTwoBody extends StatelessWidget {
   final UserModel userData, user;
   final bool isDark;
   final Size size;
-  final Widget? widget;
+  final Widget? infoCalls, followButton;
 
   @override
   Widget build(BuildContext context) {
     return MyFriendItemTwoComponent(
-        widget: widget,
+        infoCalls: infoCalls,
+        followButton: followButton,
         user: user,
         isDark: isDark,
         size: size,

@@ -8,7 +8,7 @@ import 'package:sophiee/utils/initial_state.dart';
 
 import 'my_friend_page_icon.dart';
 import 'my_friend_page_icon_elispes.dart';
-import 'my_friend_page_image.dart';
+import '../../utils/widget/custom_user_image.dart';
 
 class MyFriendItemOne extends StatelessWidget {
   const MyFriendItemOne({super.key, required this.user});
@@ -19,8 +19,8 @@ class MyFriendItemOne extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     return Stack(
       children: [
-        MyFriendPageImage(user: user, size: size),
-        MyFriendPageIconElispes(user: user, size: size),
+        CustomUserImage(user: user, size: size),
+        MyFriendPageIconElispes(user: user, size: size,isFriend: true),
         MyFriendPageIcon(
             myFriendIconModel: MyFriendIconModel(
                 left: 8,

@@ -7,14 +7,15 @@ import 'my_friend_item_two_details.dart';
 class MyFriendItemTwoComponent extends StatelessWidget {
   const MyFriendItemTwoComponent(
       {super.key,
-      required this.widget,
+      required this.infoCalls,
       required this.user,
       required this.isDark,
       required this.size,
       required this.follower,
-      required this.userData});
+      required this.userData,
+      this.followButton});
 
-  final Widget? widget;
+  final Widget? infoCalls, followButton;
   final UserModel user;
   final bool isDark;
   final Size size;
@@ -24,6 +25,11 @@ class MyFriendItemTwoComponent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MyFriendItemTwoDetails(
-        widget: widget, user: user, isDark: isDark, size: size);
+      infoCalls: infoCalls,
+      followButton: followButton,
+      user: user,
+      isDark: isDark,
+      size: size,
+    );
   }
 }

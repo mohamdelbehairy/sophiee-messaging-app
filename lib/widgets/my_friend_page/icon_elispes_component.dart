@@ -17,12 +17,14 @@ class IconElispesComponent extends StatelessWidget {
       required this.user,
       required this.size,
       required this.follower,
-      required this.userData});
+      required this.userData,
+      required this.isFriend});
 
   final UserModel user;
   final Size size;
   final FollowerCubit follower;
   final UserModel userData;
+  final bool isFriend;
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +35,7 @@ class IconElispesComponent extends StatelessWidget {
             icon: const Icon(FontAwesomeIcons.ellipsisVertical,
                 color: Colors.white, size: 25),
             itemBuilder: (context) => [
-                  if (!user.isProfileLock)
+                  if (!user.isProfileLock || !isFriend)
                     groupsInfoPopMenuItem(
                         onTap: () async {
                           await shareMedia(
@@ -48,40 +50,42 @@ class IconElispesComponent extends StatelessWidget {
                       itemName: 'Block ${user.userName.split(' ')[0]}',
                       size: size,
                       icon: Icons.block),
-                  groupsInfoPopMenuItem(
-                      onTap: () {
-                        getnav.Get.to(() => ChatPage(userID: user.userID),
-                            transition: getnav.Transition.rightToLeft);
-                      },
-                      itemName: 'Start Chat',
-                      size: size,
-                      icon: Icons.chat_outlined),
-                  groupsInfoPopMenuItem(
-                      onTap: () async {
-                        if (isFollowing) {
-                          await follower.deleteFollower(
-                              followerID: user.userID);
-                        } else {
-                          follower.addFollower(
-                              followerID: user.userID,
-                              userName: user.userName,
-                              profileImage: user.profileImage,
-                              userID: user.userID,
-                              emailAddress: user.emailAddress,
-                              isFollowing: !isFollowing,
-                              meUserName: userData.userName,
-                              meProfileImage: userData.profileImage,
-                              meEmailAddress: userData.emailAddress);
-                        }
-                      },
-                      itemName: isFollowing
-                          ? 'Remove ${user.userName.split(' ')[0]}'
-                          : 'Add ${user.userName.split(' ')[0]}',
-                      size: size,
-                      icon: isFollowing
-                          ? Icons.group_remove_outlined
-                          : Icons.group_outlined),
-                  if (!user.isProfileLock)
+                  if (isFriend)
+                    groupsInfoPopMenuItem(
+                        onTap: () {
+                          getnav.Get.to(() => ChatPage(userID: user.userID),
+                              transition: getnav.Transition.rightToLeft);
+                        },
+                        itemName: 'Start Chat',
+                        size: size,
+                        icon: Icons.chat_outlined),
+                  if (isFriend)
+                    groupsInfoPopMenuItem(
+                        onTap: () async {
+                          if (isFollowing) {
+                            await follower.deleteFollower(
+                                followerID: user.userID);
+                          } else {
+                            follower.addFollower(
+                                followerID: user.userID,
+                                userName: user.userName,
+                                profileImage: user.profileImage,
+                                userID: user.userID,
+                                emailAddress: user.emailAddress,
+                                isFollowing: !isFollowing,
+                                meUserName: userData.userName,
+                                meProfileImage: userData.profileImage,
+                                meEmailAddress: userData.emailAddress);
+                          }
+                        },
+                        itemName: isFollowing
+                            ? 'Remove ${user.userName.split(' ')[0]}'
+                            : 'Add ${user.userName.split(' ')[0]}',
+                        size: size,
+                        icon: isFollowing
+                            ? Icons.group_remove_outlined
+                            : Icons.group_outlined),
+                  if (!user.isProfileLock || !isFriend)
                     groupsInfoPopMenuItem(
                         onTap: () async {
                           await saveImage(imageUrl: user.profileImage);

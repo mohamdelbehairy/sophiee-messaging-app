@@ -11,9 +11,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'my_friend_item_two_body.dart';
 
 class MyFriendItemTwo extends StatelessWidget {
-  const MyFriendItemTwo({super.key, required this.user, this.widget});
+  const MyFriendItemTwo(
+      {super.key, required this.user, this.infoCalls, this.followButton});
   final UserModel user;
-  final Widget? widget;
+  final Widget? infoCalls, followButton;
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +31,8 @@ class MyFriendItemTwo extends StatelessWidget {
           final userData = state.userModel
               .firstWhere((element) => element.userID == currentUser.uid);
           return MyFriendItemTwoBody(
-              widget: widget,
+              followButton: followButton,
+              infoCalls: infoCalls,
               follower: follower,
               user: user,
               friend: friend,

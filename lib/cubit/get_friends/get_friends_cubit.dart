@@ -11,7 +11,6 @@ class GetFriendsCubit extends Cubit<GetFriendsState> {
   List<UserModel> friends = [];
   void getFriends({required String userID}) {
     emit(GetFriendsLoading());
-
     try {
       FirebaseFirestore.instance
           .collection('friends')

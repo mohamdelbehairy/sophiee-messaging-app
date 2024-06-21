@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:sophiee/constants.dart';
 import 'package:sophiee/models/users_model.dart';
 
 import 'my_friend_info.dart';
@@ -11,12 +9,13 @@ class MyFriendItemTwoDetails extends StatelessWidget {
       required this.user,
       required this.isDark,
       required this.size,
-      required this.widget});
+      required this.infoCalls,
+      this.followButton});
 
   final UserModel user;
   final bool isDark;
   final Size size;
-  final Widget? widget;
+  final Widget? infoCalls, followButton;
 
   @override
   Widget build(BuildContext context) {
@@ -26,23 +25,9 @@ class MyFriendItemTwoDetails extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           MyFriendInfo(user: user, isDark: isDark, size: size),
-          if (user.isAudioAndVideoCall)
-            Padding(
-              padding: const EdgeInsets.only(bottom: 10),
-              child: Row(
-                children: [
-                  GestureDetector(
-                      onTap: () {},
-                      child:
-                          const Icon(Icons.call, size: 30, color: Colors.blue)),
-                  const SizedBox(width: 30),
-                  GestureDetector(
-                      onTap: () {},
-                      child: const Icon(FontAwesomeIcons.video,
-                          size: 30, color: kPrimaryColor)),
-                ],
-              ),
-            )
+          if (user.isAudioAndVideoCall && infoCalls != null) infoCalls!,
+          if(followButton != null)
+          followButton!,
         ],
       ),
     );

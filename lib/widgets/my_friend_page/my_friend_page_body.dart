@@ -6,6 +6,7 @@ import 'package:sophiee/cubit/auth/login/login_cubit.dart';
 import '../../cubit/user_date/image/get_image/get_image_cubit.dart';
 import '../../models/users_model.dart';
 import '../../pages/card_three_see_all_page.dart';
+import 'info_calls_widget.dart';
 import 'my_friend_item_bio.dart';
 import 'my_friend_item_one.dart';
 import 'my_friend_item_two.dart';
@@ -27,10 +28,10 @@ class MyFriendPageBody extends StatelessWidget {
     return Column(
       children: [
         MyFriendItemOne(user: user),
-        MyFriendItemTwo(user: user),
+        MyFriendItemTwo(user: user, infoCalls: const InfoCallsWidget()),
         if (!user.isProfileLock) const SizedBox(height: 12),
         if (user.isProfileLock)
-          ProfilePageLockWidget(size: size, user: user, isDark: isDark),
+          ProfilePageLockWidget(size: size, user: user, isDark: isDark,isFriend: true),
         if (user.isBioAndNickName && !user.isProfileLock)
           MyFriendItems(
               text: 'About ${user.userName.split(' ')[0]}',
@@ -61,3 +62,4 @@ class MyFriendPageBody extends StatelessWidget {
     );
   }
 }
+
