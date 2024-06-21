@@ -13,17 +13,18 @@ import '../my_friend_page/my_friend_page_icon_elispes.dart';
 
 class SearchResultItemOne extends StatelessWidget {
   const SearchResultItemOne(
-      {super.key, required this.user, required this.size});
+      {super.key, required this.user, required this.size, required this.isFriend});
 
   final UserModel user;
   final Size size;
+  final bool isFriend;
 
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
         CustomUserImage(user: user, size: size),
-        MyFriendPageIconElispes(user: user, size: size, isFriend: false),
+        MyFriendPageIconElispes(user: user, size: size, isFriend: isFriend),
         MyFriendPageIcon(
             myFriendIconModel: MyFriendIconModel(
                 left: 8,

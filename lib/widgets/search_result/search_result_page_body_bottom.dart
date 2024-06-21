@@ -9,6 +9,7 @@ import 'package:sophiee/models/users_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+
 class SearchResultPageBodyBottom extends StatelessWidget {
   const SearchResultPageBodyBottom(
       {super.key,
@@ -30,6 +31,7 @@ class SearchResultPageBodyBottom extends StatelessWidget {
           onTap: () async {
             context.read<GetFollowersCubit>().getFollowers(userID: user.userID);
             context.read<GetFollowingCubit>().getFollowing(userID: user.userID);
+
             if (isFollowing) {
               await follower.deleteFollower(followerID: user.userID);
             } else {
@@ -43,6 +45,7 @@ class SearchResultPageBodyBottom extends StatelessWidget {
                   meUserName: userData.userName,
                   meProfileImage: userData.profileImage,
                   meEmailAddress: userData.emailAddress);
+              
               await sendFollowerNotification.sendFollowerNotification(
                   followingToken: user.token, folowingName: userData.userName);
             }

@@ -34,6 +34,7 @@ import 'package:sophiee/cubit/groups/groups_members_details/groups_members_detai
 import 'package:sophiee/cubit/groups/high_light_group_message/high_light_messages_user/high_light_messages_user_cubit.dart';
 import 'package:sophiee/cubit/groups/high_light_group_message/hight_light_messages/high_light_messages_cubit.dart';
 import 'package:sophiee/cubit/groups/message_group/group_message_cubit.dart';
+import 'package:sophiee/cubit/is_friend/is_friend_cubit.dart';
 import 'package:sophiee/cubit/message/message_cubit.dart';
 import 'package:sophiee/cubit/network_error_status/network_error_status_cubit.dart';
 import 'package:sophiee/cubit/notification/live_notification/live_notification_cubit.dart';
@@ -144,6 +145,7 @@ class CustomMaterialApp extends StatelessWidget {
         BlocProvider(create: (context) => StoryNotificationCubit()),
         BlocProvider(create: (context) => GroupNotificationCubit()),
         BlocProvider(create: (context) => LiveNotificationCubit()),
+        BlocProvider(create: (context) => IsFriendCubit()),
       ],
       child: BlocBuilder<LoginCubit, LoginState>(
         builder: (context, state) {

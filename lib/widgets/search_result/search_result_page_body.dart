@@ -9,14 +9,17 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../cubit/is_friend/is_friend_cubit.dart';
+
 class SearchResultBogy extends StatelessWidget {
   const SearchResultBogy({super.key, required this.user});
   final UserModel user;
 
   @override
   Widget build(BuildContext context) {
-    final follower = context.read<FollowerCubit>();
-    final friend = context.read<FriendsCubit>();
+    var follower = context.read<FollowerCubit>();
+    var friend = context.read<FriendsCubit>();
+    var isFriend = context.read<IsFriendCubit>();
 
     return BlocBuilder<GetUserDataCubit, GetUserDataStates>(
       builder: (context, userState) {
@@ -41,6 +44,7 @@ class SearchResultBogy extends StatelessWidget {
                           meUserName: userData.userName,
                           meProfileImage: userData.profileImage,
                           meEmailAddress: userData.emailAddress);
+                      isFriend.isFriend();
                     }
                   }
                   if (state is DeleteFollowerSuccess) {
@@ -48,7 +52,7 @@ class SearchResultBogy extends StatelessWidget {
                         !await follower.followerResult(
                             followerID: user.userID)) {
                       await friend.deleteFriends(friendID: user.userID);
-
+                      isFriend.isFriend();
                       debugPrint('تم حذف الصداقه');
                     }
                   }
