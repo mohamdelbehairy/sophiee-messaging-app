@@ -18,11 +18,11 @@ class ItemTopOnlineStateItem extends StatelessWidget {
     return Positioned(
       bottom: size.width * .01,
       child: CircleAvatar(
-          radius: size.width * .018,
+          radius: size.width * .02,
           backgroundColor:
               isDark ? cardDarkModeBackground : const Color(0xfff1f2f2),
           child:
-              CircleAvatar(backgroundColor: color, radius: size.width * .0135)),
+              CircleAvatar(backgroundColor: color, radius: size.width * .015)),
     );
   }
 }

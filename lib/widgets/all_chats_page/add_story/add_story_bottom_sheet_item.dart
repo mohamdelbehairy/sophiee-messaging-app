@@ -2,8 +2,8 @@ import 'package:sophiee/cubit/auth/login/login_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class AddStoryPopoverItem extends StatelessWidget {
-  const AddStoryPopoverItem(
+class AddStoryBottomSheetItem extends StatelessWidget {
+  const AddStoryBottomSheetItem(
       {super.key, required this.icon, required this.text, required this.onTap});
   final IconData icon;
   final String text;
