@@ -1798,18 +1798,18 @@ packages:
     dependency: transitive
     description:
       name: zego_uikit
-      sha256: "8d69a8b3892af128021c8692671388e106857984f9ee2b2893c900888870ac20"
+      sha256: "2f7d22fa5ca337977d425556a504d70a7230045ac62d2aafeb720e618e0b2a13"
       url: "https://pub.dev"
     source: hosted
-    version: "2.24.0"
+    version: "2.24.2"
   zego_uikit_prebuilt_live_streaming:
     dependency: "direct main"
     description:
       name: zego_uikit_prebuilt_live_streaming
-      sha256: "3fd8392b794dd5d31f1c0e5e920360c8c33460decdd7d3d26ce0ad4a8c29e0de"
+      sha256: "1998fdff01a0ef401c7a39e15c4417a31c0776575d28d204131f914d7dd70092"
       url: "https://pub.dev"
     source: hosted
-    version: "3.8.5"
+    version: "3.8.9"
   zego_uikit_signaling_plugin:
     dependency: "direct main"
     description:
