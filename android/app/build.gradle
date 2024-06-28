@@ -28,7 +28,7 @@ if (flutterVersionName == null) {
 android {
     namespace "com.example.sophiee"
     compileSdk 34
-    ndkVersion flutter.ndkVersion
+    ndkVersion "25.1.8937393"
 
     compileOptions {
         coreLibraryDesugaringEnabled true

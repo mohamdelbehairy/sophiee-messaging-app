@@ -113,6 +113,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.1.0"
+  awesome_dialog:
+    dependency: "direct main"
+    description:
+      name: awesome_dialog
+      sha256: "41c41ae4b30b5c7f26bb3d9f9c87010ed1cab0bb4d4ac0cc513e5799c37e9d82"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.2.1"
   bloc:
     dependency: transitive
     description:
@@ -821,6 +829,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.12.4+1"
+  graphs:
+    dependency: transitive
+    description:
+      name: graphs
+      sha256: aedc5a15e78fc65a6e23bcd927f24c64dd995062bcd1ca6eda65a3cff92a4d19
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.3.1"
   hexcolor:
     dependency: "direct main"
     description:
@@ -1309,6 +1325,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.7.1"
+  rive:
+    dependency: transitive
+    description:
+      name: rive
+      sha256: "0342c9cd3c83ceeee4ad9246b98d628a2e9abd9d615acf69fa81fbbcf84a36ae"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.13.8"
+  rive_common:
+    dependency: transitive
+    description:
+      name: rive_common
+      sha256: "3fe76ba4680787741688ee393e47b63417e8643816795e4eac01021683af1d84"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.4.9"
   rxdart:
     dependency: transitive
     description:

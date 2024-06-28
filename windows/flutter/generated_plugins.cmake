@@ -14,6 +14,7 @@ list(APPEND FLUTTER_PLUGIN_LIST
   modal_progress_hud_nsn
   permission_handler_windows
   record_windows
+  rive_common
   share_plus
   smart_auth
   url_launcher_windows

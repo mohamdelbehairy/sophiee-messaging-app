@@ -1,8 +1,11 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:sophiee/cubit/auth/auth_settings/auth_settings_cubit.dart';
-import 'package:sophiee/utils/widget/show_top_snack_bar/show_top_snack_bar_success.dart';
 import 'package:sophiee/utils/widget/custom_bottom.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../models/awsome_dialog_model.dart';
+import '../../utils/custom_awsome_dialog.dart';
 
 class VerificationPageCustomButton extends StatelessWidget {
   const VerificationPageCustomButton(
@@ -16,10 +19,15 @@ class VerificationPageCustomButton extends StatelessWidget {
     return BlocListener<AuthSettingsCubit, AuthSettingsState>(
         listener: (context, state) {
           if (state is VerificationEmailSuccess) {
-            showTopSnackBarSuccess(
-                context: context,
-                message:
-                    'Verification link sent successful, Please check your email.');
+            customAwsomeDialog(
+              awsomeDialogModel: AwsomeDialogModel(
+                  context: context,
+                  autoHide: const Duration(seconds: 4),
+                  horizontal: 12,
+                  title: 'Verification email sent',
+                  desc:
+                      'Verification link sent successful, Please check your email.',
+                  dialogType: DialogType.success));
           }
         },
         child: CustomBottom(

@@ -1,12 +1,14 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:sophiee/cubit/auth/register/register_cubit.dart';
 import 'package:sophiee/pages/create_account/add_user_data_page.dart';
-import 'package:sophiee/utils/widget/show_top_snack_bar/show_top_snack_bar_failure.dart';
 import 'package:sophiee/widgets/register_page/register_page_bottom_sheet_body.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart' as getnav;
 
 import '../../constants.dart';
+import '../../models/awsome_dialog_model.dart';
+import '../../utils/custom_awsome_dialog.dart';
 
 class RegisterPageBottomSheet extends StatelessWidget {
   const RegisterPageBottomSheet({super.key, required this.isDark});
@@ -34,14 +36,22 @@ class RegisterPageBottomSheet extends StatelessWidget {
               }
               if (state is RegisterFailure) {
                 if (state.errorMessage == 'weak-password') {
-                  showTopSnackBarFailure(
-                      context: context,
-                      message: 'Ops, The password provided is too weak.');
+                 customAwsomeDialog(
+              awsomeDialogModel: AwsomeDialogModel(
+                  context: context,
+                  autoHide: const Duration(seconds: 3),
+                  title: 'Password is too weak',
+                  desc: 'Ops, The password provided is too weak.',
+                  dialogType: DialogType.error));
                 } else if (state.errorMessage == 'email-already-in-use') {
-                  showTopSnackBarFailure(
-                      context: context,
-                      message:
-                          'Ops, The account already exists for that email.');
+                   customAwsomeDialog(
+              awsomeDialogModel: AwsomeDialogModel(
+                  context: context,
+                  autoHide: const Duration(seconds: 3),
+                  title: 'Email already in use',
+                  horizontal: 16,
+                  desc: 'Ops, The account already exists for that email.',
+                  dialogType: DialogType.error));
                 }
               } else if (state is RegisterSuccess) {
                 getnav.Get.to(() => const AddUserDataPage(),
