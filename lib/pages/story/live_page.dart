@@ -55,8 +55,8 @@ class _LivePageState extends State<LivePage> {
                   .firstWhere((element) => element.userID == currentUser.uid);
               return SafeArea(
                 child: ZegoUIKitPrebuiltLiveStreaming(
-                  appID: LiveInfo.appID,
-                  appSign: LiveInfo.appSign,
+                  appID: int.parse(LiveInfo.appID ?? ''),
+                  appSign: LiveInfo.appSign ?? '',
                   userID: userData.userID,
                   userName: userData.userName,
                   liveID: widget.liveID,

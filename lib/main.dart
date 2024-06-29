@@ -3,6 +3,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:sophiee/custom_material_app.dart';
 import 'package:sophiee/firebase_options.dart';
@@ -19,7 +20,11 @@ void main() async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
-  await runAppInit();
+  await Future.wait([
+    dotenv.load(fileName: ".env"),
+    runAppInit(),
+  ]);
+  // await runAppInit();
 
   FlutterNativeSplash.remove();
 }

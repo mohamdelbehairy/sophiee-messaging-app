@@ -48,7 +48,8 @@ class StoryNotificationCubit extends Cubit<StoryNotificationState> {
         },
       };
 
-      await http.post(Uri.parse(serverUrl), body: jsonEncode(data), headers: {
+      await http
+          .post(Uri.parse(serverUrl ?? ''), body: jsonEncode(data), headers: {
         'Content-Type': contentType,
         'Authorization': 'key=$serverKey',
       });

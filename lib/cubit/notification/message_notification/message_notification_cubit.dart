@@ -21,7 +21,7 @@ class MessageNotificationCubit extends Cubit<MessageNotificationState> {
     FirebaseMessaging.onMessage.listen((message) async {
       debugPrint('title: ${message.notification!.title}');
       debugPrint('body: ${message.notification!.body}');
-      
+
       if (message.data['page'] == 'chat') {
         await showMessageNotification(
             title: message.notification!.title.toString(),
@@ -51,7 +51,8 @@ class MessageNotificationCubit extends Cubit<MessageNotificationState> {
         }
       };
 
-      await http.post(Uri.parse(serverUrl), body: jsonEncode(data), headers: {
+      await http
+          .post(Uri.parse(serverUrl ?? ''), body: jsonEncode(data), headers: {
         'Content-Type': contentType,
         'Authorization': 'key=$serverKey',
       });

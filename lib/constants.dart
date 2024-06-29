@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 // Colors
 const kPrimaryColor = Color(0xff2CB9B0);
@@ -14,7 +15,6 @@ const messageFriendColorDarkMode = Color(0xff2c2a30);
 
 const cardLightModeBackground = Color(0xfffefeff);
 const cardDarkModeBackground = Color(0xff1e1e1e);
-
 
 // 0xff2b2c33
 // 2d2c36
@@ -52,8 +52,7 @@ const defaultImageUrl =
     "https://he.cecollaboratory.com/public/layouts/images/group-default-logo.png";
 
 // firebase messaging
-const serverUrl = "https://fcm.googleapis.com/fcm/send";
-const serverKey =
-    "AAAALRycbcI:APA91bG22x3xWNtc4loGWfQN-fJnKwIdOc2NFVubKemU3CzGqrAhIHBdlhKKFG_jDOqGbwlg-5jgI07aHvbtrmfQgnsgsAGzb5hfyUhXeLPaquSwLiAIeraaxK9TnyRO4nDkb8MLbqoG";
+var serverUrl = dotenv.env['SERVERURL'];
+var serverKey = dotenv.env['SERVERKEY'];
 
 const contentType = "application/json; charset=UTF-8";

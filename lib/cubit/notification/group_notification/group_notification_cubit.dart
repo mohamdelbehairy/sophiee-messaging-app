@@ -51,7 +51,7 @@ class GroupNotificationCubit extends Cubit<GroupNotificationState> {
       };
 
       await http.post(
-        Uri.parse(serverUrl),
+        Uri.parse(serverUrl ?? ''),
         body: jsonEncode(data),
         headers: {
           'Content-Type': contentType,
