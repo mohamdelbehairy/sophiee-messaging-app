@@ -9,7 +9,6 @@ import 'package:sophiee/models/users_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-
 class SearchResultPageBodyBottom extends StatelessWidget {
   const SearchResultPageBodyBottom(
       {super.key,
@@ -45,9 +44,11 @@ class SearchResultPageBodyBottom extends StatelessWidget {
                   meUserName: userData.userName,
                   meProfileImage: userData.profileImage,
                   meEmailAddress: userData.emailAddress);
-              
+
               await sendFollowerNotification.sendFollowerNotification(
-                  followingToken: user.token, folowingName: userData.userName);
+                  senderId: userData.userID,
+                  followingToken: user.token,
+                  folowingName: userData.userName);
             }
           },
           child: Container(

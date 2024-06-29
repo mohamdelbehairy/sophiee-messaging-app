@@ -30,7 +30,9 @@ class FollowerNotificationCubit extends Cubit<FolloweNotificationState> {
 
   // send follower notification
   Future<void> sendFollowerNotification(
-      {required String? followingToken, required String folowingName}) async {
+      {required String? followingToken,
+      required String folowingName,
+      required String senderId}) async {
     try {
       var data = {
         'to': followingToken,
@@ -41,13 +43,16 @@ class FollowerNotificationCubit extends Cubit<FolloweNotificationState> {
         'data': {
           'click_action': 'FLUTTER_NOTIFICATION_CLICK',
           'status': 'done',
+          'senderId': senderId,
           'page': 'follower',
         }
       };
-      await http.post(Uri.parse(serverUrl??''), body: jsonEncode(data), headers: {
-        'Content-Type': contentType,
-        'Authorization': 'key=$serverKey'
-      });
+      await http.post(Uri.parse(serverUrl ?? ''),
+          body: jsonEncode(data),
+          headers: {
+            'Content-Type': contentType,
+            'Authorization': 'key=$serverKey'
+          });
       emit(SendFollowerNotificationSuccess());
     } catch (e) {
       emit(FolloweNotificationFailure(errorMessage: e.toString()));
@@ -69,8 +74,8 @@ class FollowerNotificationCubit extends Cubit<FolloweNotificationState> {
       await _flutterLocalNotificationsPlugin.show(
           DateTime.now().second, title, body, details);
       emit(ShowFollowerNotificationSuccess());
-    }  catch (e) {
-        emit(FolloweNotificationFailure(errorMessage: e.toString()));
+    } catch (e) {
+      emit(FolloweNotificationFailure(errorMessage: e.toString()));
       debugPrint(
           'error from show follower notification method: ${e.toString()}');
     }

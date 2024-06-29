@@ -27,7 +27,8 @@ class ListViewResultFound extends StatelessWidget {
                 // context.read<GetFollowersCubit>().getFollowers(
                 //     userID: searchList[index].userID);
 
-                getnav.Get.to(() => SearchResultPage(user: searchList[index]),
+                getnav.Get.to(
+                    () => SearchResultPage(userID: searchList[index].userID),
                     transition: getnav.Transition.rightToLeft);
               },
               child: ResultIem(user: searchList[index]));
