@@ -2,6 +2,7 @@ import 'package:receive_sharing_intent/receive_sharing_intent.dart';
 import 'package:sophiee/cubit/all_chats_shimmer_status/all_chats_shimmer_status.dart';
 import 'package:sophiee/pages/chats/all_chats_page.dart';
 import 'package:sophiee/pages/profile_page.dart';
+import 'package:sophiee/pages/receive_sharing_page.dart';
 import 'package:sophiee/pages/setting/settings_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -57,11 +58,11 @@ class _HomePageState extends State<HomePage> {
         _sharedFiles.clear();
         _sharedFiles.addAll(value);
         if (_sharedFiles.isNotEmpty) {
-          // Navigator.push(
-          //     context,
-          //     MaterialPageRoute(
-          //         builder: (context) =>
-          //             ReceiveSharingPage(sharedFiles: _sharedFiles)));
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) =>
+                      ReceiveSharingPage(sharedFiles: _sharedFiles)));
         }
       });
     });
@@ -71,13 +72,12 @@ class _HomePageState extends State<HomePage> {
         _sharedFiles.clear();
         _sharedFiles.addAll(value);
         if (_sharedFiles.isNotEmpty) {
-          // Navigator.push(
-          //   context,
-          //   MaterialPageRoute(
-          //     builder: (context) =>
-          //         ReceiveSharingPage(sharedFiles: _sharedFiles),
-          //   ),
-          // );
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) =>
+                    ReceiveSharingPage(sharedFiles: _sharedFiles)),
+          );
         }
 
         ReceiveSharingIntent.instance.reset();
