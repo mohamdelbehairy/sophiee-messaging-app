@@ -21,38 +21,27 @@ class MessageForwardGroups extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Padding(
-            padding:
-                EdgeInsets.only(left: size.width * .04, top: size.width * .01),
-            child: Text('All Groups',
-                style: Theme.of(context)
-                    .textTheme
-                    .bodyLarge
-                    ?.copyWith(color: isDark ? Colors.white : Colors.black))),
-        SizedBox(
-          height: size.height * .15,
-          child: BlocBuilder<CreateGroupsCubit, CreateGroupsState>(
-            builder: (context, state) {
-              List<GroupModel> filteredGroups =
-                  group.userGroupsList.where((userGroup) {
-                return userGroup.usersID
-                    .contains(FirebaseAuth.instance.currentUser!.uid);
-              }).toList();
-              return ListView.builder(
-                  itemCount: filteredGroups.length,
-                  itemBuilder: (context, index) {
-                    return MessageForwardGroupListTile(
-                        size: size,
-                        groupModel: filteredGroups[index],
-                        isDark: isDark);
-                  });
-            },
-          ),
-        ),
-      ],
+    return BlocBuilder<CreateGroupsCubit, CreateGroupsState>(
+      builder: (context, state) {
+        List<GroupModel> filteredGroups =
+            group.userGroupsList.where((userGroup) {
+          return userGroup.usersID
+              .contains(FirebaseAuth.instance.currentUser!.uid);
+        }).toList();
+        return SizedBox(
+          height: size.height * .1,
+          child: ListView.builder(
+              physics: const BouncingScrollPhysics(),
+              scrollDirection: Axis.horizontal,
+              itemCount: filteredGroups.length,
+              itemBuilder: (context, index) {
+                return MessageForwardGroupListTile(
+                    size: size,
+                    groupModel: filteredGroups[index],
+                    isDark: isDark);
+              }),
+        );
+      },
     );
   }
 }

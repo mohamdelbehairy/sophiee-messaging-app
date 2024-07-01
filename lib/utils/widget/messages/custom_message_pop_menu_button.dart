@@ -118,7 +118,7 @@ class CustomChatPopMenuButton extends StatelessWidget {
                 onTap: () {
                   getnav.Get.to(
                       MessageForwardPage(user: user, message: message),
-                      transition: getnav.Transition.leftToRight);
+                      transition: getnav.Transition.rightToLeft);
                 }),
             if (groupModel != null)
               customPopMenuItemMethod(

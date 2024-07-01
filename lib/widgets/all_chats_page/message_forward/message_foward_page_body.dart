@@ -5,11 +5,10 @@ import 'package:sophiee/models/media_files_model.dart';
 import 'package:sophiee/models/message_model.dart';
 import 'package:sophiee/models/users_model.dart';
 import 'package:sophiee/widgets/all_chats_page/message_forward/message_forward_button.dart';
-import 'package:sophiee/widgets/all_chats_page/message_forward/message_forward_friends.dart';
-import 'package:sophiee/widgets/all_chats_page/message_forward/message_forward_groups.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'message_forwared_custom_scroll_view.dart';
 
 class MessageForwardPageBody extends StatelessWidget {
   const MessageForwardPageBody(
@@ -37,32 +36,21 @@ class MessageForwardPageBody extends StatelessWidget {
     return SafeArea(
       child: Stack(
         children: [
-          SizedBox(
-            height: size.height,
-            child: Column(
-              children: [
-                MessageForwardGroups(
-                    selectedGroup: selectedGroup,
-                    group: group,
-                    size: size,
-                    isDark: isDark),
-                Expanded(
-                  child: MessageForwardFriends(
-                      isDark: isDark, size: size, message: message),
-                ),
-              ],
-            ),
-          ),
+          MessageForwaredCustomScrollView(
+              isDark: isDark,
+              selectedGroup: selectedGroup,
+              group: group,
+              size: size),
           if (selectedFriend.selectedFriendList.isNotEmpty ||
               selectedGroup.selectedGroupList.isNotEmpty)
             Positioned(
-              bottom: size.height * .02,
-              right: size.width * .04,
-              child: MessageForwardButton(
-                  message: message, user: user, mediaFiles: mediaFiles),
-            )
+                bottom: size.height * .02,
+                right: size.width * .04,
+                child: MessageForwardButton(
+                    message: message, user: user, mediaFiles: mediaFiles))
         ],
       ),
     );
   }
 }
+

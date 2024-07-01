@@ -1,4 +1,3 @@
-import 'package:sophiee/constants.dart';
 import 'package:sophiee/cubit/auth/login/login_cubit.dart';
 import 'package:sophiee/cubit/forward/forward_selected_friend/forward_selected_friend_cubit.dart';
 import 'package:sophiee/cubit/forward/forward_selected_friend/forward_selected_friend_state.dart';

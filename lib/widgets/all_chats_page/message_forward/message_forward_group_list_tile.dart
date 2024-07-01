@@ -1,8 +1,9 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:sophiee/cubit/forward/forward_selected_group/forward_selected_group_cubit.dart';
 import 'package:sophiee/models/group_model.dart';
-import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sophiee/widgets/all_chats_page/message_forward/message_forward_selected_item.dart';
 
 class MessageForwardGroupListTile extends StatefulWidget {
   const MessageForwardGroupListTile(
@@ -38,33 +39,36 @@ class _MessageForwardGroupListTileState
               groupName: widget.groupModel.groupName);
           debugPrint('groupID: ${widget.groupModel.groupID}');
           debugPrint('groupName: ${widget.groupModel.groupName}');
-          debugPrint('selectedgroup: ${selectedGroup.selectedGroupList.length}');
+          debugPrint(
+              'selectedgroup: ${selectedGroup.selectedGroupList.length}');
         } else {
           await selectedGroup.deleteSelectedGroups(
               groupID: widget.groupModel.groupID);
         }
       },
       child: Container(
-        color: isSelected && selectedGroup.selectedGroupList.isNotEmpty
-            ? Colors.grey
-            : Colors.transparent,
-        padding: EdgeInsets.symmetric(vertical: widget.size.width * .01),
-        child: ListTile(
-          title: Text(widget.groupModel.groupName),
-          leading: CircleAvatar(
-            radius: widget.size.height * .03,
-            backgroundColor: Colors.transparent,
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(30),
-              child: FancyShimmerImage(
-                  boxFit: BoxFit.cover,
-                  shimmerBaseColor:
-                      widget.isDark ? Colors.white12 : Colors.grey.shade300,
-                  shimmerHighlightColor:
-                      widget.isDark ? Colors.white24 : Colors.grey.shade100,
-                  imageUrl: widget.groupModel.groupImage!),
+        width: widget.size.width * .2,
+        padding: const EdgeInsets.symmetric(vertical: 4),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Stack(
+              children: [
+                CircleAvatar(
+                    radius: widget.size.height * .03,
+                    backgroundColor: Colors.transparent,
+                    backgroundImage: CachedNetworkImageProvider(
+                        widget.groupModel.groupImage!)),
+                if (isSelected && selectedGroup.selectedGroupList.isNotEmpty)
+                  const Positioned(
+                      bottom: 0.0,
+                      right: 0.0,
+                      child: MessageForwardSelectedItem())
+              ],
             ),
-          ),
+            Text(widget.groupModel.groupName.split(' ')[0],
+                style: const TextStyle(color: Colors.grey))
+          ],
         ),
       ),
     );

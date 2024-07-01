@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../../constants.dart';
 import '../../../cubit/forward/forward_selected_friend/forward_selected_friend_cubit.dart';
+import 'message_forward_selected_item.dart';
 
 class MessageForwardFriendTrailing extends StatelessWidget {
   const MessageForwardFriendTrailing(
@@ -16,12 +16,9 @@ class MessageForwardFriendTrailing extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return isSelected && selectedFriend.selectedFriendList.isNotEmpty
-        ? Container(
-            height: 20,
-            width: 20,
-            color: kPrimaryColor,
-            child: const Icon(Icons.done, size: 16, color: Colors.white))
+        ? const MessageForwardSelectedItem()
         : Text('Mobile',
             style: TextStyle(color: Colors.grey, fontSize: size.width * .033));
   }
 }
+
