@@ -24,7 +24,6 @@ void main() async {
     dotenv.load(fileName: ".env"),
     runAppInit(),
   ]);
-  // await runAppInit();
 
   FlutterNativeSplash.remove();
 }
