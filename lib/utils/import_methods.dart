@@ -15,8 +15,8 @@ import '../cubit/notification/message_notification/message_notification_cubit.da
 import '../cubit/notification/notification_setting/notification_setting_cubit.dart';
 import '../cubit/notification/story_notification/story_notification_cubit.dart';
 
-abstract class ImortMethods {
-  static void imortMethod(BuildContext context,AllChatsShimmerStatusCubit appStatusCubit) async {
+abstract class ImportMethods {
+  static void importMethod(BuildContext context,AllChatsShimmerStatusCubit appStatusCubit) async {
     var initLocalNotification = context.read<NotificationSettingCubit>();
 
     initLocalNotification.initLocalNotification();

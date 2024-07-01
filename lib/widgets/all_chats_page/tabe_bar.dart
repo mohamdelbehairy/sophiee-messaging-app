@@ -1,7 +1,7 @@
 import 'package:sophiee/constants.dart';
 import 'package:sophiee/pages/chats/calls_page.dart';
 import 'package:sophiee/pages/chats/groups/groups_page.dart';
-import 'package:sophiee/pages/friends_page.dart';
+import 'package:sophiee/pages/receive_sharing_page.dart';
 import 'package:sophiee/pages/search_page.dart';
 import 'package:sophiee/widgets/all_chats_page/all_chats_body.dart';
 import 'package:flutter/material.dart';
@@ -41,8 +41,7 @@ class _CustomTabBarState extends State<CustomTabBar> {
                   : IconButton(
                       splashColor: Colors.transparent,
                       highlightColor: Colors.transparent,
-                      onPressed: () => getnav.Get.to(
-                          () => FriendsPage(size: size, isDark: false),
+                      onPressed: () => getnav.Get.to(() => const ReceiveSharingPage(),
                           transition: getnav.Transition.rightToLeft),
                       icon: const Icon(Icons.group),
                     ),

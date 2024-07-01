@@ -11,6 +11,8 @@ import 'package:sophiee/widgets/all_chats_page/message_forward/message_foward_pa
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../utils/widget/message_forward_app_bar.dart';
+
 class MessageForwardPage extends StatelessWidget {
   const MessageForwardPage(
       {super.key, this.user, this.message, this.mediaFiles});
@@ -20,7 +22,7 @@ class MessageForwardPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
+    final size = MediaQuery.sizeOf(context);
     var isDark = context.read<LoginCubit>().isDark;
     var selectedFriend = context.read<ForwardSelectedFriendCubit>();
     selectedFriend.getSelectedFriend();
@@ -35,25 +37,8 @@ class MessageForwardPage extends StatelessWidget {
             ForwardSelectedGroupState>(
           builder: (context, state) {
             return Scaffold(
-              appBar: AppBar(
-                titleSpacing: size.width * -.02,
-                backgroundColor: kPrimaryColor,
-                title: Text(
-                    selectedFriend.selectedFriendList.isNotEmpty ||
-                            selectedGroup.selectedGroupList.isNotEmpty
-                        ? '${selectedFriend.selectedFriendList.length + selectedGroup.selectedGroupList.length} selected'
-                        : 'Forward to...',
-                    style: const TextStyle(
-                        fontWeight: FontWeight.normal, color: Colors.white)),
-                leading: GestureDetector(
-                    onTap: () async {
-                      Navigator.pop(context);
-                      await selectedFriend.deleteAllSelectedFriends();
-                      await selectedGroup.deleteAllSelectedGroups();
-                    },
-                    child: Icon(Icons.arrow_back,
-                        color: Colors.white, size: size.width * .08)),
-              ),
+              appBar: messageForwardAppBar(
+                  size, selectedFriend, selectedGroup, context),
               body: MessageForwardPageBody(
                 selectedFriend: selectedFriend,
                 selectedGroup: selectedGroup,

@@ -3,9 +3,11 @@ import 'package:sophiee/cubit/forward/forward_selected_friend/forward_selected_f
 import 'package:sophiee/cubit/user_date/get_user_data/get_user_data_cubit.dart';
 import 'package:sophiee/cubit/user_date/get_user_data/get_user_data_state.dart';
 import 'package:sophiee/models/users_model.dart';
-import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'message_forward_friend_leading.dart';
+import 'message_forward_friend_trailing.dart';
 
 class MessageForwardFriendsListTile extends StatefulWidget {
   const MessageForwardFriendsListTile({super.key, required this.user});
@@ -47,45 +49,25 @@ class _MessageForwardFriendsListTileState
                     selectedFriendID: data.userID);
               }
             },
-            child: Container(
-              color: isSelected && selectedFriend.selectedFriendList.isNotEmpty
-                  ? Colors.grey
-                  : Colors.transparent,
-              child: ListTile(
-                title: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(data.userName,
-                        style: TextStyle(
-                          color: isDark ? Colors.white : Colors.black,
-                        )),
-                    Text('Mobile',
-                        style: TextStyle(
-                            color: Colors.grey, fontSize: size.width * .033))
-                  ],
-                ),
-                subtitle: Text(data.bio,
+            child: ListTile(
+                title: Text(data.userName,
+                    style: TextStyle(
+                        color: isDark ? Colors.white : Colors.black)),
+                trailing: MessageForwardFriendTrailing(
+                    isSelected: isSelected,
+                    size: size,
+                    selectedFriend: selectedFriend),
+                subtitle: Text(
+                    data.isBioAndNickName
+                        ? data.bio.isNotEmpty
+                            ? data.bio
+                            : data.nickName
+                        : '',
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(
-                      color: Colors.grey,
-                    )),
-                leading: CircleAvatar(
-                  radius: size.height * .03,
-                  backgroundColor: Colors.transparent,
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(30),
-                    child: FancyShimmerImage(
-                        boxFit: BoxFit.cover,
-                        shimmerBaseColor:
-                            isDark ? Colors.white12 : Colors.grey.shade300,
-                        shimmerHighlightColor:
-                            isDark ? Colors.white24 : Colors.grey.shade100,
-                        imageUrl: data.profileImage),
-                  ),
-                ),
-              ),
-            ),
+                    style: const TextStyle(color: Colors.grey)),
+                leading: MessageForwardFriendLeading(
+                    size: size, isDark: isDark, data: data)),
           );
         } else {
           return Container();
@@ -94,3 +76,4 @@ class _MessageForwardFriendsListTileState
     );
   }
 }
+

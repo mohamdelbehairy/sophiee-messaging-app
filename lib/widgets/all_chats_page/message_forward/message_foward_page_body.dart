@@ -48,10 +48,7 @@ class MessageForwardPageBody extends StatelessWidget {
                     isDark: isDark),
                 Expanded(
                   child: MessageForwardFriends(
-                      isDark: isDark,
-                      selectedFriend: selectedFriend,
-                      size: size,
-                      message: message),
+                      isDark: isDark, size: size, message: message),
                 ),
               ],
             ),

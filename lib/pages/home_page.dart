@@ -1,3 +1,4 @@
+import 'package:receive_sharing_intent/receive_sharing_intent.dart';
 import 'package:sophiee/cubit/all_chats_shimmer_status/all_chats_shimmer_status.dart';
 import 'package:sophiee/pages/chats/all_chats_page.dart';
 import 'package:sophiee/pages/profile_page.dart';
@@ -5,7 +6,7 @@ import 'package:sophiee/pages/setting/settings_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../utils/imort_methods.dart';
+import '../utils/import_methods.dart';
 import '../widgets/all_chats_page/bottom_navigation_bar/custom_bottom_navigtion_bar.dart';
 
 class HomePage extends StatefulWidget {
@@ -17,6 +18,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   late final AllChatsShimmerStatusCubit appStatusCubit;
+  final _sharedFiles = <SharedMediaFile>[];
 
   int index = 0;
   final screens = const [
@@ -28,7 +30,8 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     appStatusCubit = context.read<AllChatsShimmerStatusCubit>();
-    ImortMethods.imortMethod(context,appStatusCubit);
+    ImportMethods.importMethod(context, appStatusCubit);
+    receiveSharingMethod();
   }
 
   @override
@@ -46,5 +49,39 @@ class _HomePageState extends State<HomePage> {
             }),
       ),
     );
+  }
+
+  void receiveSharingMethod() {
+    ReceiveSharingIntent.instance.getMediaStream().listen((value) {
+      setState(() {
+        _sharedFiles.clear();
+        _sharedFiles.addAll(value);
+        if (_sharedFiles.isNotEmpty) {
+          // Navigator.push(
+          //     context,
+          //     MaterialPageRoute(
+          //         builder: (context) =>
+          //             ReceiveSharingPage(sharedFiles: _sharedFiles)));
+        }
+      });
+    });
+
+    ReceiveSharingIntent.instance.getInitialMedia().then((value) {
+      setState(() {
+        _sharedFiles.clear();
+        _sharedFiles.addAll(value);
+        if (_sharedFiles.isNotEmpty) {
+          // Navigator.push(
+          //   context,
+          //   MaterialPageRoute(
+          //     builder: (context) =>
+          //         ReceiveSharingPage(sharedFiles: _sharedFiles),
+          //   ),
+          // );
+        }
+
+        ReceiveSharingIntent.instance.reset();
+      });
+    });
   }
 }

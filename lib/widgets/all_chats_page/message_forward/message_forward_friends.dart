@@ -1,4 +1,3 @@
-import 'package:sophiee/cubit/forward/forward_selected_friend/forward_selected_friend_cubit.dart';
 import 'package:sophiee/cubit/get_friends/get_friends_cubit.dart';
 import 'package:sophiee/cubit/get_friends/get_friends_state.dart';
 import 'package:sophiee/models/media_files_model.dart';
@@ -13,16 +12,12 @@ class MessageForwardFriends extends StatelessWidget {
       required this.size,
       required this.isDark,
       this.message,
-       
-      required this.selectedFriend,
       this.mediaFiels});
   final Size size;
   final bool isDark;
 
   final MessageModel? message;
   final MediaFilesModel? mediaFiels;
-  
-  final ForwardSelectedFriendCubit selectedFriend;
 
   @override
   Widget build(BuildContext context) {
