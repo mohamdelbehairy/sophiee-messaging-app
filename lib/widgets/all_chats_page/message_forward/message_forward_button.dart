@@ -197,12 +197,11 @@ class _MessageForwardButtonState extends State<MessageForwardButton> {
                                 }
                               }
                               await storeChatMedia.storeMedia(
-                                friendID: friend.userID,
-                                messageID: messageID,
-                                messageText: widget.message!.messageText,
-                                messageImage: widget.message!.messageImage,
-                                messageVideo: widget.message!.messageVideo,
-                              );
+                                  friendID: friend.userID,
+                                  messageID: messageID,
+                                  messageText: widget.message!.messageText,
+                                  messageImage: widget.message!.messageImage,
+                                  messageVideo: widget.message!.messageVideo);
                             }
                             if (widget.message!.messageText
                                     .startsWith('http') ||
