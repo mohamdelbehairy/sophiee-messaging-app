@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -100,6 +102,7 @@ class CustomChatPopMenuButton extends StatelessWidget {
                   size: size,
                   icon: Icons.save,
                   onTap: () async {
+                    log('${message.messageSound}');
                     await saveSound(messages: message);
                   }),
             if (message.messageText.isNotEmpty)

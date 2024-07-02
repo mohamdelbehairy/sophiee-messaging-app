@@ -18,7 +18,7 @@ class MessageSoundLength extends StatelessWidget {
       bottom: size.width * .01,
       left: size.width * .01,
       child: Text(
-        message.messageSoundTime!,
+        message.messageSoundTime ?? '00:00',
         style: TextStyle(fontSize: size.width * .025, color: color),
       ),
     );
