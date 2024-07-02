@@ -285,6 +285,7 @@ class _MessageForwardButtonState extends State<MessageForwardButton> {
                           }
                         }
                       }
+
                       if (selectedGroup.selectedGroupList.isNotEmpty) {
                         String messageID = const Uuid().v4();
                         for (var group in selectedGroup.selectedGroupList) {
@@ -292,16 +293,12 @@ class _MessageForwardButtonState extends State<MessageForwardButton> {
                               groupState.groupsList.isNotEmpty) {
                             var groupData = groupState.groupsList.firstWhere(
                                 (element) => element.groupID == group);
-                            debugPrint('groupName: ${groupData.groupName}');
-                            debugPrint('users: ${groupData.usersID}');
                             for (var groupUserID in groupData.usersID) {
                               if (groupUserID !=
                                   FirebaseAuth.instance.currentUser!.uid) {
                                 var groupuserData = state.userModel.firstWhere(
                                     (element) => element.userID == groupUserID);
-                                debugPrint(
-                                    'userName: ${groupuserData.userName}');
-                                debugPrint('token: ${groupuserData.token}');
+
                                 if (widget.message != null) {
                                   await sendGroupMessage.sendGroupMessage(
                                       groupID: group,
@@ -541,11 +538,10 @@ class _MessageForwardButtonState extends State<MessageForwardButton> {
                     backgroundColor: kPrimaryColor,
                     child: isCircle
                         ? SizedBox(
-                            height: size.width * .07,
-                            width: size.width * .07,
+                            height: size.width * .065,
+                            width: size.width * .065,
                             child: const CircularProgressIndicator(
-                                color: Colors.white),
-                          )
+                                color: Colors.white))
                         : Icon(Icons.send,
                             color: Colors.white, size: size.width * .07),
                   ),
