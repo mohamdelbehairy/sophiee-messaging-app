@@ -3,7 +3,6 @@ import 'package:sophiee/widgets/all_chats_page/add_story/add_story_bottom_sheet.
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../constants.dart';
 
 class AddStory extends StatelessWidget {
   const AddStory({super.key});
@@ -20,11 +19,11 @@ class AddStory extends StatelessWidget {
               context: context,
               builder: (context) => Container(
                   decoration: BoxDecoration(
-                      color: isDark ? cardDarkModeBackground : Colors.white,
+                      color: isDark ? const Color(0xff2b2c33) : Colors.white,
                       borderRadius: const BorderRadius.only(
                           topLeft: Radius.circular(12),
                           topRight: Radius.circular(12))),
-                  child: const AddStoryBottomSheet())),
+                  child:  AddStoryBottomSheet(isDark: isDark))),
           child: CircleAvatar(
             radius: size.height * .031,
             backgroundColor:

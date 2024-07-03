@@ -43,7 +43,7 @@ class _HomePageState extends State<HomePage> {
         body: screens[index],
         bottomNavigationBar: CustomBottomNavigationBar(
             index: index,
-            onDestinationSelected: (selectedIndex) {
+            onTap: (selectedIndex) {
               setState(() {
                 index = selectedIndex;
               });

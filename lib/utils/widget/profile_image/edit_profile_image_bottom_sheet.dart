@@ -19,39 +19,37 @@ class EditProfileImageBottomSheet extends StatelessWidget {
       Navigator.pop(context);
     }
 
-    return SizedBox(
-      height: size.height * .3,
-      width: size.width,
-      child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: size.width * .05),
-        child: Column(
-          children: [
-            SizedBox(
-                width: size.width * .1, child: const Divider(thickness: 5)),
-            SizedBox(height: size.height * .02),
-            Text('Change profile picture',
-                style: TextStyle(
-                    color: isDark ? Colors.white : Colors.black,
-                    fontSize: size.width * .042)),
-            SizedBox(height: size.height * .03),
-            BottomSheetItems(
-                text: 'Take photo',
-                icon: Icons.camera_alt_rounded,
-                onTap: takePhoto),
-            SizedBox(height: size.height * .03),
-            BottomSheetItems(
-                text: 'Choose from gallery',
-                icon: Icons.collections,
-                onTap: choosePhoto),
-            SizedBox(height: size.height * .03),
-            BottomSheetItems(
-                text: 'Use avatar',
-                icon: Icons.face,
-                onTap: () {
-                  navigatorPop();
-                }),
-          ],
-        ),
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: size.width * .05),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          SizedBox(
+              width: size.width * .1, child: const Divider(thickness: 5)),
+          SizedBox(height: size.height * .02),
+          Text('Change profile picture',
+              style: TextStyle(
+                  color: isDark ? Colors.white : Colors.black,
+                  fontSize: size.width * .042)),
+          SizedBox(height: size.height * .03),
+          BottomSheetItems(
+              text: 'Take photo',
+              icon: Icons.camera_alt_rounded,
+              onTap: takePhoto),
+          SizedBox(height: size.height * .03),
+          BottomSheetItems(
+              text: 'Choose from gallery',
+              icon: Icons.collections,
+              onTap: choosePhoto),
+          SizedBox(height: size.height * .03),
+          BottomSheetItems(
+              text: 'Use avatar',
+              icon: Icons.face,
+              onTap: () {
+                navigatorPop();
+              }),
+          SizedBox(height: size.height * .02),
+        ],
       ),
     );
   }

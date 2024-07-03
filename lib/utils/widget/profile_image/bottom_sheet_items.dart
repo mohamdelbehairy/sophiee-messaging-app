@@ -17,8 +17,8 @@ class BottomSheetItems extends StatelessWidget {
       onTap: onTap,
       child: Row(
         children: [
-          Icon(icon),
-          SizedBox(width: size.width * .04),
+          Icon(icon, color: isDark ? Colors.white : Colors.black87),
+          const SizedBox(width: 16),
           Text(text,
               style: TextStyle(
                   color: isDark ? Colors.white : Colors.black,
@@ -26,6 +26,5 @@ class BottomSheetItems extends StatelessWidget {
         ],
       ),
     );
-  
   }
 }

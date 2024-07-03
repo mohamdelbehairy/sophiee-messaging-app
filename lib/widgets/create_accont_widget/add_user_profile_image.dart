@@ -1,3 +1,4 @@
+import 'package:sophiee/cubit/auth/login/login_cubit.dart';
 import 'package:sophiee/cubit/pick_image/pick_image_cubit.dart';
 import 'package:sophiee/cubit/pick_image/pick_image_state.dart';
 import 'package:sophiee/utils/widget/profile_image/choose_profile_image.dart';
@@ -36,11 +37,13 @@ class AddUserProfileImage extends StatelessWidget {
                     backgroundImage: FileImage(state.image));
               }
               return CustomProfileImage(
-                  size: size, isDark: false, imageUrl: imageUrl);
+                  size: size,
+                  isDark: context.read<LoginCubit>().isDark,
+                  imageUrl: imageUrl);
             },
           ),
           ChooseProfileImage(
-              isDark: false,
+              isDark: context.read<LoginCubit>().isDark,
               isLoading: enabled,
               takePhoto: () async {
                 Navigator.pop(context);

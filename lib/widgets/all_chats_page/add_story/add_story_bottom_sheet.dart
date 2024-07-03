@@ -13,13 +13,15 @@ import 'package:image_picker/image_picker.dart';
 import 'add_story_live.dart';
 
 class AddStoryBottomSheet extends StatelessWidget {
-  const AddStoryBottomSheet({super.key});
+  const AddStoryBottomSheet({super.key, required this.isDark});
+  final bool isDark;
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final pickImage = context.read<PickImageCubit>();
     final pickVideo = context.read<PickVideoCubit>();
+    
 
     return BlocListener<PickVideoCubit, PickVideoState>(
       listener: (context, state) {
@@ -36,10 +38,18 @@ class AddStoryBottomSheet extends StatelessWidget {
           }
         },
         child: Padding(
-          padding: EdgeInsets.all(size.width * .03),
+          padding: EdgeInsets.symmetric(horizontal: size.width * .05),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
+              SizedBox(
+                  width: size.width * .1, child: const Divider(thickness: 5)),
+              SizedBox(height: size.height * .01),
+              Text('Change profile picture',
+                  style: TextStyle(
+                      color: isDark ? Colors.white : Colors.black,
+                      fontSize: size.width * .042)),
+              SizedBox(height: size.height * .015),
               AddStoryBottomSheetItem(
                   text: 'add image',
                   icon: Icons.camera_alt_rounded,
@@ -52,11 +62,12 @@ class AddStoryBottomSheet extends StatelessWidget {
                   text: 'add video',
                   icon: Icons.video_collection,
                   onTap: () async {
-                     Navigator.pop(context);
+                    Navigator.pop(context);
                     await pickVideo.pickVideo(source: ImageSource.gallery);
                   }),
               const SizedBox(height: 12),
               const AddStoryLive(),
+               SizedBox(height: size.height * .015),
             ],
           ),
         ),

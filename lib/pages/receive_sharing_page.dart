@@ -26,10 +26,10 @@ class ReceiveSharingPage extends StatelessWidget {
     group.getGroups();
 
     return BlocBuilder<ForwardSelectedFriendCubit, ForwardSelectedFriendState>(
-      builder: (context, state) {
+      builder: (context, friendState) {
         return BlocBuilder<ForwardSelectedGroupCubit,
             ForwardSelectedGroupState>(
-          builder: (context, state) {
+          builder: (context, groupState) {
             return ReceiveSharingPageBody(
                 size: size,
                 sharedFiles: sharedFiles,

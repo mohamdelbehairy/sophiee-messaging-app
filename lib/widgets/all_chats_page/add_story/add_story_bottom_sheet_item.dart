@@ -17,14 +17,12 @@ class AddStoryBottomSheetItem extends StatelessWidget {
       onTap: onTap,
       child: Row(
         children: [
-          Icon(icon, color: isDark ? Colors.white : Colors.black87,size: 20),
+          Icon(icon, color: isDark ? Colors.white : Colors.black87),
           const SizedBox(width: 16),
-          Text(
-            text,
-            style: TextStyle(
-                color: isDark ? Colors.white : Colors.black87,
-                fontSize: size.width * .04),
-          )
+             Text(text,
+              style: TextStyle(
+                  color: isDark ? Colors.white : Colors.black,
+                  fontSize: size.width * .042)),
         ],
       ),
     );

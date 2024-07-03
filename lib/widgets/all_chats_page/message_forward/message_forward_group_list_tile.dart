@@ -37,10 +37,6 @@ class _MessageForwardGroupListTileState
           await selectedGroup.selectedGroup(
               groupID: widget.groupModel.groupID,
               groupName: widget.groupModel.groupName);
-          debugPrint('groupID: ${widget.groupModel.groupID}');
-          debugPrint('groupName: ${widget.groupModel.groupName}');
-          debugPrint(
-              'selectedgroup: ${selectedGroup.selectedGroupList.length}');
         } else {
           await selectedGroup.deleteSelectedGroups(
               groupID: widget.groupModel.groupID);
@@ -67,7 +63,8 @@ class _MessageForwardGroupListTileState
               ],
             ),
             Text(widget.groupModel.groupName.split(' ')[0],
-                style: const TextStyle(color: Colors.grey))
+                style: TextStyle(
+                    color: widget.isDark ? Colors.white : Colors.black))
           ],
         ),
       ),

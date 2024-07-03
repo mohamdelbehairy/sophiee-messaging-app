@@ -7,34 +7,42 @@ import '../../../cubit/auth/login/login_cubit.dart';
 import 'custom_bottom_navigation_bar_item.dart';
 
 class CustomBottomNavigationBar extends StatelessWidget {
-  const CustomBottomNavigationBar(
-      {super.key, required this.index, this.onDestinationSelected});
+  const CustomBottomNavigationBar({super.key, required this.index, this.onTap});
 
   final int index;
-  final Function(int)? onDestinationSelected;
+  final Function(int)? onTap;
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<LoginCubit, LoginState>(
       builder: (context, state) {
-        return NavigationBar(
-          backgroundColor: context.read<LoginCubit>().isDark
-              ? kDarkModeBackgroundColor
-              : Colors.white10,
-          onDestinationSelected: onDestinationSelected,
-          indicatorColor: Colors.transparent,
-          selectedIndex: index,
-          destinations: const [
-            CustomBottomNavigationBarItem(
-                selectedIcon: Icons.person,
-                icon: Icons.person_outline_outlined),
-            CustomBottomNavigationBarItem(
-                selectedIcon: FontAwesomeIcons.solidComment,
-                icon: FontAwesomeIcons.comment),
-            CustomBottomNavigationBarItem(
-                selectedIcon: FontAwesomeIcons.gear,
-                icon: Icons.settings_outlined),
-          ],
+        return Theme(
+          data: ThemeData(
+              splashColor: Colors.transparent,
+              highlightColor: Colors.transparent,
+              canvasColor: context.read<LoginCubit>().isDark
+                  ? cardDarkModeBackground
+                  : cardLightModeBackground),
+          child: SizedBox(
+            height: 70,
+            child: BottomNavigationBar(
+                elevation: 10,
+                currentIndex: index,
+                onTap: onTap,
+                selectedItemColor: kPrimaryColor,
+                unselectedItemColor: Colors.grey,
+                items: [
+                  customBottomNavigationBarItem(
+                      icon: Icons.person_outline_outlined,
+                      activeIcon: Icons.person_rounded),
+                  customBottomNavigationBarItem(
+                      icon: FontAwesomeIcons.comment,
+                      activeIcon: FontAwesomeIcons.solidComment),
+                  customBottomNavigationBarItem(
+                      icon: Icons.settings_outlined,
+                      activeIcon: FontAwesomeIcons.gear),
+                ]),
+          ),
         );
       },
     );
