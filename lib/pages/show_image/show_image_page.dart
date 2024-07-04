@@ -24,7 +24,7 @@ class ShowImagePage extends StatelessWidget {
         backgroundColor: Colors.black,
         appBar: AppBar(
             backgroundColor: Colors.black,
-            titleSpacing: size.width * -.02,
+            titleSpacing: size.width * -.015,
             title: Text(
                 imageModel.isProfileImage ? 'Profile Image' : 'Story Image',
                 style:

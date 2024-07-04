@@ -16,11 +16,10 @@ class ProfilePageCardThree extends StatelessWidget {
     return Container(
         height: size.height * .3,
         width: size.width,
-        decoration: const BoxDecoration(
-            color: Colors.transparent,
-            boxShadow: [BoxShadow(blurRadius: 0, color: Colors.transparent)]),
+        decoration: const BoxDecoration(color: Colors.transparent, boxShadow: [
+          BoxShadow(blurRadius: 0, color: Colors.transparent),
+        ]),
         child: ProfilePageCardThreeBody(
             isDark: isDark, size: size, getImage: getImage));
   }
 }
-

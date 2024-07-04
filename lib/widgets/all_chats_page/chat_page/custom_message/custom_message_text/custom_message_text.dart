@@ -60,16 +60,15 @@ class CustomMessageText extends StatelessWidget {
                     size: size,
                     messageModel: messageModel,
                     messageTextColor: messageTextColor)),
-          Text(
-            messageModel.messageText,
-            style: TextStyle(
-                color: (messageModel.messageText.startsWith('http') ||
-                            messageModel.messageText.startsWith('https')) &&
-                        messageModel.senderID !=
-                            FirebaseAuth.instance.currentUser!.uid
-                    ? const Color(0xff8dbceb)
-                    : messageTextColor),
-          ),
+          Text(messageModel.messageText,
+              style: TextStyle(
+                  color: (messageModel.messageText.startsWith('http') ||
+                          messageModel.messageText.startsWith('https'))
+                      ? messageModel.senderID !=
+                              FirebaseAuth.instance.currentUser!.uid
+                          ? const Color(0xff8dbceb)
+                          : Colors.indigo.shade700
+                      : messageTextColor)),
         ],
       ),
     );

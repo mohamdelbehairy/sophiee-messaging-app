@@ -24,7 +24,7 @@ class ProfileInfoCardOne extends StatelessWidget {
                 CardOneProfileImage(size: size, isDark: isDark, user: user),
             title: CardOneTitle(user: user, size: size, isDark: isDark),
             subtitle: user.nickName.isNotEmpty
-                ? CardOneSubTitle(user: user, size: size,isDark: isDark)
-                : const SizedBox()));
+                ? CardOneSubTitle(user: user, size: size, isDark: isDark)
+                : null));
   }
 }

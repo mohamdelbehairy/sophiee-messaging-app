@@ -34,7 +34,7 @@ class IconSettingsGroupImage extends StatelessWidget {
                     Icon(Icons.save_alt_outlined,
                         size: size.width * .04, color: Colors.white),
                     SizedBox(width: size.width * .025),
-                    const Text('Save', style: TextStyle(color: Colors.white))
+                    const Text('Save to gallery', style: TextStyle(color: Colors.white))
                   ],
                 ),
               )),
@@ -52,7 +52,7 @@ class IconSettingsGroupImage extends StatelessWidget {
                     Icon(Icons.share,
                         size: size.width * .04, color: Colors.white),
                     SizedBox(width: size.width * .025),
-                    const Text('Share', style: TextStyle(color: Colors.white))
+                    const Text('Share image', style: TextStyle(color: Colors.white))
                   ],
                 ),
               )),

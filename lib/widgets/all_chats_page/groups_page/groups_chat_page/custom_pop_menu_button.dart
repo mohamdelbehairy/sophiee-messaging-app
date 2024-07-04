@@ -1,4 +1,5 @@
 import 'package:sophiee/constants.dart';
+import 'package:sophiee/cubit/auth/login/login_cubit.dart';
 import 'package:sophiee/cubit/groups/delete_groups/delete_groups_cubit.dart';
 import 'package:sophiee/models/group_model.dart';
 import 'package:sophiee/utils/custom_show_dialog.dart';
@@ -17,24 +18,34 @@ class CustomPopMenuButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var deleteGroup = context.read<DeleteGroupsCubit>();
+    var isDark = context.read<LoginCubit>().isDark;
+
     return PopupMenuButton(
         icon: Icon(FontAwesomeIcons.ellipsisVertical, size: size.width * .05),
+        color: isDark ? cardDarkModeBackground : cardLightModeBackground,
         itemBuilder: (context) => [
               PopupMenuItem(
                   child: Row(
                 children: [
-                  Icon(Icons.star, size: size.width * .04, color: Colors.black),
+                  Icon(Icons.star,
+                      size: size.width * .04,
+                      color: isDark ? Colors.white : Colors.black),
                   SizedBox(width: size.width * .025),
-                  const Text('Favourite')
+                  Text('Favourite',
+                      style: TextStyle(
+                          color: isDark ? Colors.white : Colors.black))
                 ],
               )),
               PopupMenuItem(
                   child: Row(
                 children: [
                   Icon(Icons.volume_up,
-                      size: size.width * .04, color: Colors.black),
+                      size: size.width * .04,
+                      color: isDark ? Colors.white : Colors.black),
                   SizedBox(width: size.width * .025),
-                  const Text('Mute')
+                  Text('Mute',
+                      style: TextStyle(
+                          color: isDark ? Colors.white : Colors.black))
                 ],
               )),
               PopupMenuItem(
@@ -62,12 +73,16 @@ class CustomPopMenuButton extends StatelessWidget {
                   child: Row(
                     children: [
                       Icon(FontAwesomeIcons.arrowRightFromBracket,
-                          size: size.width * .04, color: Colors.black),
+                          size: size.width * .04,
+                          color: isDark ? Colors.white : Colors.black),
                       SizedBox(width: size.width * .025),
-                      Text(groupModel.groupOwnerID ==
-                              FirebaseAuth.instance.currentUser!.uid
-                          ? 'Delete and Leave Group'
-                          : 'Leave Group')
+                      Text(
+                          groupModel.groupOwnerID ==
+                                  FirebaseAuth.instance.currentUser!.uid
+                              ? 'Delete and Leave Group'
+                              : 'Leave Group',
+                          style: TextStyle(
+                              color: isDark ? Colors.white : Colors.black))
                     ],
                   )),
             ]);

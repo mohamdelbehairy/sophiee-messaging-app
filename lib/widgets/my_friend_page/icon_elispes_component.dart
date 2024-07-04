@@ -7,6 +7,7 @@ import '../../cubit/follow_status/follow_status_cubit.dart';
 import '../../cubit/follower/follower_cubit.dart';
 import '../../models/users_model.dart';
 import '../../pages/chats/chat_page.dart';
+import '../../utils/widget/flutter_toast_widget.dart';
 import '../../utils/widget/media/save_image.dart';
 import '../../utils/widget/media/share_media.dart';
 import '../../utils/widget/pop_menu_info_item.dart';
@@ -42,9 +43,19 @@ class IconElispesComponent extends StatelessWidget {
                               mediaUrl: user.profileImage,
                               mediaType: 'image.jpg');
                         },
-                        itemName: 'Share Image',
+                        itemName: 'Share image',
                         size: size,
                         icon: Icons.share_outlined),
+                  if (!user.isProfileLock || !isFriend)
+                    groupsInfoPopMenuItem(
+                        onTap: () async {
+                          await saveImage(imageUrl: user.profileImage);
+                          FlutterToastWidget.showToast(
+                              msg: "Image saved successfully");
+                        },
+                        itemName: 'Save to gallery',
+                        size: size,
+                        icon: Icons.save_alt_outlined),
                   groupsInfoPopMenuItem(
                       onTap: () async {},
                       itemName: 'Block ${user.userName.split(' ')[0]}',
@@ -85,14 +96,6 @@ class IconElispesComponent extends StatelessWidget {
                         icon: isFollowing
                             ? Icons.group_remove_outlined
                             : Icons.group_outlined),
-                  if (!user.isProfileLock || !isFriend)
-                    groupsInfoPopMenuItem(
-                        onTap: () async {
-                          await saveImage(imageUrl: user.profileImage);
-                        },
-                        itemName: 'Save to Gallery',
-                        size: size,
-                        icon: Icons.save_outlined),
                 ]);
       },
     );

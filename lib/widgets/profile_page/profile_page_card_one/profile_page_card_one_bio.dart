@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sophiee/cubit/copy_text/copy_text_cubit.dart';
 import 'package:sophiee/models/users_model.dart';
 
 class ProfilePageCardOneBio extends StatelessWidget {
@@ -18,9 +20,13 @@ class ProfilePageCardOneBio extends StatelessWidget {
         child: Padding(
             padding: EdgeInsets.symmetric(
                 horizontal: size.width * .04, vertical: size.width * .02),
-            child: Text(user.bio,
-                style: TextStyle(
-                    color: isDark ? Colors.white : Colors.black,
-                    fontSize: size.height * .016))));
+            child: GestureDetector(
+              onLongPress: () =>
+                  context.read<CopyTextCubit>().copyText(text: user.bio),
+              child: Text(user.bio,
+                  style: TextStyle(
+                      color: isDark ? Colors.white : Colors.black,
+                      fontSize: size.height * .016)),
+            )));
   }
 }

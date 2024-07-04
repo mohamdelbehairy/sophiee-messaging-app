@@ -21,8 +21,8 @@ class MyFriendItemTwo extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     final follower = context.read<FollowerCubit>();
     final friend = context.read<FriendsCubit>();
-
     final isDark = context.read<LoginCubit>().isDark;
+
     return BlocBuilder<GetUserDataCubit, GetUserDataStates>(
         builder: (context, state) {
       if (state is GetUserDataSuccess && state.userModel.isNotEmpty) {

@@ -8,6 +8,7 @@ import 'package:sophiee/utils/widget/media/save_image.dart';
 
 import '../../constants.dart';
 import '../../utils/custom_show_dialog.dart';
+import '../../utils/widget/flutter_toast_widget.dart';
 import '../../utils/widget/media/share_media.dart';
 import '../../utils/widget/pop_menu_info_item.dart';
 
@@ -22,26 +23,28 @@ class ShowImagePagePopMenuButton extends StatelessWidget {
   Widget build(BuildContext context) {
     var deleteImage = context.read<DeleteImageCubit>();
     return PopupMenuButton(
-        color: kPrimaryColor,
-        offset: Offset(0, size.height * .05),
+        color: Colors.white12,
+        offset: const Offset(10, 50),
         icon: Icon(FontAwesomeIcons.ellipsisVertical,
             color: Colors.white, size: size.width * .05),
         itemBuilder: (context) => [
               groupsInfoPopMenuItem(
                   onTap: () async {
+                    await saveImage(imageUrl: imageModel.imageUrl);
+                    FlutterToastWidget.showToast(
+                        msg: "Image saved successfully");
+                  },
+                  itemName: 'Save to gallery',
+                  size: size,
+                  icon: Icons.save_alt_outlined),
+              groupsInfoPopMenuItem(
+                  onTap: () async {
                     await shareMedia(
                         mediaUrl: imageModel.imageUrl, mediaType: 'image.jpg');
                   },
-                  itemName: 'Share Image',
+                  itemName: 'Share image',
                   size: size,
                   icon: Icons.share),
-              groupsInfoPopMenuItem(
-                  onTap: () async {
-                    await saveImage(imageUrl: imageModel.imageUrl);
-                  },
-                  itemName: 'Save to Gallery',
-                  size: size,
-                  icon: Icons.save),
               if (imageModel.userID == FirebaseAuth.instance.currentUser!.uid)
                 groupsInfoPopMenuItem(
                     onTap: () async {
@@ -56,7 +59,7 @@ class ShowImagePagePopMenuButton extends StatelessWidget {
                                 imageID: imageModel.imageID);
                           });
                     },
-                    itemName: 'Delete Image',
+                    itemName: 'Delete image',
                     size: size,
                     icon: FontAwesomeIcons.trash)
             ]);

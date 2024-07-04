@@ -25,11 +25,10 @@ class MyFriendItemTwoComponent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MyFriendItemTwoDetails(
-      infoCalls: infoCalls,
-      followButton: followButton,
-      user: user,
-      isDark: isDark,
-      size: size,
-    );
+        infoCalls: infoCalls,
+        followButton: followButton,
+        user: user,
+        isDark: isDark,
+        size: size);
   }
 }
