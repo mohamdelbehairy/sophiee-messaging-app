@@ -126,7 +126,7 @@ class _CustomMessageVideoState extends State<GroupsChatCustomMessageVideo> {
                   getnav.Get.to(
                       () => ShowChatVideoPage(
                           message: widget.message, user: widget.user),
-                      transition: getnav.Transition.leftToRight);
+                      transition: getnav.Transition.downToUp);
                 },
                 child: Icon(FontAwesomeIcons.expand,
                     color: Colors.white, size: size.width * .04),

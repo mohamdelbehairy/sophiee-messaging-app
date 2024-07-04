@@ -1,6 +1,6 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sophiee/cubit/auth/phone_number_auth/phone_number_auth_cubit.dart';
-import 'package:sophiee/utils/widget/show_top_snack_bar/show_top_snack_bar_failure.dart';
 import 'package:sophiee/widgets/auth/opt_phone_number_page/custom_opt_phone_number_text.dart';
 import 'package:sophiee/widgets/auth/opt_phone_number_page/custom_opt_pinput.dart';
 import 'package:sophiee/widgets/auth/custom_phone_number_image.dart';
@@ -9,7 +9,9 @@ import 'package:sophiee/widgets/auth/opt_phone_number_page/custom_opt_resend_cod
 import 'package:sophiee/widgets/verification_page/verification_page_progress_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:telephony/telephony.dart';
-import 'package:top_snackbar_flutter/top_snack_bar.dart';
+
+import '../../../models/awsome_dialog_model.dart';
+import '../../../utils/custom_awsome_dialog.dart';
 
 class OptPhoneNumberPageBody extends StatefulWidget {
   const OptPhoneNumberPageBody(
@@ -52,13 +54,17 @@ class _OptPhoneNumberPageBodyState extends State<OptPhoneNumberPageBody> {
         if (state is VerifyPhoneNumberAuthFailure) {
           if (state.errorMessage == 'invalid-verification-code') {
             await Future.delayed(const Duration(seconds: 3));
-            showTopSnackBarFailure(
-                // ignore: use_build_context_synchronously
-                context: context,
-                maxLines: 3,
-                snackBarPosition: SnackBarPosition.bottom,
-                message:
-                    'The verification code from SMS/TOTP is invalid. Please check and enter the correct verification code again.');
+            customAwsomeDialog(
+                awsomeDialogModel: AwsomeDialogModel(
+                    // ignore: use_build_context_synchronously
+                    context: context,
+                    autoHide: const Duration(seconds: 4),
+                    horizontal: 16,
+                    title: 'Login Failed',
+                    desc:
+                        'The verification code from SMS/TOTP is invalid. Please check and enter the correct verification code again.',
+                    dialogType: DialogType.error));
+
             widget.optController.clear();
           }
         }

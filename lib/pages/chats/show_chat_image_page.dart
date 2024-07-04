@@ -5,10 +5,10 @@ import 'package:sophiee/models/users_model.dart';
 import 'package:sophiee/utils/widget/media/save_image.dart';
 import 'package:sophiee/utils/widget/media/share_media.dart';
 import 'package:sophiee/widgets/all_chats_page/chat_page/custom_message/show_chat_media/show_chat_media_appbar.dart';
-import 'package:sophiee/widgets/show_toast.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_styled_toast/flutter_styled_toast.dart';
+
+import '../../utils/widget/flutter_toast_widget.dart';
 
 class ShowChatImagePage extends StatefulWidget {
   const ShowChatImagePage(
@@ -23,12 +23,6 @@ class ShowChatImagePage extends StatefulWidget {
 
 class _ShowChatImagePageState extends State<ShowChatImagePage> {
   bool isClick = true;
-  showToastMethod() {
-    showToastMedthod(
-        context: context,
-        showToastText: 'Image saved successfully',
-        position: StyledToastPosition.bottom);
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +42,7 @@ class _ShowChatImagePageState extends State<ShowChatImagePage> {
                       imageUrl: widget.message != null
                           ? widget.message!.messageImage!
                           : widget.mediaFiels!.messageImage!);
-                  showToastMethod();
+                  FlutterToastWidget.showToast(msg: "Image saved successfully");
                 },
                 shareOnTap: () async {
                   await shareMedia(

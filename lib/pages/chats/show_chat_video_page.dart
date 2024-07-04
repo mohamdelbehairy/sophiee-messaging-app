@@ -5,11 +5,11 @@ import 'package:sophiee/models/users_model.dart';
 import 'package:sophiee/utils/widget/media/save_video.dart';
 import 'package:sophiee/utils/widget/media/share_media.dart';
 import 'package:sophiee/widgets/all_chats_page/chat_page/custom_message/show_chat_media/show_chat_media_appbar.dart';
-import 'package:sophiee/widgets/show_toast.dart';
 import 'package:chewie/chewie.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_styled_toast/flutter_styled_toast.dart';
 import 'package:video_player/video_player.dart';
+
+import '../../utils/widget/flutter_toast_widget.dart';
 
 class ShowChatVideoPage extends StatefulWidget {
   const ShowChatVideoPage(
@@ -60,13 +60,6 @@ class _ShowChatVideoPageState extends State<ShowChatVideoPage> {
     _chewieController.dispose();
   }
 
-  showToastMethod() {
-    showToastMedthod(
-        context: context,
-        showToastText: 'Video saved successfully',
-        position: StyledToastPosition.bottom);
-  }
-
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -85,7 +78,8 @@ class _ShowChatVideoPageState extends State<ShowChatVideoPage> {
                         videoUel: widget.message != null
                             ? widget.message!.messageVideo!
                             : widget.mediaFiels!.messageVideo!);
-                    showToastMethod();
+                    FlutterToastWidget.showToast(
+                        msg: "Video saved successfully");
                   },
                   shareOnTap: () async {
                     await shareMedia(

@@ -1,9 +1,8 @@
 import 'package:sophiee/models/group_model.dart';
+import 'package:sophiee/utils/widget/flutter_toast_widget.dart';
 import 'package:sophiee/utils/widget/media/save_image.dart';
 import 'package:sophiee/utils/widget/media/share_media.dart';
-import 'package:sophiee/widgets/show_toast.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_styled_toast/flutter_styled_toast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class IconSettingsGroupImage extends StatelessWidget {
@@ -15,13 +14,6 @@ class IconSettingsGroupImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    showToastMethod() {
-      showToastMedthod(
-          context: context,
-          showToastText: 'Image saved successfully',
-          position: StyledToastPosition.bottom);
-    }
-
     return PopupMenuButton(
         color: Colors.white12,
         offset: const Offset(10, 50),
@@ -35,11 +27,11 @@ class IconSettingsGroupImage extends StatelessWidget {
                 onTap: () async {
                   Navigator.pop(context);
                   await saveImage(imageUrl: groupModel.groupImage!);
-                  showToastMethod();
+                  FlutterToastWidget.showToast(msg: "Image saved successfully");
                 },
                 child: Row(
                   children: [
-                    Icon(Icons.save,
+                    Icon(Icons.save_alt_outlined,
                         size: size.width * .04, color: Colors.white),
                     SizedBox(width: size.width * .025),
                     const Text('Save', style: TextStyle(color: Colors.white))
@@ -57,7 +49,7 @@ class IconSettingsGroupImage extends StatelessWidget {
                 },
                 child: Row(
                   children: [
-                    Icon(FontAwesomeIcons.share,
+                    Icon(Icons.share,
                         size: size.width * .04, color: Colors.white),
                     SizedBox(width: size.width * .025),
                     const Text('Share', style: TextStyle(color: Colors.white))

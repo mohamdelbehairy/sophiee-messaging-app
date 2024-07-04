@@ -1,8 +1,11 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:sophiee/cubit/auth/auth_settings/auth_settings_cubit.dart';
 import 'package:sophiee/cubit/auth/login/login_cubit.dart';
-import 'package:sophiee/utils/widget/show_top_snack_bar/show_top_snack_bar_success.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../models/awsome_dialog_model.dart';
+import '../../utils/custom_awsome_dialog.dart';
 
 class CustomForgetPassword extends StatelessWidget {
   const CustomForgetPassword({super.key, required this.emailAddress});
@@ -15,10 +18,14 @@ class CustomForgetPassword extends StatelessWidget {
     return BlocListener<AuthSettingsCubit, AuthSettingsState>(
       listener: (context, state) {
         if (state is ResetPasswordSuccess) {
-          showTopSnackBarSuccess(
-              context: context,
-              message:
-                  "Password reset was successful, Please check your email and login again.");
+          customAwsomeDialog(
+              awsomeDialogModel: AwsomeDialogModel(
+                  context: context,
+                  autoHide: const Duration(seconds: 4),
+                  horizontal: 12,
+                  title: 'Password reset was successful',
+                  desc: ' Please check your email and login again.',
+                  dialogType: DialogType.success));
         }
       },
       child: Row(

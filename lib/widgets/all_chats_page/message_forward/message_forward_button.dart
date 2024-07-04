@@ -12,15 +12,14 @@ import 'package:sophiee/cubit/message/message_cubit.dart';
 import 'package:sophiee/models/media_files_model.dart';
 import 'package:sophiee/models/message_model.dart';
 import 'package:sophiee/models/users_model.dart';
-import 'package:sophiee/widgets/show_toast.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_styled_toast/flutter_styled_toast.dart';
 import 'package:uuid/uuid.dart';
 
 import '../../../cubit/groups/get_groups_member/get_groups_member_cubit.dart';
 import '../../../cubit/groups/get_groups_member/get_groups_member_state.dart';
+import '../../../utils/widget/flutter_toast_widget.dart';
 
 class MessageForwardButton extends StatefulWidget {
   const MessageForwardButton(
@@ -36,12 +35,12 @@ class MessageForwardButton extends StatefulWidget {
 class _MessageForwardButtonState extends State<MessageForwardButton> {
   bool isCircle = false;
 
-  showToastMethod() {
-    showToastMedthod(
-        context: context,
-        showToastText: 'Message forward successfully',
-        position: StyledToastPosition.center);
-  }
+  // showToastMethod() {
+  //   showToastMedthod(
+  //       context: context,
+  //       showToastText: 'Message forward successfully',
+  //       position: StyledToastPosition.center);
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -524,7 +523,8 @@ class _MessageForwardButtonState extends State<MessageForwardButton> {
                           }
                         }
                       }
-                      showToastMethod();
+                      FlutterToastWidget.showToast(
+                          msg: "Message forward successfully");
                     } finally {
                       setState(() {
                         isCircle = false;

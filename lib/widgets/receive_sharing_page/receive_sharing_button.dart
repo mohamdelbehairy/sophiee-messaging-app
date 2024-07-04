@@ -4,7 +4,6 @@ import 'dart:io';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_styled_toast/flutter_styled_toast.dart';
 import 'package:receive_sharing_intent/receive_sharing_intent.dart';
 import 'package:sophiee/cubit/upload/upload_audio/upload_audio_cubit.dart';
 import 'package:sophiee/cubit/upload/upload_file/upload_file_cubit.dart';
@@ -26,7 +25,7 @@ import '../../cubit/message/message_cubit.dart';
 import '../../cubit/notification/group_notification/group_notification_cubit.dart';
 import '../../cubit/notification/message_notification/message_notification_cubit.dart';
 import '../../cubit/upload/upload_image/upload_image_cubit.dart';
-import '../show_toast.dart';
+import '../../utils/widget/flutter_toast_widget.dart';
 
 class ReceiveSharingButton extends StatefulWidget {
   const ReceiveSharingButton(
@@ -47,13 +46,6 @@ class ReceiveSharingButton extends StatefulWidget {
 
 class _ReceiveSharingButtonState extends State<ReceiveSharingButton> {
   bool isCircle = false;
-
-  showToastMethod() {
-    showToastMedthod(
-        context: context,
-        showToastText: 'Message forward successfully',
-        position: StyledToastPosition.center);
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -365,7 +357,8 @@ class _ReceiveSharingButtonState extends State<ReceiveSharingButton> {
                         }
                       }
                     }
-                    showToastMethod();
+                    FlutterToastWidget.showToast(
+                        msg: "Message forward successfully");
                   } finally {
                     setState(() {
                       isCircle = false;
