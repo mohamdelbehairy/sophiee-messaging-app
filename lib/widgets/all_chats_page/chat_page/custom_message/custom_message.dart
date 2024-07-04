@@ -33,7 +33,7 @@ class CustomMessage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
+    final size = MediaQuery.sizeOf(context);
     var messageCubit = context.read<MessageCubit>();
 
     return GestureDetector(

@@ -23,7 +23,7 @@ class GroupsChatPageInfoListTile extends StatelessWidget {
         leading: GestureDetector(
             onTap: () => getnav.Get.to(
                 () => ShowGroupImagePage(groupModel: groupModel, size: size),
-                transition: getnav.Transition.rightToLeft),
+                transition: getnav.Transition.downToUp),
             child: CircleAvatar(
                 radius: size.height * .03,
                 backgroundColor: Colors.transparent,

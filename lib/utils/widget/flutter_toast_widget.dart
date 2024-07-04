@@ -6,9 +6,13 @@ class FlutterToastWidget {
   static void showToast({required String msg}) {
     Fluttertoast.showToast(
         msg: msg,
-        fontSize: 18,
+        fontSize: 14,
         gravity: ToastGravity.BOTTOM,
         textColor: Colors.white,
         backgroundColor: kPrimaryColor);
+  }
+
+  static void cancleShowToast() {
+    Fluttertoast.cancel();
   }
 }
