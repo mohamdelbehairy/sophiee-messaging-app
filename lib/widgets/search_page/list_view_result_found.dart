@@ -3,22 +3,27 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart' as getnav;
 
 import '../../cubit/follow_status/follow_status_cubit.dart';
+import '../../cubit/search/recent_search/recent_search_cubit.dart';
 import '../../models/users_model.dart';
 import '../../pages/search_result_page.dart';
 import 'result_item/result_item.dart';
 
 class ListViewResultFound extends StatelessWidget {
-  const ListViewResultFound({super.key, required this.searchList});
+  const ListViewResultFound(
+      {super.key, required this.searchList, required this.controller});
   final List<UserModel> searchList;
+  final TextEditingController controller;
 
   @override
   Widget build(BuildContext context) {
+    var storeRecentSearch = context.read<RecentSearchCubit>();
+
     return ListView.builder(
         itemCount: searchList.length,
         padding: const EdgeInsets.only(top: 16),
         itemBuilder: (context, index) {
           return GestureDetector(
-              onTap: () {
+              onTap: () async {
                 context
                     .read<FollowStatusCubit>()
                     .checkFollowStatus(followerID: searchList[index].userID);
@@ -30,6 +35,8 @@ class ListViewResultFound extends StatelessWidget {
                 getnav.Get.to(
                     () => SearchResultPage(userID: searchList[index].userID),
                     transition: getnav.Transition.rightToLeft);
+                await storeRecentSearch.storeRecentSearch(
+                    resentSearch: controller.text);
               },
               child: ResultIem(user: searchList[index]));
         });

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class SearchTextField extends StatelessWidget {
   const SearchTextField(
@@ -19,12 +20,12 @@ class SearchTextField extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     return Container(
       height: size.height * .045,
-      padding: const EdgeInsets.only(left: 12, top: 1, bottom: 1),
+      padding: const EdgeInsets.only(left: 20, top: 1, bottom: 1),
       decoration: BoxDecoration(
           color: Colors.white24, borderRadius: BorderRadius.circular(22)),
       child: Row(
         children: [
-          const Icon(Icons.search, color: Colors.white),
+          const Icon(FontAwesomeIcons.magnifyingGlass, color: Colors.white,size: 16),
           const SizedBox(width: 14),
           Expanded(
             child: TextField(

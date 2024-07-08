@@ -32,7 +32,8 @@ class SearchPageDetails extends StatelessWidget {
             controller: controller,
             onTap: onTap,
             onChanged: onChanged),
-        SearchPageResentSearch(isDark: isDark, size: size),
+        if (controller.text.isEmpty)
+          SearchPageResentSearch(isDark: isDark, size: size),
         SearchPageResult(
             searchList: searchList, list: list, controller: controller),
       ],

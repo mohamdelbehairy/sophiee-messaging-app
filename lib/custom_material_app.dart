@@ -46,6 +46,7 @@ import 'package:sophiee/cubit/pick_contact/pick_contact_cubit.dart';
 import 'package:sophiee/cubit/pick_file/pick_file_cubit.dart';
 import 'package:sophiee/cubit/pick_image/pick_image_cubit.dart';
 import 'package:sophiee/cubit/pick_video/pick_video_cubit.dart';
+import 'package:sophiee/cubit/search/recent_search/recent_search_cubit.dart';
 import 'package:sophiee/cubit/selected_chats/selected_chats_cubit.dart';
 import 'package:sophiee/cubit/story/story_cubit.dart';
 import 'package:sophiee/cubit/update_message_audio_playing/update_message_audio_playing_cubit.dart';
@@ -148,6 +149,7 @@ class CustomMaterialApp extends StatelessWidget {
         BlocProvider(create: (context) => LiveNotificationCubit()),
         BlocProvider(create: (context) => IsFriendCubit()),
         BlocProvider(create: (context) => CopyTextCubit()),
+        BlocProvider(create: (context) => RecentSearchCubit())
       ],
       child: BlocBuilder<LoginCubit, LoginState>(
         builder: (context, state) {

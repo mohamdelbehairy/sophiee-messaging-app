@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'resent_search_item.dart';
+import 'search_page_header.dart';
 
 class SearchPageResentSearch extends StatelessWidget {
   const SearchPageResentSearch(
@@ -11,15 +13,10 @@ class SearchPageResentSearch extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(left: 16, right: 16, top: 8),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      child: Column(
         children: [
-          Text('Recent Search',
-              style: TextStyle(
-                  color: isDark ? Colors.white : Colors.grey,
-                  fontSize: size.width * .04)),
-          Text('Clear History',
-              style: TextStyle(color: Colors.blue, fontSize: size.width * .04)),
+          SearchPageHeader(isDark: isDark, size: size),
+          ResentSearchItem(isDark: isDark),
         ],
       ),
     );

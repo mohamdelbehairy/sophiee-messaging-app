@@ -20,9 +20,12 @@ class SearchPageResult extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: searchList.isNotEmpty
-          ? ListViewResultFound(searchList: searchList)
+          ? ListViewResultFound(searchList: searchList, controller: controller)
           : list
                   .where((element) => (element.emailAddress
+                          .toLowerCase()
+                          .contains(controller.text.toLowerCase()) ||
+                      element.nickName
                           .toLowerCase()
                           .contains(controller.text.toLowerCase()) ||
                       element.userName
@@ -34,8 +37,7 @@ class SearchPageResult extends StatelessWidget {
                   image: emptyImageUrl,
                   textOne: 'No Result Found',
                   textTwo:
-                      "You didn't find any results with this name yet,\nplease enter a success username or email.",
-                )
+                      "You didn't find any results with this name yet,\nplease enter a success username or email.")
               : const NoSearchFriend(),
     );
   }

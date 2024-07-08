@@ -35,12 +35,13 @@ class CustomAppBarSetting extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: size.height * .18,
+      // height: size.height * .18,
       width: size.width,
       decoration: const BoxDecoration(color: kPrimaryColor),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16),
         child: Column(
+          mainAxisSize: MainAxisSize.min,
           children: [
             SizedBox(height: size.height * .045),
             Row(
@@ -67,6 +68,7 @@ class CustomAppBarSetting extends StatelessWidget {
                 hintText: hintText,
                 onChanged: onChanged,
                 suffixIcon: suffixIcon),
+            const Flexible(child: SizedBox(height: 12)),
           ],
         ),
       ),
