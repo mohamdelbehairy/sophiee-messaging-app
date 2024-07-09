@@ -9,6 +9,7 @@ import 'package:sophiee/cubit/auth/google_auth/google_auth_cubit.dart';
 import 'package:sophiee/cubit/user_date/user_token/user_token_cubit.dart';
 import 'package:sophiee/models/users_model.dart';
 import 'package:sophiee/pages/auth/provider_auth_page.dart';
+import 'package:sophiee/services/calls/user_call_init.dart';
 import 'package:sophiee/widgets/settings/settings_page_app_bar.dart';
 import 'package:sophiee/widgets/settings/settings_card_one/settings_page_card_one.dart';
 import 'package:sophiee/widgets/settings/settings_card_two/settings_page_card_two.dart';
@@ -60,7 +61,7 @@ class _SettingsPageBodyState extends State<SettingsPageBody> {
     );
   }
 
-  void logOut() async {
+  Future<void> logOut() async {
     var signOut = context.read<AuthSettingsCubit>();
     if (widget.user.isGoogleAuth != null) {
       context.read<GoogleAuthCubit>().isLoading = false;
@@ -73,9 +74,9 @@ class _SettingsPageBodyState extends State<SettingsPageBody> {
       await removeToken.updateUserToken(token: '');
       await signOut.signOut();
     }
-
+    UserCallInit.onUserLogout();
     getnav.Get.to(() => const ProviderAuthPage(),
-        transition: getnav.Transition.leftToRight);
+        transition: getnav.Transition.rightToLeft);
   }
 
   void onPressed() async {

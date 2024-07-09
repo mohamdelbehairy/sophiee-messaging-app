@@ -1,0 +1,18 @@
+import 'package:sophiee/services/calls/call_info.dart';
+import 'package:zego_uikit_prebuilt_call/zego_uikit_prebuilt_call.dart';
+import 'package:zego_uikit_signaling_plugin/zego_uikit_signaling_plugin.dart';
+
+abstract class UserCallInit {
+  static void onUserLogin({required String userID, required String userName}) {
+    ZegoUIKitPrebuiltCallInvitationService().init(
+        appID: int.parse(CallInfo.appID ?? ''),
+        appSign: CallInfo.appSign ?? '',
+        userID: userID,
+        userName: userName,
+        plugins: [ZegoUIKitSignalingPlugin()]);
+  }
+
+  static void onUserLogout() {
+    ZegoUIKitPrebuiltCallInvitationService().uninit();
+  }
+}

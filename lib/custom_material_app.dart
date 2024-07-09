@@ -73,10 +73,14 @@ import 'cubit/user_date/image/store_image/store_image_cubit.dart';
 
 class CustomMaterialApp extends StatelessWidget {
   const CustomMaterialApp(
-      {super.key, required this.themeModeService, required this.screen});
+      {super.key,
+      required this.themeModeService,
+      required this.screen,
+      required this.navigatorKey});
 
   final ThemeModeService themeModeService;
   final Widget screen;
+  final GlobalKey<NavigatorState> navigatorKey;
 
   @override
   Widget build(BuildContext context) {
@@ -158,6 +162,7 @@ class CustomMaterialApp extends StatelessWidget {
         builder: (context, state) {
           return GetMaterialApp(
             title: 'SophieeApp',
+            navigatorKey: navigatorKey,
             color: Colors.transparent,
             debugShowCheckedModeBanner: false,
             theme: themeModeService.lightMode(context: context),

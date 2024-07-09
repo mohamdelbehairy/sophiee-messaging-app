@@ -28,7 +28,7 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
-  audioplayers: ^5.2.1
+  audioplayers: ^6.0.0
   awesome_dialog: ^3.2.1
   cached_network_image: ^3.3.1
   chewie: ^1.7.5
@@ -40,7 +40,7 @@ dependencies:
   email_validator: ^2.1.17
   emoji_picker_flutter: ^1.6.3
   fancy_shimmer_image: ^2.0.3
-  file_picker: ^6.1.1
+  file_picker: ^8.0.6
   firebase_auth: ^4.15.3
   firebase_core: ^2.25.4
   firebase_messaging: ^14.9.2
@@ -92,8 +92,9 @@ dependencies:
   url_launcher: ^6.2.4
   uuid: ^4.3.3
   video_player: ^2.8.2
+  zego_uikit_prebuilt_call: ^4.14.1
   zego_uikit_prebuilt_live_streaming: ^3.8.2
-  zego_uikit_signaling_plugin: ^2.7.10
+  zego_uikit_signaling_plugin: ^2.8.2
 
 dev_dependencies:
   flutter_launcher_icons: ^0.13.1

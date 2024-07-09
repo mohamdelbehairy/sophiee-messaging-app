@@ -1,5 +1,6 @@
 import 'package:sophiee/cubit/user_date/get_user_data/get_user_data_cubit.dart';
 import 'package:sophiee/cubit/user_date/get_user_data/get_user_data_state.dart';
+import 'package:sophiee/services/calls/user_call_init.dart';
 import 'package:sophiee/utils/shimmer/home/profile/profile_page_shimmer.dart';
 import 'package:sophiee/widgets/profile_page/profile_page_body_component.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -21,7 +22,8 @@ class ProfilePageBody extends StatelessWidget {
           if (currentUser != null) {
             final userData = state.userModel
                 .firstWhere((element) => element.userID == currentUser.uid);
-
+            UserCallInit.onUserLogin(
+                userID: userData.userID, userName: userData.userName);
             return ProfilePageBodyComponent(size: size, user: userData);
           } else {
             return Container();
