@@ -1,4 +1,3 @@
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -89,7 +88,7 @@ class HightLightMessagesCubit extends Cubit<HightLightMessagesState> {
       await removeUserHighLight(groupID: groupID);
       emit(RemoveAllHightLightMessagesSuccess());
     } catch (e) {
-      debugPrint('error from remove all high light method: ${e.toString()}');
+      debugPrint('error from remove all high light method: $e.');
     }
   }
 

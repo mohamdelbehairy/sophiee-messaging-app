@@ -20,7 +20,11 @@ const cardDarkModeBackground = Color(0xff1e1e1e);
 // 2d2c36
 
 // Firebase
+// 1 collections
 const userCollection = 'users';
+const recentSearchCollection = 'recentSearch';
+
+// 2 fields
 const userNameField = 'userName';
 const emailAddressField = 'emailAddress';
 const passwordField = 'password';

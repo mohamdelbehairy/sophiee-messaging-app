@@ -27,10 +27,6 @@ class ListViewResultFound extends StatelessWidget {
                 context
                     .read<FollowStatusCubit>()
                     .checkFollowStatus(followerID: searchList[index].userID);
-                // context.read<GetFollowingCubit>().getFollowing(
-                //     userID: searchList[index].userID);
-                // context.read<GetFollowersCubit>().getFollowers(
-                //     userID: searchList[index].userID);
 
                 getnav.Get.to(
                     () => SearchResultPage(userID: searchList[index].userID),

@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sophiee/models/recent_search_model.dart';
 
+import '../../../constants.dart';
+
 part 'recent_search_state.dart';
 
 class RecentSearchCubit extends Cubit<RecentSearchState> {
@@ -17,9 +19,9 @@ class RecentSearchCubit extends Cubit<RecentSearchState> {
       RecentSearchModel recentSearchModel = RecentSearchModel.fromJson(
           {'userID': userID, 'dateTime': Timestamp.now()});
       await FirebaseFirestore.instance
-          .collection('recentSearch')
+          .collection(recentSearchCollection)
           .doc(FirebaseAuth.instance.currentUser!.uid)
-          .collection('recentSearch')
+          .collection(recentSearchCollection)
           .doc(userID)
           .set(recentSearchModel.toMap());
       emit(StoreRecentSearchSuccess());
@@ -34,9 +36,9 @@ class RecentSearchCubit extends Cubit<RecentSearchState> {
     emit(RecentSearchLoaing());
     try {
       FirebaseFirestore.instance
-          .collection('recentSearch')
+          .collection(recentSearchCollection)
           .doc(FirebaseAuth.instance.currentUser!.uid)
-          .collection('recentSearch')
+          .collection(recentSearchCollection)
           .orderBy('dateTime', descending: true)
           .limit(3)
           .snapshots()
