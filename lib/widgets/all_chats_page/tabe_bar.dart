@@ -1,3 +1,4 @@
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:sophiee/constants.dart';
 import 'package:sophiee/pages/chats/calls_page.dart';
 import 'package:sophiee/pages/chats/groups/groups_page.dart';
@@ -49,7 +50,7 @@ class _CustomTabBarState extends State<CustomTabBar> {
               highlightColor: Colors.transparent,
               onPressed: () => getnav.Get.to(() => const SearchPage(),
                   transition: getnav.Transition.rightToLeft),
-              icon: const Icon(Icons.search),
+              icon: const Icon(FontAwesomeIcons.magnifyingGlass,size: 22),
             ),
           ],
           backgroundColor: kPrimaryColor,

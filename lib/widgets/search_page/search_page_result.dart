@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../constants.dart';
+import '../../cubit/search/recent_search/recent_search_cubit.dart';
 import '../../models/users_model.dart';
 import '../../utils/widget/no_result_found.dart';
 import 'list_view_result_found.dart';
@@ -18,6 +20,8 @@ class SearchPageResult extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var getRecentSearch = context.read<RecentSearchCubit>();
+
     return Expanded(
       child: searchList.isNotEmpty
           ? ListViewResultFound(searchList: searchList, controller: controller)
@@ -38,7 +42,9 @@ class SearchPageResult extends StatelessWidget {
                   textOne: 'No Result Found',
                   textTwo:
                       "You didn't find any results with this name yet,\nplease enter a success username or email.")
-              : const NoSearchFriend(),
+              : getRecentSearch.recentSearchList.isNotEmpty
+                  ? const SizedBox()
+                  : const NoSearchFriend(),
     );
   }
 }

@@ -20,7 +20,7 @@ class ListViewResultFound extends StatelessWidget {
 
     return ListView.builder(
         itemCount: searchList.length,
-        padding: const EdgeInsets.only(top: 16),
+        padding: const EdgeInsets.only(top: 8),
         itemBuilder: (context, index) {
           return GestureDetector(
               onTap: () async {
@@ -35,8 +35,15 @@ class ListViewResultFound extends StatelessWidget {
                 getnav.Get.to(
                     () => SearchResultPage(userID: searchList[index].userID),
                     transition: getnav.Transition.rightToLeft);
-                await storeRecentSearch.storeRecentSearch(
-                    resentSearch: controller.text);
+
+                String userID = searchList[index].userID;
+                bool isStore = storeRecentSearch.recentSearchList
+                    .any((element) => element.userID == userID);
+
+                if (!isStore) {
+                  await storeRecentSearch.storeRecentSearch(
+                      userID: searchList[index].userID);
+                }
               },
               child: ResultIem(user: searchList[index]));
         });

@@ -8,6 +8,8 @@ final class RecentSearchLoaing extends RecentSearchState {}
 
 final class StoreRecentSearchSuccess extends RecentSearchState {}
 
+final class GstRecentSearchSuccess extends RecentSearchState {}
+
 final class RecentSearchFailure extends RecentSearchState {
   final String errorMessage;
 
