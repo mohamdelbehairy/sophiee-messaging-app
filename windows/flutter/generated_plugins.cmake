@@ -6,7 +6,6 @@ list(APPEND FLUTTER_PLUGIN_LIST
   audioplayers_windows
   cloud_firestore
   connectivity_plus
-  emoji_picker_flutter
   file_selector_windows
   firebase_auth
   firebase_core

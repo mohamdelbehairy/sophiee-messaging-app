@@ -1,7 +1,7 @@
+import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:sophiee/constants.dart';
 import 'package:sophiee/cubit/auth/login/login_cubit.dart';
 import 'package:sophiee/models/users_model.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -31,10 +31,20 @@ class ChatPageFriendInfoListTile extends StatelessWidget {
           ],
         ),
         leading: CircleAvatar(
-            backgroundColor: Colors.transparent,
-            backgroundImage: CachedNetworkImageProvider(!user.isProfilePhotos
-                ? defaultProfileImageUrl
-                : user.profileImage)),
+          backgroundColor: Colors.transparent,
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(size.height * .035),
+            child: FancyShimmerImage(
+                boxFit: BoxFit.cover,
+                shimmerBaseColor:
+                    isDark ? Colors.white12 : Colors.grey.shade300,
+                shimmerHighlightColor:
+                    isDark ? Colors.white24 : Colors.grey.shade100,
+                imageUrl: !user.isProfilePhotos
+                    ? defaultProfileImageUrl
+                    : user.profileImage),
+          ),
+        ),
         subtitle: Text(
             user.isBioAndNickName
                 ? user.nickName.isNotEmpty

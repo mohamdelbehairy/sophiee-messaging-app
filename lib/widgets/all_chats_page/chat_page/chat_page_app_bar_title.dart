@@ -1,3 +1,5 @@
+import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
+import 'package:sophiee/cubit/auth/login/login_cubit.dart';
 import 'package:sophiee/cubit/user_date/get_user_data/get_user_data_cubit.dart';
 import 'package:sophiee/cubit/user_date/get_user_data/get_user_data_state.dart';
 import 'package:sophiee/cubit/message/message_cubit.dart';
@@ -5,7 +7,6 @@ import 'package:sophiee/cubit/message/message_state.dart';
 import 'package:sophiee/models/users_model.dart';
 import 'package:sophiee/widgets/all_chats_page/chat_page/chat_page_friend_info_bottom_sheet/chat_page_friend_info_bottom_sheet.dart';
 
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -18,7 +19,8 @@ class ChatPageAppBarTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
+    final size = MediaQuery.sizeOf(context);
+    var isDark = context.read<LoginCubit>().isDark;
 
     return BlocBuilder<GetUserDataCubit, GetUserDataStates>(
       builder: (context, state) {
@@ -26,7 +28,7 @@ class ChatPageAppBarTitle extends StatelessWidget {
           final currentUser = user.userID;
           final data = state.userModel
               .firstWhere((element) => element.userID == currentUser);
-              
+
           String text;
           int differenceInMinutes =
               Timestamp.now().toDate().difference(data.onlineStatue).inMinutes;
@@ -58,14 +60,11 @@ class ChatPageAppBarTitle extends StatelessWidget {
             }
           } else {
             int weeks = differenceInDays ~/ 7;
-            // int remainingDays = differenceInDays % 7;
+
             if (weeks == 1) {
               text = 'Last Active 1 week ago';
             } else {
               text = 'Last Active $weeks weeks';
-              // if (remainingDays > 0) {
-              //   // text += ' and $remainingDays days';
-              // }
               text += ' ago';
             }
           }
@@ -80,17 +79,33 @@ class ChatPageAppBarTitle extends StatelessWidget {
                           builder: (context) =>
                               ChatPageFriendBottomSheetInfo(user: data)),
                       child: CircleAvatar(
-                          backgroundColor: Colors.transparent,
-                          backgroundImage: CachedNetworkImageProvider(
-                              !data.isProfilePhotos
+                        backgroundColor: Colors.transparent,
+                        child: ClipRRect(
+                          borderRadius:
+                              BorderRadius.circular(size.height * .035),
+                          child: FancyShimmerImage(
+                              boxFit: BoxFit.cover,
+                              shimmerBaseColor: isDark
+                                  ? Colors.white12
+                                  : Colors.grey.shade300,
+                              shimmerHighlightColor: isDark
+                                  ? Colors.white24
+                                  : Colors.grey.shade100,
+                              imageUrl: !data.isProfilePhotos
                                   ? defaultProfileImageUrl
-                                  : data.profileImage))),
-                  SizedBox(width: size.width * .02),
+                                  : data.profileImage),
+                        ),
+                      )),
+                  const SizedBox(width: 8),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(data.userName,
-                          style: TextStyle(fontSize: size.width * .04)),
+                      SizedBox(
+                          width: size.width * .35,
+                          child: Text(data.userName,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(fontSize: size.width * .04))),
                       const SizedBox(height: 2),
                       BlocBuilder<MessageCubit, MessageState>(
                         builder: (context, state) {

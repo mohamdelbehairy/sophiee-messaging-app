@@ -37,7 +37,7 @@ class HighLightMessageDateTime extends StatelessWidget {
                               ? differenceInDays == 1
                                   ? '$differenceInDays d'
                                   : '$differenceInDays d'
-                              : '',
+                              : '$differenceInDays d',
               style: const TextStyle(color: Colors.grey)),
         ],
       ),

@@ -7,6 +7,8 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:http/http.dart' as http;
 import 'package:sophiee/constants.dart';
 
+import '../../../services/server_info.dart';
+
 part 'group_notification_state.dart';
 
 class GroupNotificationCubit extends Cubit<GroupNotificationState> {
@@ -51,11 +53,11 @@ class GroupNotificationCubit extends Cubit<GroupNotificationState> {
       };
 
       await http.post(
-        Uri.parse(serverUrl ?? ''),
+        Uri.parse(ServerInfo.serverUrl),
         body: jsonEncode(data),
         headers: {
           'Content-Type': contentType,
-          'Authorization': 'key=$serverKey',
+          'Authorization': 'key=${ServerInfo.serverKey}',
         },
       );
       emit(SendGroupNotificationSuccess());

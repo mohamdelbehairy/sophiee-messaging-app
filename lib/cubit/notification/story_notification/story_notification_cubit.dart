@@ -7,6 +7,8 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:http/http.dart' as http;
 import 'package:sophiee/constants.dart';
 
+import '../../../services/server_info.dart';
+
 part 'story_notification_state.dart';
 
 class StoryNotificationCubit extends Cubit<StoryNotificationState> {
@@ -49,9 +51,9 @@ class StoryNotificationCubit extends Cubit<StoryNotificationState> {
       };
 
       await http
-          .post(Uri.parse(serverUrl ?? ''), body: jsonEncode(data), headers: {
+          .post(Uri.parse(ServerInfo.serverUrl), body: jsonEncode(data), headers: {
         'Content-Type': contentType,
-        'Authorization': 'key=$serverKey',
+        'Authorization': 'key=${ServerInfo.serverKey}',
       });
       emit(SendStoryNotificationSuccess());
     } catch (e) {

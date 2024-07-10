@@ -7,6 +7,8 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:http/http.dart' as http;
 import 'package:sophiee/constants.dart';
 
+import '../../../services/server_info.dart';
+
 part 'live_notification_state.dart';
 
 class LiveNotificationCubit extends Cubit<LiveNotificationState> {
@@ -48,9 +50,9 @@ class LiveNotificationCubit extends Cubit<LiveNotificationState> {
         },
       };
       await http
-          .post(Uri.parse(serverUrl ?? ''), body: jsonEncode(data), headers: {
+          .post(Uri.parse(ServerInfo.serverUrl), body: jsonEncode(data), headers: {
         'Content-Type': contentType,
-        'Authorization': 'key=$serverKey',
+        'Authorization': 'key=${ServerInfo.serverKey}',
       });
       emit(SendLiveNotificationSuccess());
     } catch (e) {
