@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sophiee/cubit/user_date/get_user_data/get_user_data_cubit.dart';
 import 'package:sophiee/cubit/user_date/get_user_data/get_user_data_state.dart';
-import 'package:sophiee/services/live_info.dart';
 import 'package:zego_uikit_prebuilt_live_streaming/zego_uikit_prebuilt_live_streaming.dart';
 
 import '../../cubit/get_friends/get_friends_cubit.dart';
@@ -13,6 +12,7 @@ import '../../cubit/get_friends/get_friends_state.dart';
 import '../../cubit/notification/live_notification/live_notification_cubit.dart';
 import '../../cubit/update_user_data/update_user_cubit_cubit.dart';
 import '../../models/users_model.dart';
+import '../../services/live_app_info.dart';
 import '../../widgets/all_chats_page/add_story/live_page/live_page_alert_dialog.dart';
 import '../../widgets/all_chats_page/add_story/live_page/live_page_config.dart';
 
