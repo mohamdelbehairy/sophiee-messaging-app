@@ -15,6 +15,7 @@ class ChatPageFriendInfoShimmer extends StatelessWidget {
       baseColor: isDark ? Colors.white12 : Colors.grey.shade300,
       highlightColor: isDark ? Colors.white24 : Colors.grey.shade100,
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         children: [
           Container(
               height: size.width * .012,
@@ -39,7 +40,7 @@ class ChatPageFriendInfoShimmer extends StatelessWidget {
                       children: [
                         Container(
                           height: 8,
-                          width: size.width / 2,
+                          width: size.width / 2.5,
                           decoration: BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(4),

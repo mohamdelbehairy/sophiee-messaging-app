@@ -1,6 +1,5 @@
-import 'package:flutter_dotenv/flutter_dotenv.dart';
-
 abstract class LiveInfo {
-  static var appID = dotenv.env['LIVEAPPID'];
-  static var appSign = dotenv.env['LIVEAPPSIGN'];
+  static const appID = 110136057;
+  static const appSign =
+      "7c1e3545360f5d689048447f67eb01a5b950f36495032bccead57fb099a71089";
 }

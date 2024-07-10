@@ -6,7 +6,8 @@ import 'package:sophiee/pages/auth/provider_auth_page.dart';
 import 'package:sophiee/pages/home_page.dart';
 import 'package:sophiee/pages/on_boardring_page.dart';
 
-Future<void> runAppInit() async {
+Future<void> runAppInit(
+    {required GlobalKey<NavigatorState> navigatorKey}) async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   final token = prefs.getString('userID');
   final isFirstTimeUser = prefs.getString('isFirstTimeUser');
@@ -15,10 +16,13 @@ Future<void> runAppInit() async {
               FirebaseAuth.instance.currentUser!.phoneNumber!.isNotEmpty) ||
           FirebaseAuth.instance.currentUser!.emailVerified)) {
     // UpdateUserOnline.checkOnline();
-    return runApp(const SophieeApp(screen: HomePage()));
+    return runApp(
+        SophieeApp(navigatorKey: navigatorKey, screen: const HomePage()));
   } else if (token == null && isFirstTimeUser != null) {
-    return runApp(const SophieeApp(screen: ProviderAuthPage()));
+    return runApp(SophieeApp(
+        navigatorKey: navigatorKey, screen: const ProviderAuthPage()));
   } else {
-    return runApp(const SophieeApp(screen: OnBoardringPage()));
+    return runApp(SophieeApp(
+        navigatorKey: navigatorKey, screen: const OnBoardringPage()));
   }
 }

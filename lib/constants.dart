@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 // Colors
 const kPrimaryColor = Color(0xff2CB9B0);
@@ -56,7 +55,5 @@ const defaultImageUrl =
     "https://he.cecollaboratory.com/public/layouts/images/group-default-logo.png";
 
 // firebase messaging
-var serverUrl = dotenv.env['SERVERURL'];
-var serverKey = dotenv.env['SERVERKEY'];
 
 const contentType = "application/json; charset=UTF-8";

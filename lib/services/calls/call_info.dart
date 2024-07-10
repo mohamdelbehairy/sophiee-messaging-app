@@ -1,6 +1,5 @@
-import 'package:flutter_dotenv/flutter_dotenv.dart';
-
 abstract class CallInfo {
-  static var appID = dotenv.env['CALLAPPID'];
-  static var appSign = dotenv.env['CALLAPPSIGN'];
+  static const appID = 825713506;
+  static const appSign =
+      "090bbb67b57018393dc94be4e31fa75b7b08608c26a7a583c56e73384f0c106e";
 }

@@ -7,6 +7,8 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:http/http.dart' as http;
 import 'package:sophiee/constants.dart';
 
+import '../../../services/server_info.dart';
+
 part 'message_notification_state.dart';
 
 class MessageNotificationCubit extends Cubit<MessageNotificationState> {
@@ -51,11 +53,12 @@ class MessageNotificationCubit extends Cubit<MessageNotificationState> {
         }
       };
 
-      await http
-          .post(Uri.parse(serverUrl ?? ''), body: jsonEncode(data), headers: {
-        'Content-Type': contentType,
-        'Authorization': 'key=$serverKey',
-      });
+      await http.post(Uri.parse(ServerInfo.serverUrl),
+          body: jsonEncode(data),
+          headers: {
+            'Content-Type': contentType,
+            'Authorization': 'key=${ServerInfo.serverKey}',
+          });
       emit(SendMessageNotificationSuccess());
     } catch (e) {
       emit(MessageNotificationFailure(errorMessage: e.toString()));

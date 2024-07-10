@@ -2,7 +2,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:sophiee/custom_material_app.dart';
 import 'package:sophiee/firebase_options.dart';
@@ -22,20 +21,20 @@ void main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
 
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   ZegoUIKitPrebuiltCallInvitationService().setNavigatorKey(navigatorKey);
-
-  await Future.wait([
-    dotenv.load(fileName: ".env"),
-    ZegoUIKit().initLog().then((value) {
-      ZegoUIKitPrebuiltCallInvitationService().useSystemCallingUI(
-        [ZegoUIKitSignalingPlugin()],
-      );
-      runAppInit();
-    }),
-  ]);
-  FlutterNativeSplash.remove();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+
+  ZegoUIKit().initLog().then((value) async {
+    ZegoUIKitPrebuiltCallInvitationService().useSystemCallingUI(
+      [ZegoUIKitSignalingPlugin()],
+    );
+    await runAppInit(navigatorKey: navigatorKey);
+  });
+  // await Future.wait([
+
+  // ]);
+  FlutterNativeSplash.remove();
 }
 
 @pragma('vm:entry-point')
@@ -44,8 +43,10 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
 }
 
 class SophieeApp extends StatelessWidget {
-  const SophieeApp({super.key, required this.screen});
+  const SophieeApp(
+      {super.key, required this.screen, required this.navigatorKey});
   final Widget screen;
+  final GlobalKey<NavigatorState> navigatorKey;
 
   @override
   Widget build(BuildContext context) {

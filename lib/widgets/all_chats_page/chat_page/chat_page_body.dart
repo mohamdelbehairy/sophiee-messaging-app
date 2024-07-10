@@ -3,12 +3,14 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:sophiee/cubit/auth/login/login_cubit.dart';
+import 'package:sophiee/models/send_call_invitation_model.dart';
 import 'package:sophiee/models/users_model.dart';
+import 'package:sophiee/utils/widget/send_call_invitation_button.dart';
 import 'package:sophiee/widgets/all_chats_page/chat_page/chat_page_body_component.dart';
 import 'package:sophiee/widgets/all_chats_page/chat_page/chat_page_app_bar_title.dart';
 import 'package:sophiee/widgets/all_chats_page/chat_page/chats_icons_app_bar_button.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:sophiee/constants.dart';
 
 import '../../../cubit/connectivity/connectivity_cubit.dart';
@@ -57,10 +59,20 @@ class ChatPageBody extends StatelessWidget {
                     .getImage(userID: FirebaseAuth.instance.currentUser!.uid);
               },
               child: const Icon(Icons.arrow_back)),
-          actions: const [
-            ChatsIconsAppBarButton(icon: Icons.call),
-            ChatsIconsAppBarButton(icon: FontAwesomeIcons.video),
-            ChatsIconsAppBarButton(icon: Icons.error),
+          actions: [
+            SendCallInvitationButton(
+                sendCallInvitationModel: SendCallInvitationModel(
+                    userID: user.userID,
+                    userName: user.userName,
+                    icon: Icons.call,
+                    isVideoCall: false,
+                    left: 45)),
+            SendCallInvitationButton(
+                sendCallInvitationModel: SendCallInvitationModel(
+                    userID: user.userID,
+                    userName: user.userName,
+                    icon: FontAwesomeIcons.video)),
+            const ChatsIconsAppBarButton(icon: Icons.error),
           ],
         ),
         body: BlocBuilder<ConnectivityCubit, ConnectivityResult>(

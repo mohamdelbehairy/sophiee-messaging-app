@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:http/http.dart' as http;
 import 'package:sophiee/constants.dart';
+import 'package:sophiee/services/server_info.dart';
 
 part 'follower_notification_state.dart';
 
@@ -47,11 +48,11 @@ class FollowerNotificationCubit extends Cubit<FolloweNotificationState> {
           'page': 'follower',
         }
       };
-      await http.post(Uri.parse(serverUrl ?? ''),
+      await http.post(Uri.parse(ServerInfo.serverUrl),
           body: jsonEncode(data),
           headers: {
             'Content-Type': contentType,
-            'Authorization': 'key=$serverKey'
+            'Authorization': 'key=${ServerInfo.serverKey}'
           });
       emit(SendFollowerNotificationSuccess());
     } catch (e) {
