@@ -42,6 +42,7 @@ class ItemTopBody extends StatelessWidget {
                     transition: getnav.Transition.downToUp);
               }
               if (await isLive) {
+                
                 getnav.Get.to(() => LivePage(liveID: data.userID),
                     transition: getnav.Transition.downToUp);
               }

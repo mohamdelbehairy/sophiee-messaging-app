@@ -17,12 +17,12 @@ Future<void> runAppInit(
           FirebaseAuth.instance.currentUser!.emailVerified)) {
     // UpdateUserOnline.checkOnline();
     return runApp(
-        SophieeApp(navigatorKey: navigatorKey, screen: const HomePage()));
+        SophieeApp(navigator: navigatorKey, screen: const HomePage()));
   } else if (token == null && isFirstTimeUser != null) {
     return runApp(SophieeApp(
-        navigatorKey: navigatorKey, screen: const ProviderAuthPage()));
+        navigator: navigatorKey, screen: const ProviderAuthPage()));
   } else {
     return runApp(SophieeApp(
-        navigatorKey: navigatorKey, screen: const OnBoardringPage()));
+        navigator: navigatorKey, screen: const OnBoardringPage()));
   }
 }

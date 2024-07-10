@@ -35,6 +35,7 @@ class _ChatPageState extends State<ChatPage> {
               .firstWhere((element) => element.userID == widget.userID);
           final userData = state.userModel.firstWhere((element) =>
               element.userID == FirebaseAuth.instance.currentUser!.uid);
+         
           return ChatPageBody(size: size, user: user, userData: userData);
         } else {
           return Container();

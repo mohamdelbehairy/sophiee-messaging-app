@@ -96,7 +96,7 @@ class _LivePageState extends State<LivePage> {
                         context: context,
                         barrierDismissible: false,
                         builder: (BuildContext context) {
-                          return const LivePageAlertDialog();
+                          return  LivePageAlertDialog(isHost: widget.isHost);
                         },
                       );
                     },

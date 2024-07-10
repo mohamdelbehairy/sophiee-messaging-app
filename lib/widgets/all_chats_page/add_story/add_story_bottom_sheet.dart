@@ -45,7 +45,7 @@ class AddStoryBottomSheet extends StatelessWidget {
               SizedBox(
                   width: size.width * .1, child: const Divider(thickness: 5)),
               SizedBox(height: size.height * .01),
-              Text('Change profile picture',
+              Text('Add a new story',
                   style: TextStyle(
                       color: isDark ? Colors.white : Colors.black,
                       fontSize: size.width * .042)),
