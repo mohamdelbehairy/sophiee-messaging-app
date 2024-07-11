@@ -21,14 +21,17 @@ class MyFriendItemTwoDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(16),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          MyFriendInfo(user: user, isDark: isDark, size: size),
-          if (user.isAudioAndVideoCall && infoCalls != null) infoCalls!,
-          if(followButton != null)
-          followButton!,
-        ],
+      child: SizedBox(
+        height: size.height * .055,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            MyFriendInfo(user: user, isDark: isDark, size: size),
+            if (user.isAudioAndVideoCall && infoCalls != null) infoCalls!,
+            if(followButton != null)
+            followButton!,
+          ],
+        ),
       ),
     );
   }

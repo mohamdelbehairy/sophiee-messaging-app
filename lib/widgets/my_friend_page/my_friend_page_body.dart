@@ -36,7 +36,7 @@ class MyFriendPageBody extends StatelessWidget {
       child: Column(
         children: [
           MyFriendItemOne(user: user),
-          MyFriendItemTwo(user: user, infoCalls: const InfoCallsWidget()),
+          MyFriendItemTwo(user: user, infoCalls: InfoCallsWidget(user: user)),
           if (!user.isProfileLock) const SizedBox(height: 12),
           if (user.isProfileLock)
             ProfilePageLockWidget(

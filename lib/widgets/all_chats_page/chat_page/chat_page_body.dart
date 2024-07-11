@@ -66,7 +66,7 @@ class ChatPageBody extends StatelessWidget {
                     userName: user.userName,
                     icon: Icons.call,
                     isVideoCall: false,
-                    left: 45)),
+                    paddingLeft: 45)),
             SendCallInvitationButton(
                 sendCallInvitationModel: SendCallInvitationModel(
                     userID: user.userID,

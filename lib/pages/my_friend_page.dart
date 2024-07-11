@@ -13,7 +13,7 @@ class MyFriendPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
+    final size = MediaQuery.sizeOf(context);
     context
         .read<FollowStatusCubit>()
         .checkFollowStatus(followerID: user.userID);

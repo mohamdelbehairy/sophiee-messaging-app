@@ -10,27 +10,26 @@ class SendCallInvitationButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Flexible(
-      child: FittedBox(
-        fit: BoxFit.scaleDown,
-        child: ZegoSendCallInvitationButton(
-          isVideoCall: sendCallInvitationModel.isVideoCall,
-          verticalLayout: false,
-          borderRadius: 0.0,
-          timeoutSeconds: 45,
-          padding: EdgeInsets.only(left: sendCallInvitationModel.left),
-          resourceID: "zegouikit_call",
-          icon: ButtonIcon(
-              icon: Icon(sendCallInvitationModel.icon,
-                  color: Colors.white,
-                  size: MediaQuery.sizeOf(context).height * .06)),
-          invitees: [
-            ZegoUIKitUser(
-              id: sendCallInvitationModel.userID,
-              name: sendCallInvitationModel.userName,
-            ),
-          ],
-        ),
+    return FittedBox(
+      fit: sendCallInvitationModel.fit,
+      child: ZegoSendCallInvitationButton(
+        isVideoCall: sendCallInvitationModel.isVideoCall,
+        verticalLayout: false,
+        borderRadius: 0.0,
+        timeoutSeconds: 45,
+        padding: EdgeInsets.only(left: sendCallInvitationModel.paddingLeft),
+        resourceID: "zegouikit_call",
+        icon: ButtonIcon(
+            icon: Icon(sendCallInvitationModel.icon,
+                color: sendCallInvitationModel.color,
+                size: sendCallInvitationModel.iconSize ??
+                    MediaQuery.sizeOf(context).height * .06)),
+        invitees: [
+          ZegoUIKitUser(
+            id: sendCallInvitationModel.userID,
+            name: sendCallInvitationModel.userName,
+          ),
+        ],
       ),
     );
   }
