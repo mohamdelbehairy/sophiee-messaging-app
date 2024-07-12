@@ -6,8 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ChatPageFriendInfoListTile extends StatelessWidget {
-  const ChatPageFriendInfoListTile({super.key, required this.user});
-  final UserModel user;
+  const ChatPageFriendInfoListTile(
+      {super.key, required this.user, required this.userData});
+  final UserModel user, userData;
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +41,8 @@ class ChatPageFriendInfoListTile extends StatelessWidget {
                     isDark ? Colors.white12 : Colors.grey.shade300,
                 shimmerHighlightColor:
                     isDark ? Colors.white24 : Colors.grey.shade100,
-                imageUrl: !user.isProfilePhotos
+                imageUrl: !user.isProfilePhotos ||
+                        userData.blockUsers.contains(user.userID)
                     ? defaultProfileImageUrl
                     : user.profileImage),
           ),

@@ -76,10 +76,12 @@ class ChatsFounded extends StatelessWidget {
                               onPressed: (context) async {
                                 if (userData.muteUsers
                                     .contains(chat.chatsList[index].userID)) {
-                                  await muteAndunMute.unMuteUsers(
+                                  await muteAndunMute.removeListUsers(
+                                      fieldName: 'muteUsers',
                                       userID: chat.chatsList[index].userID);
                                 } else {
-                                  await muteAndunMute.muteUsers(
+                                  await muteAndunMute.addListUsers(
+                                      fieldName: 'muteUsers',
                                       userID: chat.chatsList[index].userID);
                                 }
                               }),

@@ -85,4 +85,33 @@ class FollowerCubit extends Cubit<FollowerState> {
       return false;
     }
   }
+
+  Future<void> deleteAllFollowerInfo({required String followerID}) async {
+    await FirebaseFirestore.instance
+        .collection('followers')
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .collection('followers')
+        .doc(followerID)
+        .delete();
+    await FirebaseFirestore.instance
+        .collection('following')
+        .doc(followerID)
+        .collection('following')
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .delete();
+
+    await FirebaseFirestore.instance
+        .collection('followers')
+        .doc(followerID)
+        .collection('followers')
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .delete();
+    await FirebaseFirestore.instance
+        .collection('following')
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .collection('following')
+        .doc(followerID)
+        .delete();
+    emit(BlocAllFollowerInfoSuccess());
+  }
 }

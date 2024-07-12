@@ -14,8 +14,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../constants.dart';
 
 class ChatPageAppBarTitle extends StatelessWidget {
-  const ChatPageAppBarTitle({super.key, required this.user});
-  final UserModel user;
+  const ChatPageAppBarTitle(
+      {super.key, required this.user, required this.userData});
+  final UserModel user, userData;
 
   @override
   Widget build(BuildContext context) {
@@ -36,35 +37,38 @@ class ChatPageAppBarTitle extends StatelessWidget {
               Timestamp.now().toDate().difference(data.onlineStatue).inHours;
           int differenceInDays =
               Timestamp.now().toDate().difference(data.onlineStatue).inDays;
-          if (!user.isLastSeendAndOnline) {
-            text = 'Last seen recently';
+
+          if (userData.blockUsers.contains(user.userID)) {
+            text = 'last seen for a long time';
+          } else if (!user.isLastSeendAndOnline) {
+            text = 'last seen recently';
           } else if (differenceInMinutes < 1) {
-            text = 'Active Now';
+            text = 'active now';
           } else if (differenceInMinutes < 60) {
             if (differenceInMinutes == 1) {
-              text = 'Last Active $differenceInMinutes minute ago';
+              text = 'last active $differenceInMinutes minute ago';
             } else {
-              text = 'Last Active $differenceInMinutes minutes ago';
+              text = 'last active $differenceInMinutes minutes ago';
             }
           } else if (differenceInHours < 24) {
             if (differenceInHours == 1) {
-              text = 'Last Active $differenceInHours hour ago';
+              text = 'last active $differenceInHours hour ago';
             } else {
               text = 'Last Active $differenceInHours hours ago';
             }
           } else if (differenceInDays < 7) {
             if (differenceInDays == 1) {
-              text = 'Last Active $differenceInDays day ago';
+              text = 'last active $differenceInDays day ago';
             } else {
-              text = 'Last Active $differenceInDays days ago';
+              text = 'last active $differenceInDays days ago';
             }
           } else {
             int weeks = differenceInDays ~/ 7;
 
             if (weeks == 1) {
-              text = 'Last Active 1 week ago';
+              text = 'last active 1 week ago';
             } else {
-              text = 'Last Active $weeks weeks';
+              text = 'last active $weeks weeks';
               text += ' ago';
             }
           }
@@ -76,8 +80,8 @@ class ChatPageAppBarTitle extends StatelessWidget {
                       onTap: () => showModalBottomSheet(
                           context: context,
                           backgroundColor: Colors.transparent,
-                          builder: (context) =>
-                              ChatPageFriendBottomSheetInfo(user: data)),
+                          builder: (context) => ChatPageFriendBottomSheetInfo(
+                              user: data, userData: userData)),
                       child: CircleAvatar(
                         backgroundColor: Colors.transparent,
                         child: ClipRRect(
@@ -91,7 +95,8 @@ class ChatPageAppBarTitle extends StatelessWidget {
                               shimmerHighlightColor: isDark
                                   ? Colors.white24
                                   : Colors.grey.shade100,
-                              imageUrl: !data.isProfilePhotos
+                              imageUrl: !data.isProfilePhotos ||
+                                      userData.blockUsers.contains(user.userID)
                                   ? defaultProfileImageUrl
                                   : data.profileImage),
                         ),

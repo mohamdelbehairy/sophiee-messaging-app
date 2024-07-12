@@ -44,7 +44,7 @@ class ChatPageBody extends StatelessWidget {
           titleSpacing: -8.0,
           backgroundColor: kPrimaryColor,
           elevation: 0,
-          title: ChatPageAppBarTitle(user: user),
+          title: ChatPageAppBarTitle(user: user, userData: userData),
           iconTheme: const IconThemeData(size: 35, color: Colors.white),
           leading: GestureDetector(
               onTap: () {
@@ -60,18 +60,20 @@ class ChatPageBody extends StatelessWidget {
               },
               child: const Icon(Icons.arrow_back)),
           actions: [
-            SendCallInvitationButton(
-                sendCallInvitationModel: SendCallInvitationModel(
-                    userID: user.userID,
-                    userName: user.userName,
-                    icon: Icons.call,
-                    isVideoCall: false,
-                    paddingLeft: 45)),
-            SendCallInvitationButton(
-                sendCallInvitationModel: SendCallInvitationModel(
-                    userID: user.userID,
-                    userName: user.userName,
-                    icon: FontAwesomeIcons.video)),
+            if (!userData.blockUsers.contains(user.userID))
+              SendCallInvitationButton(
+                  sendCallInvitationModel: SendCallInvitationModel(
+                      userID: user.userID,
+                      userName: user.userName,
+                      icon: Icons.call,
+                      isVideoCall: false,
+                      paddingLeft: 45)),
+            if (!userData.blockUsers.contains(user.userID))
+              SendCallInvitationButton(
+                  sendCallInvitationModel: SendCallInvitationModel(
+                      userID: user.userID,
+                      userName: user.userName,
+                      icon: FontAwesomeIcons.video)),
             const ChatsIconsAppBarButton(icon: Icons.error),
           ],
         ),

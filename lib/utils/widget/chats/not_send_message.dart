@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
-class GroupsChatPageNotSendMessage extends StatelessWidget {
-  const GroupsChatPageNotSendMessage({super.key, required this.size});
+class NotSendMessage extends StatelessWidget {
+  const NotSendMessage({super.key, required this.size, required this.text});
 
   final Size size;
+  final String text;
 
   @override
   Widget build(BuildContext context) {
@@ -14,9 +15,8 @@ class GroupsChatPageNotSendMessage extends StatelessWidget {
       decoration: BoxDecoration(
           color: const Color(0xff2b2c33).withOpacity(.1),
           borderRadius: BorderRadius.circular(size.width * .04)),
-      child: const Center(
-          child: Text('Sending messages is not allowed in this group.',
-              style: TextStyle(color: Color(0xff878787)))),
+      child:
+          Center(child: Text(text, style: const TextStyle(color: Color(0xff878787)))),
     );
   }
 }

@@ -15,8 +15,7 @@ class UserModel {
   String? phoneNumber, token, chatbackgroundImage;
   int? chatbackgroundColor;
   final bool isStory,
- 
-  isLive,
+      isLive,
       isChatNotify,
       isGroupNotify,
       isStoryNotify,
@@ -27,8 +26,9 @@ class UserModel {
       isProfilePhotos,
       isDateOfBirth,
       isBioAndNickName,
-      isAudioAndVideoCall, isProfileLock;
-  List<dynamic> muteUsers;
+      isAudioAndVideoCall,
+      isProfileLock;
+  final List<dynamic> muteUsers, blockUsers;
 
   UserModel(
       {required this.userName,
@@ -63,8 +63,8 @@ class UserModel {
       required this.isBioAndNickName,
       required this.isAudioAndVideoCall,
       required this.muteUsers,
-      required this.isProfileLock
-      });
+      required this.isProfileLock,
+      required this.blockUsers});
 
   factory UserModel.fromJson(jsonData) {
     return UserModel(
@@ -79,7 +79,7 @@ class UserModel {
         gender: jsonData['gender'] ?? '',
         onlineStatue: (jsonData['onlineStatue'] ?? Timestamp.now()).toDate(),
         isStory: jsonData['isStory'] ?? false,
-         isLive: jsonData['isLive'] ?? false,
+        isLive: jsonData['isLive'] ?? false,
         lastMessage: jsonData['lastMessage'],
         isGoogleAuth: jsonData['isGoogleAuth'],
         isEmailAuth: jsonData['isEmailAuth'],
@@ -100,8 +100,8 @@ class UserModel {
         isBioAndNickName: jsonData['isBioAndNickName'] ?? false,
         isAudioAndVideoCall: jsonData['isAudioAndVideoCall'] ?? false,
         muteUsers: jsonData['muteUsers'] ?? [],
-        isProfileLock:jsonData['isProfileLock'] ?? false
-        );
+        isProfileLock: jsonData['isProfileLock'] ?? false,
+        blockUsers: jsonData['blockUsers'] ?? []);
   }
   Map<String, dynamic> toMap() {
     return {
@@ -116,7 +116,7 @@ class UserModel {
       'phoneNumber': phoneNumber,
       'onlineStatue': onlineStatue,
       'isStory': isStory,
-      'isLive':isLive,
+      'isLive': isLive,
       // 'lastMessage': lastMessage,
       'isGoogleAuth': isGoogleAuth,
       'isEmailAuth': isEmailAuth,
@@ -134,7 +134,8 @@ class UserModel {
       'isBioAndNickName': isBioAndNickName,
       'isAudioAndVideoCall': isAudioAndVideoCall,
       'muteUsers': muteUsers,
-      'isProfileLock':isProfileLock
+      'isProfileLock': isProfileLock,
+      'blockUsers': blockUsers
     };
   }
 

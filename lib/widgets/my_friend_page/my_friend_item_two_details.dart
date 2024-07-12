@@ -10,9 +10,10 @@ class MyFriendItemTwoDetails extends StatelessWidget {
       required this.isDark,
       required this.size,
       required this.infoCalls,
-      this.followButton});
+      this.followButton,
+      required this.userData});
 
-  final UserModel user;
+  final UserModel user, userData;
   final bool isDark;
   final Size size;
   final Widget? infoCalls, followButton;
@@ -28,8 +29,9 @@ class MyFriendItemTwoDetails extends StatelessWidget {
           children: [
             MyFriendInfo(user: user, isDark: isDark, size: size),
             if (user.isAudioAndVideoCall && infoCalls != null) infoCalls!,
-            if(followButton != null)
-            followButton!,
+            if (followButton != null &&
+                !userData.blockUsers.contains(user.userID))
+              followButton!,
           ],
         ),
       ),

@@ -16,6 +16,6 @@ class UpdateUserFailure extends UpdateUserDataStates {
   UpdateUserFailure({required this.errorMessage});
 }
 
-class MuteUserSuccess extends UpdateUserDataStates {}
+class AddListUserSuccess extends UpdateUserDataStates {}
 
-class UnMuteUserSuccess extends UpdateUserDataStates {}
+class RemoveListUserSuccess extends UpdateUserDataStates {}

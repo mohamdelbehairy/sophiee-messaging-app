@@ -5,6 +5,7 @@ import 'package:sophiee/cubit/user_date/get_user_data/get_user_data_cubit.dart';
 import 'package:sophiee/cubit/user_date/get_user_data/get_user_data_state.dart';
 import 'package:sophiee/pages/search_result_page.dart';
 
+import '../../cubit/follow_status/follow_status_cubit.dart';
 import '../../models/recent_search_model.dart';
 import 'recent_search_image.dart';
 import 'recent_search_texts.dart';
@@ -27,9 +28,14 @@ class RecentSearchItem extends StatelessWidget {
             final data = state.userModel.firstWhere(
                 (element) => element.userID == recentSearchModel.userID);
             return GestureDetector(
-              onTap: () => getnav.Get.to(
-                  () => SearchResultPage(userID: recentSearchModel.userID),
-                  transition: getnav.Transition.rightToLeft),
+              onTap: () {
+                context
+                    .read<FollowStatusCubit>()
+                    .checkFollowStatus(followerID: recentSearchModel.userID);
+                getnav.Get.to(
+                    () => SearchResultPage(userID: recentSearchModel.userID),
+                    transition: getnav.Transition.rightToLeft);
+              },
               child: Row(
                 children: [
                   RecentSearchImage(size: size, isDark: isDark, data: data),

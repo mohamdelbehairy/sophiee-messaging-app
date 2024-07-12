@@ -7,6 +7,7 @@ import 'package:sophiee/cubit/upload/upload_audio/upload_audio_cubit.dart';
 import 'package:sophiee/models/message_model.dart';
 import 'package:sophiee/models/users_model.dart';
 import 'package:sophiee/utils/shimmer/home/all_chats/chat_page/message_page_shimmer.dart';
+import 'package:sophiee/utils/widget/chats/not_send_message.dart';
 import 'package:sophiee/utils/widget/replay_to_message/replay_audio_message.dart';
 import 'package:sophiee/widgets/all_chats_page/chat_page/chat_page_swip_message.dart';
 import 'package:sophiee/widgets/all_chats_page/chat_page/custom_chat_page_text_field_item_details.dart';
@@ -18,7 +19,6 @@ import 'package:sophiee/utils/widget/replay_to_message/replay_text_message.dart'
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 
 class ChatPageBodyDetails extends StatefulWidget {
   const ChatPageBodyDetails(
@@ -64,7 +64,6 @@ class _ChatPageBodyDetailsState extends State<ChatPageBodyDetails> {
   Widget build(BuildContext context) {
     var messages = context.read<MessageCubit>();
     var uploadAudio = context.read<UploadAudioCubit>();
-    
 
     return BlocListener<DeleteChatMessageCubit, DeleteChatMessageState>(
       listener: (context, stateDelete) async {
@@ -122,11 +121,13 @@ class _ChatPageBodyDetailsState extends State<ChatPageBodyDetails> {
                             size: widget.size,
                             user: widget.user,
                             onLeftSwipe: (details) {
-                              setState(() {
-                                isSwip = !isSwip;
-                                messageModel = message;
-                                focusNode.requestFocus();
-                              });
+                              if (!widget.userDataModel.blockUsers
+                                  .contains(widget.user.userID)) {
+                                setState(() {
+                                  messageModel = message;
+                                  focusNode.requestFocus();
+                                });
+                              }
                             });
                       },
                     ),
@@ -210,60 +211,69 @@ class _ChatPageBodyDetailsState extends State<ChatPageBodyDetails> {
                                 });
                               }),
                       if (isSwip) SizedBox(height: widget.size.height * .003),
-                      BlocListener<GetUserDataCubit, GetUserDataStates>(
-                        listener: (context, state) {
-                          if (state is GetUserDataSuccess &&
-                              state.userModel.isNotEmpty) {
-                            if (isSwip) {
-                              final currentUser = messageModel!.senderID;
-                              userData = state.userModel.firstWhere(
-                                  (element) => element.userID == currentUser);
+                      if (widget.userDataModel.blockUsers
+                          .contains(widget.user.userID))
+                        NotSendMessage(
+                            size: widget.size,
+                            text:
+                                'Sending messages is not allowed in this chat'),
+                      if (!widget.userDataModel.blockUsers
+                          .contains(widget.user.userID))
+                        BlocListener<GetUserDataCubit, GetUserDataStates>(
+                          listener: (context, state) {
+                            if (state is GetUserDataSuccess &&
+                                state.userModel.isNotEmpty) {
+                              if (isSwip) {
+                                final currentUser = messageModel!.senderID;
+                                userData = state.userModel.firstWhere(
+                                    (element) => element.userID == currentUser);
+                              }
                             }
-                          }
-                        },
-                        child: CustomChatPageTextFieldItemDetails(
-                            userDataModel: widget.userDataModel,
-                            onChanged: (value) {
-                              setState(() {
-                                isShowSendButton = value.trim().isNotEmpty;
-                                // if (value.isNotEmpty) {
-                                //   messages.updateIsTyping(
-                                //       receiverID: widget.user.userID,
-                                //       isTyping: true);
-                                // } else {
-                                //   messages.updateIsTyping(
-                                //       receiverID: widget.user.userID,
-                                //       isTyping: false);
-                                // }
-                              });
-                            },
-                            widget: widget,
-                            textEditingController: textEditingController,
-                            scrollController: scrollController,
-                            focusNode: focusNode,
-                            isSwip: isSwip,
-                            messageModel: messageModel,
-                            userData: userData),
-                      ),
+                          },
+                          child: CustomChatPageTextFieldItemDetails(
+                              userDataModel: widget.userDataModel,
+                              onChanged: (value) {
+                                setState(() {
+                                  isShowSendButton = value.trim().isNotEmpty;
+                                  // if (value.isNotEmpty) {
+                                  //   messages.updateIsTyping(
+                                  //       receiverID: widget.user.userID,
+                                  //       isTyping: true);
+                                  // } else {
+                                  //   messages.updateIsTyping(
+                                  //       receiverID: widget.user.userID,
+                                  //       isTyping: false);
+                                  // }
+                                });
+                              },
+                              widget: widget,
+                              textEditingController: textEditingController,
+                              scrollController: scrollController,
+                              focusNode: focusNode,
+                              isSwip: isSwip,
+                              messageModel: messageModel,
+                              userData: userData),
+                        ),
                     ],
                   ),
                 ],
               ),
-              CustomChatSendTextAndRecordItem(
-                  stopRecording: (value) {
-                    setState(() {
-                      isSwip = false;
-                    });
-                  },
-                  isShowSendButton: isShowSendButton,
-                  scrollController: scrollController,
-                  messages: messages,
-                  widget: widget,
-                  textEditingController: textEditingController,
-                  isSwip: isSwip,
-                  messageModel: messageModel,
-                  userData: userData,
-                  uploadAudio: uploadAudio)
+              if (!widget.userDataModel.blockUsers.contains(widget.user.userID))
+                CustomChatSendTextAndRecordItem(
+                    stopRecording: (value) {
+                      setState(() {
+                        isSwip = false;
+                      });
+                    },
+                    isShowSendButton: isShowSendButton,
+                    scrollController: scrollController,
+                    messages: messages,
+                    widget: widget,
+                    textEditingController: textEditingController,
+                    isSwip: isSwip,
+                    messageModel: messageModel,
+                    userData: userData,
+                    uploadAudio: uploadAudio)
             ],
           );
         },

@@ -39,7 +39,8 @@ class UpdateUserDataCubit extends Cubit<UpdateUserDataStates> {
     }
   }
 
-  Future<void> updateBackgrounChatField({int? colorValue, String? imageUrl}) async {
+  Future<void> updateBackgrounChatField(
+      {int? colorValue, String? imageUrl}) async {
     try {
       await FirebaseFirestore.instance
           .collection(userCollection)
@@ -71,35 +72,36 @@ class UpdateUserDataCubit extends Cubit<UpdateUserDataStates> {
     }
   }
 
-  Future<void> muteUsers({required String userID}) async {
+  Future<void> addListUsers(
+      {required String userID, required String fieldName}) async {
     try {
       await FirebaseFirestore.instance
           .collection(userCollection)
           .doc(FirebaseAuth.instance.currentUser!.uid)
           .update({
-        'muteUsers': FieldValue.arrayUnion([userID])
+        fieldName: FieldValue.arrayUnion([userID])
       });
-      emit(MuteUserSuccess());
+      emit(AddListUserSuccess());
     } catch (e) {
       emit(UpdateUserFailure(errorMessage: e.toString()));
-
-      debugPrint('error from mute users method: ${e.toString()}');
+      debugPrint('error from mute users method: $e.');
     }
   }
 
-  Future<void> unMuteUsers({required String userID}) async {
+  Future<void> removeListUsers(
+      {required String userID, required String fieldName}) async {
     try {
       await FirebaseFirestore.instance
           .collection(userCollection)
           .doc(FirebaseAuth.instance.currentUser!.uid)
           .update({
-        'muteUsers': FieldValue.arrayRemove([userID])
+        fieldName: FieldValue.arrayRemove([userID])
       });
-      emit(UnMuteUserSuccess());
+      emit(RemoveListUserSuccess());
     } catch (e) {
       emit(UpdateUserFailure(errorMessage: e.toString()));
 
-      debugPrint('error from un mute users method: ${e.toString()}');
+      debugPrint('error from un mute users method: $e.');
     }
   }
 }

@@ -12,7 +12,7 @@ import 'package:sophiee/utils/widget/replay_to_message/replay_image_message.dart
 import 'package:sophiee/widgets/all_chats_page/groups_page/groups_chat_page/custom_group_send_text_and_record_item.dart';
 import 'package:sophiee/widgets/all_chats_page/groups_page/groups_chat_page/groups_chat_custom_message/groups_chat_custom_message_component_body.dart';
 import 'package:sophiee/widgets/all_chats_page/groups_page/groups_chat_page/groups_chat_page_custom_send_media.dart';
-import 'package:sophiee/widgets/all_chats_page/groups_page/groups_chat_page/groups_chat_page_not_send_message.dart';
+import 'package:sophiee/utils/widget/chats/not_send_message.dart';
 import 'package:sophiee/utils/widget/replay_to_message/replay_text_message.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -44,7 +44,8 @@ class GroupsChatPageBodyComponent extends StatefulWidget {
       _GroupsChatPageBodyComponentState();
 }
 
-class _GroupsChatPageBodyComponentState extends State<GroupsChatPageBodyComponent> {
+class _GroupsChatPageBodyComponentState
+    extends State<GroupsChatPageBodyComponent> {
   bool isSwip = false;
 
   MessageModel? messageModel;
@@ -260,7 +261,9 @@ class _GroupsChatPageBodyComponentState extends State<GroupsChatPageBodyComponen
                         FirebaseAuth.instance.currentUser!.uid &&
                     !widget.groupModel.adminsID
                         .contains(FirebaseAuth.instance.currentUser!.uid))
-                  GroupsChatPageNotSendMessage(size: widget.size)
+                  NotSendMessage(
+                      size: widget.size,
+                      text: 'Sending messages is not allowed in this group.')
               ],
             ),
             if (widget.groupModel.isSendMessages ||

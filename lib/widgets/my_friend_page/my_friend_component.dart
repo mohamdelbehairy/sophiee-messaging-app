@@ -28,6 +28,7 @@ class MyFriendItemTwoComponent extends StatelessWidget {
         infoCalls: infoCalls,
         followButton: followButton,
         user: user,
+        userData: userData,
         isDark: isDark,
         size: size);
   }

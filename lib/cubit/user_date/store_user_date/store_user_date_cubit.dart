@@ -53,7 +53,8 @@ class StoreUserDateCubit extends Cubit<StoreUserDateState> {
         'isDateOfBirth': false,
         'isBioAndNickName': true,
         'isAudioAndVideoCall': true,
-        'muteUsers': const []
+        'muteUsers': const [],
+        'blockUsers': const []
       });
       await FirebaseFirestore.instance
           .collection('users')

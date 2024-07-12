@@ -10,9 +10,10 @@ class ChatPageFriendInfoBottomSheetDetails extends StatelessWidget {
       {super.key,
       required this.size,
       required this.user,
-      required this.isDark});
+      required this.isDark,
+      required this.userData});
   final Size size;
-  final UserModel user;
+  final UserModel user, userData;
   final bool isDark;
 
   @override
@@ -21,11 +22,26 @@ class ChatPageFriendInfoBottomSheetDetails extends StatelessWidget {
       padding: const EdgeInsets.only(top: 22),
       child: Column(
         children: [
-          if (user.emailAddress.isNotEmpty && user.isPhoneAndEmail && !user.isProfileLock)
+          if (!userData.blockUsers.contains(user.userID) &&
+              user.emailAddress.isNotEmpty &&
+              user.isPhoneAndEmail &&
+              !user.isProfileLock)
             EmailAdressBottomSheet(user: user),
-          if (user.emailAddress.isNotEmpty && user.isPhoneAndEmail && !user.isProfileLock) const SizedBox(height: 8),
-          if (user.phoneNumber != null && user.isPhoneAndEmail && !user.isProfileLock) PhoneNumberBottomSheet(user: user),
-          if (user.phoneNumber != null && user.isPhoneAndEmail && !user.isProfileLock) const SizedBox(height: 12),
+          if (!userData.blockUsers.contains(user.userID) &&
+              user.emailAddress.isNotEmpty &&
+              user.isPhoneAndEmail &&
+              !user.isProfileLock)
+            const SizedBox(height: 8),
+          if (!userData.blockUsers.contains(user.userID) &&
+              user.phoneNumber != null &&
+              user.isPhoneAndEmail &&
+              !user.isProfileLock)
+            PhoneNumberBottomSheet(user: user),
+          if (!userData.blockUsers.contains(user.userID) &&
+              user.phoneNumber != null &&
+              user.isPhoneAndEmail &&
+              !user.isProfileLock)
+            const SizedBox(height: 12),
           MediaFilesBottomSheet(size: size, user: user),
           const SizedBox(height: 12),
           HighlightsBottomSheet(user: user, size: size, isDark: isDark),

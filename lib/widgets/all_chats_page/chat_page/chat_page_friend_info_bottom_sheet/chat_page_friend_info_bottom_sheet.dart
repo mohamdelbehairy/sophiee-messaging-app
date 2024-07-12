@@ -15,8 +15,9 @@ import 'package:get/get.dart' as getnav;
 import '../../../../constants.dart';
 
 class ChatPageFriendBottomSheetInfo extends StatefulWidget {
-  const ChatPageFriendBottomSheetInfo({super.key, required this.user});
-  final UserModel user;
+  const ChatPageFriendBottomSheetInfo(
+      {super.key, required this.user, required this.userData});
+  final UserModel user, userData;
 
   @override
   State<ChatPageFriendBottomSheetInfo> createState() =>
@@ -40,8 +41,10 @@ class _ChatPageFriendBottomSheetInfoState
 
     return GestureDetector(
       onVerticalDragUpdate: (details) {
-        getnav.Get.to(() => MyFriendPage(user: widget.user),
-            transition: getnav.Transition.downToUp);
+        if (!widget.userData.blockUsers.contains(widget.user.userID)) {
+          getnav.Get.to(() => MyFriendPage(user: widget.user),
+              transition: getnav.Transition.downToUp);
+        }
       },
       child: Container(
         decoration: BoxDecoration(
@@ -55,6 +58,7 @@ class _ChatPageFriendBottomSheetInfoState
                 state == ConnectivityResult.mobile ||
                 state == ConnectivityResult.vpn) {
               return ChatPageFriendInfoBottomSheetBody(
+                userData: widget.userData,
                   isDark: isDark, size: size, user: widget.user);
             } else {
               return ChatPageFriendInfoShimmer(size: size);

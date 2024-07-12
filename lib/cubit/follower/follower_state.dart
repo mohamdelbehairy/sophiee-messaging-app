@@ -21,3 +21,5 @@ final class DeleteFollowerSuccess extends FollowerState {
 
   DeleteFollowerSuccess({required this.isFollowing});
 }
+
+final class BlocAllFollowerInfoSuccess extends FollowerState {}

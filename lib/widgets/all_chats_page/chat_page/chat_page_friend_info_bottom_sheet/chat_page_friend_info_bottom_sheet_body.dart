@@ -11,9 +11,10 @@ class ChatPageFriendInfoBottomSheetBody extends StatelessWidget {
       {super.key,
       required this.size,
       required this.user,
-      required this.isDark});
+      required this.isDark,
+      required this.userData});
   final Size size;
-  final UserModel user;
+  final UserModel user, userData;
   final bool isDark;
 
   @override
@@ -22,11 +23,13 @@ class ChatPageFriendInfoBottomSheetBody extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         ChatPageDivider(size: size),
-        ChatPageFriendListTile(user: user),
-        SizedBox(height: size.height * .025),
-        const ChatPageFriendInfo(),
+        ChatPageFriendListTile(user: user, userData: userData),
+        if (!userData.blockUsers.contains(user.userID))
+          SizedBox(height: size.height * .025),
+        if (!userData.blockUsers.contains(user.userID))
+          const ChatPageFriendInfo(),
         ChatPageFriendInfoBottomSheetDetails(
-            size: size, user: user, isDark: isDark)
+            userData: userData, size: size, user: user, isDark: isDark)
       ],
     );
   }
