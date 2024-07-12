@@ -31,13 +31,14 @@ class SearchResultPageComponent extends StatelessWidget {
         return SingleChildScrollView(
           child: BlocListener<CopyTextCubit, CopyTextState>(
             listener: (context, state) {
-              if(state is CopyTextSuccess) {
+              if (state is CopyTextSuccess) {
                 FlutterToastWidget.showToast(msg: "Copied");
               }
             },
             child: Column(
               children: [
                 SearchResultItemOne(
+                    userData: userData,
                     user: user,
                     size: size,
                     isFriend: isFriend.friends.contains(user.userID)),

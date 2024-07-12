@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart' as getnav;
@@ -25,6 +26,8 @@ class RecentSearchItem extends StatelessWidget {
       child: BlocBuilder<GetUserDataCubit, GetUserDataStates>(
         builder: (context, state) {
           if (state is GetUserDataSuccess && state.userModel.isNotEmpty) {
+            final userData = state.userModel.firstWhere((element) =>
+                element.userID == FirebaseAuth.instance.currentUser!.uid);
             final data = state.userModel.firstWhere(
                 (element) => element.userID == recentSearchModel.userID);
             return GestureDetector(
@@ -38,9 +41,14 @@ class RecentSearchItem extends StatelessWidget {
               },
               child: Row(
                 children: [
-                  RecentSearchImage(size: size, isDark: isDark, data: data),
+                  RecentSearchImage(
+                      size: size,
+                      isDark: isDark,
+                      data: data,
+                      userData: userData),
                   const SizedBox(width: 8),
-                  RecentSearchTexts(data: data, isDark: isDark)
+                  RecentSearchTexts(
+                      data: data, isDark: isDark, userData: userData)
                 ],
               ),
             );

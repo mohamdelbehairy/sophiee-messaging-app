@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sophiee/cubit/follow_status/follow_status_cubit.dart';
 import 'package:sophiee/cubit/user_date/get_user_data/get_user_data_cubit.dart';
@@ -24,9 +25,12 @@ class MyFriendPage extends StatelessWidget {
           child: BlocBuilder<GetUserDataCubit, GetUserDataStates>(
             builder: (context, state) {
               if (state is GetUserDataSuccess && state.userModel.isNotEmpty) {
-                final userData = state.userModel
+                final data = state.userModel
                     .firstWhere((element) => element.userID == user.userID);
-                return MyFriendPageBody(user: userData, size: size);
+                final userData = state.userModel.firstWhere((element) =>
+                    element.userID == FirebaseAuth.instance.currentUser!.uid);
+                return MyFriendPageBody(
+                    user: data, size: size, userData: userData);
               } else {
                 return Container();
               }

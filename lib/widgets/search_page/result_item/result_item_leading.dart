@@ -6,10 +6,13 @@ import '../../../models/users_model.dart';
 
 class ResultItemLeading extends StatelessWidget {
   const ResultItemLeading(
-      {super.key, required this.isDark, required this.user});
+      {super.key,
+      required this.isDark,
+      required this.user,
+      required this.userData});
 
   final bool isDark;
-  final UserModel user;
+  final UserModel user, userData;
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +25,8 @@ class ResultItemLeading extends StatelessWidget {
             shimmerBaseColor: isDark ? Colors.white12 : Colors.grey.shade300,
             shimmerHighlightColor:
                 isDark ? Colors.white24 : Colors.grey.shade100,
-            imageUrl: !user.isProfilePhotos
+            imageUrl: !user.isProfilePhotos ||
+                    userData.blockUsers.contains(user.userID)
                 ? defaultProfileImageUrl
                 : user.profileImage));
   }

@@ -13,10 +13,11 @@ class SearchPageResult extends StatelessWidget {
       {super.key,
       required this.searchList,
       required this.list,
-      required this.controller});
+      required this.controller, required this.userData});
 
   final List<UserModel> searchList, list;
   final TextEditingController controller;
+    final UserModel userData;
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +25,7 @@ class SearchPageResult extends StatelessWidget {
 
     return Expanded(
       child: searchList.isNotEmpty
-          ? ListViewResultFound(searchList: searchList, controller: controller)
+          ? ListViewResultFound(searchList: searchList, controller: controller,userData: userData)
           : list
                   .where((element) => (element.emailAddress
                           .toLowerCase()

@@ -26,10 +26,13 @@ class _SearchPageBodyState extends State<SearchPageBody> {
     final isDark = context.read<LoginCubit>().isDark;
     return BlocBuilder<GetUserDataCubit, GetUserDataStates>(
         builder: (context, state) {
-      if (state is GetUserDataSuccess) {
+      if (state is GetUserDataSuccess && state.userModel.isNotEmpty) {
         list = state.userModel;
+        final userData = state.userModel.firstWhere((element) =>
+            element.userID == FirebaseAuth.instance.currentUser!.uid);
         return SearchPageDetails(
           size: size,
+          userData: userData,
           controller: controller,
           isDark: isDark,
           searchList: searchList,

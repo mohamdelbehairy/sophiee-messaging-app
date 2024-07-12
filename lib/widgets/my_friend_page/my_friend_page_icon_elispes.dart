@@ -11,11 +11,14 @@ import 'icon_elispes_body.dart';
 
 class MyFriendPageIconElispes extends StatelessWidget {
   const MyFriendPageIconElispes(
-      {super.key, required this.user, required this.size, required this.isFriend});
+      {super.key,
+      required this.user,
+      required this.size,
+      required this.isFriend});
 
   final UserModel user;
   final Size size;
-  final bool isFriend ;
+  final bool isFriend;
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +34,7 @@ class MyFriendPageIconElispes extends StatelessWidget {
               final userData = userState.userModel.firstWhere((element) =>
                   element.userID == FirebaseAuth.instance.currentUser!.uid);
               return IconElispesBody(
-                isFriend: isFriend,
+                  isFriend: isFriend,
                   follower: follower,
                   user: user,
                   friend: friend,

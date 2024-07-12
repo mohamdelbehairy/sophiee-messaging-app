@@ -51,25 +51,27 @@ class IconElispesComponent extends StatelessWidget {
                   color: Colors.white, size: 25),
               itemBuilder: (context) => [
                     if (!user.isProfileLock || !isFriend)
-                      groupsInfoPopMenuItem(
-                          onTap: () async {
-                            await shareMedia(
-                                mediaUrl: user.profileImage,
-                                mediaType: 'image.jpg');
-                          },
-                          itemName: 'Share image',
-                          size: size,
-                          icon: Icons.share_outlined),
+                      if (!userData.blockUsers.contains(user.userID))
+                        groupsInfoPopMenuItem(
+                            onTap: () async {
+                              await shareMedia(
+                                  mediaUrl: user.profileImage,
+                                  mediaType: 'image.jpg');
+                            },
+                            itemName: 'Share image',
+                            size: size,
+                            icon: Icons.share_outlined),
                     if (!user.isProfileLock || !isFriend)
-                      groupsInfoPopMenuItem(
-                          onTap: () async {
-                            await saveImage(imageUrl: user.profileImage);
-                            FlutterToastWidget.showToast(
-                                msg: "Image saved successfully");
-                          },
-                          itemName: 'Save to gallery',
-                          size: size,
-                          icon: Icons.save_alt_outlined),
+                      if (!userData.blockUsers.contains(user.userID))
+                        groupsInfoPopMenuItem(
+                            onTap: () async {
+                              await saveImage(imageUrl: user.profileImage);
+                              FlutterToastWidget.showToast(
+                                  msg: "Image saved successfully");
+                            },
+                            itemName: 'Save to gallery',
+                            size: size,
+                            icon: Icons.save_alt_outlined),
                     groupsInfoPopMenuItem(
                         onTap: () async {
                           if (userData.blockUsers.contains(user.userID)) {
@@ -85,7 +87,7 @@ class IconElispesComponent extends StatelessWidget {
                           }
                         },
                         itemName: userData.blockUsers.contains(user.userID)
-                            ? 'UnBlock ${user.userName.split(' ')[0]}'
+                            ? 'Un Block ${user.userName.split(' ')[0]}'
                             : 'Block ${user.userName.split(' ')[0]}',
                         size: size,
                         icon: Icons.block),

@@ -7,8 +7,8 @@ import 'result_item_leading.dart';
 import 'result_item_title.dart';
 
 class ResultIem extends StatelessWidget {
-  const ResultIem({super.key, required this.user});
-  final UserModel user;
+  const ResultIem({super.key, required this.user, required this.userData});
+  final UserModel user,userData;
 
   @override
   Widget build(BuildContext context) {
@@ -16,8 +16,8 @@ class ResultIem extends StatelessWidget {
     final isDark = context.read<LoginCubit>().isDark;
 
     return ListTile(
-        title: ResultItemTitle(size: size, user: user, isDark: isDark),
-        leading: ResultItemLeading(isDark: isDark, user: user));
+        title: ResultItemTitle(size: size, user: user, isDark: isDark,userData: userData),
+        leading: ResultItemLeading(isDark: isDark, user: user,userData: userData));
   }
 }
 

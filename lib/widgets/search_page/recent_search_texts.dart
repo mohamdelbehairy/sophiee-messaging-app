@@ -3,9 +3,13 @@ import 'package:flutter/material.dart';
 import '../../models/users_model.dart';
 
 class RecentSearchTexts extends StatelessWidget {
-  const RecentSearchTexts({super.key, required this.data, required this.isDark});
+  const RecentSearchTexts(
+      {super.key,
+      required this.data,
+      required this.isDark,
+      required this.userData});
 
-  final UserModel data;
+  final UserModel data, userData;
   final bool isDark;
 
   @override
@@ -16,9 +20,10 @@ class RecentSearchTexts extends StatelessWidget {
             style: TextStyle(
                 fontSize: 16, color: isDark ? Colors.white : Colors.black87)),
         const SizedBox(width: 8),
-        Text(data.nickName,
-            style: TextStyle(
-                fontSize: 12, color: isDark ? Colors.white60 : Colors.grey)),
+        if (data.isBioAndNickName && !userData.blockUsers.contains(data.userID))
+          Text(data.nickName,
+              style: TextStyle(
+                  fontSize: 12, color: isDark ? Colors.white60 : Colors.grey)),
       ],
     );
   }

@@ -60,7 +60,8 @@ class ChatPageBody extends StatelessWidget {
               },
               child: const Icon(Icons.arrow_back)),
           actions: [
-            if (!userData.blockUsers.contains(user.userID))
+            if (user.isAudioAndVideoCall &&
+                !userData.blockUsers.contains(user.userID))
               SendCallInvitationButton(
                   sendCallInvitationModel: SendCallInvitationModel(
                       userID: user.userID,
@@ -68,7 +69,8 @@ class ChatPageBody extends StatelessWidget {
                       icon: Icons.call,
                       isVideoCall: false,
                       paddingLeft: 45)),
-            if (!userData.blockUsers.contains(user.userID))
+            if (user.isAudioAndVideoCall &&
+                !userData.blockUsers.contains(user.userID))
               SendCallInvitationButton(
                   sendCallInvitationModel: SendCallInvitationModel(
                       userID: user.userID,

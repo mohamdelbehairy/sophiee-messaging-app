@@ -9,10 +9,11 @@ class ResultItemTitle extends StatelessWidget {
       {super.key,
       required this.size,
       required this.user,
-      required this.isDark});
+      required this.isDark,
+      required this.userData});
 
   final Size size;
-  final UserModel user;
+  final UserModel user, userData;
   final bool isDark;
 
   @override
@@ -20,7 +21,8 @@ class ResultItemTitle extends StatelessWidget {
     return Row(
       children: [
         ResultItemUserName(size: size, user: user, isDark: isDark),
-        ResultItemNickName(user: user, isDark: isDark, size: size),
+        if (!userData.blockUsers.contains(user.userID))
+          ResultItemNickName(user: user, isDark: isDark, size: size),
       ],
     );
   }

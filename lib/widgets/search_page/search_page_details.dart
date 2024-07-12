@@ -16,7 +16,7 @@ class SearchPageDetails extends StatelessWidget {
       required this.searchList,
       required this.list,
       required this.onTap,
-      required this.onChanged});
+      required this.onChanged, required this.userData});
 
   final Size size;
   final TextEditingController controller;
@@ -24,6 +24,7 @@ class SearchPageDetails extends StatelessWidget {
   final List<UserModel> searchList, list;
   final Function() onTap;
   final Function(String) onChanged;
+    final UserModel userData;
 
   @override
   Widget build(BuildContext context) {
@@ -43,6 +44,7 @@ class SearchPageDetails extends StatelessWidget {
                 size: size,
                 controller: controller),
             SearchPageResult(
+              userData: userData,
                 searchList: searchList, list: list, controller: controller),
           ],
         );

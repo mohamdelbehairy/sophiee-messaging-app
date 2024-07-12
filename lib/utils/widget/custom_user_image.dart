@@ -6,9 +6,13 @@ import '../../models/users_model.dart';
 
 class CustomUserImage extends StatelessWidget {
   const CustomUserImage(
-      {super.key, required this.user, required this.size, this.hight});
+      {super.key,
+      required this.user,
+      required this.size,
+      this.hight,
+      required this.userData});
 
-  final UserModel user;
+  final UserModel user, userData;
   final Size size;
   final double? hight;
 
@@ -18,7 +22,9 @@ class CustomUserImage extends StatelessWidget {
         fit: BoxFit.cover,
         filterQuality: FilterQuality.high,
         imageUrl:
-            user.isProfilePhotos ? user.profileImage : defaultProfileImageUrl,
+            !user.isProfilePhotos || userData.blockUsers.contains(user.userID)
+                ? defaultProfileImageUrl
+                : user.profileImage,
         height: hight ?? size.height * .55,
         width: size.width);
   }

@@ -10,9 +10,10 @@ import 'result_item/result_item.dart';
 
 class ListViewResultFound extends StatelessWidget {
   const ListViewResultFound(
-      {super.key, required this.searchList, required this.controller});
+      {super.key, required this.searchList, required this.controller, required this.userData});
   final List<UserModel> searchList;
   final TextEditingController controller;
+  final UserModel userData;
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +42,7 @@ class ListViewResultFound extends StatelessWidget {
                       userID: searchList[index].userID);
                 }
               },
-              child: ResultIem(user: searchList[index]));
+              child: ResultIem(user: searchList[index],userData: userData));
         });
   }
 }

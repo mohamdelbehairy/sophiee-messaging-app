@@ -11,16 +11,18 @@ import 'my_friend_page_icon_elispes.dart';
 import '../../utils/widget/custom_user_image.dart';
 
 class MyFriendItemOne extends StatelessWidget {
-  const MyFriendItemOne({super.key, required this.user});
-  final UserModel user;
+  const MyFriendItemOne(
+      {super.key, required this.user, required this.userData});
+  final UserModel user, userData;
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Stack(
       children: [
-        CustomUserImage(user: user, size: size),
-        MyFriendPageIconElispes(user: user, size: size,isFriend: true),
+        CustomUserImage(user: user, size: size, userData: userData),
+        MyFriendPageIconElispes(
+            user: user, size: size, isFriend: true),
         MyFriendPageIcon(
             myFriendIconModel: MyFriendIconModel(
                 left: 8,

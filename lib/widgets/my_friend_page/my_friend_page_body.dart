@@ -18,9 +18,9 @@ import 'my_friend_list_view_images.dart';
 import 'profile_page_lock_widet.dart';
 
 class MyFriendPageBody extends StatelessWidget {
-  const MyFriendPageBody({super.key, required this.user, required this.size});
+  const MyFriendPageBody({super.key, required this.user, required this.size, required this.userData});
 
-  final UserModel user;
+  final UserModel user,userData;
   final Size size;
 
   @override
@@ -35,7 +35,7 @@ class MyFriendPageBody extends StatelessWidget {
       },
       child: Column(
         children: [
-          MyFriendItemOne(user: user),
+          MyFriendItemOne(user: user,userData: userData),
           MyFriendItemTwo(user: user, infoCalls: InfoCallsWidget(user: user)),
           if (!user.isProfileLock) const SizedBox(height: 12),
           if (user.isProfileLock)
