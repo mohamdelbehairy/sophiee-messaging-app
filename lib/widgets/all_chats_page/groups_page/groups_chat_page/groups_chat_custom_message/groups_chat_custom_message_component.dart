@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:sophiee/cubit/delete_messages/delete_chat_message_cubit.dart';
 import 'package:sophiee/cubit/user_date/get_user_data/get_user_data_cubit.dart';
 import 'package:sophiee/cubit/user_date/get_user_data/get_user_data_state.dart';
@@ -48,9 +49,10 @@ class GroupsChatCustomMessageComponenet extends StatelessWidget {
     return BlocBuilder<GetUserDataCubit, GetUserDataStates>(
       builder: (context, state) {
         if (state is GetUserDataSuccess && state.userModel.isNotEmpty) {
-          final currentUser = message.senderID;
           final data = state.userModel
-              .firstWhere((element) => element.userID == currentUser);
+              .firstWhere((element) => element.userID == message.senderID);
+          final userData = state.userModel.firstWhere((element) =>
+              element.userID == FirebaseAuth.instance.currentUser!.uid);
           return GestureDetector(
             onDoubleTap: () async {
               if (message.messageImage != null) {
@@ -78,6 +80,7 @@ class GroupsChatCustomMessageComponenet extends StatelessWidget {
                     size: size,
                     message: message,
                     child: GroupsChatCustomMessageDetails(
+                        userData: userData,
                         groupModel: groupModel,
                         message: message,
                         user: data,

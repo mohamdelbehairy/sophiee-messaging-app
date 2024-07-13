@@ -5,6 +5,9 @@ import 'package:sophiee/widgets/all_chats_page/groups_page/groups_chat_page/grou
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../../../constants.dart';
+import '../../../../../../utils/widget/no_result_found.dart';
+
 class GroupsAddMembersListView extends StatelessWidget {
   const GroupsAddMembersListView(
       {super.key,
@@ -33,7 +36,16 @@ class GroupsAddMembersListView extends StatelessWidget {
               },
             );
           } else {
-            return Container();
+            return const Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                CustomNoResultFound(
+                    image: emptyImageUrl,
+                    textOne: 'No Friend Found',
+                    textTwo:
+                        'We didn\'t find any friends yet \n Please add a new friend'),
+              ],
+            );
           }
         },
       ),

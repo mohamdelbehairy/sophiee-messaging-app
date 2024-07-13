@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:sophiee/constants.dart';
 import 'package:sophiee/cubit/user_date/get_user_data/get_user_data_cubit.dart';
 import 'package:sophiee/cubit/user_date/get_user_data/get_user_data_state.dart';
@@ -9,7 +10,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class GroupsChatMembersPageListView extends StatelessWidget {
   const GroupsChatMembersPageListView(
-      {super.key, required this.groupModel, required this.size, required this.isDark});
+      {super.key,
+      required this.groupModel,
+      required this.size,
+      required this.isDark});
   final GroupModel groupModel;
   final Size size;
   final bool isDark;
@@ -25,21 +29,27 @@ class GroupsChatMembersPageListView extends StatelessWidget {
                 builder: (context, state) {
                   if (state is GetUserDataSuccess &&
                       state.userModel.isNotEmpty) {
-                    final userID = groupModel.usersID[index];
-                    final userData = state.userModel
-                        .firstWhere((element) => element.userID == userID);
+                    final membersData = state.userModel.firstWhere((element) =>
+                        element.userID == groupModel.usersID[index]);
+
+                    final userData = state.userModel.firstWhere((element) =>
+                        element.userID ==
+                        FirebaseAuth.instance.currentUser!.uid);
+
                     int differenceInMinutes = Timestamp.now()
                         .toDate()
-                        .difference(userData.onlineStatue)
+                        .difference(membersData.onlineStatue)
                         .inMinutes;
-                    if (differenceInMinutes < 1 && userData.isLastSeendAndOnline) {
+                    if (differenceInMinutes < 1 &&
+                        membersData.isLastSeendAndOnline) {
                       color = kPrimaryColor;
                     } else {
                       color = Colors.grey;
                     }
                     return GroupsChatMembersListTile(
-                      isDark: isDark,
+                        isDark: isDark,
                         color: color,
+                        membersData: membersData,
                         userData: userData,
                         size: size,
                         groupModel: groupModel);

@@ -10,10 +10,11 @@ class GroupsChatMemebrIconActions extends StatelessWidget {
   const GroupsChatMemebrIconActions(
       {super.key,
       required this.groupModel,
-      required this.userData,
-      required this.size});
+      required this.membersData,
+      required this.size,
+      required this.userData});
   final GroupModel groupModel;
-  final UserModel userData;
+  final UserModel membersData, userData;
   final Size size;
 
   @override
@@ -22,12 +23,12 @@ class GroupsChatMemebrIconActions extends StatelessWidget {
       padding: EdgeInsets.only(right: size.width * .01),
       child: Row(
         children: [
-          if (groupModel.groupOwnerID == userData.userID)
+          if (groupModel.groupOwnerID == membersData.userID)
             Padding(
                 padding: EdgeInsets.only(right: size.width * .01),
                 child: Icon(Icons.admin_panel_settings,
                     color: kPrimaryColor, size: size.width * .06)),
-          if (groupModel.adminsID.contains(userData.userID))
+          if (groupModel.adminsID.contains(membersData.userID))
             Padding(
                 padding: EdgeInsets.only(
                     right: groupModel.adminsID
@@ -36,10 +37,16 @@ class GroupsChatMemebrIconActions extends StatelessWidget {
                         : 0.0),
                 child: Icon(FontAwesomeIcons.userTie,
                     color: kPrimaryColor, size: size.width * .05)),
-          // SizedBox(width: size.width * .015),
-          if (userData.userID != FirebaseAuth.instance.currentUser!.uid)
-            ControlMembersIcon(
-                size: size, userData: userData, groupModel: groupModel),
+          if ((membersData.userID != userData.userID &&
+              (membersData.blockUsers.contains(userData.userID) ||
+                  userData.blockUsers.contains(membersData.userID))))
+            SizedBox(width: size.width * .015),
+          if (membersData.userID != FirebaseAuth.instance.currentUser!.uid)
+            if (membersData.userID != userData.userID &&
+                !membersData.blockUsers.contains(userData.userID) &&
+                !userData.blockUsers.contains(membersData.userID))
+              ControlMembersIcon(
+                  size: size, userData: membersData, groupModel: groupModel),
         ],
       ),
     );

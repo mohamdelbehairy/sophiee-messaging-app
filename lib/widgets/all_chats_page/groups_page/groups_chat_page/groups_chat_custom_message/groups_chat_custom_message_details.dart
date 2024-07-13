@@ -17,9 +17,9 @@ class GroupsChatCustomMessageDetails extends StatelessWidget {
       required this.backGroundMessageColor,
       required this.isSeen,
       required this.messageTextColor,
-      required this.groupModel});
+      required this.groupModel, required this.userData});
   final MessageModel message;
-  final UserModel user;
+  final UserModel user,userData;
   final Alignment alignment;
   final Radius bottomLeft;
   final Radius bottomRight;
@@ -126,6 +126,7 @@ class GroupsChatCustomMessageDetails extends StatelessWidget {
         ),
         if (message.senderID != FirebaseAuth.instance.currentUser!.uid)
           GroupChatCustomMessageFriendImage(
+            userData: userData,
               size: size, user: user, messageModel: message)
       ],
     );
