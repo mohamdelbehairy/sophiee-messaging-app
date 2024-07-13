@@ -154,8 +154,7 @@ class CustomMaterialApp extends StatelessWidget {
         BlocProvider(create: (context) => LiveNotificationCubit()),
         BlocProvider(create: (context) => IsFriendCubit()),
         BlocProvider(create: (context) => CopyTextCubit()),
-        BlocProvider(
-            create: (context) => RecentSearchCubit()..getRecentSearch()),
+        BlocProvider(create: (context) => RecentSearchCubit()),
         BlocProvider(create: (context) => DeleteRecentSearchCubit())
       ],
       child: BlocBuilder<LoginCubit, LoginState>(

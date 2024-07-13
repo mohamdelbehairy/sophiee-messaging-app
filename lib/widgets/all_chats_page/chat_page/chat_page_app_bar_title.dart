@@ -38,7 +38,8 @@ class ChatPageAppBarTitle extends StatelessWidget {
           int differenceInDays =
               Timestamp.now().toDate().difference(data.onlineStatue).inDays;
 
-          if (userData.blockUsers.contains(user.userID)) {
+          if (userData.blockUsers.contains(user.userID) ||
+              user.blockUsers.contains(userData.userID)) {
             text = 'last seen for a long time';
           } else if (!user.isLastSeendAndOnline) {
             text = 'last seen recently';
@@ -96,7 +97,9 @@ class ChatPageAppBarTitle extends StatelessWidget {
                                   ? Colors.white24
                                   : Colors.grey.shade100,
                               imageUrl: !data.isProfilePhotos ||
-                                      userData.blockUsers.contains(user.userID)
+                                      userData.blockUsers
+                                          .contains(user.userID) ||
+                                      user.blockUsers.contains(userData.userID)
                                   ? defaultProfileImageUrl
                                   : data.profileImage),
                         ),
@@ -106,7 +109,10 @@ class ChatPageAppBarTitle extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       SizedBox(
-                          width: size.width * .35,
+                          width: userData.blockUsers.contains(user.userID) ||
+                                  user.blockUsers.contains(userData.userID)
+                              ? size.width * .5
+                              : size.width * .35,
                           child: Text(data.userName,
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,

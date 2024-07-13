@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../models/users_model.dart';
 import 'item_bottom_image.dart';
-import '../item_bottom_online_statue.dart';
+import 'item_bottom_online_statue.dart';
 
 class ItemBottomListTileLeading extends StatelessWidget {
   const ItemBottomListTileLeading(
@@ -25,7 +25,8 @@ class ItemBottomListTileLeading extends StatelessWidget {
       children: [
         ItemBottomImage(
             size: size, isDark: isDark, data: data, userData: userData),
-        if (!userData.blockUsers.contains(data.userID))
+        if (!userData.blockUsers.contains(data.userID) &&
+            !data.blockUsers.contains(userData.userID))
           ItemBottomOnlineStatue(size: size, isDark: isDark, color: color)
       ],
     );

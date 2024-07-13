@@ -26,7 +26,8 @@ class ResultItemLeading extends StatelessWidget {
             shimmerHighlightColor:
                 isDark ? Colors.white24 : Colors.grey.shade100,
             imageUrl: !user.isProfilePhotos ||
-                    userData.blockUsers.contains(user.userID)
+                    userData.blockUsers.contains(user.userID) ||
+                    user.blockUsers.contains(userData.userID)
                 ? defaultProfileImageUrl
                 : user.profileImage));
   }

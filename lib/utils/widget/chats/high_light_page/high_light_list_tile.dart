@@ -27,7 +27,7 @@ class HighLightListTile extends StatelessWidget {
     return Stack(
       children: [
         Padding(
-            padding: EdgeInsets.only(top: size.height * .032),
+            padding: const EdgeInsets.only(top: 30),
             child: ListTile(
                 subtitle: HighLightListTileSubTitle(
                     user: user, message: message, size: size))),

@@ -41,14 +41,15 @@ class _ChatPageFriendBottomSheetInfoState
 
     return GestureDetector(
       onVerticalDragUpdate: (details) {
-        if (!widget.userData.blockUsers.contains(widget.user.userID)) {
+        if (!widget.userData.blockUsers.contains(widget.user.userID) &&
+            !widget.user.blockUsers.contains(widget.userData.userID)) {
           getnav.Get.to(() => MyFriendPage(user: widget.user),
               transition: getnav.Transition.downToUp);
         }
       },
       child: Container(
         decoration: BoxDecoration(
-            color: isDark ? cardDarkModeBackground : Colors.white,
+            color: isDark ? cardDarkModeBackground : cardLightModeBackground,
             borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(size.width * .04),
                 topRight: Radius.circular(size.width * .04))),
@@ -58,8 +59,10 @@ class _ChatPageFriendBottomSheetInfoState
                 state == ConnectivityResult.mobile ||
                 state == ConnectivityResult.vpn) {
               return ChatPageFriendInfoBottomSheetBody(
-                userData: widget.userData,
-                  isDark: isDark, size: size, user: widget.user);
+                  userData: widget.userData,
+                  isDark: isDark,
+                  size: size,
+                  user: widget.user);
             } else {
               return ChatPageFriendInfoShimmer(size: size);
             }

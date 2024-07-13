@@ -3,6 +3,7 @@ import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:sophiee/constants.dart';
 import 'package:sophiee/models/group_model.dart';
 import 'package:sophiee/models/message_model.dart';
 import 'package:sophiee/models/users_model.dart';
@@ -47,7 +48,16 @@ class ListTilePostionedFriendDetails extends StatelessWidget {
                           borderRadius: BorderRadius.circular(30),
                           child: FancyShimmerImage(
                               boxFit: BoxFit.cover,
-                              imageUrl: user.profileImage))),
+                              imageUrl: user.userID !=
+                                          FirebaseAuth
+                                              .instance.currentUser!.uid &&
+                                      (!user.isProfilePhotos ||
+                                          userDataModel.blockUsers
+                                              .contains(user.userID) ||
+                                          user.blockUsers
+                                              .contains(userDataModel.userID))
+                                  ? defaultProfileImageUrl
+                                  : user.profileImage))),
                   Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 6),
                       child: Text(

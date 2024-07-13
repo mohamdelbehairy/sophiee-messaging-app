@@ -30,7 +30,8 @@ class RecentSearchImage extends StatelessWidget {
                 shimmerHighlightColor:
                     isDark ? Colors.white24 : Colors.grey.shade100,
                 imageUrl: !data.isProfilePhotos ||
-                        userData.blockUsers.contains(data.userID)
+                        userData.blockUsers.contains(data.userID) ||
+                        data.blockUsers.contains(userData.userID)
                     ? defaultProfileImageUrl
                     : data.profileImage)));
   }

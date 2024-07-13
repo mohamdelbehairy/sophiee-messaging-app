@@ -11,7 +11,7 @@ class SearchResultPage extends StatelessWidget {
   Widget build(BuildContext context) {
     context.read<IsFriendCubit>().isFriend();
     return Scaffold(
-      body: SearchResultBogy(userID: userID),
+      body: SearchResultBody(userID: userID),
     );
   }
 }

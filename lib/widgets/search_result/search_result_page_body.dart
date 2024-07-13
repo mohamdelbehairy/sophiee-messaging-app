@@ -10,8 +10,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../cubit/is_friend/is_friend_cubit.dart';
 
-class SearchResultBogy extends StatelessWidget {
-  const SearchResultBogy({super.key, required this.userID});
+class SearchResultBody extends StatelessWidget {
+  const SearchResultBody({super.key, required this.userID});
   final String userID;
 
   @override

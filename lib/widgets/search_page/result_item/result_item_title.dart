@@ -21,7 +21,8 @@ class ResultItemTitle extends StatelessWidget {
     return Row(
       children: [
         ResultItemUserName(size: size, user: user, isDark: isDark),
-        if (!userData.blockUsers.contains(user.userID))
+        if (!userData.blockUsers.contains(user.userID) &&
+            !user.blockUsers.contains(userData.userID))
           ResultItemNickName(user: user, isDark: isDark, size: size),
       ],
     );

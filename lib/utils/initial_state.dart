@@ -22,4 +22,6 @@ class InitialState {
    static void initFriendState(BuildContext context) {
     context.read<GetFriendsCubit>().emit(GetFriendsInitial());
   }
+
+  
 }

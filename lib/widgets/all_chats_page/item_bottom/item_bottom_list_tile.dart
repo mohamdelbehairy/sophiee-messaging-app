@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../models/users_model.dart';
-import 'item_bottom/item_bottom_list_tile_leading.dart';
+import '../../../models/users_model.dart';
+import 'item_bottom_list_tile_leading.dart';
 import 'item_bottom_list_tile_sub_title.dart';
 import 'item_bottom_list_tile_title.dart';
 

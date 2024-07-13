@@ -29,9 +29,8 @@ class HighLightListViewItem extends StatelessWidget {
     return BlocBuilder<GetUserDataCubit, GetUserDataStates>(
       builder: (context, state) {
         if (state is GetUserDataSuccess && state.userModel.isNotEmpty) {
-          final currentUser = message.senderID;
           final data = state.userModel
-              .firstWhere((element) => element.userID == currentUser);
+              .firstWhere((element) => element.userID == message.senderID);
           final userDataModel = state.userModel.firstWhere((element) =>
               element.userID == FirebaseAuth.instance.currentUser!.uid);
           return Column(
@@ -46,7 +45,6 @@ class HighLightListViewItem extends StatelessWidget {
                   user: data,
                   groupModel: groupModel),
               HighLightMessageDateTime(size: size, message: message),
-              // Divider()
               Container(
                   height: .3,
                   width: size.width,

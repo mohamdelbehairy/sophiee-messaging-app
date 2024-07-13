@@ -26,9 +26,8 @@ class ChatPageBodyDetails extends StatefulWidget {
       required this.user,
       required this.size,
       required this.userDataModel});
-  final UserModel user;
+  final UserModel user, userDataModel;
   final Size size;
-  final UserModel userDataModel;
 
   @override
   State<ChatPageBodyDetails> createState() => _ChatPageBodyDetailsState();
@@ -122,8 +121,11 @@ class _ChatPageBodyDetailsState extends State<ChatPageBodyDetails> {
                             user: widget.user,
                             onLeftSwipe: (details) {
                               if (!widget.userDataModel.blockUsers
-                                  .contains(widget.user.userID)) {
+                                      .contains(widget.user.userID) &&
+                                  !widget.user.blockUsers
+                                      .contains(widget.userDataModel.userID)) {
                                 setState(() {
+                                  isSwip = true;
                                   messageModel = message;
                                   focusNode.requestFocus();
                                 });
@@ -212,13 +214,17 @@ class _ChatPageBodyDetailsState extends State<ChatPageBodyDetails> {
                               }),
                       if (isSwip) SizedBox(height: widget.size.height * .003),
                       if (widget.userDataModel.blockUsers
-                          .contains(widget.user.userID))
+                              .contains(widget.user.userID) ||
+                          widget.user.blockUsers
+                              .contains(widget.userDataModel.userID))
                         NotSendMessage(
                             size: widget.size,
                             text:
                                 'Sending messages is not allowed in this chat'),
                       if (!widget.userDataModel.blockUsers
-                          .contains(widget.user.userID))
+                              .contains(widget.user.userID) &&
+                          !widget.user.blockUsers
+                              .contains(widget.userDataModel.userID))
                         BlocListener<GetUserDataCubit, GetUserDataStates>(
                           listener: (context, state) {
                             if (state is GetUserDataSuccess &&
@@ -258,7 +264,9 @@ class _ChatPageBodyDetailsState extends State<ChatPageBodyDetails> {
                   ),
                 ],
               ),
-              if (!widget.userDataModel.blockUsers.contains(widget.user.userID))
+              if (!widget.userDataModel.blockUsers
+                      .contains(widget.user.userID) &&
+                  !widget.user.blockUsers.contains(widget.userDataModel.userID))
                 CustomChatSendTextAndRecordItem(
                     stopRecording: (value) {
                       setState(() {

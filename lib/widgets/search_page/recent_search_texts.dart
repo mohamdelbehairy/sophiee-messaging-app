@@ -20,7 +20,9 @@ class RecentSearchTexts extends StatelessWidget {
             style: TextStyle(
                 fontSize: 16, color: isDark ? Colors.white : Colors.black87)),
         const SizedBox(width: 8),
-        if (data.isBioAndNickName && !userData.blockUsers.contains(data.userID))
+        if (data.isBioAndNickName &&
+            !userData.blockUsers.contains(data.userID) &&
+            !data.blockUsers.contains(userData.userID))
           Text(data.nickName,
               style: TextStyle(
                   fontSize: 12, color: isDark ? Colors.white60 : Colors.grey)),

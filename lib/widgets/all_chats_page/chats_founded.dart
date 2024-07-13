@@ -13,7 +13,7 @@ import '../../cubit/user_date/get_user_data/get_user_data_cubit.dart';
 import '../../cubit/user_date/get_user_data/get_user_data_state.dart';
 import '../../pages/chats/chat_page.dart';
 import 'custom_slidable_action_item.dart';
-import 'item_bottom.dart';
+import 'item_bottom/item_bottom.dart';
 
 class ChatsFounded extends StatelessWidget {
   const ChatsFounded(

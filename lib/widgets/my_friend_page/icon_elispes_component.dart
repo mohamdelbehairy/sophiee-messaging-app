@@ -51,7 +51,8 @@ class IconElispesComponent extends StatelessWidget {
                   color: Colors.white, size: 25),
               itemBuilder: (context) => [
                     if (!user.isProfileLock || !isFriend)
-                      if (!userData.blockUsers.contains(user.userID))
+                      if (!userData.blockUsers.contains(user.userID) &&
+                          !user.blockUsers.contains(userData.userID))
                         groupsInfoPopMenuItem(
                             onTap: () async {
                               await shareMedia(
@@ -62,7 +63,8 @@ class IconElispesComponent extends StatelessWidget {
                             size: size,
                             icon: Icons.share_outlined),
                     if (!user.isProfileLock || !isFriend)
-                      if (!userData.blockUsers.contains(user.userID))
+                      if (!userData.blockUsers.contains(user.userID) &&
+                          !user.blockUsers.contains(userData.userID))
                         groupsInfoPopMenuItem(
                             onTap: () async {
                               await saveImage(imageUrl: user.profileImage);

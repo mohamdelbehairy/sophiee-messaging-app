@@ -30,7 +30,8 @@ class MyFriendItemTwoDetails extends StatelessWidget {
             MyFriendInfo(user: user, isDark: isDark, size: size),
             if (user.isAudioAndVideoCall && infoCalls != null) infoCalls!,
             if (followButton != null &&
-                !userData.blockUsers.contains(user.userID))
+                !userData.blockUsers.contains(user.userID) &&
+                !user.blockUsers.contains(userData.userID))
               followButton!,
           ],
         ),

@@ -24,9 +24,9 @@ class ChatPageFriendInfoBottomSheetBody extends StatelessWidget {
       children: [
         ChatPageDivider(size: size),
         ChatPageFriendListTile(user: user, userData: userData),
-        if (!userData.blockUsers.contains(user.userID))
+        if (!userData.blockUsers.contains(user.userID) && !user.blockUsers.contains(userData.userID))
           SizedBox(height: size.height * .025),
-        if (!userData.blockUsers.contains(user.userID))
+        if (!userData.blockUsers.contains(user.userID) && !user.blockUsers.contains(userData.userID))
           const ChatPageFriendInfo(),
         ChatPageFriendInfoBottomSheetDetails(
             userData: userData, size: size, user: user, isDark: isDark)

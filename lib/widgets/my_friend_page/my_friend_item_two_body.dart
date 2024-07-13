@@ -18,7 +18,6 @@ class MyFriendItemTwoBody extends StatelessWidget {
       this.followButton});
 
   final FollowerCubit follower;
-
   final FriendsCubit friend;
   final UserModel userData, user;
   final bool isDark;

@@ -1,4 +1,5 @@
 import 'package:sophiee/cubit/auth/login/login_cubit.dart';
+import 'package:sophiee/cubit/search/recent_search/recent_search_cubit.dart';
 import 'package:sophiee/cubit/user_date/get_user_data/get_user_data_cubit.dart';
 import 'package:sophiee/cubit/user_date/get_user_data/get_user_data_state.dart';
 import 'package:sophiee/models/users_model.dart';
@@ -19,6 +20,12 @@ class _SearchPageBodyState extends State<SearchPageBody> {
   TextEditingController controller = TextEditingController();
   List<UserModel> list = [];
   List<UserModel> searchList = [];
+
+  @override
+  void initState() {
+    context.read<RecentSearchCubit>().getRecentSearch();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
