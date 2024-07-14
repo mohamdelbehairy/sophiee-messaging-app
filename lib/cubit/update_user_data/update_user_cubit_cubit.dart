@@ -84,7 +84,7 @@ class UpdateUserDataCubit extends Cubit<UpdateUserDataStates> {
       emit(AddListUserSuccess());
     } catch (e) {
       emit(UpdateUserFailure(errorMessage: e.toString()));
-      debugPrint('error from mute users method: $e.');
+      debugPrint('error from add list users method: $e.');
     }
   }
 
@@ -101,7 +101,7 @@ class UpdateUserDataCubit extends Cubit<UpdateUserDataStates> {
     } catch (e) {
       emit(UpdateUserFailure(errorMessage: e.toString()));
 
-      debugPrint('error from un mute users method: $e.');
+      debugPrint('error from remove list users method: $e.');
     }
   }
 }

@@ -25,7 +25,11 @@ class CardBodyDetails extends StatelessWidget {
                 color: e.value.color,
                 icon: e.value.icon,
                 icon2: FontAwesomeIcons.chevronRight,
-                iconSize: e.key == 2 ? size.width * .04 : size.width * .045,
+                iconSize: e.key == 2
+                    ? size.width * .04
+                    : e.key == 3
+                        ? size.width * .035
+                        : size.width * .045,
                 text: e.value.text,
                 size: size,
                 textColor: isDark ? Colors.white : Colors.black,

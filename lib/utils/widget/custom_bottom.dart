@@ -10,7 +10,9 @@ class CustomBottom extends StatelessWidget {
       this.isLoading = false,
       this.enableFeedback = true,
       required this.borderRadius,
-      required this.width, this.margin, this.border});
+      required this.width,
+      this.margin,
+      this.border});
   final String text;
   final Color colorBottom;
   final Color colorText;
@@ -27,7 +29,8 @@ class CustomBottom extends StatelessWidget {
     return Container(
       width: width,
       margin: margin,
-      decoration: BoxDecoration(borderRadius: borderRadius, color: colorBottom,border: border),
+      decoration: BoxDecoration(
+          borderRadius: borderRadius, color: colorBottom, border: border),
       child: MaterialButton(
           enableFeedback: enableFeedback,
           splashColor: Colors.transparent,

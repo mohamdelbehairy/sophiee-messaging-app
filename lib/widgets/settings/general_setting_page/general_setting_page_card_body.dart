@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart' as getnav;
 import 'package:sophiee/pages/edit_profile_page.dart';
+import 'package:sophiee/pages/setting/block_setting_page.dart';
 import 'package:sophiee/pages/setting/chat_wallpaper_page.dart';
 
 import '../../../constants.dart';
@@ -33,7 +34,13 @@ class GeneralSettingPageCardBody extends StatelessWidget {
         icon: FontAwesomeIcons.image,
         text: 'Chat Wallpaper',
         color: const Color(0xffB338E0),
-        onTap: () => getnav.Get.to(() => const ChatWallpaperpage(),
+        onTap: () => getnav.Get.to(() => const ChatWallPaperPage(),
+            transition: getnav.Transition.rightToLeft)),
+    SettingCardModel(
+        icon: FontAwesomeIcons.userLock,
+        text: 'Blocking',
+        color: kPrimaryColor,
+        onTap: () => getnav.Get.to(() => const BlockSettingPage(),
             transition: getnav.Transition.rightToLeft)),
   ];
   @override

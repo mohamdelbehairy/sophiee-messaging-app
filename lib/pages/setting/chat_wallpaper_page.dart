@@ -5,8 +5,8 @@ import '../../cubit/auth/login/login_cubit.dart';
 import '../../widgets/settings/chat_wallpaper_page/chat_wall_paper_page_card.dart';
 import '../../widgets/settings/settings_page_app_bar.dart';
 
-class ChatWallpaperpage extends StatelessWidget {
-  const ChatWallpaperpage({super.key});
+class ChatWallPaperPage extends StatelessWidget {
+  const ChatWallPaperPage({super.key});
 
   @override
   Widget build(BuildContext context) {

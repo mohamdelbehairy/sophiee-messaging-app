@@ -22,6 +22,7 @@ const cardDarkModeBackground = Color(0xff1e1e1e);
 // 1 collections
 const userCollection = 'users';
 const recentSearchCollection = 'recentSearch';
+const blockingCollection = 'blocking';
 
 // 2 fields
 const userNameField = 'userName';

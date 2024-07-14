@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart' as getnav;
+import 'package:sophiee/cubit/block/block_cubit.dart';
 import 'package:sophiee/cubit/friends/friends_state.dart';
 import '../../constants.dart';
 import '../../cubit/follow_status/follow_status_cubit.dart';
@@ -35,6 +36,7 @@ class IconElispesComponent extends StatelessWidget {
   Widget build(BuildContext context) {
     var friend = context.read<FriendsCubit>();
     var updateUserData = context.read<UpdateUserDataCubit>();
+    var blockUser = context.read<BlockCubit>();
 
     return BlocBuilder<FollowStatusCubit, bool>(
       builder: (context, isFollowing) {
@@ -79,17 +81,18 @@ class IconElispesComponent extends StatelessWidget {
                           if (userData.blockUsers.contains(user.userID)) {
                             await updateUserData.removeListUsers(
                                 userID: user.userID, fieldName: 'blockUsers');
+                            await blockUser.deleteBlock(userID: user.userID);
                           } else {
                             await updateUserData.addListUsers(
                                 userID: user.userID, fieldName: 'blockUsers');
-
+                            await blockUser.storeBlock(userID: user.userID);
                             await follower.deleteAllFollowerInfo(
                                 followerID: user.userID);
                             await friend.deleteFriends(friendID: user.userID);
                           }
                         },
                         itemName: userData.blockUsers.contains(user.userID)
-                            ? 'Un Block ${user.userName.split(' ')[0]}'
+                            ? 'Unblock ${user.userName.split(' ')[0]}'
                             : 'Block ${user.userName.split(' ')[0]}',
                         size: size,
                         icon: Icons.block),

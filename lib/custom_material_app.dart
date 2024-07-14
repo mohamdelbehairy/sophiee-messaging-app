@@ -9,6 +9,7 @@ import 'package:sophiee/cubit/auth/google_auth/google_auth_cubit.dart';
 import 'package:sophiee/cubit/auth/login/login_cubit.dart';
 import 'package:sophiee/cubit/auth/phone_number_auth/phone_number_auth_cubit.dart';
 import 'package:sophiee/cubit/auth/register/register_cubit.dart';
+import 'package:sophiee/cubit/block/block_cubit.dart';
 import 'package:sophiee/cubit/chat_high_lights/update_chat_high_light/update_chat_high_light_cubit.dart';
 import 'package:sophiee/cubit/chat_media_files/chat_get_media_files/chat_get_media_files_cubit.dart';
 import 'package:sophiee/cubit/chat_media_files/chat_store_media_files/chat_store_media_files_cubit.dart';
@@ -155,7 +156,8 @@ class CustomMaterialApp extends StatelessWidget {
         BlocProvider(create: (context) => IsFriendCubit()),
         BlocProvider(create: (context) => CopyTextCubit()),
         BlocProvider(create: (context) => RecentSearchCubit()),
-        BlocProvider(create: (context) => DeleteRecentSearchCubit())
+        BlocProvider(create: (context) => DeleteRecentSearchCubit()),
+        BlocProvider(create: (context) => BlockCubit())
       ],
       child: BlocBuilder<LoginCubit, LoginState>(
         builder: (context, state) {
