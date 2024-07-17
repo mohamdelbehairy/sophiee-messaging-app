@@ -25,28 +25,18 @@ void main() async {
 
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
-  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
-
   ZegoUIKit().initLog().then((value) async {
     ZegoUIKitPrebuiltCallInvitationService().useSystemCallingUI(
       [ZegoUIKitSignalingPlugin()],
     );
     await runAppInit(navigatorKey: navigatorKey);
   });
-  // await Future.wait([
 
-  // ]);
-  // FlutterNativeSplash.remove();
-}
-
-@pragma('vm:entry-point')
-Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
-  await Firebase.initializeApp();
+  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
 }
 
 class SophieeApp extends StatelessWidget {
-  const SophieeApp(
-      {super.key, required this.screen, required this.navigator});
+  const SophieeApp({super.key, required this.screen, required this.navigator});
   final Widget screen;
   final GlobalKey<NavigatorState> navigator;
 
@@ -60,4 +50,9 @@ class SophieeApp extends StatelessWidget {
         themeModeService: themeModeService,
         screen: screen);
   }
+}
+
+@pragma('vm:entry-point')
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  await Firebase.initializeApp();
 }

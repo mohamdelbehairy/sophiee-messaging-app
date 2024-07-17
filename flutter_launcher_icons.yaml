@@ -1,4 +1,4 @@
 flutter_launcher_icons:
   android: "launcher_icon"
   ios: true
-  image_path: "assets/images/app-icon.png"
+  image_path: "assets/images/chat.png"
