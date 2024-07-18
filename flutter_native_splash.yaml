@@ -1,31 +1,12 @@
-# flutter_native_splash:
-#   color: "#FFFFFF"
-#   image: assets/images/app-icon.png
-#   # branding: assets/images/8379986.png
-#   color_dark: "#121212"
-#   image_dark: assets/images/app-icon.png
-#   # branding_dark: assets/branding-development.png
-
-#   android_12:
-#     color: "#FFFFFF"
-#     image: assets/images/app-icon.png
-#     icon_background_color: "#ffffff"
-#     image_dark: assets/images/app-icon.png
-#     # icon_background_color_dark: "#121212"
-  
-#   android: true
-#   ios: true
-#   web: false
-  
-
 flutter_native_splash:
   android: true
   ios: true
   web: false
   color: "#ffffff"
-  image: assets/images/empty.png
+  image: assets/images/chat.png
 
   android_12:
-    image: assets/images/empty.png
+    color: "#FFFFFF"
     icon_background_color: "#ffffff"
-    icon_background_color_dark: "#ffffff"  
+    image: assets/images/chat.png
+    image_dark: assets/images/chat.png
