@@ -3,10 +3,10 @@ flutter_native_splash:
   ios: true
   web: false
   color: "#ffffff"
-  image: assets/images/chat.png
+  image: assets/images/low_splash.png
 
   android_12:
     color: "#FFFFFF"
     icon_background_color: "#ffffff"
-    image: assets/images/chat.png
-    image_dark: assets/images/chat.png
+    image: assets/images/high_splash.png
+    image_dark: assets/images/high_splash.png

@@ -35,7 +35,7 @@
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     
     <application
-        android:label="SophieeApp"
+        android:label="sophiee"
         android:name="${applicationName}"
         android:enableOnBackInvokedCallback="true"
         android:icon="@mipmap/launcher_icon">
