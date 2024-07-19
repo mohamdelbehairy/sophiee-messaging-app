@@ -6,6 +6,8 @@ import 'package:sophiee/widgets/profile_page/profile_page_card_two/show_friends_
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../constants.dart';
+
 class FriendsListView extends StatelessWidget {
   const FriendsListView({super.key, required this.size});
   final Size size;
@@ -31,10 +33,9 @@ class FriendsListView extends StatelessWidget {
                 })),
           );
         } else {
-          return Container();
+          return Image.asset(emptyImageUrl, height: 40,width:100);
         }
       },
     );
   }
 }
-

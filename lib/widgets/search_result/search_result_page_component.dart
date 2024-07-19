@@ -43,12 +43,17 @@ class SearchResultPageComponent extends StatelessWidget {
                     size: size,
                     isFriend: isFriend.friends.contains(user.userID)),
                 MyFriendItemTwo(
+                    userData: userData,
                     user: user,
                     followButton: SearchResultPageBodyBottom(
                         user: user, userData: userData, size: size)),
                 if (!isFriend.friends.contains(user.userID))
                   ProfilePageLockWidget(
-                      size: size, user: user, isDark: isDark, isFriend: false),
+                      userData: userData,
+                      size: size,
+                      user: user,
+                      isDark: isDark,
+                      isFriend: false),
                 if (isFriend.friends.contains(user.userID))
                   SearchResultDetails(
                       user: user,

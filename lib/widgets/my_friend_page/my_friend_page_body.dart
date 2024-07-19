@@ -18,9 +18,13 @@ import 'my_friend_list_view_images.dart';
 import 'profile_page_lock_widet.dart';
 
 class MyFriendPageBody extends StatelessWidget {
-  const MyFriendPageBody({super.key, required this.user, required this.size, required this.userData});
+  const MyFriendPageBody(
+      {super.key,
+      required this.user,
+      required this.size,
+      required this.userData});
 
-  final UserModel user,userData;
+  final UserModel user, userData;
   final Size size;
 
   @override
@@ -35,29 +39,63 @@ class MyFriendPageBody extends StatelessWidget {
       },
       child: Column(
         children: [
-          MyFriendItemOne(user: user,userData: userData),
-          MyFriendItemTwo(user: user, infoCalls: InfoCallsWidget(user: user)),
+          MyFriendItemOne(user: user, userData: userData),
+          MyFriendItemTwo(
+              user: user,
+              userData: userData,
+              infoCalls: InfoCallsWidget(user: user)),
           if (!user.isProfileLock) const SizedBox(height: 12),
-          if (user.isProfileLock)
+          if (user.isProfileLock ||
+              userData.blockUsers.contains(user.userID) ||
+              user.blockUsers.contains(userData.userID))
             ProfilePageLockWidget(
-                size: size, user: user, isDark: isDark, isFriend: true),
-          if (user.isBioAndNickName && !user.isProfileLock)
+                userData: userData,
+                size: size,
+                user: user,
+                isDark: isDark,
+                isFriend: true),
+          if (user.isBioAndNickName &&
+              !user.isProfileLock &&
+              !userData.blockUsers.contains(user.userID) &&
+              !user.blockUsers.contains(userData.userID))
             MyFriendItems(
                 text: 'About ${user.userName.split(' ')[0]}',
                 textButton: 'More',
                 onTap: () {}),
-          if (user.isBioAndNickName && !user.isProfileLock)
+          if (user.isBioAndNickName &&
+              !user.isProfileLock &&
+              !userData.blockUsers.contains(user.userID) &&
+              !user.blockUsers.contains(userData.userID))
             const SizedBox(height: 8),
-          if (user.isBioAndNickName && !user.isProfileLock)
+          if (user.isBioAndNickName &&
+              !user.isProfileLock &&
+              !userData.blockUsers.contains(user.userID) &&
+              !user.blockUsers.contains(userData.userID))
             MyFriendItemBio(user: user),
-          if (user.isBioAndNickName && !user.isProfileLock)
+          if (user.isBioAndNickName &&
+              !user.isProfileLock &&
+              !userData.blockUsers.contains(user.userID) &&
+              !user.blockUsers.contains(userData.userID))
             const SizedBox(height: 22),
-          if (!user.isProfileLock)
+          if (!user.isProfileLock &&
+              !userData.blockUsers.contains(user.userID) &&
+              !user.blockUsers.contains(userData.userID))
             MyFriendItems(text: 'Friends', textButton: 'See all', onTap: () {}),
-          if (!user.isProfileLock) const SizedBox(height: 4),
-          if (!user.isProfileLock) MyFriendListViewFriends(friend: user),
-          if (!user.isProfileLock) const SizedBox(height: 18),
-          if (!user.isProfileLock)
+          if (!user.isProfileLock &&
+              !userData.blockUsers.contains(user.userID) &&
+              !user.blockUsers.contains(userData.userID))
+            const SizedBox(height: 4),
+          if (!user.isProfileLock &&
+              !userData.blockUsers.contains(user.userID) &&
+              !user.blockUsers.contains(userData.userID))
+            MyFriendListViewFriends(friend: user),
+          if (!user.isProfileLock &&
+              !userData.blockUsers.contains(user.userID) &&
+              !user.blockUsers.contains(userData.userID))
+            const SizedBox(height: 18),
+          if (!user.isProfileLock &&
+              !userData.blockUsers.contains(user.userID) &&
+              !user.blockUsers.contains(userData.userID))
             MyFriendItems(
                 text: 'Photos',
                 textButton: 'See all',
@@ -65,8 +103,13 @@ class MyFriendPageBody extends StatelessWidget {
                     () => CardThreeSeeAllPage(
                         isDark: isDark, getImage: getImage, size: size),
                     transition: getnav.Transition.downToUp)),
-          if (!user.isProfileLock) const SizedBox(height: 4),
-          if (!user.isProfileLock)
+          if (!user.isProfileLock &&
+              !userData.blockUsers.contains(user.userID) &&
+              !user.blockUsers.contains(userData.userID))
+            const SizedBox(height: 4),
+          if (!user.isProfileLock &&
+              !userData.blockUsers.contains(user.userID) &&
+              !user.blockUsers.contains(userData.userID))
             MyFriendListViewImages(size: size, user: user)
         ],
       ),

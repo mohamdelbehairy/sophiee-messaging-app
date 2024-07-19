@@ -8,6 +8,7 @@ class BlockSettingPageBody extends StatelessWidget {
 
   final Size size;
 
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -17,9 +18,9 @@ class BlockSettingPageBody extends StatelessWidget {
             appParTitle: 'Blocking',
             arrowIcon:
                 const Icon(Icons.arrow_back, color: Colors.white, size: 30)),
-        Expanded(child: BlockSettingPageListView(size: size))
+        Expanded(
+            child: BlockSettingPageListView(size: size)),
       ],
     );
   }
 }
-

@@ -8,10 +8,12 @@ class ProfilePageLockWidget extends StatelessWidget {
       {super.key,
       required this.size,
       required this.user,
-      required this.isDark, required this.isFriend});
+      required this.isDark,
+      required this.isFriend,
+      required this.userData});
 
   final Size size;
-  final UserModel user;
+  final UserModel user, userData;
   final bool isDark, isFriend;
 
   @override
@@ -20,7 +22,8 @@ class ProfilePageLockWidget extends StatelessWidget {
       children: [
         Image.asset(profileLockImageurl,
             fit: BoxFit.cover, height: size.height * .3),
-        if (isFriend)
+        // if (isFriend)
+        if (user.blockUsers.contains(userData.userID))
           Text('${user.userName.split(' ')[0]} is locked your profile',
               textAlign: TextAlign.center,
               style: TextStyle(

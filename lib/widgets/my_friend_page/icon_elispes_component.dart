@@ -96,7 +96,9 @@ class IconElispesComponent extends StatelessWidget {
                             : 'Block ${user.userName.split(' ')[0]}',
                         size: size,
                         icon: Icons.block),
-                    if (isFriend)
+                    if (isFriend &&
+                        !userData.blockUsers.contains(user.userID) &&
+                        !user.blockUsers.contains(userData.userID))
                       groupsInfoPopMenuItem(
                           onTap: () {
                             getnav.Get.to(() => ChatPage(userID: user.userID),
@@ -105,7 +107,9 @@ class IconElispesComponent extends StatelessWidget {
                           itemName: 'Start Chat',
                           size: size,
                           icon: Icons.chat_outlined),
-                    if (isFriend)
+                    if (isFriend &&
+                        !userData.blockUsers.contains(user.userID) &&
+                        !user.blockUsers.contains(userData.userID))
                       groupsInfoPopMenuItem(
                           onTap: () async {
                             if (isFollowing) {

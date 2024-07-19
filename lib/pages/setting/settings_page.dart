@@ -33,10 +33,10 @@ class SettingsPage extends StatelessWidget {
                     return SettingsPageBody(
                         size: size, isDark: isDark, user: userData);
                   } else {
-                    return Container();
+                    return const SizedBox();
                   }
                 } else {
-                  return Container();
+                  return const SizedBox();
                 }
               },
             );

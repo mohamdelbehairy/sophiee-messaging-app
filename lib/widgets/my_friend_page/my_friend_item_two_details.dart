@@ -28,7 +28,11 @@ class MyFriendItemTwoDetails extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             MyFriendInfo(user: user, isDark: isDark, size: size),
-            if (user.isAudioAndVideoCall && infoCalls != null) infoCalls!,
+            if (user.isAudioAndVideoCall &&
+                infoCalls != null &&
+                !userData.blockUsers.contains(user.userID) &&
+                !user.blockUsers.contains(userData.userID))
+              infoCalls!,
             if (followButton != null &&
                 !userData.blockUsers.contains(user.userID) &&
                 !user.blockUsers.contains(userData.userID))

@@ -74,12 +74,8 @@ import 'cubit/user_date/image/store_image/store_image_cubit.dart';
 
 class CustomMaterialApp extends StatelessWidget {
   const CustomMaterialApp(
-      {super.key,
-      required this.themeModeService,
-      required this.screen,
-      required this.navigatorKey});
+      {super.key, required this.screen, required this.navigatorKey});
 
-  final ThemeModeService themeModeService;
   final Widget screen;
   final GlobalKey<NavigatorState> navigatorKey;
 
@@ -161,8 +157,9 @@ class CustomMaterialApp extends StatelessWidget {
       ],
       child: BlocBuilder<LoginCubit, LoginState>(
         builder: (context, state) {
+          ThemeModeService themeModeService = ThemeModeService();
           return GetMaterialApp(
-            title: 'SophieeApp',
+            title: 'sophiee',
             navigatorKey: navigatorKey,
             color: Colors.transparent,
             debugShowCheckedModeBanner: false,

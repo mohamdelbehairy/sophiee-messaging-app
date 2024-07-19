@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 
 import '../../../../../constants.dart';
 import '../../../../../models/users_model.dart';
-import 'groups_chat_members_status.dart';
 
 class GroupChatMemberLeading extends StatelessWidget {
   const GroupChatMemberLeading(
@@ -42,17 +41,17 @@ class GroupChatMemberLeading extends StatelessWidget {
                                         .contains(membersData.userID)))
                         ? defaultProfileImageUrl
                         : membersData.profileImage))),
-        if (membersData.userID != userData.userID &&
-            !membersData.blockUsers.contains(userData.userID) &&
-            !userData.blockUsers.contains(membersData.userID))
-          Positioned(
-              right: 0.0,
-              bottom: 0.0,
-              child: GroupsChatMembersStatus(
-                  membersData: membersData,
-                  size: size,
-                  color: color,
-                  isDark: isDark)),
+        // if (membersData.userID != userData.userID &&
+        //     !membersData.blockUsers.contains(userData.userID) &&
+        //     !userData.blockUsers.contains(membersData.userID))
+        // Positioned(
+        //     right: 0.0,
+        //     bottom: 0.0,
+        //     child: GroupsChatMembersStatus(
+        //         membersData: membersData,
+        //         size: size,
+        //         color: color,
+        //         isDark: isDark)),
       ],
     );
   }

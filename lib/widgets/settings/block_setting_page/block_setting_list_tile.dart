@@ -14,12 +14,14 @@ class BlockSettingListTile extends StatelessWidget {
       required this.userData,
       required this.isDark,
       required this.size,
-      required this.blockUser});
+      required this.blockUser,
+      required this.onPressed});
 
   final UserModel userData;
   final bool isDark;
   final Size size;
   final BlockCubit blockUser;
+  final Function() onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -34,6 +36,7 @@ class BlockSettingListTile extends StatelessWidget {
         leading:
             BlockSettingLeading(size: size, isDark: isDark, userData: userData),
         trailing: BlockSettingTrailing(
+            onPressed: onPressed,
             updateUser: updateUser,
             userData: userData,
             blockUser: blockUser,

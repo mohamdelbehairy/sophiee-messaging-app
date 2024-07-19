@@ -26,7 +26,7 @@ class _ChatPageState extends State<ChatPage> {
 
   @override
   Widget build(BuildContext context) {
-    var size = MediaQuery.of(context).size;
+    var size = MediaQuery.sizeOf(context);
 
     return BlocBuilder<GetUserDataCubit, GetUserDataStates>(
       builder: (context, state) {

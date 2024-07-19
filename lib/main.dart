@@ -5,7 +5,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sophiee/custom_material_app.dart';
 import 'package:sophiee/firebase_options.dart';
 import 'package:sophiee/run_app_init.dart';
-import 'package:sophiee/services/theme.dart';
 import 'package:sophiee/simple_observe_bloc.dart';
 import 'package:zego_uikit_prebuilt_call/zego_uikit_prebuilt_call.dart';
 import 'package:zego_uikit_signaling_plugin/zego_uikit_signaling_plugin.dart';
@@ -17,8 +16,6 @@ final navigatorKey = GlobalKey<NavigatorState>();
 void main() async {
   Bloc.observer = SimpleBlocObserver();
 
-  // WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
-  // FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   WidgetsFlutterBinding.ensureInitialized();
 
   ZegoUIKitPrebuiltCallInvitationService().setNavigatorKey(navigatorKey);
@@ -43,12 +40,8 @@ class SophieeApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     systemChromeMethod();
-    ThemeModeService themeModeService = ThemeModeService();
 
-    return CustomMaterialApp(
-        navigatorKey: navigator,
-        themeModeService: themeModeService,
-        screen: screen);
+    return CustomMaterialApp(navigatorKey: navigator, screen: screen);
   }
 }
 

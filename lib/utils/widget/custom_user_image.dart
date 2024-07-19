@@ -21,10 +21,11 @@ class CustomUserImage extends StatelessWidget {
     return CachedNetworkImage(
         fit: BoxFit.cover,
         filterQuality: FilterQuality.high,
-        imageUrl:
-            !user.isProfilePhotos || userData.blockUsers.contains(user.userID)
-                ? defaultProfileImageUrl
-                : user.profileImage,
+        imageUrl: !user.isProfilePhotos ||
+                userData.blockUsers.contains(user.userID) ||
+                user.blockUsers.contains(userData.userID)
+            ? defaultProfileImageUrl
+            : user.profileImage,
         height: hight ?? size.height * .55,
         width: size.width);
   }

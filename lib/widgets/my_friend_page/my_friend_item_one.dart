@@ -21,8 +21,7 @@ class MyFriendItemOne extends StatelessWidget {
     return Stack(
       children: [
         CustomUserImage(user: user, size: size, userData: userData),
-        MyFriendPageIconElispes(
-            user: user, size: size, isFriend: true),
+        MyFriendPageIconElispes(user: user, size: size, isFriend: true),
         MyFriendPageIcon(
             myFriendIconModel: MyFriendIconModel(
                 left: 8,

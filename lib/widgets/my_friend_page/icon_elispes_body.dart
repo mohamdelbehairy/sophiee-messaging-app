@@ -15,7 +15,8 @@ class IconElispesBody extends StatelessWidget {
       required this.user,
       required this.friend,
       required this.userData,
-      required this.size, required this.isFriend});
+      required this.size,
+      required this.isFriend});
 
   final FollowerCubit follower;
   final UserModel user;
@@ -56,8 +57,11 @@ class IconElispesBody extends StatelessWidget {
       },
       builder: (context, state) {
         return IconElispesComponent(
-          isFriend: isFriend,
-            user: user, size: size, follower: follower, userData: userData);
+            isFriend: isFriend,
+            user: user,
+            size: size,
+            follower: follower,
+            userData: userData);
       },
     );
   }
