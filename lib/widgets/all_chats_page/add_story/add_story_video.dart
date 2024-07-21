@@ -96,7 +96,6 @@ class _AddStoryVideoState extends State<AddStoryVideo> {
                     onTap: () async {
                       await Future.delayed(const Duration(seconds: 1), () {
                         Navigator.pop(context);
-                        Navigator.pop(context);
                       });
                       String videoUrl = await uploadVideo.uploadVideo(
                           videoFile: widget.video, fieldName: 'stories_videos');
@@ -105,7 +104,9 @@ class _AddStoryVideoState extends State<AddStoryVideo> {
                           videoUrl: videoUrl,
                           storyText: controller.text,
                           storyVideoTime: videoDuration?.inSeconds);
-                      await story.updateIsStory(isStory: true);
+                      await story.updateIsStory(
+                          isStory: true,
+                          userID: FirebaseAuth.instance.currentUser!.uid);
 
                       for (var element in items!) {
                         var data = items2!
@@ -145,6 +146,7 @@ class _AddStoryVideoState extends State<AddStoryVideo> {
         setState(() {
           videoPlayerController.setLooping(false);
           _isPlaying = true;
+          videoDuration = videoPlayerController.value.duration;
           videoPlayerController.addListener(_videoListener);
         });
       });

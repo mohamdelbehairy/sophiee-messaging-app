@@ -10,6 +10,7 @@ class PickImageCubit extends Cubit<PickImageStates> {
   File? selectedImage;
 
   Future<void> pickImage({required ImageSource source}) async {
+    emit(PickImageLoading());
     try {
       final returnImage = await ImagePicker().pickImage(source: source);
       if (returnImage != null) {
@@ -17,7 +18,7 @@ class PickImageCubit extends Cubit<PickImageStates> {
         emit(PickImageSucccess(image: selectedImage!));
       }
     } catch (e) {
-      debugPrint('error from pick image cubit: ${e.toString()}');
+      debugPrint('error from pick image cubit: $e');
       emit(PickImageFailure(errorMessage: e.toString()));
     }
   }

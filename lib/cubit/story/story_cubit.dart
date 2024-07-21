@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -6,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sophiee/cubit/story/story_state.dart';
 import 'package:sophiee/models/story_model.dart';
+
+import '../../constants.dart';
 
 class StoryCubit extends Cubit<StoryState> {
   StoryCubit() : super(AddStoryInitial());
@@ -17,39 +20,40 @@ class StoryCubit extends Cubit<StoryState> {
       int? storyVideoTime}) async {
     try {
       StoryModel storyModel = StoryModel.fromJson({
-        'storyImage': imageUrl,
-        'storyVideo': videoUrl,
-        'storyText': storyText,
-        'storyDataTime': Timestamp.now(),
-        'storyExpirationTime':
-            Timestamp.fromDate(DateTime.now().add(const Duration(days: 1))),
-        'storyVideoTime': storyVideoTime
+        storyImageField: imageUrl,
+        storyVideoField: videoUrl,
+        storyTextField: storyText,
+        storyDataTimeField: Timestamp.now(),
+        storyExpirationTimeField:
+            Timestamp.fromDate(DateTime.now().add(const Duration(minutes: 10))),
+        storyVideoTimeField: storyVideoTime
       });
       await FirebaseFirestore.instance
-          .collection('stories')
+          .collection(storiesCollection)
           .doc(FirebaseAuth.instance.currentUser!.uid)
-          .collection('stories')
+          .collection(storiesCollection)
           .add(storyModel.toMap());
       emit(AddStorySuccess());
     } catch (e) {
       emit(AddStoryFailure(errorMessage: e.toString()));
-      debugPrint('error from add story: ${e.toString()}');
+      debugPrint('error from add story: $e');
     }
   }
 
-  Future<void> updateIsStory({required bool isStory}) async {
+  Future<void> updateIsStory(
+      {required bool isStory, required String userID}) async {
     await FirebaseFirestore.instance
-        .collection('users')
-        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .collection(userCollection)
+        .doc(userID)
         .update({'isStory': isStory});
   }
 
   Future<void> getStory({required String friendId}) async {
     try {
       await FirebaseFirestore.instance
-          .collection('stories')
+          .collection(storiesCollection)
           .doc(friendId)
-          .collection('stories')
+          .collection(storiesCollection)
           .orderBy('storyDataTime', descending: false)
           .get()
           .then((QuerySnapshot<Map<String, dynamic>> snapshot) {
@@ -61,14 +65,14 @@ class StoryCubit extends Cubit<StoryState> {
       });
     } catch (e) {
       emit(GetStoryFailure(errorMessage: e.toString()));
-      debugPrint('error from get story method: ${e.toString()}');
+      debugPrint('error from get story method: $e');
     }
   }
 
   Future<bool> checkIsStory(
       {required String friendId, required String story}) async {
     var userData = await FirebaseFirestore.instance
-        .collection('users')
+        .collection(userCollection)
         .doc(friendId)
         .get();
     if (userData.exists) {
@@ -79,29 +83,14 @@ class StoryCubit extends Cubit<StoryState> {
     return false;
   }
 
-  void startDeleteStory() {
-    const Duration period = Duration(seconds: 1);
-    Timer.periodic(period, (timer) {
-      deleteStory();
-    });
-  }
-
-  Future<void> deleteStory() async {
+  Future<void> deleteStory({required String userID}) async {
     try {
-      var documents = await FirebaseFirestore.instance
-          .collection('stories')
-          .doc(FirebaseAuth.instance.currentUser!.uid)
-          .collection('stories')
-          .get();
-      if (documents.docs.isEmpty) {
-        updateIsStory(isStory: false);
-      }
       DateTime currentDateTime = DateTime.now();
       QuerySnapshot<Map<String, dynamic>> snapshot = await FirebaseFirestore
           .instance
-          .collection('stories')
-          .doc(FirebaseAuth.instance.currentUser!.uid)
-          .collection('stories')
+          .collection(storiesCollection)
+          .doc(userID)
+          .collection(storiesCollection)
           .get();
       for (QueryDocumentSnapshot<Map<String, dynamic>> document
           in snapshot.docs) {
@@ -109,11 +98,27 @@ class StoryCubit extends Cubit<StoryState> {
             document.data()['storyExpirationTime'].toDate();
         if (currentDateTime.isAfter(expirationTime)) {
           await document.reference.delete();
-          debugPrint('اتحذفت');
+          log('اتحذفت');
+        } else {
+          log('لسه فيه وقت لحذفها');
+          log('date time now: $currentDateTime');
+          log('date time expiration: $expirationTime');
         }
+        await isAllStoryDeleted(userID: userID);
       }
     } catch (e) {
-      debugPrint('error from deleteExpiredStories method: ${e.toString()}');
+      debugPrint('error from deleteExpiredStories method: $e');
+    }
+  }
+
+  Future<void> isAllStoryDeleted({required String userID}) async {
+    var documents = await FirebaseFirestore.instance
+        .collection(storiesCollection)
+        .doc(userID)
+        .collection(storiesCollection)
+        .get();
+    if (documents.docs.isEmpty) {
+      updateIsStory(isStory: false, userID: userID);
     }
   }
 }

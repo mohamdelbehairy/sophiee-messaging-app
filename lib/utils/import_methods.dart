@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sophiee/services/work_manager_service.dart';
 
 import '../cubit/all_chats_shimmer_status/all_chats_shimmer_status.dart';
 import '../cubit/chats/chats_cubit.dart';
@@ -16,7 +17,8 @@ import '../cubit/notification/notification_setting/notification_setting_cubit.da
 import '../cubit/notification/story_notification/story_notification_cubit.dart';
 
 abstract class ImportMethods {
-  static void importMethod(BuildContext context,AllChatsShimmerStatusCubit appStatusCubit) async {
+  static void importMethod(
+      BuildContext context, AllChatsShimmerStatusCubit appStatusCubit) async {
     var initLocalNotification = context.read<NotificationSettingCubit>();
 
     initLocalNotification.initLocalNotification();
@@ -40,6 +42,7 @@ abstract class ImportMethods {
     context
         .read<GetFollowingCubit>()
         .getFollowing(userID: FirebaseAuth.instance.currentUser!.uid);
+    await WorkManagerService.initWorkManager();
     await Future.delayed(const Duration(seconds: 5));
     appStatusCubit.setLoading(false);
   }

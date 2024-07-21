@@ -23,8 +23,10 @@ const cardDarkModeBackground = Color(0xff1e1e1e);
 const userCollection = 'users';
 const recentSearchCollection = 'recentSearch';
 const blockingCollection = 'blocking';
+const storiesCollection = 'stories';
 
 // 2 fields
+//=> user fields
 const userNameField = 'userName';
 const emailAddressField = 'emailAddress';
 const passwordField = 'password';
@@ -32,6 +34,13 @@ const userIDField = 'userID';
 const bioField = 'bio';
 const nickNameField = 'nickName';
 const profileImageField = 'profileImage';
+//=> story fields
+const storyImageField = 'storyImage';
+const storyVideoField = 'storyVideo';
+const storyTextField = 'storyText';
+const storyDataTimeField = 'storyDataTime';
+const storyExpirationTimeField = 'storyExpirationTime';
+const storyVideoTimeField = 'storyVideoTime';
 
 // assets images
 const onBoardringPageImageOneUrl = 'assets/images/on-boardring-page-1.png';
@@ -56,5 +65,4 @@ const defaultImageUrl =
     "https://he.cecollaboratory.com/public/layouts/images/group-default-logo.png";
 
 // firebase messaging
-
 const contentType = "application/json; charset=UTF-8";

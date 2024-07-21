@@ -10,23 +10,15 @@ class AddStoryShareBottom extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(size.height * 0.015),
       decoration: BoxDecoration(
-        color: kPrimaryColor,
-        borderRadius: BorderRadius.circular(size.height * .1),
-      ),
+          color: kPrimaryColor,
+          borderRadius: BorderRadius.circular(size.height * .1)),
       child: Row(
         children: [
-          Text(
-            'Share Now',
-            style: TextStyle(
-              fontSize: size.height * .015,
-              color: Colors.white,
-            ),
-          ),
+          Text('Share Now',
+              style:
+                  TextStyle(fontSize: size.height * .015, color: Colors.white)),
           SizedBox(width: size.width * .02),
-          const Icon(
-            Icons.send_rounded,
-            color: Colors.white,
-          ),
+          const Icon(Icons.send_rounded, color: Colors.white),
         ],
       ),
     );

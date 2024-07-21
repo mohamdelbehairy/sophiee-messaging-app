@@ -88,7 +88,7 @@ class _AddStoryImageState extends State<AddStoryImage> {
                     onTap: () async {
                       await Future.delayed(const Duration(seconds: 1), () {
                         Navigator.pop(context);
-                        Navigator.pop(context);
+                    
                       });
                       String storyImage = await uploadImage.uploadImage(
                           imageFile: widget.image, fieldName: 'stories_images');
@@ -100,7 +100,7 @@ class _AddStoryImageState extends State<AddStoryImage> {
                           imageUrl: storyImage,
                           videoUrl: null,
                           storyText: controller.text);
-                      await story.updateIsStory(isStory: true);
+                      await story.updateIsStory(isStory: true,userID: FirebaseAuth.instance.currentUser!.uid);
                       for (var element in items!) {
                         var data = items2!
                             .firstWhere((e) => e.userID == element.userID);

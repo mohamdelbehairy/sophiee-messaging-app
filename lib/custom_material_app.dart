@@ -159,7 +159,7 @@ class CustomMaterialApp extends StatelessWidget {
         builder: (context, state) {
           ThemeModeService themeModeService = ThemeModeService();
           return GetMaterialApp(
-            title: 'sophiee',
+            title: 'Sophiee',
             navigatorKey: navigatorKey,
             color: Colors.transparent,
             debugShowCheckedModeBanner: false,
