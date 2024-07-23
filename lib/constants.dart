@@ -37,6 +37,7 @@ const profileImageField = 'profileImage';
 //=> story fields
 const storyImageField = 'storyImage';
 const storyVideoField = 'storyVideo';
+const storyIDField = 'storyID';
 const storyTextField = 'storyText';
 const storyDataTimeField = 'storyDataTime';
 const storyExpirationTimeField = 'storyExpirationTime';
