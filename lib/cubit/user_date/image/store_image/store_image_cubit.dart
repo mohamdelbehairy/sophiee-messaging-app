@@ -10,10 +10,10 @@ part 'store_image_state.dart';
 class StoreImageCubit extends Cubit<StoreImageState> {
   StoreImageCubit() : super(StoreImageInitial());
 
-  void storeImage(
+  Future<void> storeImage(
       {required String imageUrl,
       required bool isProfileImage,
-      required bool isStoryImage}) {
+      required bool isStoryImage}) async {
     emit(StoreImageLoading());
     try {
       ImageModel imageModel = ImageModel.fromJson({
@@ -25,7 +25,7 @@ class StoreImageCubit extends Cubit<StoreImageState> {
         'isStoryImage': isStoryImage
       });
 
-      FirebaseFirestore.instance
+      await FirebaseFirestore.instance
           .collection('images')
           .doc(FirebaseAuth.instance.currentUser!.uid)
           .collection('Images')

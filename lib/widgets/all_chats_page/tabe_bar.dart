@@ -45,7 +45,7 @@ class _CustomTabBarState extends State<CustomTabBar> {
                         onPressed: () => getnav.Get.to(
                             () => const MyStoryPage(),
                             transition: getnav.Transition.rightToLeft),
-                        icon: const Icon(Icons.perm_media))),
+                        icon: const Icon(Icons.perm_media,size: 24))),
             IconButton(
                 splashColor: Colors.transparent,
                 highlightColor: Colors.transparent,

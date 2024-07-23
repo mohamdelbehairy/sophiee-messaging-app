@@ -4,6 +4,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sophiee/cubit/story/story_cubit.dart';
 import 'package:sophiee/cubit/story/story_state.dart';
 
+import '../../../constants.dart';
+import '../../../utils/widget/loading_animation_circle_indicator.dart';
+import '../../../utils/widget/no_result_found.dart';
 import 'my_story_page_list_tile.dart';
 
 class MyStoryPageBody extends StatelessWidget {
@@ -13,30 +16,44 @@ class MyStoryPageBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var stories = context.read<StoryCubit>();
     return BlocBuilder<StoryCubit, StoryState>(builder: (context, state) {
-      if (state is GetStorySuccess) {
+      if (state is GetStoryLoading) {
+        return LoadingAnimationCircleIndicator(size: size);
+      }
+
+      if (stories.stories.isNotEmpty) {
         return ListView.builder(
             physics: const BouncingScrollPhysics(),
-            itemCount: state.stories.length,
+            itemCount: stories.stories.length,
             itemBuilder: (context, index) {
               int differenceInMinutes = Timestamp.now()
                   .toDate()
-                  .difference(state.stories[index].storyDataTime)
+                  .difference(stories.stories[index].storyDataTime)
                   .inMinutes;
               int differenceInHours = Timestamp.now()
                   .toDate()
-                  .difference(state.stories[index].storyDataTime)
+                  .difference(stories.stories[index].storyDataTime)
                   .inHours;
               return MyStoryPageListTile(
                   size: size,
                   isDark: isDark,
                   index: index,
-                  storyModel: state.stories[index],
+                  storyModel: stories.stories[index],
                   differenceInMinutes: differenceInMinutes,
                   differenceInHours: differenceInHours);
             });
       } else {
-        return const SizedBox();
+        return Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            CustomNoResultFound(
+                height: size.height * .35,
+                image: searchFriendsImageUrl,
+                textOne: '',
+                textTwo: ''),
+          ],
+        );
       }
     });
   }

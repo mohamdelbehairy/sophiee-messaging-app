@@ -5,6 +5,7 @@ PopupMenuItem<dynamic> groupsInfoPopMenuItem(
     required String itemName,
     required Size size,
     IconData? icon,
+    double? iconSize,
     required bool isDark}) {
   return PopupMenuItem(
     onTap: onTap,
@@ -13,7 +14,7 @@ PopupMenuItem<dynamic> groupsInfoPopMenuItem(
         if (icon != null)
           Icon(icon,
               color: isDark ? Colors.white : Colors.black,
-              size: size.width * .04),
+              size: iconSize ?? size.width * .04),
         if (icon != null) SizedBox(width: size.width * .03),
         Text(
           itemName,

@@ -25,7 +25,7 @@ class ShowImagePagePopMenuButton extends StatelessWidget {
     var deleteImage = context.read<DeleteImageCubit>();
     var isDark = context.read<LoginCubit>().isDark;
     return PopupMenuButton(
-        color: cardLightModeBackground,
+        color: isDark ? cardDarkModeBackground: cardLightModeBackground,
         offset: const Offset(10, 50),
         icon: Icon(FontAwesomeIcons.ellipsisVertical,
             color: Colors.white, size: size.width * .05),

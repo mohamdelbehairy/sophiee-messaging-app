@@ -1,14 +1,17 @@
-import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:sophiee/pages/story/show_my_story_page.dart';
 
 import '../../../models/story_model.dart';
+import 'my_story_page_leading_image.dart';
+import 'my_story_page_leading_video.dart';
 
 class MyStoryPageLeading extends StatelessWidget {
   const MyStoryPageLeading(
       {super.key,
-        required this.size,
-        required this.isDark,
-        required this.storyModel});
+      required this.size,
+      required this.isDark,
+      required this.storyModel});
 
   final Size size;
   final bool isDark;
@@ -16,17 +19,14 @@ class MyStoryPageLeading extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CircleAvatar(
-        radius: size.height * .035,
-        backgroundColor: Colors.transparent,
-        child: ClipRRect(
-            borderRadius: BorderRadius.circular(size.height * .035),
-            child: FancyShimmerImage(
-                boxFit: BoxFit.cover,
-                shimmerBaseColor:
-                isDark ? Colors.white12 : Colors.grey.shade300,
-                shimmerHighlightColor:
-                isDark ? Colors.white24 : Colors.grey.shade100,
-                imageUrl: storyModel.storyImage!)));
+    return GestureDetector(
+      onTap: () => Get.to(() => ShowMyStoryPage(storyModel: storyModel)),
+      child: storyModel.storyImage != null
+          ? MyStoryPageLeadingImage(
+              size: size, isDark: isDark, storyModel: storyModel)
+          : MyStoryPageLeadingVideo(size: size, storyModel: storyModel),
+    );
   }
 }
+
+

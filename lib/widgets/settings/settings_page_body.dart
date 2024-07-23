@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
-import 'package:sophiee/constants.dart';
 import 'package:sophiee/cubit/auth/auth_settings/auth_settings_cubit.dart';
 import 'package:sophiee/cubit/auth/facebook_auth/facebook_auth_cubit.dart';
 import 'package:sophiee/cubit/auth/google_auth/google_auth_cubit.dart';
@@ -10,6 +8,7 @@ import 'package:sophiee/cubit/user_date/user_token/user_token_cubit.dart';
 import 'package:sophiee/models/users_model.dart';
 import 'package:sophiee/pages/auth/provider_auth_page.dart';
 import 'package:sophiee/services/calls/user_call_init.dart';
+import 'package:sophiee/utils/widget/loading_animation_circle_indicator.dart';
 import 'package:sophiee/widgets/settings/settings_page_app_bar.dart';
 import 'package:sophiee/widgets/settings/settings_card_one/settings_page_card_one.dart';
 import 'package:sophiee/widgets/settings/settings_card_two/settings_page_card_two.dart';
@@ -38,8 +37,7 @@ class _SettingsPageBodyState extends State<SettingsPageBody> {
     return ModalProgressHUD(
       opacity: 0.1,
       inAsyncCall: showProgressIndicator,
-      progressIndicator: LoadingAnimationWidget.discreteCircle(
-          color: kPrimaryColor, size: widget.size.height * .04),
+      progressIndicator: LoadingAnimationCircleIndicator(size: widget.size),
       child: SingleChildScrollView(
         child: Column(
           children: [

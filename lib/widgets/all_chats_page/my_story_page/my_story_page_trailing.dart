@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:sophiee/models/story_model.dart';
+import 'package:sophiee/utils/widget/media/save_video.dart';
 
 import '../../../constants.dart';
 import '../../../utils/custom_show_dialog.dart';
@@ -30,22 +31,35 @@ class MyStoryPageTrailing extends StatelessWidget {
         itemBuilder: (context) => [
               groupsInfoPopMenuItem(
                   isDark: isDark,
+                  iconSize: size.width * .045,
                   onTap: () async {
-                    await saveImage(imageUrl: storyModel.storyImage!);
-                    FlutterToastWidget.showToast(
-                        msg: "Image saved successfully");
+                    if (storyModel.storyImage != null) {
+                      await saveImage(imageUrl: storyModel.storyImage!);
+                      FlutterToastWidget.showToast(
+                          msg: "image saved successfully");
+                    } else {
+                      await saveVideo(videoUel: storyModel.storyVideo!);
+                      FlutterToastWidget.showToast(
+                          msg: "video saved successfully");
+                    }
                   },
                   itemName: 'Save to gallery',
                   size: size,
-                  icon: Icons.save_alt_outlined),
+                  icon: Icons.bookmark_add),
               groupsInfoPopMenuItem(
                   isDark: isDark,
                   onTap: () async {
                     await shareMedia(
-                        mediaUrl: storyModel.storyImage!,
-                        mediaType: 'image.jpg');
+                        mediaUrl: storyModel.storyImage != null
+                            ? storyModel.storyImage!
+                            : storyModel.storyVideo!,
+                        mediaType: storyModel.storyImage != null
+                            ? 'image.jpg'
+                            : 'video.mp4');
                   },
-                  itemName: 'Share image',
+                  itemName: storyModel.storyImage != null
+                      ? 'Share image'
+                      : 'Share video',
                   size: size,
                   icon: Icons.share),
               groupsInfoPopMenuItem(
@@ -55,17 +69,20 @@ class MyStoryPageTrailing extends StatelessWidget {
                         context: context,
                         isDark: isDark,
                         doneButtonText: 'Ok',
-                        contentText: 'Are you sure to delete image?',
+                        contentText: storyModel.storyImage != null
+                            ? 'Are you sure to delete this image?'
+                            : 'Are you sure to delete this video?',
                         okFunction: () async {
                           Navigator.pop(context);
                           // await deleteImage.deleteImage(
                           //     imageID: imageModel.imageID);
                         });
                   },
-                  itemName: 'Delete image',
+                  itemName: storyModel.storyImage != null
+                      ? 'Delete image'
+                      : 'Delete video',
                   size: size,
                   icon: FontAwesomeIcons.trash)
             ]);
   }
 }
-

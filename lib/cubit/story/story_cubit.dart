@@ -48,20 +48,22 @@ class StoryCubit extends Cubit<StoryState> {
         .update({'isStory': isStory});
   }
 
+  List<StoryModel> stories = [];
   void getStory({required String friendId}) {
+    emit(GetStoryLoading());
     try {
       FirebaseFirestore.instance
           .collection(storiesCollection)
           .doc(friendId)
           .collection(storiesCollection)
-          .orderBy('storyDataTime', descending: false)
+          .orderBy(storyDataTimeField, descending: false)
           .snapshots()
           .listen((snapshot) {
-        List<StoryModel> stories =
-            snapshot.docs.map((e) => StoryModel.fromJson(e.data())).toList();
-        if (stories.isNotEmpty) {
-          emit(GetStorySuccess(stories: stories));
+        stories = [];
+        for (var story in snapshot.docs) {
+          stories.add(StoryModel.fromJson(story.data()));
         }
+        emit(GetStorySuccess());
       });
     } catch (e) {
       emit(GetStoryFailure(errorMessage: e.toString()));
@@ -95,7 +97,7 @@ class StoryCubit extends Cubit<StoryState> {
       for (QueryDocumentSnapshot<Map<String, dynamic>> document
           in snapshot.docs) {
         DateTime expirationTime =
-            document.data()['storyExpirationTime'].toDate();
+            document.data()[storyExpirationTimeField].toDate();
         if (currentDateTime.isAfter(expirationTime)) {
           await document.reference.delete();
           log('اتحذفت');

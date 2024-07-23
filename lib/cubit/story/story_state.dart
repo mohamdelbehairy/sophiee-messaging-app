@@ -1,5 +1,3 @@
-import 'package:sophiee/models/story_model.dart';
-
 final class StoryState {}
 
 final class AddStoryInitial extends StoryState {}
@@ -30,11 +28,9 @@ final class UploadStoryVideoFailure extends StoryState {
   UploadStoryVideoFailure({required this.errorMessage});
 }
 
-final class GetStorySuccess extends StoryState {
-  final List<StoryModel> stories;
+final class GetStoryLoading extends StoryState {}
 
-  GetStorySuccess({required this.stories});
-}
+final class GetStorySuccess extends StoryState {}
 
 final class GetStoryFailure extends StoryState {
   final String errorMessage;
