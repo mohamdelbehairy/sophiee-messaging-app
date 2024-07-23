@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:sophiee/constants.dart';
+import 'package:sophiee/cubit/auth/login/login_cubit.dart';
 import 'package:sophiee/cubit/chat_high_lights/chat_high_light_message/chat_high_light_message_cubit.dart';
 import 'package:sophiee/cubit/groups/high_light_group_message/hight_light_messages/high_light_messages_cubit.dart';
 import 'package:sophiee/models/group_model.dart';
@@ -24,8 +26,9 @@ class HighLightAppBarActionIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var isDark = context.read<LoginCubit>().isDark;
     return PopupMenuButton(
-        color: kPrimaryColor,
+        color: isDark ? cardLightModeBackground : cardDarkModeBackground,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         offset: Offset(0, size.height * .05),
         icon: Icon(FontAwesomeIcons.ellipsisVertical, size: size.height * .025),
@@ -35,7 +38,8 @@ class HighLightAppBarActionIcon extends StatelessWidget {
                       context: context,
                       doneButtonText: 'Remove all',
                       contentText: 'Remove all messages?',
-                      backgroundColor: kPrimaryColor,
+                      // backgroundColor: kPrimaryColor,
+                      isDark: isDark,
                       okFunction: () async {
                         Navigator.pop(context);
                         if (groupModel != null && hightLightMessage != null) {

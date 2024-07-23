@@ -25,7 +25,7 @@ class StoryCubit extends Cubit<StoryState> {
         storyTextField: storyText,
         storyDataTimeField: Timestamp.now(),
         storyExpirationTimeField:
-            Timestamp.fromDate(DateTime.now().add(const Duration(minutes: 10))),
+            Timestamp.fromDate(DateTime.now().add(const Duration(days: 1))),
         storyVideoTimeField: storyVideoTime
       });
       await FirebaseFirestore.instance
@@ -48,15 +48,15 @@ class StoryCubit extends Cubit<StoryState> {
         .update({'isStory': isStory});
   }
 
-  Future<void> getStory({required String friendId}) async {
+  void getStory({required String friendId}) {
     try {
-      await FirebaseFirestore.instance
+      FirebaseFirestore.instance
           .collection(storiesCollection)
           .doc(friendId)
           .collection(storiesCollection)
           .orderBy('storyDataTime', descending: false)
-          .get()
-          .then((QuerySnapshot<Map<String, dynamic>> snapshot) {
+          .snapshots()
+          .listen((snapshot) {
         List<StoryModel> stories =
             snapshot.docs.map((e) => StoryModel.fromJson(e.data())).toList();
         if (stories.isNotEmpty) {

@@ -35,7 +35,6 @@ class CustomAppBarSetting extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      // height: size.height * .18,
       width: size.width,
       decoration: const BoxDecoration(color: kPrimaryColor),
       child: Padding(

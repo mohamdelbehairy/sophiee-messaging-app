@@ -32,7 +32,7 @@ class SearchPageAppBar extends StatelessWidget {
                 const Icon(FontAwesomeIcons.barsStaggered, color: Colors.white),
             appParTitle: 'Search',
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            padding: EdgeInsets.only(left: size.height * .035)),
+            padding: EdgeInsets.only(left: size.height * .035,top: size.width *.01)),
         SearchPageAppBarIcon(size: size),
       ],
     );

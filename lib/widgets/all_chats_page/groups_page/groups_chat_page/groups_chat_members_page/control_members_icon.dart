@@ -1,4 +1,5 @@
 import 'package:sophiee/constants.dart';
+import 'package:sophiee/cubit/auth/login/login_cubit.dart';
 import 'package:sophiee/cubit/groups/groups_members_details/groups_members_details_cubit.dart';
 import 'package:sophiee/models/group_model.dart';
 import 'package:sophiee/models/users_model.dart';
@@ -25,6 +26,7 @@ class ControlMembersIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var groupMember = context.read<GroupsMembersDetailsCubit>();
+    var isDark = context.read<LoginCubit>().isDark;
     return PopupMenuButton(
         color: kPrimaryColor,
         offset: Offset(0, size.height * .05),
@@ -32,11 +34,13 @@ class ControlMembersIcon extends StatelessWidget {
             color: Colors.grey, size: size.width * .05),
         itemBuilder: (context) => [
               groupsInfoPopMenuItem(
+                  isDark: isDark,
                   onTap: () => getnav.Get.to(() => ChatPage(userID: userData.userID),
                       transition: getnav.Transition.rightToLeft),
                   itemName: 'Message ${userData.userName.split(' ')[0]}',
                   size: size),
               groupsInfoPopMenuItem(
+                  isDark: isDark,
                   onTap: () => getnav.Get.to(() => MyFriendPage(user: userData),
                       transition: getnav.Transition.rightToLeft),
                   itemName: 'View ${userData.userName.split(' ')[0]}',
@@ -44,6 +48,7 @@ class ControlMembersIcon extends StatelessWidget {
               if (groupModel.groupOwnerID ==
                   FirebaseAuth.instance.currentUser!.uid)
                 groupsInfoPopMenuItem(
+                    isDark: isDark,
                     onTap: () async {
                       if (groupModel.adminsID.contains(userData.userID)) {
                         await groupMember.removeAdmin(
@@ -64,6 +69,7 @@ class ControlMembersIcon extends StatelessWidget {
               if (groupModel.groupOwnerID ==
                   FirebaseAuth.instance.currentUser!.uid)
                 groupsInfoPopMenuItem(
+                    isDark: isDark,
                     onTap: () => removeMemberShowDialog(
                         context: context,
                         removeGroupMember: groupMember,

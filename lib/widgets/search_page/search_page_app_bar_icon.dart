@@ -14,7 +14,7 @@ class SearchPageAppBarIcon extends StatelessWidget {
   Widget build(BuildContext context) {
     return Positioned(
       left: 0.0,
-      top: size.height * .045,
+      top: size.height * .04,
       child: IconButton(
         color: Colors.transparent,
         highlightColor: Colors.transparent,

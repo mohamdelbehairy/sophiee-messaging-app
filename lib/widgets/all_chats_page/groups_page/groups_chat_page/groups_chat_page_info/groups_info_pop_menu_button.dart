@@ -29,6 +29,7 @@ class GroupsInfoPopupMenueButton extends StatelessWidget {
             groupModel.adminsID
                 .contains(FirebaseAuth.instance.currentUser!.uid))
           groupsInfoPopMenuItem(
+            isDark: isDark,
             size: size,
             itemName: 'Add member',
             onTap: () => getnav.Get.to(
@@ -37,6 +38,7 @@ class GroupsInfoPopupMenueButton extends StatelessWidget {
                 transition: getnav.Transition.rightToLeft),
           ),
         groupsInfoPopMenuItem(
+          isDark: isDark,
           size: size,
           itemName: 'Change group info',
           onTap: () {
@@ -74,6 +76,7 @@ class GroupsInfoPopupMenueButton extends StatelessWidget {
             groupModel.adminsID
                 .contains(FirebaseAuth.instance.currentUser!.uid))
           groupsInfoPopMenuItem(
+            isDark: isDark,
             size: size,
             itemName: 'Group permissions',
             onTap: () => getnav.Get.to(

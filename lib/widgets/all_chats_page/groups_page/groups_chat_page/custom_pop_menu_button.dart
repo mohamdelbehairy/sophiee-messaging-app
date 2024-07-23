@@ -53,7 +53,8 @@ class CustomPopMenuButton extends StatelessWidget {
                     customShowDialog(
                         context: context,
                         doneButtonText: 'Ok',
-                        backgroundColor: kPrimaryColor,
+                        // backgroundColor: kPrimaryColor,
+                        isDark: isDark,
                         contentText: groupModel.groupOwnerID ==
                                 FirebaseAuth.instance.currentUser!.uid
                             ? 'Are you sure to delete ${groupModel.groupName} group?'

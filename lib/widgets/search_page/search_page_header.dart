@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sophiee/constants.dart';
 
 import '../../cubit/search/delete_recent_search/delete_recent_search_cubit.dart';
 import '../../utils/custom_show_dialog.dart';
@@ -30,10 +29,11 @@ class SearchPageHeader extends StatelessWidget {
         if (controller.text.isEmpty)
           GestureDetector(
             onTap: () => customShowDialog(
+              isDark: isDark,
               title: 'Clear search history',
               contentText: 'Do you want to clear your search history?',
               context: context,
-              backgroundColor: kPrimaryColor,
+              // backgroundColor: kPrimaryColor,
               okFunction: () async {
                 Navigator.pop(context);
                 await deleteRecentSearch.deleteRecentSearch();

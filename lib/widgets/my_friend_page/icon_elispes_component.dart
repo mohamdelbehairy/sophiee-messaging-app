@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart' as getnav;
+import 'package:sophiee/cubit/auth/login/login_cubit.dart';
 import 'package:sophiee/cubit/block/block_cubit.dart';
 import 'package:sophiee/cubit/friends/friends_state.dart';
 import '../../constants.dart';
@@ -37,6 +38,7 @@ class IconElispesComponent extends StatelessWidget {
     var friend = context.read<FriendsCubit>();
     var updateUserData = context.read<UpdateUserDataCubit>();
     var blockUser = context.read<BlockCubit>();
+    var isDark = context.read<LoginCubit>().isDark;
 
     return BlocBuilder<FollowStatusCubit, bool>(
       builder: (context, isFollowing) {
@@ -56,6 +58,7 @@ class IconElispesComponent extends StatelessWidget {
                       if (!userData.blockUsers.contains(user.userID) &&
                           !user.blockUsers.contains(userData.userID))
                         groupsInfoPopMenuItem(
+                            isDark: isDark,
                             onTap: () async {
                               await shareMedia(
                                   mediaUrl: user.profileImage,
@@ -68,6 +71,7 @@ class IconElispesComponent extends StatelessWidget {
                       if (!userData.blockUsers.contains(user.userID) &&
                           !user.blockUsers.contains(userData.userID))
                         groupsInfoPopMenuItem(
+                            isDark: isDark,
                             onTap: () async {
                               await saveImage(imageUrl: user.profileImage);
                               FlutterToastWidget.showToast(
@@ -77,6 +81,7 @@ class IconElispesComponent extends StatelessWidget {
                             size: size,
                             icon: Icons.save_alt_outlined),
                     groupsInfoPopMenuItem(
+                        isDark: isDark,
                         onTap: () async {
                           if (userData.blockUsers.contains(user.userID)) {
                             await updateUserData.removeListUsers(
@@ -100,6 +105,7 @@ class IconElispesComponent extends StatelessWidget {
                         !userData.blockUsers.contains(user.userID) &&
                         !user.blockUsers.contains(userData.userID))
                       groupsInfoPopMenuItem(
+                          isDark: isDark,
                           onTap: () {
                             getnav.Get.to(() => ChatPage(userID: user.userID),
                                 transition: getnav.Transition.rightToLeft);
@@ -111,6 +117,7 @@ class IconElispesComponent extends StatelessWidget {
                         !userData.blockUsers.contains(user.userID) &&
                         !user.blockUsers.contains(userData.userID))
                       groupsInfoPopMenuItem(
+                          isDark: isDark,
                           onTap: () async {
                             if (isFollowing) {
                               await follower.deleteFollower(

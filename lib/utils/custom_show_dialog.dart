@@ -1,35 +1,46 @@
 import 'package:flutter/material.dart';
 
-Future<dynamic> customShowDialog({
-  required BuildContext context,
-  required String contentText,
-  required Color backgroundColor,
-  required Function() okFunction,
-  required String doneButtonText,
-  String? title,
-}) {
+import '../constants.dart';
+
+Future<dynamic> customShowDialog(
+    {required BuildContext context,
+    required String contentText,
+    // required Color backgroundColor,
+    required Function() okFunction,
+    required String doneButtonText,
+    String? title,
+    required bool isDark}) {
   return showDialog(
       context: context,
       builder: (context) {
         return AlertDialog(
-            backgroundColor: backgroundColor,
-            content: Text(contentText),
+            backgroundColor:
+                isDark ? cardDarkModeBackground : cardLightModeBackground,
+            content: Text(contentText,
+                style: TextStyle(
+                    color: isDark ? Colors.white : Colors.black,
+                    fontWeight: FontWeight.w100,
+                    fontSize: 16)),
             title: title != null
                 ? Text(title,
-                    style: const TextStyle(
-                        color: Colors.white,
+                    style: TextStyle(
+                        color: isDark ? Colors.white : Colors.black,
                         fontWeight: FontWeight.w100,
                         fontSize: 18))
                 : null,
             actions: <Widget>[
               TextButton(
                   onPressed: () => Navigator.pop(context),
-                  child: const Text('Cancle',
-                      style: TextStyle(color: Colors.white70))),
+                  child: Text('Cancel',
+                      style: TextStyle(
+                        color: isDark ? Colors.white60 : Colors.black54,
+                      ))),
               TextButton(
                 onPressed: okFunction,
                 child: Text(doneButtonText,
-                    style: const TextStyle(color: Colors.white)),
+                    style: TextStyle(
+                      color: isDark ? Colors.white70 : Colors.black87,
+                    )),
               ),
             ]);
       });
