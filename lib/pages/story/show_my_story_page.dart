@@ -6,7 +6,7 @@ import 'package:sophiee/cubit/user_date/get_user_data/get_user_data_state.dart';
 import 'package:sophiee/models/story_model.dart';
 
 import '../../cubit/auth/login/login_cubit.dart';
-import '../../utils/widget/story_page/show_story_publish_info.dart';
+import '../../utils/widget/story_page/show_story_publish_info_body.dart';
 import '../../widgets/all_chats_page/my_story_page/my_story_page_widget.dart';
 
 class ShowMyStoryPage extends StatelessWidget {
@@ -28,7 +28,7 @@ class ShowMyStoryPage extends StatelessWidget {
                 if (state is GetUserDataSuccess && state.userModel.isNotEmpty) {
                   final userData = state.userModel.firstWhere((element) =>
                       element.userID == FirebaseAuth.instance.currentUser!.uid);
-                  return ShowStoryPublishInfo(
+                  return ShowStoryPublishInfoBody(
                       size: size,
                       title: 'My status',
                       imageUrl: userData.profileImage,

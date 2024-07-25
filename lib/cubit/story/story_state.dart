@@ -37,3 +37,13 @@ final class GetStoryFailure extends StoryState {
 
   GetStoryFailure({required this.errorMessage});
 }
+
+final class DeleteOnStoryLoading extends StoryState {}
+
+final class DeleteOnStorySuccess extends StoryState {}
+
+final class DeleteOnStoryFailure extends StoryState {
+  final String errorMessage;
+
+  DeleteOnStoryFailure({required this.errorMessage});
+}

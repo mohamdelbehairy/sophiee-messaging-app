@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:sophiee/cubit/story/story_cubit.dart';
 import 'package:sophiee/models/story_model.dart';
 import 'package:sophiee/utils/widget/media/save_video.dart';
 
@@ -22,6 +24,7 @@ class MyStoryPageTrailing extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var deleteStory = context.read<StoryCubit>();
     return PopupMenuButton(
         color: isDark ? cardDarkModeBackground : cardLightModeBackground,
         offset: const Offset(10, 50),
@@ -74,8 +77,8 @@ class MyStoryPageTrailing extends StatelessWidget {
                             : 'Are you sure to delete this video?',
                         okFunction: () async {
                           Navigator.pop(context);
-                          // await deleteImage.deleteImage(
-                          //     imageID: imageModel.imageID);
+                          await deleteStory.deleteOneStory(
+                              storyID: storyModel.storyID);
                         });
                   },
                   itemName: storyModel.storyImage != null

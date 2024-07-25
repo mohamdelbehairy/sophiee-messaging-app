@@ -34,14 +34,12 @@ class _StoryViewPageState extends State<StoryViewPage> {
     return BlocBuilder<StoryCubit, StoryState>(builder: (context, state) {
       List<StoryModel> story = stories.stories;
       return Scaffold(
-        body: StoryViewPageBody(
-            story: story,
-            controller: controller,
-            widget: widget,
-            size: size,
-            isDark: isDark),
-      );
+          body: StoryViewPageBody(
+              story: story,
+              controller: controller,
+              userID: widget.userID,
+              size: size,
+              isDark: isDark));
     });
   }
 }
-

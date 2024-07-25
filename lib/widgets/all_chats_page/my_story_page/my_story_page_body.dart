@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sophiee/cubit/story/story_cubit.dart';
@@ -17,8 +18,14 @@ class MyStoryPageBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var stories = context.read<StoryCubit>();
-    return BlocBuilder<StoryCubit, StoryState>(builder: (context, state) {
-      if (state is GetStoryLoading) {
+    return BlocConsumer<StoryCubit, StoryState>(
+        listener: (context, state) async {
+      if (state is DeleteOnStorySuccess) {
+        await stories.isAllStoryDeleted(
+            userID: FirebaseAuth.instance.currentUser!.uid);
+      }
+    }, builder: (context, state) {
+      if (state is GetStoryLoading || state is DeleteOnStoryLoading) {
         return LoadingAnimationCircleIndicator(size: size);
       }
 

@@ -23,9 +23,8 @@ class ChatItemTop extends StatelessWidget {
     return BlocBuilder<GetUserDataCubit, GetUserDataStates>(
       builder: (context, state) {
         if (state is GetUserDataSuccess && state.userModel.isNotEmpty) {
-          final currentUser = user.userID;
           final data = state.userModel
-              .firstWhere((element) => element.userID == currentUser);
+              .firstWhere((element) => element.userID == user.userID);
           final userData = state.userModel.firstWhere((element) =>
               element.userID == FirebaseAuth.instance.currentUser!.uid);
 

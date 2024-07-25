@@ -35,11 +35,12 @@ class ShowImagePagePopMenuButton extends StatelessWidget {
                   onTap: () async {
                     await saveImage(imageUrl: imageModel.imageUrl);
                     FlutterToastWidget.showToast(
-                        msg: "Image saved successfully");
+                        msg: "image saved successfully");
                   },
                   itemName: 'Save to gallery',
                   size: size,
-                  icon: Icons.save_alt_outlined),
+                  iconSize: size.width * .045,
+                  icon: Icons.bookmark_add),
               groupsInfoPopMenuItem(
                   isDark: isDark,
                   onTap: () async {

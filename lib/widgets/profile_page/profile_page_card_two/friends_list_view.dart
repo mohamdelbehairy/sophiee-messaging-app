@@ -33,7 +33,9 @@ class FriendsListView extends StatelessWidget {
                 })),
           );
         } else {
-          return Image.asset(emptyImageUrl, height: 40,width:100);
+          return FittedBox(
+              fit: BoxFit.scaleDown,
+              child: Image.asset(emptyImageUrl, height: 35, width: 100));
         }
       },
     );

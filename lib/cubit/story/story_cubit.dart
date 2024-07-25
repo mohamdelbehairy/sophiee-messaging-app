@@ -23,7 +23,7 @@ class StoryCubit extends Cubit<StoryState> {
       StoryModel storyModel = StoryModel.fromJson({
         storyImageField: imageUrl,
         storyVideoField: videoUrl,
-        storyIDField:const Uuid().v4(),
+        storyIDField: const Uuid().v4(),
         storyTextField: storyText,
         storyDataTimeField: Timestamp.now(),
         storyExpirationTimeField:
@@ -34,7 +34,8 @@ class StoryCubit extends Cubit<StoryState> {
           .collection(storiesCollection)
           .doc(FirebaseAuth.instance.currentUser!.uid)
           .collection(storiesCollection)
-          .add(storyModel.toMap());
+          .doc(storyModel.storyID)
+          .set(storyModel.toMap());
       emit(AddStorySuccess());
     } catch (e) {
       emit(AddStoryFailure(errorMessage: e.toString()));
@@ -123,6 +124,23 @@ class StoryCubit extends Cubit<StoryState> {
         .get();
     if (documents.docs.isEmpty) {
       updateIsStory(isStory: false, userID: userID);
+    }
+  }
+
+  Future<void> deleteOneStory({required String storyID}) async {
+    emit(DeleteOnStoryLoading());
+    await Future.delayed(const Duration(seconds: 1));
+    try {
+      await FirebaseFirestore.instance
+          .collection(storiesCollection)
+          .doc(FirebaseAuth.instance.currentUser!.uid)
+          .collection(storiesCollection)
+          .doc(storyID)
+          .delete();
+      emit(DeleteOnStorySuccess());
+    } catch (e) {
+      emit(DeleteOnStorySuccess());
+      debugPrint('error from deleteOneStory method: $e');
     }
   }
 }
