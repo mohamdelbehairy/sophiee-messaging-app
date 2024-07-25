@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sophiee/cubit/story/story_state.dart';
 import 'package:sophiee/models/story_model.dart';
+import 'package:uuid/uuid.dart';
 
 import '../../constants.dart';
 
@@ -22,6 +23,7 @@ class StoryCubit extends Cubit<StoryState> {
       StoryModel storyModel = StoryModel.fromJson({
         storyImageField: imageUrl,
         storyVideoField: videoUrl,
+        storyIDField:const Uuid().v4(),
         storyTextField: storyText,
         storyDataTimeField: Timestamp.now(),
         storyExpirationTimeField:
