@@ -24,6 +24,7 @@ const userCollection = 'users';
 const recentSearchCollection = 'recentSearch';
 const blockingCollection = 'blocking';
 const storiesCollection = 'stories';
+const notificationCollection = 'notification';
 
 // 2 fields
 //=> user fields

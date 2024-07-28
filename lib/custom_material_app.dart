@@ -42,6 +42,7 @@ import 'package:sophiee/cubit/network_error_status/network_error_status_cubit.da
 import 'package:sophiee/cubit/notification/live_notification/live_notification_cubit.dart';
 import 'package:sophiee/cubit/notification/message_notification/message_notification_cubit.dart';
 import 'package:sophiee/cubit/notification/notification_setting/notification_setting_cubit.dart';
+import 'package:sophiee/cubit/notification/store_notification/store_notification_cubit.dart';
 import 'package:sophiee/cubit/open_files/open_files_cubit.dart';
 import 'package:sophiee/cubit/pick_contact/pick_contact_cubit.dart';
 import 'package:sophiee/cubit/pick_file/pick_file_cubit.dart';
@@ -153,7 +154,8 @@ class CustomMaterialApp extends StatelessWidget {
         BlocProvider(create: (context) => CopyTextCubit()),
         BlocProvider(create: (context) => RecentSearchCubit()),
         BlocProvider(create: (context) => DeleteRecentSearchCubit()),
-        BlocProvider(create: (context) => BlockCubit())
+        BlocProvider(create: (context) => BlockCubit()),
+        BlocProvider(create: (context) => StoreNotificationCubit()),
       ],
       child: BlocBuilder<LoginCubit, LoginState>(
         builder: (context, state) {

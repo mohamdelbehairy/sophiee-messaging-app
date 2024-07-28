@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:sophiee/cubit/get_friends/get_friends_cubit.dart';
 import 'package:sophiee/cubit/get_friends/get_friends_state.dart';
+import 'package:sophiee/cubit/notification/store_notification/store_notification_cubit.dart';
 import 'package:sophiee/cubit/story/story_cubit.dart';
 import 'package:sophiee/cubit/story/story_state.dart';
 import 'package:sophiee/cubit/user_date/get_user_data/get_user_data_cubit.dart';
@@ -50,6 +51,7 @@ class _AddStoryImageState extends State<AddStoryImage> {
     var uploadImage = context.read<UploadImageCubit>();
     var storeImage = context.read<StoreImageCubit>();
     var storyNotification = context.read<StoryNotificationCubit>();
+    var storeNotification = context.read<StoreNotificationCubit>();
 
     return Scaffold(
       backgroundColor: Colors.black87,
@@ -112,6 +114,8 @@ class _AddStoryImageState extends State<AddStoryImage> {
                               senderName: user!.userName,
                               senderId: user!.userID);
                         }
+                        await storeNotification.storeNotification(
+                            userID: data.userID, notificationType: "image");
                       }
                     },
                     child: const AddStoryShareBottom(),

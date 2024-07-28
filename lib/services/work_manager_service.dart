@@ -7,7 +7,7 @@ import 'package:workmanager/workmanager.dart';
 
 abstract class WorkManagerService {
   static Future<void> initWorkManager() async {
-    await Workmanager().initialize(actionTask, isInDebugMode: true);
+    await Workmanager().initialize(actionTask, isInDebugMode: false);
     await registerMyTask();
   }
 

@@ -10,6 +10,7 @@ import 'package:video_player/video_player.dart';
 
 import '../../../cubit/get_friends/get_friends_cubit.dart';
 import '../../../cubit/get_friends/get_friends_state.dart';
+import '../../../cubit/notification/store_notification/store_notification_cubit.dart';
 import '../../../cubit/notification/story_notification/story_notification_cubit.dart';
 import '../../../cubit/upload/upload_video/upload_video_cubit.dart';
 import '../../../cubit/user_date/get_user_data/get_user_data_cubit.dart';
@@ -54,6 +55,7 @@ class _AddStoryVideoState extends State<AddStoryVideo> {
     final story = context.read<StoryCubit>();
     var uploadVideo = context.read<UploadVideoCubit>();
     var storyNotification = context.read<StoryNotificationCubit>();
+    var storeNotification = context.read<StoreNotificationCubit>();
 
     return Scaffold(
       appBar: AppBar(backgroundColor: Colors.black),
@@ -118,6 +120,8 @@ class _AddStoryVideoState extends State<AddStoryVideo> {
                               senderName: user!.userName,
                               senderId: user!.userID);
                         }
+                        await storeNotification.storeNotification(
+                            userID: data.userID, notificationType: "video");
                       }
                     },
                     child: const AddStoryShareBottom(),
