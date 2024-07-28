@@ -21,7 +21,7 @@ class _MyStoryPageState extends State<MyStoryPage> {
   void initState() {
     context
         .read<StoryCubit>()
-        .getStory(friendId: FirebaseAuth.instance.currentUser!.uid);
+        .getStory(friendId: FirebaseAuth.instance.currentUser!.uid,descending: true);
     super.initState();
   }
 

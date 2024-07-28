@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class NotificationModel {
   final String publishID, notificationType, notificationID;
   final bool? isLive;
+  final bool isRead;
   final DateTime dateTime;
 
   NotificationModel(
@@ -10,6 +11,7 @@ class NotificationModel {
       required this.notificationType,
       required this.notificationID,
       this.isLive,
+      required this.isRead,
       required this.dateTime});
 
   factory NotificationModel.fromJson(jsonData) {
@@ -18,6 +20,7 @@ class NotificationModel {
       notificationType: jsonData['notificationType'],
       notificationID: jsonData['notificationID'],
       isLive: jsonData['isLive'],
+      isRead: jsonData['isRead'],
       dateTime: (jsonData['dateTime'] as Timestamp).toDate(),
     );
   }
@@ -28,6 +31,7 @@ class NotificationModel {
       'notificationType': notificationType,
       'notificationID': notificationID,
       'isLive': isLive,
+      'isRead': isRead,
       'dateTime': dateTime
     };
   }

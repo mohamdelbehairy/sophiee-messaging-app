@@ -3,8 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart' as getnav;
 import 'package:sophiee/cubit/auth/login/login_cubit.dart';
+import 'package:sophiee/cubit/notification/get_notification/get_notification_cubit.dart';
 import 'package:sophiee/pages/setting/general_setting_page.dart';
 import 'package:sophiee/pages/setting/privacy_setting_page.dart';
+import 'package:sophiee/pages/setting/show_notification_page.dart';
 import 'package:sophiee/widgets/settings/custom_items_two.dart';
 
 class CardOneItemsTwo extends StatelessWidget {
@@ -17,10 +19,8 @@ class CardOneItemsTwo extends StatelessWidget {
       padding: const EdgeInsets.only(right: 16),
       child: Column(children: [
         CustomItemsTwo(
-            onTap: () {
-              getnav.Get.to(() => GeneralSettingPage(size: size),
-                  transition: getnav.Transition.rightToLeft);
-            },
+            onTap: () => getnav.Get.to(() => GeneralSettingPage(size: size),
+                transition: getnav.Transition.rightToLeft),
             size: size,
             textColor:
                 context.read<LoginCubit>().isDark ? Colors.white : Colors.black,
@@ -31,7 +31,11 @@ class CardOneItemsTwo extends StatelessWidget {
             color: Colors.indigoAccent.shade400),
         const SizedBox(height: 2),
         CustomItemsTwo(
-            onTap: () {},
+            onTap: () => getnav.Get.to(
+                () => BlocProvider(
+                    create: (context) => GetNotificationCubit(),
+                    child: const ShowNotificationPage()),
+                transition: getnav.Transition.rightToLeft),
             size: size,
             icon2: FontAwesomeIcons.chevronRight,
             text: 'Notification',

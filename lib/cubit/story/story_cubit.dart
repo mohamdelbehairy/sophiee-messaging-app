@@ -52,14 +52,14 @@ class StoryCubit extends Cubit<StoryState> {
   }
 
   List<StoryModel> stories = [];
-  void getStory({required String friendId}) {
+  void getStory({required String friendId, bool? descending}) {
     emit(GetStoryLoading());
     try {
       FirebaseFirestore.instance
           .collection(storiesCollection)
           .doc(friendId)
           .collection(storiesCollection)
-          .orderBy(storyDataTimeField, descending: false)
+          .orderBy(storyDataTimeField, descending: descending ?? false)
           .snapshots()
           .listen((snapshot) {
         stories = [];

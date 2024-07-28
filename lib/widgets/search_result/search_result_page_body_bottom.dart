@@ -4,6 +4,7 @@ import 'package:sophiee/cubit/follower/follower_cubit.dart';
 import 'package:sophiee/cubit/get_followers/get_followers_cubit.dart';
 import 'package:sophiee/cubit/get_following/get_following_cubit.dart';
 import 'package:sophiee/cubit/notification/follower_notification/follower_notification_cubit.dart';
+import 'package:sophiee/cubit/notification/store_notification/store_notification_cubit.dart';
 import 'package:sophiee/models/users_model.dart';
 
 import 'package:flutter/material.dart';
@@ -23,6 +24,7 @@ class SearchResultPageBodyBottom extends StatelessWidget {
   Widget build(BuildContext context) {
     var follower = context.read<FollowerCubit>();
     var sendFollowerNotification = context.read<FollowerNotificationCubit>();
+    var storeNotification = context.read<StoreNotificationCubit>();
 
     return BlocBuilder<FollowStatusCubit, bool>(
       builder: (context, isFollowing) {
@@ -49,6 +51,8 @@ class SearchResultPageBodyBottom extends StatelessWidget {
                   senderId: userData.userID,
                   followingToken: user.token,
                   folowingName: userData.userName);
+              await storeNotification.storeNotification(
+                  userID: user.userID, notificationType: "follow");
             }
           },
           child: Container(

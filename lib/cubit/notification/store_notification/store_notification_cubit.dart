@@ -24,6 +24,7 @@ class StoreNotificationCubit extends Cubit<StoreNotificationState> {
         'notificationType': notificationType,
         'notificationID': notificationID ?? const Uuid().v4(),
         'isLive': isLive,
+        'isRead': false,
         'dateTime': Timestamp.now()
       });
       await FirebaseFirestore.instance
@@ -32,9 +33,9 @@ class StoreNotificationCubit extends Cubit<StoreNotificationState> {
           .collection(notificationCollection)
           .doc(notificationModel.notificationID)
           .set(notificationModel.toJson());
-      emit(StoreGetNotificationSuccess());
+      emit(StoreNotificationSuccess());
     } catch (e) {
-      emit(StoreGetNotificationFailure(errorMessage: e.toString()));
+      emit(StoreNotificationFailure(errorMessage: e.toString()));
       debugPrint('error from store notification method: $e');
     }
   }
@@ -46,6 +47,6 @@ class StoreNotificationCubit extends Cubit<StoreNotificationState> {
         .doc(userID)
         .collection(notificationCollection)
         .doc(notificationID)
-        .update({'isLive': false});
+        .update({'isLive': null});
   }
 }
