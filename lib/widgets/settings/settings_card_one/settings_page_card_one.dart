@@ -20,7 +20,7 @@ class _SettingsPageCardOneState extends State<SettingsPageCardOne> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 14, right: 14, top: 14),
+      padding: const EdgeInsets.only(left: 16, right: 16, top: 16),
       child: SettingsPageCardOneBody(
         userData: widget.userData,
         size: widget.size,

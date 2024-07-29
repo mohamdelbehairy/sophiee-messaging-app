@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sophiee/cubit/user_date/image/get_image/get_image_cubit.dart';
 
 import '../../cubit/get_followers/get_followers_cubit.dart';
 import '../../cubit/get_following/get_following_cubit.dart';
@@ -28,19 +29,21 @@ class SearchResultItemOne extends StatelessWidget {
     return Stack(
       children: [
         CustomUserImage(user: user, size: size, userData: userData),
-        MyFriendPageIconElispes(
-            user: user, size: size, isFriend: isFriend),
+        MyFriendPageIconElispes(user: user, size: size, isFriend: isFriend),
         MyFriendPageIcon(
             myFriendIconModel: MyFriendIconModel(
                 left: 8,
                 size: size.height * .035,
                 icon: Icons.arrow_back,
                 onPressed: () {
+                  Navigator.pop(context);
                   context.read<GetFollowersCubit>().followersList.clear();
                   context.read<GetFollowingCubit>().followingList.clear();
                   context.read<GetFriendsCubit>().getFriends(
                       userID: FirebaseAuth.instance.currentUser!.uid);
-                  Navigator.pop(context);
+                  context
+                      .read<GetImageCubit>()
+                      .getImage(userID: FirebaseAuth.instance.currentUser!.uid);
                 })),
       ],
     );

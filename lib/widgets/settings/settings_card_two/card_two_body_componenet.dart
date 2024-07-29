@@ -15,7 +15,7 @@ class CardTwoBodyComponenet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: size.width * .035),
+      padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Container(
         width: size.width,
         decoration: const BoxDecoration(
