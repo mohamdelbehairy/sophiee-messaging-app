@@ -16,15 +16,13 @@ class AddStoryBottomSheet extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     final pickImage = context.read<PickImageCubit>();
     final pickVideo = context.read<PickVideoCubit>();
-    
 
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: size.width * .05),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          SizedBox(
-              width: size.width * .1, child: const Divider(thickness: 5)),
+          SizedBox(width: size.width * .1, child: const Divider(thickness: 5)),
           SizedBox(height: size.height * .01),
           Text('Add a new story',
               style: TextStyle(
@@ -48,7 +46,7 @@ class AddStoryBottomSheet extends StatelessWidget {
               }),
           const SizedBox(height: 12),
           const AddStoryLive(),
-           SizedBox(height: size.height * .015),
+          SizedBox(height: size.height * .015),
         ],
       ),
     );

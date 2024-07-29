@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:sophiee/constants.dart';
 import 'package:sophiee/cubit/auth/login/login_cubit.dart';
 import 'package:sophiee/cubit/user_date/get_user_data/get_user_data_cubit.dart';
@@ -25,8 +24,6 @@ class ChatItemTop extends StatelessWidget {
         if (state is GetUserDataSuccess && state.userModel.isNotEmpty) {
           final data = state.userModel
               .firstWhere((element) => element.userID == user.userID);
-          final userData = state.userModel.firstWhere((element) =>
-              element.userID == FirebaseAuth.instance.currentUser!.uid);
 
           int differenceInMinutes =
               Timestamp.now().toDate().difference(data.onlineStatue).inMinutes;
@@ -36,12 +33,7 @@ class ChatItemTop extends StatelessWidget {
             color = Colors.grey;
           }
           return ItemTopBody(
-              userData: userData,
-              user: user,
-              data: data,
-              size: size,
-              isDark: isDark,
-              color: color);
+              data: data, size: size, isDark: isDark, color: color);
         } else {
           return Container();
         }

@@ -20,12 +20,6 @@ class _StoryViewPageState extends State<StoryViewPage> {
   final StoryController controller = StoryController();
 
   @override
-  void initState() {
-    super.initState();
-    context.read<StoryCubit>().getStory(friendId: widget.userID);
-  }
-
-  @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     var isDark = context.read<LoginCubit>().isDark;

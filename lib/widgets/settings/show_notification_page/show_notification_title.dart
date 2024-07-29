@@ -20,12 +20,18 @@ class ShowNotificationTitle extends StatelessWidget {
         notificationModel.notificationType == "live"
             ? '${friendData.userName.split(" ")[0]} is starting live now'
             : notificationModel.notificationType == "image"
-                ? '${friendData.userName.split(" ")[0]} is adding an image now'
+                ? '${friendData.userName.split(" ")[0]} is adding an image'
                 : notificationModel.notificationType == "video"
-                    ? '${friendData.userName.split(" ")[0]} is adding a video now'
-                    : '${friendData.userName.split(" ")[0]} started following you',
+                    ? '${friendData.userName.split(" ")[0]} is adding a video'
+                    : '${friendData.userName.split(" ")[0]} started following',
         style: TextStyle(
             fontWeight: FontWeight.normal,
-            color: isDark ? Colors.white : Colors.black));
+            color: notificationModel.isRead && isDark
+                ? const Color(0xff757575)
+                : notificationModel.isRead && !isDark
+                    ? const Color(0xff969a9b)
+                    : isDark
+                        ? Colors.white
+                        : Colors.black));
   }
 }

@@ -77,8 +77,10 @@ class _LivePageState extends State<LivePage> {
                         for (var element in items!) {
                           var data = items2
                               .firstWhere((e) => e.userID == element.userID);
-                          await storeNotification.updateIsLive(
+                          await storeNotification.updateNotificationField(
                               userID: data.userID,
+                              fieldName: 'isLive',
+                              fieldValue: null,
                               notificationID: notificationID);
                         }
                       }

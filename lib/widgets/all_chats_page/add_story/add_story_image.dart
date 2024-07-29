@@ -12,6 +12,7 @@ import 'package:sophiee/utils/initial_state.dart';
 import 'package:sophiee/widgets/all_chats_page/add_story/add_story_share_bottom.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:uuid/uuid.dart';
 
 import '../../../cubit/notification/story_notification/story_notification_cubit.dart';
 import '../../../cubit/upload/upload_image/upload_image_cubit.dart';
@@ -91,6 +92,7 @@ class _AddStoryImageState extends State<AddStoryImage> {
                       await Future.delayed(const Duration(seconds: 1), () {
                         Navigator.pop(context);
                       });
+                      String storyID = const Uuid().v4();
                       String storyImage = await uploadImage.uploadImage(
                           imageFile: widget.image, fieldName: 'stories_images');
                       await storeImage.storeImage(
@@ -99,6 +101,7 @@ class _AddStoryImageState extends State<AddStoryImage> {
                           isStoryImage: true);
                       await story.addStory(
                           imageUrl: storyImage,
+                          storyID: storyID,
                           videoUrl: null,
                           storyText: controller.text);
                       await story.updateIsStory(
@@ -115,7 +118,9 @@ class _AddStoryImageState extends State<AddStoryImage> {
                               senderId: user!.userID);
                         }
                         await storeNotification.storeNotification(
-                            userID: data.userID, notificationType: "image");
+                            notificationID: storyID,
+                            userID: data.userID,
+                            notificationType: "image");
                       }
                     },
                     child: const AddStoryShareBottom(),

@@ -6,6 +6,7 @@ import 'package:sophiee/widgets/all_chats_page/add_story/add_story_share_bottom.
 import 'package:sophiee/widgets/all_chats_page/add_story/add_story_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:uuid/uuid.dart';
 import 'package:video_player/video_player.dart';
 
 import '../../../cubit/get_friends/get_friends_cubit.dart';
@@ -99,11 +100,13 @@ class _AddStoryVideoState extends State<AddStoryVideo> {
                       await Future.delayed(const Duration(seconds: 1), () {
                         Navigator.pop(context);
                       });
+                      String storyID = const Uuid().v4();
                       String videoUrl = await uploadVideo.uploadVideo(
                           videoFile: widget.video, fieldName: 'stories_videos');
                       await story.addStory(
                           imageUrl: null,
                           videoUrl: videoUrl,
+                          storyID: storyID,
                           storyText: controller.text,
                           storyVideoTime: videoDuration?.inSeconds);
                       await story.updateIsStory(
@@ -121,7 +124,9 @@ class _AddStoryVideoState extends State<AddStoryVideo> {
                               senderId: user!.userID);
                         }
                         await storeNotification.storeNotification(
-                            userID: data.userID, notificationType: "video");
+                            notificationID: storyID,
+                            userID: data.userID,
+                            notificationType: "video");
                       }
                     },
                     child: const AddStoryShareBottom(),

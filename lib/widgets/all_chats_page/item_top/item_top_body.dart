@@ -12,14 +12,12 @@ import 'item_top_text.dart';
 class ItemTopBody extends StatelessWidget {
   const ItemTopBody(
       {super.key,
-      required this.user,
       required this.data,
       required this.size,
       required this.isDark,
-      required this.color,
-      required this.userData});
+      required this.color});
 
-  final UserModel user, data, userData;
+  final UserModel data;
 
   final Size size;
   final bool isDark;
@@ -29,16 +27,19 @@ class ItemTopBody extends StatelessWidget {
   Widget build(BuildContext context) {
     var isStory = context
         .read<StoryCubit>()
-        .checkIsStory(friendId: user.userID, story: 'isStory');
+        .checkIsStory(friendId: data.userID, story: 'isStory');
     var isLive = context
         .read<StoryCubit>()
-        .checkIsStory(friendId: user.userID, story: 'isLive');
+        .checkIsStory(friendId: data.userID, story: 'isLive');
+    var story = context.read<StoryCubit>();
     return Column(
       children: [
         GestureDetector(
             onTap: () async {
               if (await isStory && !await isLive) {
-                getnav.Get.to(() => StoryViewPage(userID: user.userID),
+                story.getStory(friendId: data.userID);
+                await Future.delayed(const Duration(seconds: 1));
+                getnav.Get.to(() => StoryViewPage(userID: data.userID),
                     transition: getnav.Transition.downToUp);
               }
               if (await isLive) {

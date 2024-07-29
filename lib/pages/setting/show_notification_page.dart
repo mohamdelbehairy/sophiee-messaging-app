@@ -28,7 +28,7 @@ class _ShowNotificationPageState extends State<ShowNotificationPage> {
       backgroundColor: context.read<LoginCubit>().isDark
           ? kDarkModeBackgroundColor
           : const Color(0xfff6fafb),
-      appBar: showNotificationAppBar(),
+      appBar: showNotificationAppBar(context),
       body: const ShowNotificationPageBody(),
     );
   }

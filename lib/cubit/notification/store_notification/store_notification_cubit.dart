@@ -40,13 +40,16 @@ class StoreNotificationCubit extends Cubit<StoreNotificationState> {
     }
   }
 
-  Future<void> updateIsLive(
-      {required String userID, required String notificationID}) async {
+  Future<void> updateNotificationField(
+      {required String userID,
+      required String notificationID,
+      required fieldName,
+      required fieldValue}) async {
     await FirebaseFirestore.instance
         .collection(notificationCollection)
         .doc(userID)
         .collection(notificationCollection)
         .doc(notificationID)
-        .update({'isLive': null});
+        .update({fieldName: fieldValue});
   }
 }

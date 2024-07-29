@@ -57,6 +57,7 @@ const phoneNumberImageUrl = 'assets/images/phone-number.png';
 const noGroupChat = "assets/images/no-group-chat.png";
 const noHighlightMessages = 'assets/images/highLightMessage.png';
 const noChatsImageUrl = 'assets/images/no-chats.png';
+const noNotificationImageUrl = 'assets/images/notification.png';
 
 const profileLockImageurl = 'assets/images/profile_lock.png';
 

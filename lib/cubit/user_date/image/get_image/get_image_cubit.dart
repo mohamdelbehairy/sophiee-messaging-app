@@ -29,7 +29,7 @@ class GetImageCubit extends Cubit<GetImageState> {
       });
     } catch (e) {
       emit(GetImageFailure(errorMessage: e.toString()));
-      debugPrint('error from get image method: ${e.toString()}');
+      debugPrint('error from get image method: $e');
     }
   }
 }
