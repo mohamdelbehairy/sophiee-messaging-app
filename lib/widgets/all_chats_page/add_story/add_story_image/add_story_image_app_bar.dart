@@ -1,6 +1,6 @@
  import 'package:flutter/material.dart';
 
-import '../../../../utils/initial_state.dart';
+import '../../../../utils/methods/initial_state.dart';
 
 AppBar addStoryImageAppBar(BuildContext context) {
     return AppBar(

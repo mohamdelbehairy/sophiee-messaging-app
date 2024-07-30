@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
-import '../../../utils/navigation_notify.dart';
+import '../../../utils/methods/navigation_notify.dart';
+
 
 part 'notification_setting_state.dart';
 
@@ -53,6 +54,7 @@ class NotificationSettingCubit extends Cubit<NotificationSettingState> {
     RemoteMessage? message =
         await FirebaseMessaging.instance.getInitialMessage();
     if (message != null) {
+      // ignore: use_build_context_synchronously
       NavigationNotify.navigationNotification(message, context);
     }
 

@@ -113,20 +113,22 @@ class _AddStoryVideoState extends State<AddStoryVideo> {
                           isStory: true,
                           userID: FirebaseAuth.instance.currentUser!.uid);
 
-                      for (var element in items!) {
-                        var data = items2!
-                            .firstWhere((e) => e.userID == element.userID);
+                      if (items != null) {
+                        for (var element in items!) {
+                          var data = items2!
+                              .firstWhere((e) => e.userID == element.userID);
 
-                        if (data.isStoryNotify) {
-                          await storyNotification.sendStoryNotification(
-                              receiverToken: data.token,
-                              senderName: user!.userName,
-                              senderId: user!.userID);
+                          if (data.isStoryNotify) {
+                            await storyNotification.sendStoryNotification(
+                                receiverToken: data.token,
+                                senderName: user!.userName,
+                                senderId: user!.userID);
+                          }
+                          await storeNotification.storeNotification(
+                              notificationID: storyID,
+                              userID: data.userID,
+                              notificationType: "video");
                         }
-                        await storeNotification.storeNotification(
-                            notificationID: storyID,
-                            userID: data.userID,
-                            notificationType: "video");
                       }
                     },
                     child: const AddStoryShareBottom(),

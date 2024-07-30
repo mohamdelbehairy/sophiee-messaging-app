@@ -1,3 +1,4 @@
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sophiee/cubit/user_date/get_user_data/get_user_data_cubit.dart';
 import 'package:sophiee/cubit/user_date/get_user_data/get_user_data_state.dart';
 import 'package:sophiee/utils/shimmer/home/profile/profile_page_shimmer.dart';
@@ -14,7 +15,11 @@ class ProfilePageBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<GetUserDataCubit, GetUserDataStates>(
+    return BlocConsumer<GetUserDataCubit, GetUserDataStates>(
+      listener: (context, state) async {
+        final pref = await SharedPreferences.getInstance();
+        pref.setString('storeUser', FirebaseAuth.instance.currentUser!.uid);
+      },
       builder: (context, state) {
         if (state is GetUserDataLoading) {
           return const ProfilePageShimmer();
@@ -23,6 +28,7 @@ class ProfilePageBody extends StatelessWidget {
           if (currentUser != null) {
             final userData = state.userModel
                 .firstWhere((element) => element.userID == currentUser.uid);
+
             UserCallInit.onUserLogin(
                 userID: userData.userID, userName: userData.userName);
             return ProfilePageBodyComponent(size: size, user: userData);

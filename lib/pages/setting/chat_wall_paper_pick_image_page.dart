@@ -3,9 +3,9 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sophiee/cubit/update_user_data/update_user_data_state.dart';
-import 'package:sophiee/utils/initial_state.dart';
 
 import '../../cubit/update_user_data/update_user_cubit_cubit.dart';
+import '../../utils/methods/initial_state.dart';
 import '../../widgets/settings/chat_wallpaper_page/pick_image_page/app_bar_save_image_icon.dart';
 import '../../widgets/settings/chat_wallpaper_page/pick_image_page/pick_image_oage_app_bar_title.dart';
 import '../../widgets/settings/chat_wallpaper_page/pick_image_page/pick_image_page_app_bar_leading.dart';

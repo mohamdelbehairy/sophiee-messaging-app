@@ -4,7 +4,7 @@ import '../../constants.dart';
 import '../../cubit/pick_image/pick_image_cubit.dart';
 import '../../cubit/pick_image/pick_image_state.dart';
 import '../../models/users_model.dart';
-import '../../utils/initial_state.dart';
+import '../../utils/methods/initial_state.dart';
 import '../../utils/widget/custom_bottom.dart';
 
 class DiscardChangesButton extends StatelessWidget {

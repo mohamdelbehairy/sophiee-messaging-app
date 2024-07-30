@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 
 class ProviderAuthPage extends StatelessWidget {
   const ProviderAuthPage({super.key});
-  
 
   @override
   Widget build(BuildContext context) {

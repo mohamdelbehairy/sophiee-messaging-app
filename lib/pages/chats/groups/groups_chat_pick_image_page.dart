@@ -6,7 +6,7 @@ import 'package:sophiee/widgets/all_chats_page/groups_page/groups_chat_page/grou
 import 'package:flutter/material.dart';
 
 import '../../../cubit/upload/upload_image/upload_image_cubit.dart';
-import '../../../utils/initial_state.dart';
+import '../../../utils/methods/initial_state.dart';
 import '../../../widgets/all_chats_page/chat_page/pick_chat_items/pick_image_page_bottom.dart';
 
 class GroupsChatPickImagePage extends StatelessWidget {

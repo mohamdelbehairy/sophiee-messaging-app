@@ -5,7 +5,7 @@ import '../../cubit/follower/follower_cubit.dart';
 import '../../cubit/follower/follower_state.dart';
 import '../../cubit/friends/friends_cubit.dart';
 import '../../models/users_model.dart';
-import '../../utils/initial_state.dart';
+import '../../utils/methods/initial_state.dart';
 import 'icon_elispes_component.dart';
 
 class IconElispesBody extends StatelessWidget {

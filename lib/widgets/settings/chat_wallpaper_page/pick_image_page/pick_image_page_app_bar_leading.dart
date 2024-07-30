@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../utils/initial_state.dart';
+import '../../../../utils/methods/initial_state.dart';
 
 class PickImagePageAppBarleading extends StatelessWidget {
   const PickImagePageAppBarleading({super.key});

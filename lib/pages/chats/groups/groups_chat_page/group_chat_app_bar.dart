@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:sophiee/utils/initial_state.dart';
 import 'package:sophiee/widgets/all_chats_page/chat_page/chats_icons_app_bar_button.dart';
 import 'package:sophiee/widgets/all_chats_page/groups_page/groups_chat_page/groups_chat_page_app_bar.dart';
 
 import '../../../../constants.dart';
 import '../../../../models/group_model.dart';
+import '../../../../utils/methods/initial_state.dart';
 
 AppBar groupChatAppBar(
     {required bool isDark,

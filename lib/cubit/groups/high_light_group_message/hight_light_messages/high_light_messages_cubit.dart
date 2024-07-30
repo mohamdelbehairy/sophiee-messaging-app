@@ -83,7 +83,7 @@ class HightLightMessagesCubit extends Cubit<HightLightMessagesState> {
           .collection('messages')
           .get();
       for (QueryDocumentSnapshot snapshot in document.docs) {
-        snapshot.reference.delete();
+        await snapshot.reference.delete();
       }
       await removeUserHighLight(groupID: groupID);
       emit(RemoveAllHightLightMessagesSuccess());

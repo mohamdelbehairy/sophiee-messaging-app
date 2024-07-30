@@ -12,7 +12,7 @@ import '../../cubit/friends/friends_cubit.dart';
 import '../../cubit/update_user_data/update_user_cubit_cubit.dart';
 import '../../models/users_model.dart';
 import '../../pages/chats/chat_page.dart';
-import '../../utils/initial_state.dart';
+import '../../utils/methods/initial_state.dart';
 import '../../utils/widget/flutter_toast_widget.dart';
 import '../../utils/widget/media/save_image.dart';
 import '../../utils/widget/media/share_media.dart';

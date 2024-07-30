@@ -3,11 +3,11 @@ import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:sophiee/constants.dart';
 import 'package:sophiee/cubit/update_user_data/update_user_cubit_cubit.dart';
-import 'package:sophiee/utils/initial_state.dart';
 
 import '../../cubit/pick_image/pick_image_cubit.dart';
 import '../../cubit/pick_image/pick_image_state.dart';
 import '../../cubit/upload/upload_image/upload_image_cubit.dart';
+import '../../utils/methods/initial_state.dart';
 import '../settings/settings_page_app_bar.dart';
 import 'edit_profile_component_details.dart';
 

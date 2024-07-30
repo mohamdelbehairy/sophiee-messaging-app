@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import '../../../initial_state.dart';
+import '../../../methods/initial_state.dart';
 
 class ContactIconClose extends StatelessWidget {
   const ContactIconClose({super.key, required this.size, required this.isDark});

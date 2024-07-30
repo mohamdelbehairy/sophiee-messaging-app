@@ -4,7 +4,8 @@ import 'package:sophiee/models/group_model.dart';
 import 'package:sophiee/widgets/all_chats_page/groups_page/groups_chat_page/groups_chat_page_info/app_bar_icon.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../../utils/initial_state.dart';
+import '../../../../../utils/methods/initial_state.dart';
+
 
 class EditingGroupsDetails extends StatelessWidget {
   const EditingGroupsDetails(

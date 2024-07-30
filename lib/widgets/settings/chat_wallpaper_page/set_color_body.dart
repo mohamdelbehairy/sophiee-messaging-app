@@ -32,6 +32,7 @@ class SetColorBody extends StatelessWidget {
               child: SlidePicker(
                 pickerColor: Colors.red,
                 enableAlpha: false,
+                // ignore: deprecated_member_use
                 sliderTextStyle: const TextStyle(
                     color: Colors.black,
                     fontSize: 14,

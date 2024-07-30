@@ -7,7 +7,7 @@ import 'package:sophiee/widgets/all_chats_page/groups_page/create_group_page/cre
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../utils/initial_state.dart';
+import '../../../../utils/methods/initial_state.dart';
 
 class CreateGroupPageSecondBody extends StatelessWidget {
   const CreateGroupPageSecondBody(

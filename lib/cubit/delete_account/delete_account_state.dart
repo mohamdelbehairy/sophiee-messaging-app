@@ -6,7 +6,7 @@ final class DeleteAccountInitial extends DeleteAccountState {}
 
 final class DeleteAccountLoading extends DeleteAccountState {}
 
-final class DeleteFollowersAndFollowing extends DeleteAccountState {}
+final class DeleteAccountSuccess extends DeleteAccountState {}
 
 final class DeleteAccountFailure extends DeleteAccountState {
   final String errorMessage;

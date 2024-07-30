@@ -41,8 +41,8 @@ class CardThreeCustomScrollItemTwo extends StatelessWidget {
                   textTwoFontSize: size.height * .012,
                   mainAxisAlignment: MainAxisAlignment.start,
                   image: emptyImageUrl,
-                  textOne: 'No Images here',
-                  textTwo: 'We didn\'t find any images yet \n Please add a new image');
+                  textOne: '',
+                  textTwo: '');
             }
           },
         ),

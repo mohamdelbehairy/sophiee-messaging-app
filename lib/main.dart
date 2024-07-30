@@ -9,7 +9,7 @@ import 'package:sophiee/simple_observe_bloc.dart';
 import 'package:zego_uikit_prebuilt_call/zego_uikit_prebuilt_call.dart';
 import 'package:zego_uikit_signaling_plugin/zego_uikit_signaling_plugin.dart';
 
-import 'utils/system_chrome_method.dart';
+import 'utils/methods/system_chrome_method.dart';
 
 final navigatorKey = GlobalKey<NavigatorState>();
 

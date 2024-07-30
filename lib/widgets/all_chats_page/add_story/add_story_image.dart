@@ -8,7 +8,6 @@ import 'package:sophiee/cubit/story/story_state.dart';
 import 'package:sophiee/cubit/user_date/get_user_data/get_user_data_cubit.dart';
 import 'package:sophiee/cubit/user_date/get_user_data/get_user_data_state.dart';
 import 'package:sophiee/models/users_model.dart';
-import 'package:sophiee/utils/initial_state.dart';
 import 'package:sophiee/widgets/all_chats_page/add_story/add_story_share_bottom.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -17,6 +16,7 @@ import 'package:uuid/uuid.dart';
 import '../../../cubit/notification/story_notification/story_notification_cubit.dart';
 import '../../../cubit/upload/upload_image/upload_image_cubit.dart';
 import '../../../cubit/user_date/image/store_image/store_image_cubit.dart';
+import '../../../utils/methods/initial_state.dart';
 import 'add_story_image/add_story_image_app_bar.dart';
 import 'add_story_image/add_story_image_custom_image.dart';
 import 'add_story_text_field.dart';
@@ -107,20 +107,22 @@ class _AddStoryImageState extends State<AddStoryImage> {
                       await story.updateIsStory(
                           isStory: true,
                           userID: FirebaseAuth.instance.currentUser!.uid);
-                      for (var element in items!) {
-                        var data = items2!
-                            .firstWhere((e) => e.userID == element.userID);
+                      if (items != null) {
+                        for (var element in items!) {
+                          var data = items2!
+                              .firstWhere((e) => e.userID == element.userID);
 
-                        if (data.isStoryNotify) {
-                          await storyNotification.sendStoryNotification(
-                              receiverToken: data.token,
-                              senderName: user!.userName,
-                              senderId: user!.userID);
+                          if (data.isStoryNotify) {
+                            await storyNotification.sendStoryNotification(
+                                receiverToken: data.token,
+                                senderName: user!.userName,
+                                senderId: user!.userID);
+                          }
+                          await storeNotification.storeNotification(
+                              notificationID: storyID,
+                              userID: data.userID,
+                              notificationType: "image");
                         }
-                        await storeNotification.storeNotification(
-                            notificationID: storyID,
-                            userID: data.userID,
-                            notificationType: "image");
                       }
                     },
                     child: const AddStoryShareBottom(),

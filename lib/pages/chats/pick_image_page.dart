@@ -2,10 +2,10 @@ import 'dart:io';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sophiee/cubit/upload/upload_image/upload_image_cubit.dart';
 import 'package:sophiee/models/users_model.dart';
-import 'package:sophiee/utils/initial_state.dart';
 import 'package:sophiee/widgets/all_chats_page/chat_page/pick_chat_items/pick_image_page/pick_image_page_body.dart';
 import 'package:flutter/material.dart';
 
+import '../../utils/methods/initial_state.dart';
 import '../../widgets/all_chats_page/chat_page/pick_chat_items/pick_image_page_bottom.dart';
 
 class PickImagePage extends StatelessWidget {

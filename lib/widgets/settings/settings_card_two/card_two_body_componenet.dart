@@ -7,10 +7,14 @@ import 'package:sophiee/widgets/settings/settings_card_two/card_two_delete_item.
 
 class CardTwoBodyComponenet extends StatelessWidget {
   const CardTwoBodyComponenet(
-      {super.key, required this.size, required this.onTap});
+      {super.key,
+      required this.size,
+      required this.onTap,
+      required this.deleteAccount});
 
   final Size size;
   final Function() onTap;
+  final Function() deleteAccount;
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +40,7 @@ class CardTwoBodyComponenet extends StatelessWidget {
               children: [
                 CardTwoLogoutItem(onTap: onTap, size: size),
                 SizedBox(height: size.width * .001),
-                CardTwoDeleteItem(size: size),
+                CardTwoDeleteItem(size: size, onTap: deleteAccount),
               ],
             ),
           ),

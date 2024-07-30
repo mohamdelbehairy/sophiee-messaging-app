@@ -7,7 +7,7 @@ import '../../../constants.dart';
 import '../../../cubit/get_followers/get_followers_cubit.dart';
 import '../../../cubit/get_following/get_following_cubit.dart';
 import '../../../cubit/get_friends/get_friends_cubit.dart';
-import '../../../utils/initial_state.dart';
+import '../../../utils/methods/initial_state.dart';
 
 AppBar showNotificationAppBar(BuildContext context) {
   return AppBar(

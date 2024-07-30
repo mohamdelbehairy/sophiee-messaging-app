@@ -9,7 +9,7 @@ import '../../../cubit/get_following/get_following_cubit.dart';
 import '../../../cubit/user_date/image/get_image/get_image_cubit.dart';
 import '../../../models/send_call_invitation_model.dart';
 import '../../../models/users_model.dart';
-import '../../../utils/initial_state.dart';
+import '../../../utils/methods/initial_state.dart';
 import '../../../utils/widget/send_call_invitation_button.dart';
 import 'chat_page_app_bar_title.dart';
 import 'chats_icons_app_bar_button.dart';

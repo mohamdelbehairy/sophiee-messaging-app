@@ -4,8 +4,8 @@ import 'package:sophiee/models/users_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sophiee/utils/initial_state.dart';
 
+import '../../utils/methods/initial_state.dart';
 import 'my_friend_page_icon.dart';
 import 'my_friend_page_icon_elispes.dart';
 import '../../utils/widget/custom_user_image.dart';
