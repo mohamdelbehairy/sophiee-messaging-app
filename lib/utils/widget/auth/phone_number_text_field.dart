@@ -47,7 +47,8 @@ class PhoneNumberTextField extends StatelessWidget {
                   fontWeight: FontWeight.w300,
                   fontSize: size.width * .035),
               decoration: InputDecoration(
-                  contentPadding: const EdgeInsets.symmetric(vertical: 12),
+                  contentPadding:
+                      EdgeInsets.symmetric(vertical: size.width * .035),
                   border: InputBorder.none,
                   hintText: hintText,
                   hintStyle: TextStyle(

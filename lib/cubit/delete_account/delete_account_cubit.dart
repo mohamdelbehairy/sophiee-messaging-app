@@ -196,6 +196,7 @@ class DeleteAccountCubit extends Cubit<DeleteAccountState> {
       emit(DeleteAccountSuccess());
     } catch (e) {
       emit(DeleteAccountFailure(errorMessage: e.toString()));
+      debugPrint('error from delete account method: $e');
     }
   }
 }

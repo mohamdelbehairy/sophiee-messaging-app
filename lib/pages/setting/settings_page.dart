@@ -7,7 +7,7 @@ import 'package:sophiee/utils/shimmer/home/settings/settings_page_shimmer.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sophiee/widgets/settings/settings_page_body.dart';
+import 'package:sophiee/widgets/settings/setting_page/settings_page_body.dart';
 
 class SettingsPage extends StatelessWidget {
   const SettingsPage({super.key});

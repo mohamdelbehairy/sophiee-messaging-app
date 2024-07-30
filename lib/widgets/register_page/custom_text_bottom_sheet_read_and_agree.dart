@@ -32,7 +32,10 @@ class CustomTextBottomSheetReadAndAgree extends StatelessWidget {
             style: TextStyle(
                 fontWeight: FontWeight.bold,
                 color: isDark ? Colors.white : Colors.black)),
-        TextButton(onPressed: () {}, child: const Text('terms & policy'))
+        TextButton(
+            onPressed: () {},
+            child: const Text('terms & policy',
+                style: TextStyle(color: Colors.blue)))
       ],
     );
   }

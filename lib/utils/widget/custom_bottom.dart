@@ -12,7 +12,8 @@ class CustomBottom extends StatelessWidget {
       required this.borderRadius,
       required this.width,
       this.margin,
-      this.border});
+      this.border,
+      this.textSize, this.padding});
   final String text;
   final Color colorBottom;
   final Color colorText;
@@ -21,14 +22,16 @@ class CustomBottom extends StatelessWidget {
   final bool enableFeedback;
   final BorderRadius borderRadius;
   final double width;
-  final EdgeInsetsGeometry? margin;
+  final EdgeInsetsGeometry? margin,padding;
   final BoxBorder? border;
+  final double? textSize;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       width: width,
       margin: margin,
+      padding: padding,
       decoration: BoxDecoration(
           borderRadius: borderRadius, color: colorBottom, border: border),
       child: MaterialButton(
@@ -42,7 +45,8 @@ class CustomBottom extends StatelessWidget {
                   width: 30,
                   child: CircularProgressIndicator(
                       valueColor: AlwaysStoppedAnimation<Color>(colorText)))
-              : Text(text, style: TextStyle(color: colorText))),
+              : Text(text,
+                  style: TextStyle(color: colorText, fontSize: textSize))),
     );
   }
 }

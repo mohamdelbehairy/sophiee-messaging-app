@@ -5,15 +5,15 @@ class SettingsPageCardTwo extends StatelessWidget {
   const SettingsPageCardTwo(
       {super.key,
       required this.size,
-      required this.onPressed,
+      required this.loginAccount,
       required this.deleteAccount});
 
   final Size size;
-  final Function() onPressed, deleteAccount;
+  final Function() loginAccount, deleteAccount;
 
   @override
   Widget build(BuildContext context) {
     return SettingsPageCardTwoBody(
-        deleteAccount: deleteAccount, size: size, onPressed: onPressed);
+        deleteAccount: deleteAccount, size: size, loginAccount: loginAccount);
   }
 }

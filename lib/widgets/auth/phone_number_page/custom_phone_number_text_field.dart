@@ -7,7 +7,8 @@ class CustomPhoneNumberTextField extends StatelessWidget {
       {super.key,
       required this.size,
       required this.onChanged,
-      required this.controller, required this.enabled});
+      required this.controller,
+      required this.enabled});
 
   final Size size;
   final Function(PhoneNumber) onChanged;
