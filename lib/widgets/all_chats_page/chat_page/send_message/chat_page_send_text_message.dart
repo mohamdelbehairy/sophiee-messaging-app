@@ -10,6 +10,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:uuid/uuid.dart';
 
+import '../../../../utils/methods/default_user_model.dart';
+
 class ChatPageSendTextMessageButton extends StatelessWidget {
   const ChatPageSendTextMessageButton(
       {super.key,
@@ -49,8 +51,9 @@ class ChatPageSendTextMessageButton extends StatelessWidget {
         if (state is GetUserDataSuccess && state.userModel.isNotEmpty) {
           final currentUser = FirebaseAuth.instance.currentUser;
           final friendUser = user.userID;
-          final friendData = state.userModel
-              .firstWhere((element) => element.userID == friendUser);
+          final friendData = state.userModel.firstWhere(
+              (element) => element.userID == friendUser,
+              orElse: () => defaultUserModel(userID: user.userID));
           if (currentUser != null) {
             final userData = state.userModel
                 .firstWhere((element) => element.userID == currentUser.uid);

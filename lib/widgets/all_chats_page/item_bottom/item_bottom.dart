@@ -7,6 +7,7 @@ import 'package:sophiee/models/users_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sophiee/utils/methods/default_user_model.dart';
 
 import 'item_bottom_list_tile.dart';
 
@@ -17,14 +18,15 @@ class ItemBottom extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
+    final size = MediaQuery.sizeOf(context);
     final isDark = context.read<LoginCubit>().isDark;
     Color color;
     return BlocBuilder<GetUserDataCubit, GetUserDataStates>(
       builder: (context, state) {
         if (state is GetUserDataSuccess && state.userModel.isNotEmpty) {
-          final data = state.userModel
-              .firstWhere((element) => element.userID == user.userID);
+          final data = state.userModel.firstWhere(
+              (element) => element.userID == user.userID,
+              orElse: () => defaultUserModel(userID: user.userID));
           final userData = state.userModel.firstWhere((element) =>
               element.userID == FirebaseAuth.instance.currentUser!.uid);
           int differenceInMinutes =
@@ -34,6 +36,7 @@ class ItemBottom extends StatelessWidget {
           } else {
             color = Colors.grey;
           }
+
           return ItemBottomListTile(
               userData: userData,
               data: data,

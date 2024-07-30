@@ -6,6 +6,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../utils/methods/default_user_model.dart';
 import 'chat_page_app_bar_title_body.dart';
 
 class ChatPageAppBarTitle extends StatelessWidget {
@@ -22,8 +23,9 @@ class ChatPageAppBarTitle extends StatelessWidget {
       builder: (context, state) {
         if (state is GetUserDataSuccess && state.userModel.isNotEmpty) {
           final currentUser = user.userID;
-          final data = state.userModel
-              .firstWhere((element) => element.userID == currentUser);
+          final data = state.userModel.firstWhere(
+              (element) => element.userID == currentUser,
+              orElse: () => defaultUserModel(userID: user.userID));
 
           String text;
           int differenceInMinutes =
@@ -34,7 +36,8 @@ class ChatPageAppBarTitle extends StatelessWidget {
               Timestamp.now().toDate().difference(data.onlineStatue).inDays;
 
           if (userData.blockUsers.contains(user.userID) ||
-              user.blockUsers.contains(userData.userID)) {
+              user.blockUsers.contains(userData.userID) ||
+              user.userName == "Deleted Account") {
             text = 'last seen for a long time';
           } else if (!user.isLastSeendAndOnline) {
             text = 'last seen recently';

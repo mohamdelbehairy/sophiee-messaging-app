@@ -26,7 +26,8 @@ class ItemBottomListTileLeading extends StatelessWidget {
         ItemBottomImage(
             size: size, isDark: isDark, data: data, userData: userData),
         if (!userData.blockUsers.contains(data.userID) &&
-            !data.blockUsers.contains(userData.userID))
+            !data.blockUsers.contains(userData.userID) &&
+            data.userName != "Deleted Account")
           ItemBottomOnlineStatue(size: size, isDark: isDark, color: color)
       ],
     );

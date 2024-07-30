@@ -5,6 +5,7 @@ import 'package:sophiee/cubit/user_date/get_user_data/get_user_data_state.dart';
 import 'package:sophiee/models/notification_model.dart';
 
 import '../../../cubit/auth/login/login_cubit.dart';
+import '../../../utils/methods/default_user_model.dart';
 import 'show_notification_list_tile_body.dart';
 
 class ShowNotificationListTile extends StatelessWidget {
@@ -26,7 +27,8 @@ class ShowNotificationListTile extends StatelessWidget {
       builder: (context, state) {
         if (state is GetUserDataSuccess && state.userModel.isNotEmpty) {
           final friendData = state.userModel.firstWhere(
-              (element) => element.userID == notificationModel.publishID);
+              (element) => element.userID == notificationModel.publishID,
+              orElse: () => defaultUserModel(userID: notificationModel.notificationID));
           return ShowNotificationListTileBody(
               isDark: isDark,
               size: size,
@@ -41,4 +43,6 @@ class ShowNotificationListTile extends StatelessWidget {
       },
     );
   }
+
+ 
 }

@@ -4,6 +4,7 @@ import 'package:sophiee/cubit/user_date/get_user_data/get_user_data_cubit.dart';
 import 'package:sophiee/cubit/user_date/get_user_data/get_user_data_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sophiee/utils/methods/default_user_model.dart';
 import 'package:sophiee/widgets/all_chats_page/chat_page/chat_page_body.dart';
 
 import '../../cubit/message/message_cubit.dart';
@@ -31,11 +32,12 @@ class _ChatPageState extends State<ChatPage> {
     return BlocBuilder<GetUserDataCubit, GetUserDataStates>(
       builder: (context, state) {
         if (state is GetUserDataSuccess && state.userModel.isNotEmpty) {
-          final user = state.userModel
-              .firstWhere((element) => element.userID == widget.userID);
+          final user = state.userModel.firstWhere(
+              (element) => element.userID == widget.userID,
+              orElse: () => defaultUserModel(userID: widget.userID));
           final userData = state.userModel.firstWhere((element) =>
               element.userID == FirebaseAuth.instance.currentUser!.uid);
-         
+
           return ChatPageBody(size: size, user: user, userData: userData);
         } else {
           return Container();

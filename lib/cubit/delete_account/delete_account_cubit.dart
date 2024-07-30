@@ -112,7 +112,18 @@ class DeleteAccountCubit extends Cubit<DeleteAccountState> {
         .collection('recentSearch')
         .get();
     for (var snapshot in document.docs) {
-      await snapshot.reference.delete();
+      await FirebaseFirestore.instance
+          .collection('recentSearch')
+          .doc(snapshot.id)
+          .collection('recentSearch')
+          .doc(FirebaseAuth.instance.currentUser!.uid)
+          .delete();
+      await FirebaseFirestore.instance
+          .collection('recentSearch')
+          .doc(FirebaseAuth.instance.currentUser!.uid)
+          .collection('recentSearch')
+          .doc(snapshot.id)
+          .delete();
     }
   }
 

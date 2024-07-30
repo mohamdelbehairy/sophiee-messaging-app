@@ -54,7 +54,9 @@ class ShowNotificationListTileBody extends StatelessWidget {
   }
 
   Future<void> onTap(BuildContext context) async {
-    if (notificationModel.notificationType == 'follow') {
+    if (friendData.userName == "Deleted Account") {
+      FlutterToastWidget.showToast(msg: 'this account has been deleted');
+    } else if (notificationModel.notificationType == 'follow') {
       context
           .read<FollowStatusCubit>()
           .checkFollowStatus(followerID: notificationModel.publishID);

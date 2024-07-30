@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import '../../../models/users_model.dart';
@@ -28,8 +29,11 @@ class ChatPageAppBarTitleBody extends StatelessWidget {
         Row(
           children: [
             GestureDetector(
-                onTap: () {
-                  if (userData.blockUsers.contains(user.userID)) {
+                onTap: () async {
+                  if (!await isUserFound(userID: user.userID)) {
+                    FlutterToastWidget.showToast(
+                        msg: 'this account has been deleted');
+                  } else if (userData.blockUsers.contains(user.userID)) {
                     FlutterToastWidget.showToast(
                         msg: 'You blocked ${user.userName}');
                   } else if (user.blockUsers.contains(userData.userID)) {
@@ -37,6 +41,7 @@ class ChatPageAppBarTitleBody extends StatelessWidget {
                         msg: '${user.userName.split(" ")[0]} is blocked you');
                   } else {
                     showModalBottomSheet(
+                        // ignore: use_build_context_synchronously
                         context: context,
                         backgroundColor: Colors.transparent,
                         builder: (context) => ChatPageFriendBottomSheetInfo(
@@ -60,5 +65,14 @@ class ChatPageAppBarTitleBody extends StatelessWidget {
         ),
       ],
     );
+  }
+
+  Future<bool> isUserFound({required String userID}) async {
+    var document =
+        await FirebaseFirestore.instance.collection('users').doc(userID).get();
+    if (document.exists) {
+      return true;
+    }
+    return false;
   }
 }
