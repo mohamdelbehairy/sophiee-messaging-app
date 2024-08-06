@@ -27,14 +27,15 @@ class IconSettingsGroupImage extends StatelessWidget {
                 onTap: () async {
                   Navigator.pop(context);
                   await saveImage(imageUrl: groupModel.groupImage!);
-                  FlutterToastWidget.showToast(msg: "Image saved successfully");
+                  FlutterToastWidget.showToast(msg: "image saved successfully");
                 },
                 child: Row(
                   children: [
-                    Icon(Icons.save_alt_outlined,
-                        size: size.width * .04, color: Colors.white),
+                    Icon(Icons.bookmark_add,
+                        size: size.width * .05, color: Colors.white),
                     SizedBox(width: size.width * .025),
-                    const Text('Save to gallery', style: TextStyle(color: Colors.white))
+                    const Text('Save to gallery',
+                        style: TextStyle(color: Colors.white))
                   ],
                 ),
               )),
@@ -52,7 +53,8 @@ class IconSettingsGroupImage extends StatelessWidget {
                     Icon(Icons.share,
                         size: size.width * .04, color: Colors.white),
                     SizedBox(width: size.width * .025),
-                    const Text('Share image', style: TextStyle(color: Colors.white))
+                    const Text('Share image',
+                        style: TextStyle(color: Colors.white))
                   ],
                 ),
               )),

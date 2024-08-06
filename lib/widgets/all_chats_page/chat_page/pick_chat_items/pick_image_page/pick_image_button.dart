@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sophiee/utils/methods/initial_state.dart';
 import 'package:uuid/uuid.dart';
 
 import '../../../../../cubit/chat_media_files/chat_store_media_files/chat_store_media_files_cubit.dart';
@@ -52,6 +53,8 @@ class PickImageButton extends StatelessWidget {
                   onTap: () async {
                     String imageUrl = await uploadImage.uploadImage(
                         fieldName: 'messages_images', imageFile: widget.image);
+                    // ignore: use_build_context_synchronously
+                    InitialState.initPickImageState(context);
                     String messageID = const Uuid().v4();
                     await sendMessage.sendMessage(
                         messageID: messageID,

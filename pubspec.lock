@@ -562,10 +562,10 @@ packages:
     dependency: transitive
     description:
       name: flutter_callkit_incoming_yoer
-      sha256: a0e08c9ddd4034d3a8b7f786bb8d417ffb9185e6711b9d3e5c1a01b3877f3156
+      sha256: efc107281b549ca8c5617b8f959615b8e01b71323d2dc77b06900f06e15b9104
       url: "https://pub.dev"
     source: hosted
-    version: "2.0.1+5"
+    version: "2.0.4+1"
   flutter_colorpicker:
     dependency: "direct main"
     description:
@@ -1822,10 +1822,10 @@ packages:
     dependency: "direct main"
     description:
       name: zego_uikit_prebuilt_call
-      sha256: "0b333309d4741b253968190117b764b1b9968fe484148aed59f7faccaed4be58"
+      sha256: "1d0d116940710d88681dda8ea96087e957060428f7b80701b8b44df5460e4af4"
       url: "https://pub.dev"
     source: hosted
-    version: "4.14.1"
+    version: "4.14.3"
   zego_uikit_prebuilt_live_streaming:
     dependency: "direct main"
     description:

@@ -50,7 +50,7 @@ class IconElispesComponent extends StatelessWidget {
             }
           },
           child: PopupMenuButton(
-              color: kPrimaryColor,
+              color: isDark ? cardDarkModeBackground : cardLightModeBackground,
               icon: const Icon(FontAwesomeIcons.ellipsisVertical,
                   color: Colors.white, size: 25),
               itemBuilder: (context) => [
@@ -71,15 +71,16 @@ class IconElispesComponent extends StatelessWidget {
                       if (!userData.blockUsers.contains(user.userID) &&
                           !user.blockUsers.contains(userData.userID))
                         groupsInfoPopMenuItem(
+                            iconSize: size.width * .05,
                             isDark: isDark,
                             onTap: () async {
                               await saveImage(imageUrl: user.profileImage);
                               FlutterToastWidget.showToast(
-                                  msg: "Image saved successfully");
+                                  msg: "image saved successfully");
                             },
                             itemName: 'Save to gallery',
                             size: size,
-                            icon: Icons.save_alt_outlined),
+                            icon: Icons.bookmark_add_outlined),
                     groupsInfoPopMenuItem(
                         isDark: isDark,
                         onTap: () async {

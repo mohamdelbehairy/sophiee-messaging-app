@@ -64,7 +64,7 @@ class _LivePageState extends State<LivePage> {
                   appSign: LiveInfo.appSign,
                   userID: userData.userID,
                   userName: userData.userName,
-                  liveID: widget.liveID,
+                  liveID: '123456',
                   events: ZegoUIKitPrebuiltLiveStreamingEvents(
                     onStateUpdated: (state) async {
                       if (state == ZegoLiveStreamingState.ended) {
@@ -74,34 +74,38 @@ class _LivePageState extends State<LivePage> {
                         await updateField.updateUserField(
                             fieldName: 'isLive', fieldValue: false);
 
-                        for (var element in items!) {
-                          var data = items2
-                              .firstWhere((e) => e.userID == element.userID);
-                          await storeNotification.updateNotificationField(
-                              userID: data.userID,
-                              fieldName: 'isLive',
-                              fieldValue: null,
-                              notificationID: notificationID);
+                        if (items != null) {
+                          for (var element in items!) {
+                            var data = items2
+                                .firstWhere((e) => e.userID == element.userID);
+                            await storeNotification.updateNotificationField(
+                                userID: data.userID,
+                                fieldName: 'isLive',
+                                fieldValue: null,
+                                notificationID: notificationID);
+                          }
                         }
                       }
                       if (state == ZegoLiveStreamingState.living &&
                           widget.isHost) {
                         await updateField.updateUserField(
                             fieldName: 'isLive', fieldValue: true);
-                        for (var element in items!) {
-                          var data = items2
-                              .firstWhere((e) => e.userID == element.userID);
-                          await storeNotification.storeNotification(
-                              userID: data.userID,
-                              notificationType: "live",
-                              isLive: true,
-                              notificationID: notificationID);
-                          if (data.isLivesNotify) {
-                            await liveNotification.sendLiveNotification(
-                                receiverToken: data.token,
-                                senderName: userData.userName,
-                                senderId: userData.userID);
-                            log('token: ${data.token}');
+                        if (items != null) {
+                          for (var element in items!) {
+                            var data = items2
+                                .firstWhere((e) => e.userID == element.userID);
+                            await storeNotification.storeNotification(
+                                userID: data.userID,
+                                notificationType: "live",
+                                isLive: true,
+                                notificationID: notificationID);
+                            if (data.isLivesNotify) {
+                              await liveNotification.sendLiveNotification(
+                                  receiverToken: data.token,
+                                  senderName: userData.userName,
+                                  senderId: userData.userID);
+                              log('token: ${data.token}');
+                            }
                           }
                         }
                       }

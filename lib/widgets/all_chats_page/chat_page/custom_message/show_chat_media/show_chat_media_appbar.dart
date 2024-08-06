@@ -60,7 +60,7 @@ class ShowChatMediaAppBar extends StatelessWidget {
                   onTap: () => getnav.Get.to(
                       () => MessageForwardPage(
                           user: user, message: message, mediaFiles: mediaFiels),
-                      transition: getnav.Transition.leftToRight),
+                      transition: getnav.Transition.rightToLeft),
                   child: Icon(FontAwesomeIcons.share, size: size.width * .06)),
               SizedBox(width: size.width * .01),
               ShowChatMediaAppBarPopMenu(

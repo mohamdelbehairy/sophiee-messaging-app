@@ -23,7 +23,7 @@ class TabBarMediaImage extends StatelessWidget {
           return GestureDetector(
             onTap: () => getnav.Get.to(
                 () => ShowChatImagePage(mediaFiels: mediaFiels, user: data),
-                transition: getnav.Transition.leftToRight),
+                transition: getnav.Transition.rightToLeft),
             child: FancyShimmerImage(
                 boxFit: BoxFit.cover,
                 shimmerBaseColor: Colors.grey.shade100,

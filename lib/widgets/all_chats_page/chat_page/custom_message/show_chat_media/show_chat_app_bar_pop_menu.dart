@@ -20,8 +20,8 @@ class ShowChatMediaAppBarPopMenu extends StatelessWidget {
             onTap: saveOnTap,
             child: Row(
               children: [
-                Icon(FontAwesomeIcons.solidFloppyDisk,
-                    size: size.height * .018, color: Colors.white),
+                Icon(Icons.bookmark_add,
+                    size: size.width * .05, color: Colors.white),
                 SizedBox(width: size.width * .04),
                 const Text("Save", style: TextStyle(color: Colors.white)),
               ],
@@ -36,24 +36,6 @@ class ShowChatMediaAppBarPopMenu extends StatelessWidget {
                 const Text("Share", style: TextStyle(color: Colors.white)),
               ],
             )),
-        PopupMenuItem(
-            child: const Text('edit', style: TextStyle(color: Colors.white)),
-            onTap: () {}),
-        PopupMenuItem(
-            child: const Text('edit', style: TextStyle(color: Colors.white)),
-            onTap: () {}),
-        PopupMenuItem(
-            child: const Text('edit', style: TextStyle(color: Colors.white)),
-            onTap: () {}),
-        PopupMenuItem(
-            child: const Text('edit', style: TextStyle(color: Colors.white)),
-            onTap: () {}),
-        PopupMenuItem(
-            child: const Text('edit', style: TextStyle(color: Colors.white)),
-            onTap: () {}),
-        PopupMenuItem(
-            child: const Text('edit', style: TextStyle(color: Colors.white)),
-            onTap: () {}),
       ],
     );
   }

@@ -28,14 +28,15 @@ class ControlMembersIcon extends StatelessWidget {
     var groupMember = context.read<GroupsMembersDetailsCubit>();
     var isDark = context.read<LoginCubit>().isDark;
     return PopupMenuButton(
-        color: kPrimaryColor,
+        color: isDark ? cardDarkModeBackground : cardLightModeBackground,
         offset: Offset(0, size.height * .05),
         icon: Icon(FontAwesomeIcons.ellipsisVertical,
             color: Colors.grey, size: size.width * .05),
         itemBuilder: (context) => [
               groupsInfoPopMenuItem(
                   isDark: isDark,
-                  onTap: () => getnav.Get.to(() => ChatPage(userID: userData.userID),
+                  onTap: () => getnav.Get.to(
+                      () => ChatPage(userID: userData.userID),
                       transition: getnav.Transition.rightToLeft),
                   itemName: 'Message ${userData.userName.split(' ')[0]}',
                   size: size),

@@ -5,6 +5,7 @@ import '../../../../../cubit/groups/groups_mdeia_files/group_store_media_files/g
 import '../../../../../cubit/groups/message_group/group_message_cubit.dart';
 import '../../../../../cubit/notification/group_notification/group_notification_cubit.dart';
 import '../../../../../cubit/upload/upload_image/upload_image_cubit.dart';
+import '../../../../../utils/methods/initial_state.dart';
 import '../groups_chat_page_send_chat_items.dart';
 import 'groups_chat_pick_image_page_body.dart';
 
@@ -38,6 +39,8 @@ class GroupChatPickImageButton extends StatelessWidget {
         onTap: () async {
           String imageUrl = await uploadImage.uploadImage(
               imageFile: widget.image, fieldName: 'groups_messages_images');
+          // ignore: use_build_context_synchronously
+          InitialState.initPickImageState(context);
           String messageID = const Uuid().v4();
           await sendMessage.sendGroupMessage(
               messageID: messageID,

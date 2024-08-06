@@ -85,7 +85,7 @@ dependencies:
   uuid: ^4.3.3
   video_player: ^2.8.2
   workmanager: ^0.5.2
-  zego_uikit_prebuilt_call: ^4.14.1
+  zego_uikit_prebuilt_call: ^4.14.3
   zego_uikit_prebuilt_live_streaming: ^3.11.0
   zego_uikit_signaling_plugin: ^2.8.2
 

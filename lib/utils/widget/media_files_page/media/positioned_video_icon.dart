@@ -26,7 +26,7 @@ class PositionedVideoIcon extends StatelessWidget {
               child: InkWell(
             onTap: () => getnav.Get.to(
                 () => ShowChatVideoPage(mediaFiels: mediaFiels, user: data),
-                transition: getnav.Transition.leftToRight),
+                transition: getnav.Transition.rightToLeft),
             child: Icon(FontAwesomeIcons.expand,
                 color: Colors.transparent, size: size.width * .035),
           ));

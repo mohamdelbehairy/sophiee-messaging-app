@@ -49,7 +49,7 @@ class MyFriendListViewImages extends StatelessWidget {
                 textTwoFontSize: 0,
                 mainAxisAlignment: MainAxisAlignment.start,
                 image: emptyImageUrl,
-                textOne: 'No Images here',
+                textOne: '',
                 textTwo: '');
           }
         },

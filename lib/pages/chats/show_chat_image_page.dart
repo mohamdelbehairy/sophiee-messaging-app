@@ -42,7 +42,7 @@ class _ShowChatImagePageState extends State<ShowChatImagePage> {
                       imageUrl: widget.message != null
                           ? widget.message!.messageImage!
                           : widget.mediaFiels!.messageImage!);
-                  FlutterToastWidget.showToast(msg: "Image saved successfully");
+                  FlutterToastWidget.showToast(msg: "image saved successfully");
                 },
                 shareOnTap: () async {
                   await shareMedia(
