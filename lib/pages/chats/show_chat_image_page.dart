@@ -2,6 +2,7 @@ import 'package:sophiee/constants.dart';
 import 'package:sophiee/models/media_files_model.dart';
 import 'package:sophiee/models/message_model.dart';
 import 'package:sophiee/models/users_model.dart';
+import 'package:sophiee/utils/resize_image.dart';
 import 'package:sophiee/utils/widget/media/save_image.dart';
 import 'package:sophiee/utils/widget/media/share_media.dart';
 import 'package:sophiee/widgets/all_chats_page/chat_page/custom_message/show_chat_media/show_chat_media_appbar.dart';
@@ -55,21 +56,23 @@ class _ShowChatImagePageState extends State<ShowChatImagePage> {
           : AppBar(
               backgroundColor: Colors.transparent,
               automaticallyImplyLeading: false),
-      body: Padding(
-        padding: EdgeInsets.only(top: size.height * .06),
-        child: GestureDetector(
-          onTap: () {
-            setState(() {
-              isClick = !isClick;
-            });
-          },
-          child: Container(
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                  image: CachedNetworkImageProvider(widget.message != null
-                      ? widget.message!.messageImage!
-                      : widget.mediaFiels!.messageImage!),
-                  fit: BoxFit.fitWidth),
+      body: ResizeImageWidget(
+        child: Padding(
+          padding: EdgeInsets.only(top: size.height * .06),
+          child: GestureDetector(
+            onTap: () {
+              setState(() {
+                isClick = !isClick;
+              });
+            },
+            child: Container(
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: CachedNetworkImageProvider(widget.message != null
+                        ? widget.message!.messageImage!
+                        : widget.mediaFiels!.messageImage!),
+                    fit: BoxFit.fitWidth),
+              ),
             ),
           ),
         ),

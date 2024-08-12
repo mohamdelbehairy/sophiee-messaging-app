@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:sophiee/utils/resize_image.dart';
 
 import '../../models/image_model.dart';
 
@@ -12,11 +13,13 @@ class ShowImagePageBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
+    return ResizeImageWidget(
+        child: Center(
       child: SizedBox(
-          width: size.width,
-          child: CachedNetworkImage(
-              imageUrl: imageModel.imageUrl, fit: BoxFit.cover)),
-    );
+        width: size.width,
+        child: CachedNetworkImage(
+            imageUrl: imageModel.imageUrl, fit: BoxFit.cover),
+      ),
+    ));
   }
 }
