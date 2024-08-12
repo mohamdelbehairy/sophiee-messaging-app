@@ -22,7 +22,7 @@ class GroupsInfoPopupMenueButton extends StatelessWidget {
     var isDark = context.read<LoginCubit>().isDark;
     return PopupMenuButton(
       offset: Offset(0, size.height * .06),
-      color: kPrimaryColor,
+      color:  isDark ? cardDarkModeBackground: cardLightModeBackground,
       itemBuilder: (context) => [
         if (groupModel.isAddFriends ||
             groupModel.groupOwnerID == FirebaseAuth.instance.currentUser!.uid ||

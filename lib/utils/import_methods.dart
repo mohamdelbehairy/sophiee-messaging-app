@@ -43,7 +43,7 @@ abstract class ImportMethods {
         .read<GetFollowingCubit>()
         .getFollowing(userID: FirebaseAuth.instance.currentUser!.uid);
     await WorkManagerService.initWorkManager();
-    await Future.delayed(const Duration(seconds: 5));
+    await Future.delayed(const Duration(seconds: 3));
     appStatusCubit.setLoading(false);
   }
 }
