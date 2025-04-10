@@ -61,8 +61,8 @@ class _AddUserDateOfBirthState extends State<AddUserDateOfBirth> {
                   // barrierColor: Colors.amber,
                   context: context,
                   initialDate: DateTime.now(),
-                  firstDate: DateTime(2000),
-                  lastDate: DateTime(2025))
+                  firstDate: DateTime(1990),
+                  lastDate: DateTime(2030))
               .then((value) {
             if (value != null) {
               DateFormat format = DateFormat('MM-dd-yyyy');
