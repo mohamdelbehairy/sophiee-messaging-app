@@ -11,7 +11,7 @@ class PickVideoPlayVideo extends StatelessWidget {
     return Positioned.fill(
       child: Center(
         child: CircleAvatar(
-          backgroundColor: const Color(0xff585558).withOpacity(.3),
+          backgroundColor: const Color(0xff585558).withValues(alpha:  .3),
           child: Icon(FontAwesomeIcons.play,
               color: Colors.white, size: size.width * .05),
         ),

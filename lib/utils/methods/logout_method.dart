@@ -8,7 +8,6 @@ import '../../cubit/auth/facebook_auth/facebook_auth_cubit.dart';
 import '../../cubit/auth/google_auth/google_auth_cubit.dart';
 import '../../cubit/user_date/user_token/user_token_cubit.dart';
 import '../../pages/auth/provider_auth_page.dart';
-import '../../services/calls/user_call_init.dart';
 
 Future<void> logOut({required BuildContext context,required UserModel user}) async {
     var signOut = context.read<AuthSettingsCubit>();
@@ -23,7 +22,7 @@ Future<void> logOut({required BuildContext context,required UserModel user}) asy
       await removeToken.updateUserToken(token: '');
       await signOut.signOut();
     }
-    UserCallInit.onUserLogout();
+    // UserCallInit.onUserLogout();
     getnav.Get.to(() => const ProviderAuthPage(),
         transition: getnav.Transition.rightToLeft);
   }

@@ -6,7 +6,7 @@ Future<dynamic> deleteMessageShowDialog(
         context: context,
         builder: (context) {
           return AlertDialog(
-            backgroundColor: Colors.blue[900]!.withOpacity(0.9),
+            backgroundColor: Colors.blue[900]!.withValues(alpha:  0.9),
             title: const Text("Delete message",
                 style: TextStyle(color: Colors.white70)),
             content: const Text("Are you sure wnt to delete this message?",

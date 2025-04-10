@@ -8,7 +8,6 @@ import '../../cubit/auth/facebook_auth/facebook_auth_cubit.dart';
 import '../../cubit/auth/google_auth/google_auth_cubit.dart';
 import '../../cubit/delete_account/delete_account_cubit.dart';
 import '../../pages/auth/provider_auth_page.dart';
-import '../../services/calls/user_call_init.dart';
 
 Future<void> deleteAccountAction(BuildContext context) async {
   var signOut = context.read<AuthSettingsCubit>();
@@ -19,7 +18,7 @@ Future<void> deleteAccountAction(BuildContext context) async {
   await signOut.googleSignOut();
   await signOut.facebookSignOut();
   await signOut.signOut();
-  UserCallInit.onUserLogout();
+  // UserCallInit.onUserLogout();
   final prefs = await SharedPreferences.getInstance();
   var userID = prefs.getString('storeUser');
   getnav.Get.to(() => const ProviderAuthPage(),

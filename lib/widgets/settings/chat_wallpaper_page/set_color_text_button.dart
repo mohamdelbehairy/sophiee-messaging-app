@@ -16,6 +16,7 @@ class SetColorTextButton extends StatelessWidget {
           debugPrint('pickerColor: $pickerColor');
           Color selectedColor = pickerColor;
 
+          // ignore: deprecated_member_use
           int colorValue = selectedColor.value;
           debugPrint('selected color value: ${Color(colorValue)}');
 

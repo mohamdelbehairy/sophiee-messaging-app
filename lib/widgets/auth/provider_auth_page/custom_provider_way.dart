@@ -29,7 +29,7 @@ class CustomProviderWay extends StatelessWidget {
             right: size.width * .08, left: size.width * .08, top: top),
         decoration: BoxDecoration(
             color: Colors.white,
-            border: Border.all(color: Colors.white.withOpacity(.3)),
+            border: Border.all(color: Colors.white.withValues(alpha:  .3)),
             borderRadius: BorderRadius.circular(12)),
         child: isLoading
             ? const Center(child:  CircularProgressIndicator(color: kPrimaryColor))

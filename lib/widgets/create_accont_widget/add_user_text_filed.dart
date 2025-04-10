@@ -15,7 +15,8 @@ class AddUserTextField extends StatelessWidget {
       this.iconColor,
       this.textInputType,
       this.validator,
-      this.enabled, this.bottom});
+      this.enabled,
+      this.bottom});
 
   final Size size;
   final String hintText;
@@ -30,7 +31,7 @@ class AddUserTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-     var isDark = context.read<LoginCubit>().isDark;
+    var isDark = context.read<LoginCubit>().isDark;
     return Padding(
       padding: EdgeInsets.only(bottom: bottom ?? size.width * .045),
       child: ClipRRect(
@@ -42,9 +43,9 @@ class AddUserTextField extends StatelessWidget {
               validator: validator,
               controller: controller,
               keyboardType: textInputType,
-              cursorColor: isDark ? Colors.white: Colors.black,
+              cursorColor: isDark ? Colors.white : Colors.black,
               style: TextStyle(
-                  color: isDark ? Colors.white: Colors.black,
+                  color: isDark ? Colors.white : Colors.black,
                   fontWeight: FontWeight.w100,
                   fontSize: size.width * .035),
               decoration: InputDecoration(
@@ -52,14 +53,15 @@ class AddUserTextField extends StatelessWidget {
                   border: InputBorder.none,
                   hintText: hintText,
                   hintStyle: TextStyle(
-                      color: isDark ? Colors.white70: const Color(0xffc3c5c5),
+                      color: isDark ? Colors.white70 : const Color(0xffc3c5c5),
                       fontWeight: FontWeight.w100,
                       fontSize: size.width * .035),
                   filled: true,
-                  fillColor: isDark ? messageFriendColorDarkMode: const Color(0xff2b2c33).withOpacity(.035)),
+                  fillColor: isDark
+                      ? messageFriendColorDarkMode
+                      : const Color(0xff2b2c33).withValues(alpha: .035)),
             ),
           )),
     );
- 
   }
 }

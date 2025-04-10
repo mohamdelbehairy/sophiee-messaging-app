@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:sophiee/cubit/story/story_cubit.dart';
@@ -22,10 +20,8 @@ void actionTask() {
   StoryCubit storyCubit = StoryCubit();
   Workmanager().executeTask((taskName, inputData) async {
     await Firebase.initializeApp().then((_) async {
-      log('uid: ${FirebaseAuth.instance.currentUser!.uid}');
       await storyCubit.deleteStory(
           userID: FirebaseAuth.instance.currentUser!.uid);
-      log('name: ${FirebaseAuth.instance.currentUser!.displayName}');
     });
     return Future.value(true);
   });

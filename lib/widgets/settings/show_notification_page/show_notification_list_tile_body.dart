@@ -2,16 +2,15 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart' as getnav;
-import 'package:sophiee/cubit/notification/store_notification/store_notification_cubit.dart';
 import 'package:sophiee/models/users_model.dart';
 import 'package:sophiee/pages/search_result_page.dart';
 import 'package:sophiee/pages/story/story_view_page.dart';
 import 'package:sophiee/utils/widget/flutter_toast_widget.dart';
 
 import '../../../cubit/follow_status/follow_status_cubit.dart';
+import '../../../cubit/notification/store_notification/store_notification_cubit.dart';
 import '../../../cubit/story/story_cubit.dart';
 import '../../../models/notification_model.dart';
-import '../../../pages/story/live_page.dart';
 import 'show_notification_list_tile_component.dart';
 
 class ShowNotificationListTileBody extends StatelessWidget {
@@ -63,12 +62,12 @@ class ShowNotificationListTileBody extends StatelessWidget {
       getnav.Get.to(() => SearchResultPage(userID: notificationModel.publishID),
           transition: getnav.Transition.rightToLeft);
     } else if (notificationModel.notificationType == 'live') {
-      if (notificationModel.isLive != null) {
-        getnav.Get.to(() => LivePage(liveID: notificationModel.publishID),
-            transition: getnav.Transition.rightToLeft);
-      } else {
-        FlutterToastWidget.showToast(msg: 'live has been ended');
-      }
+      // if (notificationModel.isLive != null) {
+      //   getnav.Get.to(() => LivePage(liveID: notificationModel.publishID),
+      //       transition: getnav.Transition.rightToLeft);
+      // } else {
+      //   FlutterToastWidget.showToast(msg: 'live has been ended');
+      // }
     } else {
       var isStory = context.read<StoryCubit>().checkIsStory(
           friendId: notificationModel.publishID, story: 'isStory');

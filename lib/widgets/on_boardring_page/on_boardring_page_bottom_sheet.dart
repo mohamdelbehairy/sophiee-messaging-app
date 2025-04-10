@@ -35,7 +35,7 @@ class OnBoardringPageBottomSheet extends StatelessWidget {
               onPressed: () {
                 if (isLastPage) {
                   getnav.Get.to(() => const ProviderAuthPage(),
-                      transition: getnav.Transition.rightToLeft,duration: const Duration(seconds: 1));
+                      transition: getnav.Transition.rightToLeft);
                 } else {
                   controller.nextPage(
                       duration: const Duration(milliseconds: 500),

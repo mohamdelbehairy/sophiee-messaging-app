@@ -60,6 +60,7 @@ class NotificationSettingCubit extends Cubit<NotificationSettingState> {
 
     // when app is in background
     FirebaseMessaging.onMessageOpenedApp.listen((message) {
+      // ignore: use_build_context_synchronously
       NavigationNotify.navigationNotification(message, context);
     });
   }

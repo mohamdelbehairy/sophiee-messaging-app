@@ -22,7 +22,7 @@ class CustomCreateGroupBody extends StatelessWidget {
                   radius: 25,
                   backgroundColor: isDark
                       ? const Color(0xff4a4b50)
-                      : Colors.grey.withOpacity(.15),
+                      : Colors.grey.withValues(alpha:  .15),
                   child: Icon(Icons.add,
                       color: isDark ? const Color(0xffd2d1d8) : Colors.grey))),
           const SizedBox(height: 6),

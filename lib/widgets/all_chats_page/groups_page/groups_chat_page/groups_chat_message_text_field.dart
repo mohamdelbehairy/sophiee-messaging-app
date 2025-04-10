@@ -39,21 +39,21 @@ class GroupChatMessageTextField extends StatelessWidget {
             borderRadius: BorderRadius.circular(size.width * .08),
             borderSide: BorderSide(
               color: userDataModel.chatbackgroundImage != null
-                    ? kPrimaryColor
-                    : const Color(0xff2b2c33).withOpacity(.1),
+                  ? kPrimaryColor
+                  : const Color(0xff2b2c33).withValues(alpha: .1),
             ),
           ),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(size.width * .08),
-            borderSide:
-                BorderSide(color: userDataModel.chatbackgroundImage != null
+            borderSide: BorderSide(
+                color: userDataModel.chatbackgroundImage != null
                     ? kPrimaryColor
-                    : const Color(0xff2b2c33).withOpacity(.1)),
+                    : const Color(0xff2b2c33).withValues(alpha: .1)),
           ),
           filled: true,
           fillColor: isDark
               ? messageFriendColorDarkMode
-              : const Color(0xff2b2c33).withOpacity(.1),
+              : const Color(0xff2b2c33).withValues(alpha:  .1),
           hintText: 'Type your message',
           hintStyle: TextStyle(color: isDark ? Colors.white70 : Colors.grey),
           prefixIcon: IconButton(

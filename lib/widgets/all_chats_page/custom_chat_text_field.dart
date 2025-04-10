@@ -31,7 +31,7 @@ class CustomChatTextField extends StatelessWidget {
                 hintText: hintText,
                 hintStyle: TextStyle(
                     fontWeight: FontWeight.normal,
-                    color: Colors.white.withOpacity(0.7),
+                    color: Colors.white.withValues(alpha:  0.7),
                     fontSize: size.height * 0.018),
                 enabledBorder: InputBorder.none,
                 focusedBorder: InputBorder.none,

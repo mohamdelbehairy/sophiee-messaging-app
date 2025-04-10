@@ -10,6 +10,7 @@ class ChatPageDivider extends StatelessWidget {
     return SizedBox(
         width: size.width * .08,
         child: Divider(
-            thickness: size.width * .01, color: Colors.grey.withOpacity(.3)));
+            thickness: size.width * .01,
+            color: Colors.grey.withValues(alpha: .3)));
   }
 }

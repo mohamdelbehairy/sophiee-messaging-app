@@ -8,8 +8,7 @@ import 'package:sophiee/pages/on_boardring_page.dart';
 
 import 'utils/methods/update_user_online.dart';
 
-Future<void> runAppInit(
-    {required GlobalKey<NavigatorState> navigatorKey}) async {
+Future<void> runAppInit() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   final token = prefs.getString('userID');
   final isFirstTimeUser = prefs.getString('isFirstTimeUser');
@@ -18,13 +17,10 @@ Future<void> runAppInit(
               FirebaseAuth.instance.currentUser!.phoneNumber!.isNotEmpty) ||
           FirebaseAuth.instance.currentUser!.emailVerified)) {
     UpdateUserOnline.checkOnline();
-    return runApp(
-        SophieeApp(navigator: navigatorKey, screen: const HomePage()));
+    return runApp(const SophieeApp(screen: HomePage()));
   } else if (token == null && isFirstTimeUser != null) {
-    return runApp(
-        SophieeApp(navigator: navigatorKey, screen: const ProviderAuthPage()));
+    return runApp(const SophieeApp(screen: ProviderAuthPage()));
   } else {
-    return runApp(
-        SophieeApp(navigator: navigatorKey, screen: const OnBoardringPage()));
+    return runApp(const SophieeApp(screen: OnBoardringPage()));
   }
 }

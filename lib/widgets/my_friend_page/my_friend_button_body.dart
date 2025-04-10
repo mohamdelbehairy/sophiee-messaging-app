@@ -18,7 +18,7 @@ class MyFriendButtonBody extends StatelessWidget {
           borderRadius: BorderRadius.circular(size.height * .04),
           color: isFollowing ? Colors.white : kPrimaryColor,
           border: isFollowing
-              ? Border.all(color: Colors.grey.withOpacity(.2))
+              ? Border.all(color: Colors.grey.withValues(alpha:  .2))
               : Border.all(color: Colors.transparent)),
       child: Center(
         child: Text(

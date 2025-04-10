@@ -90,6 +90,7 @@ class _AddStoryImageState extends State<AddStoryImage> {
                     highlightColor: Colors.transparent,
                     onTap: () async {
                       await Future.delayed(const Duration(seconds: 1), () {
+                        // ignore: use_build_context_synchronously
                         Navigator.pop(context);
                       });
                       String storyID = const Uuid().v4();

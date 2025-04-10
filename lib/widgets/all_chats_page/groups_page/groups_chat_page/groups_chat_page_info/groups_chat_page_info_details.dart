@@ -46,7 +46,7 @@ class GroupsChatPageInfoDetails extends StatelessWidget {
                         groupModel: groupData, isDark: isDark, size: size),
                     const SizedBox(height: 6),
                     GroupsChatPageCreatedInfo(size: size, groupData: groupData),
-                    Divider(thickness: 2, color: Colors.grey.withOpacity(.1)),
+                    Divider(thickness: 2, color: Colors.grey.withValues(alpha:  .1)),
                     GroupsMembers(
                         size: size, isDark: isDark, groupData: groupData),
                     GroupsHighlights(

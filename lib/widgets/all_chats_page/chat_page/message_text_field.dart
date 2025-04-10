@@ -37,17 +37,17 @@ class MessageTextField extends StatelessWidget {
             borderSide: BorderSide(
                 color: userData.chatbackgroundImage != null
                     ? kPrimaryColor
-                    : const Color(0xff2b2c33).withOpacity(.1))),
+                    : const Color(0xff2b2c33).withValues(alpha:  .1))),
         focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(32),
             borderSide: BorderSide(
                 color: userData.chatbackgroundImage != null
                     ? kPrimaryColor
-                    : const Color(0xff2b2c33).withOpacity(.1))),
+                    : const Color(0xff2b2c33).withValues(alpha:  .1))),
         filled: true,
         fillColor: isDark
             ? messageFriendColorDarkMode
-            : const Color(0xff2b2c33).withOpacity(.1),
+            : const Color(0xff2b2c33).withValues(alpha:  .1),
         hintText: 'Type your message',
         hintStyle: TextStyle(color: isDark ? Colors.white70 : Colors.grey),
         prefixIcon: IconButton(

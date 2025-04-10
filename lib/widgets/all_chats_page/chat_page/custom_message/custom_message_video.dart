@@ -78,7 +78,7 @@ class _CustomMessageVideoState extends State<CustomMessageVideo> {
                   child: Center(
                       child: CircleAvatar(
                           backgroundColor:
-                              const Color(0xff585558).withOpacity(.3),
+                              const Color(0xff585558).withValues(alpha: .3),
                           child: Icon(FontAwesomeIcons.play,
                               color: Colors.white, size: size.width * .05)))))
       ],

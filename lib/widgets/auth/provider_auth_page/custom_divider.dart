@@ -14,6 +14,6 @@ class ProviderAuthPageCustomDivider extends StatelessWidget {
         height: 1,
         width: size.width * .36,
         margin: EdgeInsets.only(left: left, right: right),
-        decoration: BoxDecoration(color: Colors.white.withOpacity(.3)));
+        decoration: BoxDecoration(color: Colors.white.withValues(alpha:  .3)));
   }
 }

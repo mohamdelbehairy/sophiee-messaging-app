@@ -39,7 +39,7 @@ class GroupsChatComponent extends StatelessWidget {
               ),
             ),
           ),
-          Divider(thickness: 2, color: Colors.grey.withOpacity(.1)),
+          Divider(thickness: 2, color: Colors.grey.withValues(alpha: .1)),
         ],
       ),
     );

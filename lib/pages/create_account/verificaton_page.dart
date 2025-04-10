@@ -52,7 +52,7 @@ class _VerificationPageState extends State<VerificationPage> {
         child: Scaffold(
             appBar: AppBar(
                 automaticallyImplyLeading: false,
-                backgroundColor: Colors.grey.withOpacity(.010),
+                backgroundColor: Colors.grey.withValues(alpha: .010),
                 elevation: 0,
                 systemOverlayStyle: SystemUiOverlayStyle(
                     statusBarColor: Colors.transparent,

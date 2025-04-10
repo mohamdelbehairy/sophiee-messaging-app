@@ -13,7 +13,7 @@ class NotSendMessage extends StatelessWidget {
       width: size.width,
       margin: EdgeInsets.symmetric(horizontal: size.width * .03),
       decoration: BoxDecoration(
-          color: const Color(0xff2b2c33).withOpacity(.1),
+          color: const Color(0xff2b2c33).withValues(alpha:  .1),
           borderRadius: BorderRadius.circular(size.width * .04)),
       child:
           Center(child: Text(text, style: const TextStyle(color: Color(0xff878787)))),

@@ -7,7 +7,7 @@ class LivePageAlertDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      backgroundColor: Colors.blue[900]!.withOpacity(0.9),
+      backgroundColor: Colors.blue[900]!.withValues(alpha: 0.9),
       title: Text(isHost ? "End this live" : "Leave this live",
           style: const TextStyle(color: Colors.white70)),
       content: Text(

@@ -13,6 +13,6 @@ class ContactNumber extends StatelessWidget {
         style: TextStyle(
             color: isDark
                 ? Colors.grey
-                : const Color(0xff2b2c33).withOpacity(.3)));
+                : const Color(0xff2b2c33).withValues(alpha: .3)));
   }
 }

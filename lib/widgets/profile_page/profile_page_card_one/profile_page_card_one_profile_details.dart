@@ -29,8 +29,8 @@ class ProfilePageCardOneProfileDetails extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
             color: isDark
-                ? Colors.grey.withOpacity(.01)
-                : const Color(0xfff9f8f8).withOpacity(.7),
+                ? Colors.grey.withValues(alpha:  .01)
+                : const Color(0xfff9f8f8).withValues(alpha:  .7),
             borderRadius: BorderRadius.only(
                 bottomLeft: Radius.circular(size.width * .02),
                 bottomRight: Radius.circular(size.width * .02))),

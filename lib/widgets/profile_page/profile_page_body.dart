@@ -7,7 +7,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../services/calls/user_call_init.dart';
 
 class ProfilePageBody extends StatelessWidget {
   const ProfilePageBody({super.key, required this.size});
@@ -29,8 +28,8 @@ class ProfilePageBody extends StatelessWidget {
             final userData = state.userModel
                 .firstWhere((element) => element.userID == currentUser.uid);
 
-            UserCallInit.onUserLogin(
-                userID: userData.userID, userName: userData.userName);
+            // UserCallInit.onUserLogin(
+            //     userID: userData.userID, userName: userData.userName);
             return ProfilePageBodyComponent(size: size, user: userData);
           } else {
             return Container();

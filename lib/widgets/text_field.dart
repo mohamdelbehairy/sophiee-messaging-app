@@ -39,7 +39,7 @@ class CustomTextField extends StatelessWidget {
             filled: true,
             fillColor: isDark
                 ? const Color(0xff424548)
-                : const Color(0xff2b2c33).withOpacity(.1),
+                : const Color(0xff2b2c33).withValues(alpha:  .1),
             border: InputBorder.none,
             hintText: hintText,
             hintStyle: TextStyle(color: isDark ? Colors.white : Colors.black87)),
