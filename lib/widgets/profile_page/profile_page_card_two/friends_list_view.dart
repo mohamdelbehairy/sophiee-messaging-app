@@ -6,7 +6,6 @@ import 'package:sophiee/widgets/profile_page/profile_page_card_two/show_friends_
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../constants.dart';
 
 class FriendsListView extends StatelessWidget {
   const FriendsListView({super.key, required this.size});
@@ -33,9 +32,10 @@ class FriendsListView extends StatelessWidget {
                 })),
           );
         } else {
-          return FittedBox(
-              fit: BoxFit.scaleDown,
-              child: Image.asset(emptyImageUrl, height: 35, width: 100));
+          return Text("We don't have any friends yet",
+              style: TextStyle(
+                  fontWeight: FontWeight.w400,
+                  color: isDark ? Colors.white : Colors.black));
         }
       },
     );

@@ -43,7 +43,7 @@ class CustomNoResultFound extends StatelessWidget {
                   image: DecorationImage(image: AssetImage(image!)))),
         if (image != null)
           SizedBox(height: sizedBoxHeightOne ?? size.height * .02),
-        if (image == null) SizedBox(height: size.height * .2),
+        // if (image == null) SizedBox(height: size.height * .2),
         Text(textOne,
             style: TextStyle(
                 color: isDark ? Colors.white : Colors.black,

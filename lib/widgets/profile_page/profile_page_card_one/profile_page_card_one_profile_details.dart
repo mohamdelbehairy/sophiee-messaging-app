@@ -35,7 +35,7 @@ class ProfilePageCardOneProfileDetails extends StatelessWidget {
                 bottomLeft: Radius.circular(size.width * .02),
                 bottomRight: Radius.circular(size.width * .02))),
         child: Padding(
-          padding: const EdgeInsets.only(top: 24),
+          padding: const EdgeInsets.only(top: 30),
           child:
               Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
              ProfilePageCardOnePosts(size: size),

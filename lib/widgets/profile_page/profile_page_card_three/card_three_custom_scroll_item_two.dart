@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sophiee/utils/widget/no_result_found.dart';
 
-import '../../../constants.dart';
 import '../../../cubit/user_date/image/get_image/get_image_cubit.dart';
 import 'card_three_all_page/card_three_grid_view.dart';
 
@@ -33,16 +31,14 @@ class CardThreeCustomScrollItemTwo extends StatelessWidget {
                   crossAxisCount: 3,
                   physics: const NeverScrollableScrollPhysics());
             } else {
-              return CustomNoResultFound(
-                  height: size.height * .15,
-                  sizedBoxHeightOne: size.height * .005,
-                  sizedBoxHeightTwo: size.height * .001,
-                  textOneFontSize: size.height * .022,
-                  textTwoFontSize: size.height * .012,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  image: emptyImageUrl,
-                  textOne: '',
-                  textTwo: '');
+              return Column(
+                children: [
+                  Text("We don't have any images yet",
+                      style: TextStyle(
+                          fontWeight: FontWeight.w400,
+                          color: isDark ? Colors.white : Colors.black)),
+                ],
+              );
             }
           },
         ),

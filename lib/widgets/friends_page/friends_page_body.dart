@@ -83,7 +83,7 @@ class _FriendsPageBodyState extends State<FriendsPageBody> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               CustomNoResultFound(
-                  image: emptyImageUrl,
+                  // image: emptyImageUrl,
                   textOne: 'No Friend Found',
                   textTwo:
                       'We didn\'t find any friends yet \n Please add a new friend'),

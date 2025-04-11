@@ -1,10 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:sophiee/main.dart';
 import 'package:sophiee/pages/auth/provider_auth_page.dart';
 import 'package:sophiee/pages/home_page.dart';
 import 'package:sophiee/pages/on_boardring_page.dart';
+import 'package:sophiee/utils/sophiee_app.dart';
 
 import 'utils/methods/update_user_online.dart';
 

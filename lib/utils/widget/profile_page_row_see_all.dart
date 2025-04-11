@@ -33,7 +33,7 @@ class ProfilePageRowSeeAll extends StatelessWidget {
               style: TextStyle(
                   color: Colors.blue,
                   fontSize: size.width * .04,
-                  fontWeight: FontWeight.bold),
+                  fontWeight: FontWeight.w400),
             ),
           ),
         ],
