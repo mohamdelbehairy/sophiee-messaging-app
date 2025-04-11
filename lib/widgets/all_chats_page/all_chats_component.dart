@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../constants.dart';
 import '../../cubit/chats/chats_cubit.dart';
 import '../../cubit/chats/chats_state.dart';
 import '../../cubit/get_friends/get_friends_cubit.dart';
@@ -34,7 +33,9 @@ class AllChatsComponent extends StatelessWidget {
               if (friends.friends.isEmpty && chat.chatsList.isEmpty) {
                 return Center(
                   child: NoChatsFounded(
-                      image: emptyImageUrl, size: size, isDark: isDark),
+                      // image: emptyImageUrl,
+                      size: size,
+                      isDark: isDark),
                 );
               }
             }

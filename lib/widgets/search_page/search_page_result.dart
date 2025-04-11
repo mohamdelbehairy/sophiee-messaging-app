@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../constants.dart';
 import '../../cubit/search/recent_search/recent_search_cubit.dart';
 import '../../models/users_model.dart';
 import '../../utils/widget/no_result_found.dart';
@@ -39,7 +38,7 @@ class SearchPageResult extends StatelessWidget {
                   .toList()
                   .isEmpty
               ? const CustomNoResultFound(
-                  image: emptyImageUrl,
+                  // image: emptyImageUrl,
                   textOne: 'No Result Found',
                   textTwo:
                       "You didn't find any results with this name yet,\nplease enter a success username or email.")

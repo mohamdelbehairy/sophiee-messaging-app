@@ -23,6 +23,8 @@ class CustomSwitchIcon extends StatelessWidget {
             value: value,
             activeColor: Colors.white,
             activeTrackColor: kPrimaryColor,
+            trackOutlineColor: const WidgetStatePropertyAll(Colors.transparent),
+            // inactiveThumbColor: const Color(0xff1E1E1E),
             onChanged: onChanged));
   }
 }

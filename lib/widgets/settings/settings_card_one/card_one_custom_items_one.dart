@@ -44,11 +44,6 @@ class CardOneCustomItemsOne extends StatelessWidget {
           ],
         ),
         CustomSwitchIcon(size: size, onChanged: onPressed, value: value),
-        // IconButton(
-        //     splashColor: Colors.transparent,
-        //     highlightColor: Colors.transparent,
-        //     onPressed: onPressed,
-        //     icon: Icon(iconChange)),
       ],
     );
   }

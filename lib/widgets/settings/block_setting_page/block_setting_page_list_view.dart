@@ -35,7 +35,7 @@ class _BlockSettingPageListViewState extends State<BlockSettingPageListView> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               CustomNoResultFound(
-                  image: emptyImageUrl,
+                  // image: emptyImageUrl,
                   textOne: 'No Blocking Found',
                   textTwo: 'We didn\'t find any users yet'),
             ],
