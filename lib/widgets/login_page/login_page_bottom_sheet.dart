@@ -2,16 +2,16 @@ import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:sophiee/cubit/auth/login/login_cubit.dart';
 import 'package:sophiee/cubit/user_date/user_token/user_token_cubit.dart';
 import 'package:sophiee/pages/home_page.dart';
-import 'package:sophiee/widgets/login_page/login_page_botom_sheet_details.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get/get.dart' as getnav;
+import 'package:sophiee/utils/navigation.dart';
 
 import '../../constants.dart';
 import '../../models/awsome_dialog_model.dart';
 import '../../pages/create_account/verificaton_page.dart';
 import '../../utils/custom_awsome_dialog.dart';
+import 'login_page_botom_sheet_details.dart';
 
 class LoginPageBottomSheet extends StatelessWidget {
   const LoginPageBottomSheet({super.key, required this.isDark});
@@ -40,39 +40,34 @@ class LoginPageBottomSheet extends StatelessWidget {
               if (state is LoginFailure &&
                   state.errorMessage == 'invalid-credential') {
                 customAwsomeDialog(
-              awsomeDialogModel: AwsomeDialogModel(
-                  context: context,
-                  autoHide: const Duration(seconds: 4),
-                  horizontal: 16,
-                  title: 'Login Failed',
-                  desc:
-                      'Opps, There was a problem logging in. Check your email and password or create an account.',
-                  dialogType: DialogType.error));
-              } else if (state is LoginSuccess 
-                 ) {
-                  if( FirebaseAuth.instance.currentUser!.emailVerified) {
-                    Navigator.pushAndRemoveUntil(
-                    context,
-                    MaterialPageRoute(builder: (context) => const HomePage()),
-                    (route) => false);
-                String? getToken = await token.getUserToken();
-                await token.updateUserToken(token: getToken);
-                  } else {
-                    customAwsomeDialog(
-                  awsomeDialogModel: AwsomeDialogModel(
-                      context: context,
-                      showCloseIcon: true,
-                      title: 'Email is not verified',
-                      desc: 'Please verified you email and login again.',
-                      dialogType: DialogType.error,
-                      btnCancelText: 'Verified now',
-                      btnCancelOnPress: () =>getnav.Get.to(
-                                  () => const VerificationPage(),
-                                  transition: getnav.Transition.leftToRight)
-                    ));
-                    
-                  }
-                
+                    awsomeDialogModel: AwsomeDialogModel(
+                        context: context,
+                        autoHide: const Duration(seconds: 4),
+                        horizontal: 16,
+                        title: 'Login Failed',
+                        desc:
+                            'Opps, There was a problem logging in. Check your email and password or create an account.',
+                        dialogType: DialogType.error));
+              } else if (state is LoginSuccess) {
+                if (FirebaseAuth.instance.currentUser!.emailVerified) {
+                  Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(builder: (context) => const HomePage()),
+                      (route) => false);
+                  String? getToken = await token.getUserToken();
+                  await token.updateUserToken(token: getToken);
+                } else {
+                  customAwsomeDialog(
+                      awsomeDialogModel: AwsomeDialogModel(
+                          context: context,
+                          showCloseIcon: true,
+                          title: 'Email is not verified',
+                          desc: 'Please verified you email and login again.',
+                          dialogType: DialogType.error,
+                          btnCancelText: 'Verified now',
+                          btnCancelOnPress: () => Navigation.push(
+                              context, const VerificationPage())));
+                }
               }
             },
             builder: (context, state) {

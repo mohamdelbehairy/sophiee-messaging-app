@@ -1,11 +1,12 @@
 import 'package:sophiee/constants.dart';
 import 'package:sophiee/cubit/auth/login/login_cubit.dart';
 import 'package:sophiee/pages/login_page.dart';
+import 'package:sophiee/utils/navigation.dart';
 import 'package:sophiee/utils/widget/auth/auth_positioned_icon.dart';
-import 'package:sophiee/widgets/register_page/register_page_bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get/get.dart' as getnav;
+
+import 'register_page_bottom_sheet.dart';
 
 class RegisterPageBody extends StatelessWidget {
   const RegisterPageBody({super.key});
@@ -17,13 +18,11 @@ class RegisterPageBody extends StatelessWidget {
     return Stack(
       fit: StackFit.expand,
       children: [
-        const Image(
-            image: AssetImage(emailAuthImageUrl), fit: BoxFit.cover),
+        const Image(image: AssetImage(emailAuthImageUrl), fit: BoxFit.cover),
         AuthPositionedIcon(
             top: 50,
             right: 16,
-            onPressed: () => getnav.Get.to(() => const LoginPage(),
-                transition: getnav.Transition.leftToRight),
+            onPressed: () => Navigation.push(context, const LoginPage()),
             child: const Text('Get Login',
                 style: TextStyle(
                     color: Colors.white,
@@ -40,4 +39,3 @@ class RegisterPageBody extends StatelessWidget {
     );
   }
 }
-

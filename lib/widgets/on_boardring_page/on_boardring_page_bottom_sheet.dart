@@ -1,9 +1,10 @@
 import 'package:sophiee/constants.dart';
 import 'package:sophiee/pages/auth/provider_auth_page.dart';
+import 'package:sophiee/utils/navigation.dart';
 import 'package:sophiee/utils/widget/custom_bottom.dart';
-import 'package:sophiee/widgets/on_boardring_page/custom_smooth_page_indicator.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart' as getnav;
+
+import 'custom_smooth_page_indicator.dart';
 
 class OnBoardringPageBottomSheet extends StatelessWidget {
   const OnBoardringPageBottomSheet(
@@ -34,8 +35,7 @@ class OnBoardringPageBottomSheet extends StatelessWidget {
               colorText: kPrimaryColor,
               onPressed: () {
                 if (isLastPage) {
-                  getnav.Get.to(() => const ProviderAuthPage(),
-                      transition: getnav.Transition.rightToLeft);
+                  Navigation.go(context, const ProviderAuthPage());
                 } else {
                   controller.nextPage(
                       duration: const Duration(milliseconds: 500),

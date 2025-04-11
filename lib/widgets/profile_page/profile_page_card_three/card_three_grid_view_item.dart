@@ -1,6 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart' as getnav;
+import 'package:sophiee/utils/navigation.dart';
 
 import '../../../models/image_model.dart';
 import '../../../pages/show_image/show_image_page.dart';
@@ -23,11 +23,8 @@ class CardThreeGridViewItem extends StatelessWidget {
       child: ClipRRect(
         borderRadius: BorderRadius.circular(8),
         child: GestureDetector(
-          onTap: () {
-            getnav.Get.to(
-                () => ShowImagePage(imageModel: imageModel, size: size),
-                transition: getnav.Transition.downToUp);
-          },
+          onTap: () => Navigation.push(
+              context, ShowImagePage(imageModel: imageModel, size: size)),
           child: CachedNetworkImage(
               imageUrl: imageModel.imageUrl,
               progressIndicatorBuilder: (context, url, progress) =>

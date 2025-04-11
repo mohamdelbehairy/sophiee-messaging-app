@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sophiee/utils/navigation.dart';
 
 import '../../cubit/user_date/image/get_image/get_image_cubit.dart';
 import '../../models/users_model.dart';
@@ -6,7 +7,6 @@ import '../../pages/card_three_see_all_page.dart';
 import '../my_friend_page/my_friend_item_bio.dart';
 import '../my_friend_page/my_friend_items.dart';
 import '../my_friend_page/my_friend_list_view_friends.dart';
-import 'package:get/get.dart' as getnav;
 
 import '../my_friend_page/my_friend_list_view_images.dart';
 
@@ -41,10 +41,10 @@ class SearchResultDetails extends StatelessWidget {
         MyFriendItems(
             text: 'Photos',
             textButton: 'See all',
-            onTap: () => getnav.Get.to(
-                () => CardThreeSeeAllPage(
-                    isDark: isDark, getImage: getImage, size: size),
-                transition: getnav.Transition.downToUp)),
+            onTap: () => Navigation.push(
+                context,
+                CardThreeSeeAllPage(
+                    isDark: isDark, getImage: getImage, size: size))),
         const SizedBox(height: 4),
         MyFriendListViewImages(size: size, user: user)
       ],

@@ -4,12 +4,16 @@ import 'package:sophiee/cubit/get_followers/get_followers_cubit.dart';
 import 'package:sophiee/cubit/get_followers/get_followers_state.dart';
 import 'package:sophiee/pages/profile_details_page/followers_page.dart';
 import 'package:sophiee/models/users_model.dart';
-import 'package:sophiee/widgets/profile_page/profile_page_card_one/custom_profile_info.dart';
-import 'package:get/get.dart' as getnav;
+import 'package:sophiee/utils/navigation.dart';
+
+import 'custom_profile_info.dart';
 
 class ProfilePageCardOneFollowers extends StatelessWidget {
   const ProfilePageCardOneFollowers(
-      {super.key, required this.user, required this.follower, required this.size});
+      {super.key,
+      required this.user,
+      required this.follower,
+      required this.size});
 
   final UserModel user;
   final GetFollowersCubit follower;
@@ -18,8 +22,7 @@ class ProfilePageCardOneFollowers extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => getnav.Get.to(() =>  FollowersPage(size: size),
-          transition: getnav.Transition.rightToLeft),
+      onTap: () => Navigation.push(context, FollowersPage(size: size)),
       child: BlocBuilder<GetFollowersCubit, GetFollowersState>(
         builder: (context, state) {
           if (state is GetFollowersSuccess) {

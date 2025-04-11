@@ -5,12 +5,13 @@ import 'package:sophiee/cubit/get_friends/get_friends_state.dart';
 import 'package:sophiee/cubit/user_date/get_user_data/get_user_data_cubit.dart';
 import 'package:sophiee/cubit/user_date/get_user_data/get_user_data_state.dart';
 import 'package:sophiee/pages/my_friend_page.dart';
+import 'package:sophiee/utils/navigation.dart';
 import 'package:sophiee/utils/widget/no_result_found.dart';
-import 'package:sophiee/widgets/profile_details_page/list_view_list_tile.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get/get.dart' as getnav;
+
+import '../profile_details_page/list_view_list_tile.dart';
 
 class FriendsPageBody extends StatefulWidget {
   const FriendsPageBody({super.key, required this.size});
@@ -32,11 +33,8 @@ class _FriendsPageBodyState extends State<FriendsPageBody> {
               itemCount: state.friends.length,
               itemBuilder: (context, index) {
                 return GestureDetector(
-                  onTap: () {
-                    getnav.Get.to(
-                        () => MyFriendPage(user: state.friends[index]),
-                        transition: getnav.Transition.rightToLeft);
-                  },
+                  onTap: () => Navigation.push(
+                      context, MyFriendPage(user: state.friends[index])),
                   child: BlocBuilder<GetUserDataCubit, GetUserDataStates>(
                     builder: (context, userState) {
                       if (userState is GetUserDataSuccess &&

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 import 'package:sophiee/models/users_model.dart';
 import 'package:sophiee/pages/delete_account_page.dart';
-import 'package:get/get.dart' as getnav;
+import 'package:sophiee/utils/navigation.dart';
 
 import '../../../utils/methods/logout_method.dart';
 import 'setting_page_body_details.dart';
@@ -49,12 +49,12 @@ class _SettingsPageBodyState extends State<SettingsPageBody> {
   }
 
   void deleteAccount() async {
-    Navigator.pop(context);
+    Navigation.pop(context);
     showProgressIndicator = true;
     setState(() {});
     await Future.delayed(const Duration(seconds: 2));
-    getnav.Get.to(() => const DeleteAccountPage(),
-        transition: getnav.Transition.rightToLeft);
+    // ignore: use_build_context_synchronously
+    Navigation.push(context, const DeleteAccountPage());
     showProgressIndicator = false;
     setState(() {});
   }

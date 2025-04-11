@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:get/get.dart' as getnav;
 import 'package:sophiee/cubit/auth/login/login_cubit.dart';
 import 'package:sophiee/cubit/block/block_cubit.dart';
 import 'package:sophiee/cubit/friends/friends_state.dart';
+import 'package:sophiee/utils/navigation.dart';
 import '../../constants.dart';
 import '../../cubit/follow_status/follow_status_cubit.dart';
 import '../../cubit/follower/follower_cubit.dart';
@@ -107,10 +107,8 @@ class IconElispesComponent extends StatelessWidget {
                         !user.blockUsers.contains(userData.userID))
                       groupsInfoPopMenuItem(
                           isDark: isDark,
-                          onTap: () {
-                            getnav.Get.to(() => ChatPage(userID: user.userID),
-                                transition: getnav.Transition.rightToLeft);
-                          },
+                          onTap: () => Navigation.push(
+                              context, ChatPage(userID: user.userID)),
                           itemName: 'Start Chat',
                           size: size,
                           icon: Icons.chat_outlined),

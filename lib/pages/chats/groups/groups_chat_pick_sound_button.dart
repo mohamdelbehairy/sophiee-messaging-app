@@ -121,7 +121,8 @@ class _GroupsChatPickSoundButtonState extends State<GroupsChatPickSoundButton> {
                 messageSound: audioUrl,
                 messageSoundName: widget.audioName);
 
-            navigation();
+            // ignore: use_build_context_synchronously
+            Navigation.pop(context);
           } finally {
             setState(() {
               isLoading = false;
@@ -159,9 +160,5 @@ class _GroupsChatPickSoundButtonState extends State<GroupsChatPickSoundButton> {
     int minutes = seconds ~/ 60;
     int remainingSeconds = seconds % 60;
     return '${minutes.toString().padLeft(2, '0')}:${remainingSeconds.toString().padLeft(2, '0')}';
-  }
-
-  void navigation() {
-    Navigation.pop(context: context);
   }
 }

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:get/get.dart' as getnav;
 import 'package:sophiee/pages/edit_profile_page.dart';
 import 'package:sophiee/pages/setting/block_setting_page.dart';
 import 'package:sophiee/pages/setting/chat_wallpaper_page.dart';
+import 'package:sophiee/utils/navigation.dart';
 
 import '../../../constants.dart';
 import '../../../models/setting_card_model.dart';
@@ -17,34 +17,31 @@ class GeneralSettingPageCardBody extends StatelessWidget {
   final Size size;
   final bool isDark;
 
-  static List<SettingCardModel> items = [
-    SettingCardModel(
-        icon: Icons.person,
-        text: 'Edit Profile',
-        color: Colors.indigoAccent.shade400,
-        onTap: () => getnav.Get.to(() => const EditProfilePage(),
-            transition: getnav.Transition.rightToLeft)),
-    SettingCardModel(
-        icon: Icons.notifications_active,
-        text: 'Notifications',
-        color: Colors.pink.shade400,
-        onTap: () => getnav.Get.to(() => const NotificationSettingPage(),
-            transition: getnav.Transition.rightToLeft)),
-    SettingCardModel(
-        icon: FontAwesomeIcons.image,
-        text: 'Chat Wallpaper',
-        color: const Color(0xffB338E0),
-        onTap: () => getnav.Get.to(() => const ChatWallPaperPage(),
-            transition: getnav.Transition.rightToLeft)),
-    SettingCardModel(
-        icon: FontAwesomeIcons.userLock,
-        text: 'Blocking',
-        color: kPrimaryColor,
-        onTap: () => getnav.Get.to(() => const BlockSettingPage(),
-            transition: getnav.Transition.rightToLeft)),
-  ];
   @override
   Widget build(BuildContext context) {
+    List<SettingCardModel> items = [
+      SettingCardModel(
+          icon: Icons.person,
+          text: 'Edit Profile',
+          color: Colors.indigoAccent.shade400,
+          onTap: () => Navigation.push(context, const EditProfilePage())),
+      SettingCardModel(
+          icon: Icons.notifications_active,
+          text: 'Notifications',
+          color: Colors.pink.shade400,
+          onTap: () =>
+              Navigation.push(context, const NotificationSettingPage())),
+      SettingCardModel(
+          icon: FontAwesomeIcons.image,
+          text: 'Chat Wallpaper',
+          color: const Color(0xffB338E0),
+          onTap: () => Navigation.push(context, const ChatWallPaperPage())),
+      SettingCardModel(
+          icon: FontAwesomeIcons.userLock,
+          text: 'Blocking',
+          color: kPrimaryColor,
+          onTap: () => Navigation.push(context, const BlockSettingPage())),
+    ];
     return Card(
       color: isDark ? cardDarkModeBackground : Colors.white,
       elevation: isDark ? 1 : 0,

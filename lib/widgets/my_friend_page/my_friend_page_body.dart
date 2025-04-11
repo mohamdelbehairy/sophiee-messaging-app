@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get/get.dart' as getnav;
 import 'package:sophiee/cubit/auth/login/login_cubit.dart';
 import 'package:sophiee/cubit/copy_text/copy_text_cubit.dart';
+import 'package:sophiee/utils/navigation.dart';
 import 'package:sophiee/utils/widget/flutter_toast_widget.dart';
 
 import '../../cubit/user_date/image/get_image/get_image_cubit.dart';
@@ -99,10 +99,10 @@ class MyFriendPageBody extends StatelessWidget {
             MyFriendItems(
                 text: 'Photos',
                 textButton: 'See all',
-                onTap: () => getnav.Get.to(
-                    () => CardThreeSeeAllPage(
-                        isDark: isDark, getImage: getImage, size: size),
-                    transition: getnav.Transition.downToUp)),
+                onTap: () => Navigation.push(
+                    context,
+                    CardThreeSeeAllPage(
+                        isDark: isDark, getImage: getImage, size: size))),
           if (!user.isProfileLock &&
               !userData.blockUsers.contains(user.userID) &&
               !user.blockUsers.contains(userData.userID))

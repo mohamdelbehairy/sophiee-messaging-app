@@ -1,10 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get/get.dart' as getnav;
 import 'package:sophiee/models/users_model.dart';
 import 'package:sophiee/pages/search_result_page.dart';
 import 'package:sophiee/pages/story/story_view_page.dart';
+import 'package:sophiee/utils/navigation.dart';
 import 'package:sophiee/utils/widget/flutter_toast_widget.dart';
 
 import '../../../cubit/follow_status/follow_status_cubit.dart';
@@ -59,8 +59,8 @@ class ShowNotificationListTileBody extends StatelessWidget {
       context
           .read<FollowStatusCubit>()
           .checkFollowStatus(followerID: notificationModel.publishID);
-      getnav.Get.to(() => SearchResultPage(userID: notificationModel.publishID),
-          transition: getnav.Transition.rightToLeft);
+      Navigation.push(
+          context, SearchResultPage(userID: notificationModel.publishID));
     } else if (notificationModel.notificationType == 'live') {
       // if (notificationModel.isLive != null) {
       //   getnav.Get.to(() => LivePage(liveID: notificationModel.publishID),
@@ -75,8 +75,10 @@ class ShowNotificationListTileBody extends StatelessWidget {
       if (await isStory) {
         story.getStory(friendId: notificationModel.publishID);
         await Future.delayed(const Duration(seconds: 1));
-        getnav.Get.to(() => StoryViewPage(userID: notificationModel.publishID),
-            transition: getnav.Transition.rightToLeft);
+        Navigation.push(
+            // ignore: use_build_context_synchronously
+            context,
+            StoryViewPage(userID: notificationModel.publishID));
       } else {
         FlutterToastWidget.showToast(msg: 'story has been ended');
       }

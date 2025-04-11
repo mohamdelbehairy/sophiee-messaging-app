@@ -1,6 +1,6 @@
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart' as getnav;
+import 'package:sophiee/utils/navigation.dart';
 
 import '../../cubit/user_date/image/get_image/get_image_cubit.dart';
 import '../../models/image_model.dart';
@@ -22,10 +22,8 @@ class ListViewImagesItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        getnav.Get.to(() => ShowImagePage(imageModel: imageModel, size: size),
-            transition: getnav.Transition.downToUp);
-      },
+      onTap: () => Navigation.push(
+          context, ShowImagePage(imageModel: imageModel, size: size)),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(4),
         child: FancyShimmerImage(

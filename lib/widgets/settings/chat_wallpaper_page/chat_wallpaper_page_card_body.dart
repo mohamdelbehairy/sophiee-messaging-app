@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get/get.dart' as getnav;
 import 'package:sophiee/cubit/pick_image/pick_image_cubit.dart';
 import 'package:sophiee/cubit/pick_image/pick_image_state.dart';
+import 'package:sophiee/utils/navigation.dart';
 
 import '../../../constants.dart';
 import '../../../pages/setting/chat_wall_paper_pick_image_page.dart';
@@ -22,10 +22,8 @@ class ChatWallPaperPageCardBody extends StatelessWidget {
     return BlocListener<PickImageCubit, PickImageStates>(
       listener: (context, state) {
         if (state is PickImageSucccess) {
-          getnav.Get.to(
-              () => ChatWallPaperPickImagePage(
-                  imageFile: state.image, size: size),
-              transition: getnav.Transition.rightToLeft);
+          Navigation.push(context,
+              ChatWallPaperPickImagePage(imageFile: state.image, size: size));
         }
       },
       child: Card(

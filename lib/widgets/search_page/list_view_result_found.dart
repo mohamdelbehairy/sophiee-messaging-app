@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get/get.dart' as getnav;
+import 'package:sophiee/utils/navigation.dart';
 
 import '../../cubit/follow_status/follow_status_cubit.dart';
 import '../../cubit/search/recent_search/recent_search_cubit.dart';
@@ -10,7 +10,10 @@ import 'result_item/result_item.dart';
 
 class ListViewResultFound extends StatelessWidget {
   const ListViewResultFound(
-      {super.key, required this.searchList, required this.controller, required this.userData});
+      {super.key,
+      required this.searchList,
+      required this.controller,
+      required this.userData});
   final List<UserModel> searchList;
   final TextEditingController controller;
   final UserModel userData;
@@ -29,9 +32,8 @@ class ListViewResultFound extends StatelessWidget {
                     .read<FollowStatusCubit>()
                     .checkFollowStatus(followerID: searchList[index].userID);
 
-                getnav.Get.to(
-                    () => SearchResultPage(userID: searchList[index].userID),
-                    transition: getnav.Transition.rightToLeft);
+                Navigation.push(context,
+                    SearchResultPage(userID: searchList[index].userID));
 
                 String userID = searchList[index].userID;
                 bool isStore = storeRecentSearch.recentSearchList
@@ -42,7 +44,7 @@ class ListViewResultFound extends StatelessWidget {
                       userID: searchList[index].userID);
                 }
               },
-              child: ResultIem(user: searchList[index],userData: userData));
+              child: ResultIem(user: searchList[index], userData: userData));
         });
   }
 }

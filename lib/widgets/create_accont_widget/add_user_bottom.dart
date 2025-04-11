@@ -5,11 +5,11 @@ import 'package:sophiee/cubit/upload/upload_image/upload_image_cubit.dart';
 import 'package:sophiee/cubit/user_date/store_user_date/store_user_date_cubit.dart';
 import 'package:sophiee/pages/create_account/verificaton_page.dart';
 import 'package:sophiee/pages/home_page.dart';
+import 'package:sophiee/utils/navigation.dart';
 import 'package:sophiee/utils/widget/custom_bottom.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get/get.dart' as getnav;
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AddUserBottom extends StatelessWidget {
@@ -58,13 +58,13 @@ class AddUserBottom extends StatelessWidget {
           isLoading: isLoading,
           colorBottom: kPrimaryColor,
           colorText: Colors.white,
-          onPressed: onPressedCustomBottom,
+          onPressed: onPressedCustomBottom(context),
           borderRadius: BorderRadius.circular(size.width * .08),
           width: size.width),
     );
   }
 
-  onPressedCustomBottom() async {
+  onPressedCustomBottom(BuildContext context) async {
     if (globalKey.currentState!.validate()) {
       globalKey.currentState!.save();
 
@@ -90,8 +90,8 @@ class AddUserBottom extends StatelessWidget {
             phoneNumber: phoneController.text.isNotEmpty ? phoneNumber! : null,
             profileImage: profileImage);
 
-        getnav.Get.to(() => const VerificationPage(),
-            transition: getnav.Transition.rightToLeft);
+        // ignore: use_build_context_synchronously
+        Navigation.push(context, const VerificationPage());
       }
       if (FirebaseAuth.instance.currentUser!.phoneNumber != null) {
         await storeUserDate.storeUserData(
@@ -107,8 +107,8 @@ class AddUserBottom extends StatelessWidget {
             profileImage: profileImage);
         SharedPreferences prefs = await SharedPreferences.getInstance();
         prefs.setString('userID', FirebaseAuth.instance.currentUser!.uid);
-        getnav.Get.to(() => const HomePage(),
-            transition: getnav.Transition.rightToLeft);
+        // ignore: use_build_context_synchronously
+        Navigation.go(context, const HomePage());
       }
     }
   }

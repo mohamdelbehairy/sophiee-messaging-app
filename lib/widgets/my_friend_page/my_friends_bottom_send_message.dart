@@ -4,7 +4,7 @@ import 'package:sophiee/models/users_model.dart';
 import 'package:sophiee/pages/chats/chat_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get/get.dart' as getnav;
+import 'package:sophiee/utils/navigation.dart';
 
 class MyFriendsBottomMessage extends StatelessWidget {
   const MyFriendsBottomMessage({super.key, required this.user});
@@ -18,8 +18,7 @@ class MyFriendsBottomMessage extends StatelessWidget {
       highlightColor: Colors.transparent,
       onTap: () {
         context.read<MessageCubit>().getMessage(receiverID: user.userID);
-        getnav.Get.to(() => ChatPage(userID: user.userID),
-            transition: getnav.Transition.leftToRight);
+        Navigation.push(context, ChatPage(userID: user.userID));
       },
       child: Container(
         height: size.height * .045,
