@@ -58,7 +58,7 @@ dependencies:
   fluttercontactpicker: ^4.7.0
   fluttertoast: ^8.2.6
   font_awesome_flutter: ^10.6.0
-  get: ^4.6.6
+  # get: ^4.6.6
   google_sign_in: ^6.2.1
   http: ^0.13.6
   image_picker: ^1.0.5

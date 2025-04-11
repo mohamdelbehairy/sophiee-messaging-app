@@ -2,7 +2,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:get/get.dart' as getnav;
 import 'package:sophiee/constants.dart';
 import 'package:sophiee/cubit/chat_high_lights/chat_high_light_message/chat_high_light_message_cubit.dart';
 import 'package:sophiee/cubit/chat_high_lights/update_chat_high_light/update_chat_high_light_cubit.dart';
@@ -16,6 +15,7 @@ import 'package:sophiee/models/group_model.dart';
 import 'package:sophiee/models/message_model.dart';
 import 'package:sophiee/models/users_model.dart';
 import 'package:sophiee/pages/chats/message_forward_page.dart';
+import 'package:sophiee/utils/navigation.dart';
 import 'package:sophiee/utils/widget/flutter_toast_widget.dart';
 import 'package:sophiee/utils/widget/media/save_sound.dart';
 import 'package:sophiee/utils/widget/media/share_media.dart';
@@ -125,11 +125,8 @@ class CustomChatPopMenuButton extends StatelessWidget {
                   name: 'Forward',
                   size: size,
                   icon: FontAwesomeIcons.share,
-                  onTap: () {
-                    getnav.Get.to(
-                        MessageForwardPage(user: user, message: message),
-                        transition: getnav.Transition.rightToLeft);
-                  }),
+                  onTap: () => Navigation.push(context,
+                      MessageForwardPage(user: user, message: message))),
               if (groupModel != null)
                 customPopMenuItemMethod(
                     name: message.highlightMessage!

@@ -12,11 +12,12 @@ import 'package:sophiee/pages/chats/groups/groups_chat_pick_file_page.dart';
 import 'package:sophiee/pages/chats/groups/groups_chat_pick_image_page.dart';
 import 'package:sophiee/pages/chats/groups/groups_chat_pick_sound_page.dart';
 import 'package:sophiee/pages/chats/groups/groups_chat_pick_video_page.dart';
+import 'package:sophiee/utils/navigation.dart';
 import 'package:sophiee/utils/widget/chats/chat_choose_media.dart';
-import 'package:sophiee/widgets/all_chats_page/groups_page/groups_chat_page/groups_chat_message_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get/get.dart' as getnav;
+
+import 'groups_chat_message_text_field.dart';
 
 class GroupsChatPageSendMedia extends StatefulWidget {
   const GroupsChatPageSendMedia(
@@ -76,8 +77,9 @@ class _GroupsChatPageSendMediaState extends State<GroupsChatPageSendMedia> {
         BlocListener<PickImageCubit, PickImageStates>(
           listener: (context, state) {
             if (state is PickImageSucccess && isClick) {
-              getnav.Get.to(
-                  () => GroupsChatPickImagePage(
+              Navigation.push(
+                  context,
+                  GroupsChatPickImagePage(
                       isNotify: widget.isNotify,
                       tokens: widget.tokens,
                       senderName: widget.senderName,
@@ -92,8 +94,7 @@ class _GroupsChatPageSendMediaState extends State<GroupsChatPageSendMedia> {
                       replaySoundMessage: widget.replaySoundMessage,
                       replayRecordMessage: widget.replayRecordMessage,
                       image: state.image,
-                      groupModel: widget.groupModel),
-                  transition: getnav.Transition.rightToLeft);
+                      groupModel: widget.groupModel));
 
               setState(() {
                 isClick = false;
@@ -108,8 +109,9 @@ class _GroupsChatPageSendMediaState extends State<GroupsChatPageSendMedia> {
                 if ((file.path.toLowerCase().endsWith('.pdf') ||
                     file.path.toLowerCase().endsWith('.doc') ||
                     file.path.toLowerCase().endsWith('.txt'))) {
-                  getnav.Get.to(
-                      () => GroupsChatPickFilePage(
+                  Navigation.push(
+                      context,
+                      GroupsChatPickFilePage(
                           isNotify: widget.isNotify,
                           tokens: widget.tokens,
                           senderName: widget.senderName,
@@ -124,11 +126,12 @@ class _GroupsChatPageSendMediaState extends State<GroupsChatPageSendMedia> {
                           replayContactMessage: widget.replayContactMessage,
                           replayMessageID: widget.replayMessageID,
                           replaySoundMessage: widget.replaySoundMessage,
-                          replayRecordMessage: widget.replayRecordMessage),
-                      transition: getnav.Transition.rightToLeft);
+                          replayRecordMessage: widget.replayRecordMessage));
                 }
                 if (file.path.toLowerCase().endsWith('.mp3')) {
-                  getnav.Get.to(() => GroupsChatPickSoundPage(
+                  Navigation.push(
+                      context,
+                      GroupsChatPickSoundPage(
                         isNotify: widget.isNotify,
                         senderName: widget.senderName,
                         tokens: widget.tokens,
@@ -156,14 +159,14 @@ class _GroupsChatPageSendMediaState extends State<GroupsChatPageSendMedia> {
             child: BlocListener<PickVideoCubit, PickVideoState>(
               listener: (context, state) {
                 if (state is PickVideoSuccess) {
-                  getnav.Get.to(
-                      () => GroupsChatPickVideoPage(
+                  Navigation.push(
+                      context,
+                      GroupsChatPickVideoPage(
                           isNotify: widget.isNotify,
                           senderName: widget.senderName,
                           tokens: widget.tokens,
                           video: state.video,
-                          groupModel: widget.groupModel),
-                      transition: getnav.Transition.rightToLeft);
+                          groupModel: widget.groupModel));
                   setState(() {
                     isClick = false;
                   });

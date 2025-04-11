@@ -12,8 +12,9 @@ class BottomIconsBottomSheet extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     final pickContact = context.read<PickContactCubit>();
     navigation() {
-      Navigation.navigationOnePop(context: context);
+      Navigation.pop(context);
     }
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -30,7 +31,7 @@ class BottomIconsBottomSheet extends StatelessWidget {
             icon: Icons.location_pin),
         SizedBox(width: size.width * .08),
         CustomIconBottomSheet(
-            onTap: () async{
+            onTap: () async {
               await pickContact.pickContact();
               navigation();
             },
@@ -39,6 +40,5 @@ class BottomIconsBottomSheet extends StatelessWidget {
             icon: Icons.person)
       ],
     );
- 
   }
 }

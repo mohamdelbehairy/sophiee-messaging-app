@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:sophiee/pages/story/show_my_story_page.dart';
+import 'package:sophiee/utils/navigation.dart';
 
 import '../../../models/story_model.dart';
 import 'my_story_page_leading_image.dart';
@@ -20,7 +20,8 @@ class MyStoryPageLeading extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Get.to(() => ShowMyStoryPage(storyModel: storyModel)),
+      onTap: () =>
+          Navigation.push(context, ShowMyStoryPage(storyModel: storyModel)),
       child: storyModel.storyImage != null
           ? MyStoryPageLeadingImage(
               size: size, isDark: isDark, storyModel: storyModel)
@@ -28,5 +29,3 @@ class MyStoryPageLeading extends StatelessWidget {
     );
   }
 }
-
-

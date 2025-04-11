@@ -5,10 +5,10 @@ import 'package:sophiee/models/group_model.dart';
 import 'package:sophiee/pages/chats/groups/groups_add_member_page.dart';
 import 'package:sophiee/pages/chats/groups/groups_chat_page/group_permissions_page.dart';
 import 'package:sophiee/pages/chats/groups/groups_chat_page/groups_chat_page_info_edit.dart';
+import 'package:sophiee/utils/navigation.dart';
 import 'package:sophiee/utils/widget/pop_menu_info_item.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart' as getnav;
 
 class GroupsInfoPopupMenueButton extends StatelessWidget {
   const GroupsInfoPopupMenueButton(
@@ -22,7 +22,7 @@ class GroupsInfoPopupMenueButton extends StatelessWidget {
     var isDark = context.read<LoginCubit>().isDark;
     return PopupMenuButton(
       offset: Offset(0, size.height * .06),
-      color:  isDark ? cardDarkModeBackground: cardLightModeBackground,
+      color: isDark ? cardDarkModeBackground : cardLightModeBackground,
       itemBuilder: (context) => [
         if (groupModel.isAddFriends ||
             groupModel.groupOwnerID == FirebaseAuth.instance.currentUser!.uid ||
@@ -32,10 +32,10 @@ class GroupsInfoPopupMenueButton extends StatelessWidget {
             isDark: isDark,
             size: size,
             itemName: 'Add member',
-            onTap: () => getnav.Get.to(
-                () => GroupsAddMemberPage(
-                    groupModel: groupModel, size: size, isDark: isDark),
-                transition: getnav.Transition.rightToLeft),
+            onTap: () => Navigation.push(
+                context,
+                GroupsAddMemberPage(
+                    groupModel: groupModel, size: size, isDark: isDark)),
           ),
         groupsInfoPopMenuItem(
           isDark: isDark,
@@ -47,9 +47,8 @@ class GroupsInfoPopupMenueButton extends StatelessWidget {
                 groupModel.isMemberSettings ||
                 groupModel.adminsID
                     .contains(FirebaseAuth.instance.currentUser!.uid)) {
-              getnav.Get.to(
-                  () => GroupsChatPageInfoEditPage(groupModel: groupModel),
-                  transition: getnav.Transition.rightToLeft);
+              Navigation.push(
+                  context, GroupsChatPageInfoEditPage(groupModel: groupModel));
             } else {
               showDialog(
                   context: context,
@@ -79,9 +78,8 @@ class GroupsInfoPopupMenueButton extends StatelessWidget {
             isDark: isDark,
             size: size,
             itemName: 'Group permissions',
-            onTap: () => getnav.Get.to(
-                () => GroupPermissionsPage(size: size, groupModel: groupModel),
-                transition: getnav.Transition.rightToLeft),
+            onTap: () => Navigation.push(context,
+                GroupPermissionsPage(size: size, groupModel: groupModel)),
           ),
       ],
     );

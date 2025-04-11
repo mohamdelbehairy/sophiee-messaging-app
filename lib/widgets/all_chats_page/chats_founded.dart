@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:get/get.dart' as getnav;
+import 'package:sophiee/utils/navigation.dart';
 
 import '../../cubit/chat_high_lights/chat_high_light_message/chat_high_light_message_cubit.dart';
 import '../../cubit/chats/chats_cubit.dart';
@@ -44,9 +44,8 @@ class ChatsFounded extends StatelessWidget {
                     context
                         .read<MessageCubit>()
                         .getMessage(receiverID: chat.chatsList[index].userID);
-                    getnav.Get.to(
-                        () => ChatPage(userID: chat.chatsList[index].userID),
-                        transition: getnav.Transition.rightToLeft);
+                    Navigation.push(context,
+                        ChatPage(userID: chat.chatsList[index].userID));
                   },
                   child: Slidable(
                     key: ValueKey(index),

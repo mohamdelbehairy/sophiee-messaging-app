@@ -4,9 +4,9 @@ import 'package:sophiee/pages/chats/calls_page.dart';
 import 'package:sophiee/pages/chats/groups/groups_page.dart';
 import 'package:sophiee/pages/search_page.dart';
 import 'package:sophiee/pages/story/my_story_page.dart';
+import 'package:sophiee/utils/navigation.dart';
 import 'package:sophiee/widgets/all_chats_page/all_chats_body.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart' as getnav;
 
 class CustomTabBar extends StatefulWidget {
   const CustomTabBar({super.key});
@@ -42,15 +42,13 @@ class _CustomTabBarState extends State<CustomTabBar> {
                     : IconButton(
                         splashColor: Colors.transparent,
                         highlightColor: Colors.transparent,
-                        onPressed: () => getnav.Get.to(
-                            () => const MyStoryPage(),
-                            transition: getnav.Transition.rightToLeft),
-                        icon: const Icon(Icons.perm_media,size: 24))),
+                        onPressed: () =>
+                            Navigation.push(context, const MyStoryPage()),
+                        icon: const Icon(Icons.perm_media, size: 24))),
             IconButton(
                 splashColor: Colors.transparent,
                 highlightColor: Colors.transparent,
-                onPressed: () => getnav.Get.to(() => const SearchPage(),
-                    transition: getnav.Transition.rightToLeft),
+                onPressed: () => Navigation.push(context, const SearchPage()),
                 icon: const Icon(FontAwesomeIcons.magnifyingGlass, size: 22)),
             const SizedBox(width: 4),
           ],

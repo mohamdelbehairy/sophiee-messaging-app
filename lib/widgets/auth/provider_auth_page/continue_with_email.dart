@@ -1,8 +1,8 @@
 import 'package:sophiee/pages/login_page.dart';
 import 'package:sophiee/pages/register_page.dart';
+import 'package:sophiee/utils/navigation.dart';
 import 'package:sophiee/utils/widget/custom_bottom.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart' as getnav;
 
 class ContinueWithEmail extends StatelessWidget {
   const ContinueWithEmail({super.key, required this.size});
@@ -20,8 +20,7 @@ class ContinueWithEmail extends StatelessWidget {
               text: 'Continue with email',
               colorBottom: Colors.white,
               colorText: Colors.black,
-              onPressed: () => getnav.Get.to(() => const LoginPage(),
-                  transition: getnav.Transition.rightToLeft),
+              onPressed: () => Navigation.push(context, const LoginPage()),
               borderRadius: BorderRadius.circular(32),
               width: size.width)),
       Row(
@@ -33,8 +32,7 @@ class ContinueWithEmail extends StatelessWidget {
                   color: Colors.grey.shade300,
                   fontWeight: FontWeight.w100)),
           TextButton(
-              onPressed: () => getnav.Get.to(() => const RegisterPage(),
-                  transition: getnav.Transition.rightToLeft),
+              onPressed: () => Navigation.push(context, const RegisterPage()),
               child: Text('Sign up',
                   style: TextStyle(
                       color: Colors.black, fontSize: size.height * .014)))

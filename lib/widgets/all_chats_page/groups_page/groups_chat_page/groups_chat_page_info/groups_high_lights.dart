@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get/get.dart' as getnav;
+import 'package:sophiee/utils/navigation.dart';
 
 import '../../../../../cubit/groups/high_light_group_message/hight_light_messages/high_light_messages_cubit.dart';
 import '../../../../../models/group_model.dart';
@@ -31,10 +31,8 @@ class GroupsHighlights extends StatelessWidget {
           context
               .read<HightLightMessagesCubit>()
               .getHightLightMessage(groupID: groupModel.groupID);
-          getnav.Get.to(
-              () => GroupsChatHighLightsPage(size: size, groupModel: groupData),
-              transition: getnav.Transition.rightToLeft);
+          Navigation.push(context,
+              GroupsChatHighLightsPage(size: size, groupModel: groupData));
         });
   }
 }
-

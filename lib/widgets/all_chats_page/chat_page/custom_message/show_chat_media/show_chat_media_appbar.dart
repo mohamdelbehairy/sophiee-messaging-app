@@ -2,11 +2,11 @@ import 'package:sophiee/models/media_files_model.dart';
 import 'package:sophiee/models/message_model.dart';
 import 'package:sophiee/models/users_model.dart';
 import 'package:sophiee/pages/chats/message_forward_page.dart';
+import 'package:sophiee/utils/navigation.dart';
 import 'package:sophiee/widgets/all_chats_page/chat_page/custom_message/show_chat_media/show_chat_app_bar_pop_menu.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:get/get.dart' as getnav;
 
 class ShowChatMediaAppBar extends StatelessWidget {
   const ShowChatMediaAppBar(
@@ -57,10 +57,12 @@ class ShowChatMediaAppBar extends StatelessWidget {
           child: Row(
             children: [
               GestureDetector(
-                  onTap: () => getnav.Get.to(
-                      () => MessageForwardPage(
-                          user: user, message: message, mediaFiles: mediaFiels),
-                      transition: getnav.Transition.rightToLeft),
+                  onTap: () => Navigation.push(
+                      context,
+                      MessageForwardPage(
+                          user: user,
+                          message: message,
+                          mediaFiles: mediaFiels)),
                   child: Icon(FontAwesomeIcons.share, size: size.width * .06)),
               SizedBox(width: size.width * .01),
               ShowChatMediaAppBarPopMenu(

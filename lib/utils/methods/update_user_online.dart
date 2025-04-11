@@ -18,8 +18,6 @@ class UpdateUserOnline {
               .collection('users')
               .doc(currentUser.uid)
               .update({'onlineStatue': Timestamp.now()});
-          // StoryCubit storyCubit = StoryCubit();
-          // storyCubit.deleteStory();
         }
       }
     });

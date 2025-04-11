@@ -5,11 +5,12 @@ import 'package:sophiee/cubit/user_date/user_token/user_token_cubit.dart';
 import 'package:sophiee/pages/create_account/add_user_data_page.dart';
 import 'package:sophiee/pages/home_page.dart';
 
-import 'package:sophiee/widgets/auth/opt_phone_number_page/opt_phone_number_page_body.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get/get.dart' as getnav;
+import 'package:sophiee/utils/navigation.dart';
+
+import '../../widgets/auth/opt_phone_number_page/opt_phone_number_page_body.dart';
 
 class OptPhoneNumberPage extends StatelessWidget {
   const OptPhoneNumberPage(
@@ -41,14 +42,16 @@ class OptPhoneNumberPage extends StatelessWidget {
               await Future.delayed(const Duration(seconds: 2));
               if (!await isUserDataStored.isUserDataStored(
                   userID: FirebaseAuth.instance.currentUser!.uid)) {
-                getnav.Get.to(() => const AddUserDataPage(),
-                    transition: getnav.Transition.rightToLeft);
+                // ignore: use_build_context_synchronously
+                Navigation.push(context, const AddUserDataPage());
+
                 Future.delayed(const Duration(seconds: 2));
                 optController.clear();
               } else {
                 String? getToken = await token.getUserToken();
-                getnav.Get.to(() => const HomePage(),
-                    transition: getnav.Transition.rightToLeft);
+                // ignore: use_build_context_synchronously
+                Navigation.push(context, const HomePage());
+
                 Future.delayed(const Duration(seconds: 2));
                 await token.updateUserToken(token: getToken);
                 optController.clear();

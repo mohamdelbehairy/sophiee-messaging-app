@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart' as getnav;
+import 'package:sophiee/utils/navigation.dart';
 
 import '../../../../../models/group_model.dart';
 import '../../../../../pages/chats/groups/groups_chat_page/groups_chat_members_page.dart';
@@ -22,9 +22,9 @@ class GroupsMembers extends StatelessWidget {
         size: size,
         isDark: isDark,
         componentName: 'Group Members',
-        onTap: () => getnav.Get.to(
-            () => GroupsChatMembersPage(
-                groupModel: groupData, size: size, isDark: isDark),
-            transition: getnav.Transition.rightToLeft));
+        onTap: () => Navigation.push(
+            context,
+            GroupsChatMembersPage(
+                groupModel: groupData, size: size, isDark: isDark)));
   }
 }

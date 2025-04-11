@@ -25,9 +25,7 @@ class GroupsChatPageTopIconsBottomSheet extends StatelessWidget {
     final pickImage = context.read<PickImageCubit>();
     final pickVideo = context.read<PickVideoCubit>();
     final pickFile = context.read<PickFileCubit>();
-    navigation() {
-      Navigation.navigationOnePop(context: context);
-    }
+    
 
     return BlocListener<PickImageCubit, PickImageStates>(
       listener: (context, state) {
@@ -95,7 +93,8 @@ class GroupsChatPageTopIconsBottomSheet extends StatelessWidget {
               CustomIconBottomSheet(
                   onTap: () async {
                     await pickFile.pickFile(allowedExtensions: ['pdf', 'doc']);
-                    navigation();
+                    // ignore: use_build_context_synchronously
+                    Navigation.pop(context);
                   },
                   text: 'File',
                   color: Colors.indigo,
@@ -104,7 +103,8 @@ class GroupsChatPageTopIconsBottomSheet extends StatelessWidget {
               CustomIconBottomSheet(
                   onTap: () async {
                     await pickVideo.pickVideo(source: ImageSource.gallery);
-                    navigation();
+                    // ignore: use_build_context_synchronously
+                    Navigation.pop(context);
                   },
                   text: 'Video',
                   color: Colors.pink,
@@ -113,7 +113,8 @@ class GroupsChatPageTopIconsBottomSheet extends StatelessWidget {
               CustomIconBottomSheet(
                   onTap: () async {
                     await pickImage.pickImage(source: ImageSource.gallery);
-                    navigation();
+                    // ignore: use_build_context_synchronously
+                    Navigation.pop(context);
                   },
                   text: 'Gallery',
                   color: Colors.purple,

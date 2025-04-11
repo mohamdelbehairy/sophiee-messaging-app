@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:sophiee/utils/navigation.dart';
 
 import '../../../../models/users_model.dart';
 import '../../../../pages/chats/chat_media_files_page.dart';
 import 'chat_page_friend_info_connection.dart';
-import 'package:get/get.dart' as getnav;
 
 class MediaFilesBottomSheet extends StatelessWidget {
   const MediaFilesBottomSheet(
@@ -18,8 +18,7 @@ class MediaFilesBottomSheet extends StatelessWidget {
         text: 'Media files',
         iconColor: Colors.blue,
         icon: Icons.perm_media,
-        onTap: () => getnav.Get.to(
-            () => ChatMediaFilesPage(size: size, user: user),
-            transition: getnav.Transition.rightToLeft));
+        onTap: () => Navigation.push(
+            context, ChatMediaFilesPage(size: size, user: user)));
   }
 }

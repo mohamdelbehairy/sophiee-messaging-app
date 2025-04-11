@@ -5,12 +5,12 @@ import 'package:sophiee/cubit/get_following/get_following_cubit.dart';
 import 'package:sophiee/cubit/user_date/image/get_image/get_image_cubit.dart';
 import 'package:sophiee/models/users_model.dart';
 import 'package:sophiee/pages/my_friend_page.dart';
+import 'package:sophiee/utils/navigation.dart';
 import 'package:sophiee/utils/shimmer/home/all_chats/chat_page/chat_page_friend_info_shimmer.dart';
 import 'package:sophiee/widgets/all_chats_page/chat_page/chat_page_friend_info_bottom_sheet/chat_page_friend_info_bottom_sheet_body.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get/get.dart' as getnav;
 
 import '../../../../constants.dart';
 
@@ -43,8 +43,7 @@ class _ChatPageFriendBottomSheetInfoState
       onVerticalDragUpdate: (details) {
         if (!widget.userData.blockUsers.contains(widget.user.userID) &&
             !widget.user.blockUsers.contains(widget.userData.userID)) {
-          getnav.Get.to(() => MyFriendPage(user: widget.user),
-              transition: getnav.Transition.downToUp);
+          Navigation.push(context, MyFriendPage(user: widget.user));
         }
       },
       child: Container(

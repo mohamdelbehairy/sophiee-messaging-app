@@ -8,13 +8,13 @@ import 'package:sophiee/cubit/groups/high_light_group_message/hight_light_messag
 import 'package:sophiee/models/group_model.dart';
 import 'package:sophiee/models/message_model.dart';
 import 'package:sophiee/pages/chats/show_chat_image_page.dart';
+import 'package:sophiee/utils/navigation.dart';
 import 'package:sophiee/utils/widget/messages/custom_message_pop_menu_button.dart';
 import 'package:sophiee/widgets/all_chats_page/chat_page/custom_message/message_date_time.dart';
 import 'package:sophiee/widgets/all_chats_page/groups_page/groups_chat_page/groups_chat_custom_message/groups_chat_custom_message_details.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get/get.dart' as getnav;
 import 'package:url_launcher/url_launcher.dart';
 
 class GroupsChatCustomMessageComponenet extends StatelessWidget {
@@ -56,9 +56,8 @@ class GroupsChatCustomMessageComponenet extends StatelessWidget {
           return GestureDetector(
             onDoubleTap: () async {
               if (message.messageImage != null) {
-                getnav.Get.to(
-                    () => ShowChatImagePage(message: message, user: data),
-                    transition: getnav.Transition.downToUp);
+                Navigation.push(
+                    context, ShowChatImagePage(message: message, user: data));
               }
               if (message.phoneContactNumber != null) {
                 String url = 'tel:${message.phoneContactNumber}';

@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:sophiee/cubit/all_chats_shimmer_status/all_chats_shimmer_status.dart';
 import 'package:sophiee/cubit/auth/auth_settings/auth_settings_cubit.dart';
 import 'package:sophiee/cubit/auth/facebook_auth/facebook_auth_cubit.dart';
@@ -163,7 +162,7 @@ class CustomMaterialApp extends StatelessWidget {
       child: BlocBuilder<LoginCubit, LoginState>(
         builder: (context, state) {
           ThemeModeService themeModeService = ThemeModeService();
-          return GetMaterialApp(
+          return MaterialApp(
             title: 'Sophiee',
             navigatorKey: navigatorKey,
             color: Colors.transparent,

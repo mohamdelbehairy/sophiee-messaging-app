@@ -1,11 +1,11 @@
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get/get.dart' as getnav;
 import 'package:sophiee/cubit/user_date/get_user_data/get_user_data_cubit.dart';
 import 'package:sophiee/cubit/user_date/get_user_data/get_user_data_state.dart';
 import 'package:sophiee/models/media_files_model.dart';
 import 'package:sophiee/pages/chats/show_chat_image_page.dart';
+import 'package:sophiee/utils/navigation.dart';
 
 class TabBarMediaImage extends StatelessWidget {
   const TabBarMediaImage({super.key, required this.mediaFiels});
@@ -21,9 +21,8 @@ class TabBarMediaImage extends StatelessWidget {
           final data = state.userModel
               .firstWhere((element) => element.userID == currentUser);
           return GestureDetector(
-            onTap: () => getnav.Get.to(
-                () => ShowChatImagePage(mediaFiels: mediaFiels, user: data),
-                transition: getnav.Transition.rightToLeft),
+            onTap: () => Navigation.push(
+                context, ShowChatImagePage(mediaFiels: mediaFiels, user: data)),
             child: FancyShimmerImage(
                 boxFit: BoxFit.cover,
                 shimmerBaseColor: Colors.grey.shade100,

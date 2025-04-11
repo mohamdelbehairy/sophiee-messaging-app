@@ -1,11 +1,11 @@
 import 'package:sophiee/cubit/pick_image/pick_image_cubit.dart';
 import 'package:sophiee/cubit/pick_image/pick_image_state.dart';
 import 'package:sophiee/cubit/pick_video/pick_video_cubit.dart';
+import 'package:sophiee/utils/navigation.dart';
 import 'package:sophiee/widgets/all_chats_page/add_story/add_story_bottom_sheet_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:get/get.dart' as getnav;
 
 import '../../../cubit/pick_video/pick_video_state.dart';
 import 'add_story_image.dart';
@@ -25,17 +25,15 @@ class AddStoryBottomSheet extends StatelessWidget {
     return BlocListener<PickImageCubit, PickImageStates>(
       listener: (context, state) {
         if (state is PickImageSucccess) {
-          Navigator.pop(context);
-          getnav.Get.to(() => AddStoryImage(image: state.image),
-              transition: getnav.Transition.downToUp);
+          Navigation.pop(context);
+          Navigation.push(context, AddStoryImage(image: state.image));
         }
       },
       child: BlocListener<PickVideoCubit, PickVideoState>(
         listener: (context, state) {
           if (state is PickVideoSuccess) {
-            Navigator.pop(context);
-            getnav.Get.to(() => AddStoryVideo(video: state.video),
-                transition: getnav.Transition.downToUp);
+            Navigation.pop(context);
+            Navigation.push(context, AddStoryVideo(video: state.video));
           }
         },
         child: Padding(

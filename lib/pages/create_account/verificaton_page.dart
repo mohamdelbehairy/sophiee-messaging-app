@@ -5,12 +5,12 @@ import 'package:sophiee/cubit/auth/login/login_cubit.dart';
 import 'package:sophiee/models/users_model.dart';
 import 'package:sophiee/pages/home_page.dart';
 import 'package:sophiee/pages/login_page.dart';
+import 'package:sophiee/utils/navigation.dart';
 import 'package:sophiee/widgets/verification_page/verification_page_body.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get/get.dart' as getnav;
 
 class VerificationPage extends StatefulWidget {
   const VerificationPage({super.key, this.userData});
@@ -75,12 +75,14 @@ class _VerificationPageState extends State<VerificationPage> {
     if (isEmailVerified) {
       await Future.delayed(const Duration(seconds: 3));
       if (userData != null && userData.isFacebookAuth!) {
-        getnav.Get.to(() => const HomePage(),
-            transition: getnav.Transition.rightToLeft);
+        // ignore: use_build_context_synchronously
+        Navigation.push(context, const HomePage());
+
         timer?.cancel();
       } else {
-        getnav.Get.to(() => const LoginPage(),
-            transition: getnav.Transition.rightToLeft);
+        // ignore: use_build_context_synchronously
+        Navigation.push(context, const LoginPage());
+
         timer?.cancel();
       }
     }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:sophiee/utils/navigation.dart';
 import '../../../../constants.dart';
 import '../../../../pages/chats/groups/create_group/create_group_page.dart';
-import 'package:get/get.dart' as getnav;
 
 class CustomCreateGroupBody extends StatelessWidget {
   const CustomCreateGroupBody({super.key, required this.isDark});
@@ -16,8 +16,7 @@ class CustomCreateGroupBody extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           GestureDetector(
-              onTap: () => getnav.Get.to(() => const CreateGroupPage(),
-                  transition: getnav.Transition.rightToLeft),
+              onTap: () => Navigation.push(context, const CreateGroupPage()),
               child: CircleAvatar(
                   radius: 25,
                   backgroundColor: isDark

@@ -4,7 +4,7 @@ import 'package:sophiee/models/users_model.dart';
 import 'package:sophiee/pages/my_friend_page.dart';
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart' as getnav;
+import 'package:sophiee/utils/navigation.dart';
 import 'package:sophiee/utils/widget/flutter_toast_widget.dart';
 
 class GroupChatCustomMessageFriendImage extends StatelessWidget {
@@ -34,8 +34,7 @@ class GroupChatCustomMessageFriendImage extends StatelessWidget {
           onTap: () {
             if (!userData.blockUsers.contains(user.userID) &&
                 !user.blockUsers.contains(userData.userID)) {
-              getnav.Get.to(() => MyFriendPage(user: user),
-                  transition: getnav.Transition.downToUp);
+              Navigation.push(context, MyFriendPage(user: user));
             } else if (userData.blockUsers.contains(user.userID)) {
               FlutterToastWidget.showToast(
                   msg: 'You blocked ${user.userName.split(" ")[0]}');

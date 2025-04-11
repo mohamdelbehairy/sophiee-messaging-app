@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:get/get.dart' as getnav;
+import 'package:sophiee/utils/navigation.dart';
 
 import '../../cubit/auth/auth_settings/auth_settings_cubit.dart';
 import '../../cubit/auth/facebook_auth/facebook_auth_cubit.dart';
@@ -21,8 +21,9 @@ Future<void> deleteAccountAction(BuildContext context) async {
   // UserCallInit.onUserLogout();
   final prefs = await SharedPreferences.getInstance();
   var userID = prefs.getString('storeUser');
-  getnav.Get.to(() => const ProviderAuthPage(),
-      transition: getnav.Transition.rightToLeft);
+  // ignore: use_build_context_synchronously
+  Navigation.go(context, const ProviderAuthPage());
+
   await Future.delayed(const Duration(seconds: 1));
   await deleteAccount.deleteUserInfo(userID: userID);
   await prefs.remove('storeUser');

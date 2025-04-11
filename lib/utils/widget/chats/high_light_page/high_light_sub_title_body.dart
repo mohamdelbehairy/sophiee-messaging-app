@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart' as getnav;
 import 'package:sophiee/constants.dart';
 import 'package:sophiee/models/message_model.dart';
 import 'package:sophiee/models/users_model.dart';
 import 'package:sophiee/pages/chats/show_chat_image_page.dart';
 import 'package:sophiee/pages/chats/show_chat_video_page.dart';
+import 'package:sophiee/utils/navigation.dart';
 import 'package:sophiee/utils/widget/chats/high_light_page/high_light_custom_image.dart';
 import 'package:sophiee/utils/widget/chats/high_light_page/high_light_custom_video.dart';
 import 'package:sophiee/utils/widget/messages/custom_message_record.dart';
@@ -73,15 +73,13 @@ class HighLightSubTitelBody extends StatelessWidget {
               color: Colors.white),
         if (message.messageVideo != null)
           GestureDetector(
-              onTap: () => getnav.Get.to(
-                  () => ShowChatVideoPage(user: user, message: message),
-                  transition: getnav.Transition.downToUp),
+              onTap: () => Navigation.push(
+                  context, ShowChatVideoPage(user: user, message: message)),
               child: HighLightCustomVideo(message: message, size: size)),
         if (message.messageImage != null)
           GestureDetector(
-              onTap: () => getnav.Get.to(
-                  () => ShowChatImagePage(user: user, message: message),
-                  transition: getnav.Transition.downToUp),
+              onTap: () => Navigation.push(
+                  context, ShowChatImagePage(user: user, message: message)),
               child: HighLightCustomImage(message: message, size: size)),
         if (message.messageText != '')
           GestureDetector(

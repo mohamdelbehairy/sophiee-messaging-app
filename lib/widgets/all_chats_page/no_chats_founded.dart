@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart' as getnav;
+import 'package:sophiee/utils/navigation.dart';
 
 import '../../pages/friends_page.dart';
 import '../../utils/widget/no_result_found.dart';
 
 class NoChatsFounded extends StatelessWidget {
-  const NoChatsFounded({super.key, required this.size, required this.isDark, this.image});
+  const NoChatsFounded(
+      {super.key, required this.size, required this.isDark, this.image});
 
   final Size size;
   final bool isDark;
@@ -19,9 +20,8 @@ class NoChatsFounded extends StatelessWidget {
       textTwo:
           'You didn\'t have any conversations yet.\nplease start a conversation.',
       widget: TextButton(
-          onPressed: () => getnav.Get.to(
-              () => FriendsPage(size: size, isDark: isDark),
-              transition: getnav.Transition.rightToLeft),
+          onPressed: () =>
+              Navigation.push(context, FriendsPage(size: size, isDark: isDark)),
           child:
               const Text('Chat People', style: TextStyle(color: Colors.blue))),
     );

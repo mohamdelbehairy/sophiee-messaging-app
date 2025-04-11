@@ -9,8 +9,9 @@ import 'package:sophiee/cubit/user_date/user_token/user_token_cubit.dart';
 import 'package:sophiee/models/users_model.dart';
 import 'package:sophiee/pages/create_account/verificaton_page.dart';
 import 'package:sophiee/pages/home_page.dart';
-import 'package:sophiee/widgets/auth/provider_auth_page/custom_provider_way.dart';
-import 'package:get/get.dart' as getnav;
+import 'package:sophiee/utils/navigation.dart';
+
+import 'custom_provider_way.dart';
 
 class FacebookAuthWay extends StatefulWidget {
   const FacebookAuthWay({super.key, required this.size});
@@ -48,11 +49,11 @@ class _FacebookAuthWayState extends State<FacebookAuthWay> {
             await token.updateUserToken(token: getToken);
 
             if (FirebaseAuth.instance.currentUser!.emailVerified) {
-              getnav.Get.to(() => const HomePage(),
-                  transition: getnav.Transition.rightToLeft);
+              // ignore: use_build_context_synchronously
+              Navigation.go(context, const HomePage());
             } else {
-              getnav.Get.to(() => VerificationPage(userData: userData),
-                  transition: getnav.Transition.rightToLeft);
+              // ignore: use_build_context_synchronously
+              Navigation.go(context, VerificationPage(userData: userData));
             }
           }
         },

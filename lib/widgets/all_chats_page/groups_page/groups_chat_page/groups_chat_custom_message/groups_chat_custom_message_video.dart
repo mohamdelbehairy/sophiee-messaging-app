@@ -4,8 +4,8 @@ import 'package:sophiee/pages/chats/show_chat_video_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:sophiee/utils/navigation.dart';
 import 'package:video_player/video_player.dart';
-import 'package:get/get.dart' as getnav;
 
 class GroupsChatCustomMessageVideo extends StatefulWidget {
   const GroupsChatCustomMessageVideo(
@@ -94,10 +94,10 @@ class _CustomMessageVideoState extends State<GroupsChatCustomMessageVideo> {
             bottom: size.height * .02,
             left: size.height * .02,
             child: GestureDetector(
-              onTap: () => getnav.Get.to(
-                  () => ShowChatVideoPage(
-                      message: widget.message, user: widget.user),
-                  transition: getnav.Transition.downToUp),
+              onTap: () => Navigation.push(
+                  context,
+                  ShowChatVideoPage(
+                      message: widget.message, user: widget.user)),
               child: Icon(FontAwesomeIcons.expand,
                   color: Colors.white, size: size.width * .04),
             ))

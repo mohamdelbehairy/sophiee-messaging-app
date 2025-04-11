@@ -2,7 +2,7 @@ import 'package:sophiee/models/group_model.dart';
 import 'package:sophiee/pages/chats/groups/groups_add_member_page.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:get/get.dart' as getnav;
+import 'package:sophiee/utils/navigation.dart';
 
 class GroupsChatPageAddMemberItem extends StatelessWidget {
   const GroupsChatPageAddMemberItem(
@@ -19,10 +19,10 @@ class GroupsChatPageAddMemberItem extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 12),
       child: GestureDetector(
-        onTap: () => getnav.Get.to(
-            () => GroupsAddMemberPage(
-                size: size, groupModel: groupModel, isDark: isDark),
-            transition: getnav.Transition.rightToLeft),
+        onTap: () => Navigation.push(
+            context,
+            GroupsAddMemberPage(
+                size: size, groupModel: groupModel, isDark: isDark)),
         child: Row(
           children: [
             Icon(FontAwesomeIcons.plus,

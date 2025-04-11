@@ -1,16 +1,15 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
-import 'package:sophiee/cubit/auth/phone_number_auth/phone_number_auth_cubit.dart';
-import 'package:sophiee/pages/auth/opt_phone_number_page.dart';
-import 'package:sophiee/widgets/auth/phone_number_page/phone_number_page_body_component.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get/get.dart' as getnav;
+import 'package:sophiee/pages/auth/opt_phone_number_page.dart';
+import 'package:sophiee/utils/navigation.dart';
 import 'package:telephony/telephony.dart';
 
+import '../../../cubit/auth/phone_number_auth/phone_number_auth_cubit.dart';
 import '../../../models/awsome_dialog_model.dart';
 import '../../../utils/custom_awsome_dialog.dart';
+import 'phone_number_page_body_component.dart';
 
 class PhoneNumberPageBody extends StatefulWidget {
   const PhoneNumberPageBody({super.key, required this.size});
@@ -45,13 +44,13 @@ class _PhoneNumberPageBodyState extends State<PhoneNumberPageBody> {
           signInWithPhone.isLoading = state.isLoading;
         }
         if (state is SendPhoneNumberAuthSuccess) {
-          getnav.Get.to(
-              () => OptPhoneNumberPage(
+          Navigation.push(
+              context,
+              OptPhoneNumberPage(
                   optController: optController,
                   size: widget.size,
                   phoneNumber: phoneNumber,
-                  resendPhoneNumber: phoneNumber),
-              transition: getnav.Transition.rightToLeft);
+                  resendPhoneNumber: phoneNumber));
         }
         if (state is SendPhoneNumberAuthFailure) {
           if (state.errorMessage == 'invalid-phone-number') {
@@ -66,7 +65,7 @@ class _PhoneNumberPageBodyState extends State<PhoneNumberPageBody> {
                     dialogType: DialogType.error));
           }
           if (state.errorMessage == 'too-many-requests') {
-             customAwsomeDialog(
+            customAwsomeDialog(
                 awsomeDialogModel: AwsomeDialogModel(
                     context: context,
                     autoHide: const Duration(seconds: 4),
@@ -77,7 +76,7 @@ class _PhoneNumberPageBodyState extends State<PhoneNumberPageBody> {
                     dialogType: DialogType.error));
           }
           if (state.errorMessage == 'network-request-failed') {
-             customAwsomeDialog(
+            customAwsomeDialog(
                 awsomeDialogModel: AwsomeDialogModel(
                     context: context,
                     autoHide: const Duration(seconds: 4),

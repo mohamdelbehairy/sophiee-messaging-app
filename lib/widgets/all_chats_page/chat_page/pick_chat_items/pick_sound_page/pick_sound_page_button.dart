@@ -183,6 +183,6 @@ class _PickSoundPageButtonState extends State<PickSoundPageButton> {
   }
 
   void navigation() {
-    Navigation.navigationOnePop(context: context);
+    Navigation.pop(context);
   }
 }

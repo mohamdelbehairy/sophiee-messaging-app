@@ -2,10 +2,11 @@ import 'package:sophiee/constants.dart';
 import 'package:sophiee/cubit/auth/google_auth/google_auth_cubit.dart';
 import 'package:sophiee/cubit/user_date/user_token/user_token_cubit.dart';
 import 'package:sophiee/pages/home_page.dart';
-import 'package:sophiee/widgets/auth/provider_auth_page/custom_provider_way.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get/get.dart' as getnav;
+import 'package:sophiee/utils/navigation.dart';
+
+import 'custom_provider_way.dart';
 
 class GoogleAuthWay extends StatelessWidget {
   const GoogleAuthWay({super.key, required this.size});
@@ -24,8 +25,8 @@ class GoogleAuthWay extends StatelessWidget {
           String? getToken = await token.getUserToken();
           await token.updateUserToken(token: getToken);
 
-          getnav.Get.to(() => const HomePage(),
-              transition: getnav.Transition.rightToLeft);
+          // ignore: use_build_context_synchronously
+          Navigation.go(context, const HomePage());
         }
       },
       builder: (context, state) {

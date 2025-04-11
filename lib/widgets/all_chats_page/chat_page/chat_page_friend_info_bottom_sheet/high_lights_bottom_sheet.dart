@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get/get.dart' as getnav;
+import 'package:sophiee/utils/navigation.dart';
 
 import '../../../../constants.dart';
 import '../../../../cubit/chat_high_lights/chat_high_light_message/chat_high_light_message_cubit.dart';
@@ -29,8 +29,8 @@ class HighlightsBottomSheet extends StatelessWidget {
           context
               .read<ChatHighLightMessageCubit>()
               .getHightLightMessage(friendID: user.userID);
-          getnav.Get.to(() => ChatHighLightPage(size: size, user: user,isDark: isDark),
-              transition: getnav.Transition.rightToLeft);
+          Navigation.push(context,
+              ChatHighLightPage(size: size, user: user, isDark: isDark));
         });
   }
 }

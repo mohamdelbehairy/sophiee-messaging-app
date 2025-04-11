@@ -12,7 +12,7 @@ class GroupChatBottomIconsBottomSheet extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     final pickContact = context.read<PickContactCubit>();
     navigation() {
-      Navigation.navigationOnePop(context: context);
+      Navigation.pop(context);
     }
 
     return Row(

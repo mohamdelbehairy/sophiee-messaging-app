@@ -4,7 +4,7 @@ import 'package:sophiee/pages/chats/show_chat_video_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:get/get.dart' as getnav;
+import 'package:sophiee/utils/navigation.dart';
 import 'package:video_player/video_player.dart';
 
 class CustomMessageVideo extends StatefulWidget {
@@ -69,12 +69,10 @@ class _CustomMessageVideoState extends State<CustomMessageVideo> {
         if (!_videoPlayerController.value.isPlaying)
           Positioned.fill(
               child: GestureDetector(
-                  onTap: () {
-                    getnav.Get.to(
-                        () => ShowChatVideoPage(
-                            message: widget.message, user: widget.user),
-                        transition: getnav.Transition.downToUp);
-                  },
+                  onTap: () => Navigation.push(
+                      context,
+                      ShowChatVideoPage(
+                          message: widget.message, user: widget.user)),
                   child: Center(
                       child: CircleAvatar(
                           backgroundColor:

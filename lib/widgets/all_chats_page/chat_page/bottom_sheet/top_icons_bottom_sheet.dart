@@ -36,9 +36,6 @@ class TopIconsBottomSheet extends StatelessWidget {
     final pickImage = context.read<PickImageCubit>();
     final pickFile = context.read<PickFileCubit>();
     final pickVideo = context.read<PickVideoCubit>();
-    navigation() {
-      Navigation.navigationOnePop(context: context);
-    }
 
     return BlocListener<PickImageCubit, PickImageStates>(
       listener: (context, state) {
@@ -96,7 +93,8 @@ class TopIconsBottomSheet extends StatelessWidget {
               CustomIconBottomSheet(
                   onTap: () async {
                     await pickFile.pickFile(allowedExtensions: []);
-                    navigation();
+                    // ignore: use_build_context_synchronously
+                    Navigation.pop(context);
                   },
                   text: 'File',
                   color: Colors.indigo,
@@ -106,7 +104,8 @@ class TopIconsBottomSheet extends StatelessWidget {
                   onTap: () async {
                     await pickVideo.pickVideo(source: ImageSource.gallery);
                     pickVideo.selectedVideo = null;
-                    navigation();
+                    // ignore: use_build_context_synchronously
+                    Navigation.pop(context);
                   },
                   text: 'Video',
                   color: Colors.pink,
@@ -115,7 +114,8 @@ class TopIconsBottomSheet extends StatelessWidget {
               CustomIconBottomSheet(
                   onTap: () async {
                     await pickImage.pickImage(source: ImageSource.gallery);
-                    navigation();
+                    // ignore: use_build_context_synchronously
+                    Navigation.pop(context);
                   },
                   text: 'Gallery',
                   color: Colors.purple,

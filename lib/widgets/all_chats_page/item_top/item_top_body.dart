@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get/get.dart' as getnav;
+import 'package:sophiee/utils/navigation.dart';
 
 import '../../../cubit/story/story_cubit.dart';
 import '../../../models/users_model.dart';
@@ -38,8 +38,8 @@ class ItemTopBody extends StatelessWidget {
               if (await isStory && !await isLive) {
                 story.getStory(friendId: data.userID);
                 await Future.delayed(const Duration(seconds: 1));
-                getnav.Get.to(() => StoryViewPage(userID: data.userID),
-                    transition: getnav.Transition.downToUp);
+                // ignore: use_build_context_synchronously
+                Navigation.push(context, StoryViewPage(userID: data.userID));
               }
               // if (await isLive) {
               //   getnav.Get.to(() => LivePage(liveID: data.userID),

@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart' as getnav;
+import 'package:sophiee/utils/navigation.dart';
 
 import '../../../../../models/group_model.dart';
 import '../../../../../pages/chats/groups/groups_chat_page/groups_chat_page_info_edit.dart';
@@ -30,11 +30,7 @@ class GroupsChatPageInfoTitle extends StatelessWidget {
         if (groupModel.isMemberSettings ||
             groupModel.groupOwnerID == FirebaseAuth.instance.currentUser!.uid)
           GestureDetector(
-              onTap: () {
-                getnav.Get.to(
-                    () => GroupsChatPageInfoEditPage(groupModel: groupModel),
-                    transition: getnav.Transition.rightToLeft);
-              },
+              onTap: () => Navigation.push(context, GroupsChatPageInfoEditPage(groupModel: groupModel)),
               child: Icon(Icons.edit,
                   color: isDark ? Colors.white70 : Colors.grey,
                   size: size.height * .022))

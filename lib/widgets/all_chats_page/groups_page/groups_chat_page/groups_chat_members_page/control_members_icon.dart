@@ -1,17 +1,18 @@
 import 'package:sophiee/constants.dart';
 import 'package:sophiee/cubit/auth/login/login_cubit.dart';
-import 'package:sophiee/cubit/groups/groups_members_details/groups_members_details_cubit.dart';
 import 'package:sophiee/models/group_model.dart';
 import 'package:sophiee/models/users_model.dart';
 import 'package:sophiee/pages/my_friend_page.dart';
 import 'package:sophiee/pages/chats/chat_page.dart';
-import 'package:sophiee/widgets/all_chats_page/groups_page/groups_chat_page/groups_chat_members_page/remove_member_show_dialog.dart';
+import 'package:sophiee/utils/navigation.dart';
 import 'package:sophiee/utils/widget/pop_menu_info_item.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:get/get.dart' as getnav;
+
+import '../../../../../cubit/groups/groups_members_details/groups_members_details_cubit.dart';
+import 'remove_member_show_dialog.dart';
 
 class ControlMembersIcon extends StatelessWidget {
   const ControlMembersIcon(
@@ -35,15 +36,14 @@ class ControlMembersIcon extends StatelessWidget {
         itemBuilder: (context) => [
               groupsInfoPopMenuItem(
                   isDark: isDark,
-                  onTap: () => getnav.Get.to(
-                      () => ChatPage(userID: userData.userID),
-                      transition: getnav.Transition.rightToLeft),
+                  onTap: () => Navigation.push(
+                      context, ChatPage(userID: userData.userID)),
                   itemName: 'Message ${userData.userName.split(' ')[0]}',
                   size: size),
               groupsInfoPopMenuItem(
                   isDark: isDark,
-                  onTap: () => getnav.Get.to(() => MyFriendPage(user: userData),
-                      transition: getnav.Transition.rightToLeft),
+                  onTap: () =>
+                      Navigation.push(context, MyFriendPage(user: userData)),
                   itemName: 'View ${userData.userName.split(' ')[0]}',
                   size: size),
               if (groupModel.groupOwnerID ==

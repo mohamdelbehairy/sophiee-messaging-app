@@ -11,12 +11,12 @@ import 'package:sophiee/pages/chats/pick_file_page.dart';
 import 'package:sophiee/pages/chats/pick_image_page.dart';
 import 'package:sophiee/pages/chats/pick_soud_page.dart';
 import 'package:sophiee/pages/chats/pick_video_page.dart';
+import 'package:sophiee/utils/navigation.dart';
 import 'package:sophiee/widgets/all_chats_page/chat_page/message_text_field.dart';
 import 'package:sophiee/utils/widget/chats/chat_choose_media.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get/get.dart' as getnav;
 
 class ChatPageTextFieldItem extends StatefulWidget {
   const ChatPageTextFieldItem(
@@ -65,21 +65,20 @@ class _ChatPageTextFieldItemState extends State<ChatPageTextFieldItem> {
         BlocListener<PickImageCubit, PickImageStates>(
           listener: (context, state) {
             if (state is PickImageSucccess) {
-              getnav.Get.to(
-                  () => PickImagePage(
-                        friendNameReplay: widget.friendNameReplay,
-                        replayMessageID: widget.replayMessageID,
-                        image: state.image,
-                        user: widget.user,
-                        replayTextMessageImage: widget.replayTextMessage,
-                        replayImageMessageImage: widget.replayImageMessage,
-                        replayFileMessageImage: widget.replayFileMessage,
-                        replayContactMessageContact:
-                            widget.replayContactMessage,
-                        replaySoundMessage: widget.replaySoundMessage,
-                        replayRecordMessage: widget.replayRecordMessage,
-                      ),
-                  transition: getnav.Transition.rightToLeft);
+              Navigation.push(
+                  context,
+                  PickImagePage(
+                    friendNameReplay: widget.friendNameReplay,
+                    replayMessageID: widget.replayMessageID,
+                    image: state.image,
+                    user: widget.user,
+                    replayTextMessageImage: widget.replayTextMessage,
+                    replayImageMessageImage: widget.replayImageMessage,
+                    replayFileMessageImage: widget.replayFileMessage,
+                    replayContactMessageContact: widget.replayContactMessage,
+                    replaySoundMessage: widget.replaySoundMessage,
+                    replayRecordMessage: widget.replayRecordMessage,
+                  ));
               setState(() {
                 isClick = false;
               });
@@ -88,9 +87,8 @@ class _ChatPageTextFieldItemState extends State<ChatPageTextFieldItem> {
           child: BlocListener<PickVideoCubit, PickVideoState>(
             listener: (context, state) {
               if (state is PickVideoSuccess) {
-                getnav.Get.to(
-                    () => PickVideoPage(video: state.video, user: widget.user),
-                    transition: getnav.Transition.rightToLeft);
+                Navigation.push(context,
+                    PickVideoPage(video: state.video, user: widget.user));
               }
               setState(() {
                 isClick = false;
@@ -102,8 +100,9 @@ class _ChatPageTextFieldItemState extends State<ChatPageTextFieldItem> {
                   final file = state.file;
                   if (file.path.toLowerCase().endsWith('.pdf') ||
                       file.path.toLowerCase().endsWith('.doc')) {
-                    getnav.Get.to(
-                        () => PickFilePage(
+                    Navigation.push(
+                        context,
+                        PickFilePage(
                             size: widget.size,
                             replayContactMessage: widget.replayContactMessage,
                             friendNameReplay: widget.friendNameReplay,
@@ -114,12 +113,12 @@ class _ChatPageTextFieldItemState extends State<ChatPageTextFieldItem> {
                             replayImageMessage: widget.replayImageMessage,
                             replayFileMessage: widget.replayFileMessage,
                             replaySoundMessage: widget.replaySoundMessage,
-                            replayRecordMessage: widget.replayRecordMessage),
-                        transition: getnav.Transition.rightToLeft);
+                            replayRecordMessage: widget.replayRecordMessage));
                   }
                   if (file.path.toLowerCase().endsWith('.mp3')) {
-                    getnav.Get.to(
-                        () => PickSoundPage(
+                    Navigation.push(
+                        context,
+                        PickSoundPage(
                             friendNameReplay: widget.friendNameReplay,
                             replayMessageID: widget.replayMessageID,
                             replayTextMessage: widget.replayTextMessage,
@@ -130,8 +129,7 @@ class _ChatPageTextFieldItemState extends State<ChatPageTextFieldItem> {
                             replayRecordMessage: widget.replayRecordMessage,
                             size: widget.size,
                             file: state.file,
-                            user: widget.user),
-                        transition: getnav.Transition.rightToLeft);
+                            user: widget.user));
                   }
                 }
                 setState(() {

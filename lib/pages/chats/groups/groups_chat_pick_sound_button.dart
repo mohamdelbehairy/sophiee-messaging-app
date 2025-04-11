@@ -162,6 +162,6 @@ class _GroupsChatPickSoundButtonState extends State<GroupsChatPickSoundButton> {
   }
 
   void navigation() {
-    Navigation.navigationOnePop(context: context);
+    Navigation.pop(context: context);
   }
 }

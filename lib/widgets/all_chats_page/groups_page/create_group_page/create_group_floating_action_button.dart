@@ -5,7 +5,7 @@ import 'package:sophiee/pages/chats/groups/create_group/create_group_page_second
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:get/get.dart' as getnav;
+import 'package:sophiee/utils/navigation.dart';
 
 class CreateGroupFloatingActionButton extends StatelessWidget {
   const CreateGroupFloatingActionButton(
@@ -23,10 +23,10 @@ class CreateGroupFloatingActionButton extends StatelessWidget {
           return FloatingActionButton(
               shape: const CircleBorder(),
               backgroundColor: kPrimaryColor,
-              onPressed: () => getnav.Get.to(
-                  () => CreateGroupPageSecond(size: size),
-                  transition: getnav.Transition.rightToLeft),
-              child: const Icon(FontAwesomeIcons.arrowRight, color: Colors.white));
+              onPressed: () =>
+                  Navigation.push(context, CreateGroupPageSecond(size: size)),
+              child:
+                  const Icon(FontAwesomeIcons.arrowRight, color: Colors.white));
         } else {
           return const SizedBox();
         }
