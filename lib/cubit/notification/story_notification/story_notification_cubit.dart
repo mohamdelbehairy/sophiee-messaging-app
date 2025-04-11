@@ -50,11 +50,12 @@ class StoryNotificationCubit extends Cubit<StoryNotificationState> {
         },
       };
 
-      await http
-          .post(Uri.parse(ServerInfo.serverUrl), body: jsonEncode(data), headers: {
-        'Content-Type': contentType,
-        'Authorization': 'key=${ServerInfo.serverKey}',
-      });
+      await http.post(Uri.parse(ServerInfo.serverUrl),
+          body: jsonEncode(data),
+          headers: {
+            'Content-Type': contentType,
+            'Authorization': 'key=${ServerInfo.serverKey}',
+          });
       emit(SendStoryNotificationSuccess());
     } catch (e) {
       emit(StoryNotificationFailure(errorMessage: e.toString()));
@@ -67,7 +68,7 @@ class StoryNotificationCubit extends Cubit<StoryNotificationState> {
       {required String title, required String body}) async {
     try {
       AndroidNotificationDetails android = const AndroidNotificationDetails(
-          "com.example.sophiee", "myChannel",
+          "com.android.sophiee", "myChannel",
           importance: Importance.max, priority: Priority.high);
 
       NotificationDetails details = NotificationDetails(android: android);

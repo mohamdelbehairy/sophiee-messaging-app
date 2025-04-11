@@ -52,7 +52,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyBOkL1OmXZz82Iy4RPkqEAYdhtkgWLBI0o',
-    appId: '1:193753542082:android:36e4ae0c5aa9140cf47a5b',
+    appId: '1:193753542082:android:d262daf326032d20f47a5b',
     messagingSenderId: '193753542082',
     projectId: 'sophiee-messaging-app',
     storageBucket: 'sophiee-messaging-app.appspot.com',
@@ -60,20 +60,24 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyC7i-EoBQvlmZTI3w-1ZS2tX58pq80H7PE',
-    appId: '1:193753542082:ios:4a0fbe5851841416f47a5b',
+    appId: '1:193753542082:ios:aa8f895d417b65ccf47a5b',
     messagingSenderId: '193753542082',
     projectId: 'sophiee-messaging-app',
     storageBucket: 'sophiee-messaging-app.appspot.com',
-    iosBundleId: 'com.example.sophiee',
+    androidClientId: '193753542082-ce2iqt0n535ubrf5tfo66fhssg0jdd15.apps.googleusercontent.com',
+    iosClientId: '193753542082-7ebnpoeubintmsc8tbpml1od56aoil8b.apps.googleusercontent.com',
+    iosBundleId: 'com.android.sophiee',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
     apiKey: 'AIzaSyC7i-EoBQvlmZTI3w-1ZS2tX58pq80H7PE',
-    appId: '1:193753542082:ios:4a0fbe5851841416f47a5b',
+    appId: '1:193753542082:ios:aa8f895d417b65ccf47a5b',
     messagingSenderId: '193753542082',
     projectId: 'sophiee-messaging-app',
     storageBucket: 'sophiee-messaging-app.appspot.com',
-    iosBundleId: 'com.example.sophiee',
+    androidClientId: '193753542082-ce2iqt0n535ubrf5tfo66fhssg0jdd15.apps.googleusercontent.com',
+    iosClientId: '193753542082-7ebnpoeubintmsc8tbpml1od56aoil8b.apps.googleusercontent.com',
+    iosBundleId: 'com.android.sophiee',
   );
 
   static const FirebaseOptions windows = FirebaseOptions(

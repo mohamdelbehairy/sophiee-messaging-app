@@ -1,4 +1,4 @@
-package com.example.sophiee
+package com.android.sophiee
 
 import io.flutter.embedding.android.FlutterActivity
 

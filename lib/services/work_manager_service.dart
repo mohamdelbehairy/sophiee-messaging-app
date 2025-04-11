@@ -11,7 +11,7 @@ abstract class WorkManagerService {
 
   static Future<void> registerMyTask() async {
     await Workmanager().registerPeriodicTask('uniqueName', 'taskName',
-        frequency: const Duration(seconds: 15));
+        frequency: const Duration(days: 1));
   }
 }
 

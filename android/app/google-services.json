@@ -7,12 +7,17 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:193753542082:android:36e4ae0c5aa9140cf47a5b",
+        "mobilesdk_app_id": "1:193753542082:android:d262daf326032d20f47a5b",
         "android_client_info": {
-          "package_name": "com.example.sophiee"
+          "package_name": "com.android.sophiee"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "193753542082-p5ernadl1r8q9r6q2adt0lpubumvidfq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyBOkL1OmXZz82Iy4RPkqEAYdhtkgWLBI0o"
@@ -20,7 +25,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "193753542082-p5ernadl1r8q9r6q2adt0lpubumvidfq.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "193753542082-l3l4gqj5e99rhirr4ulkg6htnam3gfgb.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.sophiee"
+              }
+            }
+          ]
         }
       }
     }

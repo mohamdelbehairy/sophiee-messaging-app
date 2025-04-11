@@ -72,7 +72,7 @@ class MessageNotificationCubit extends Cubit<MessageNotificationState> {
       {required String title, required String body}) async {
     try {
       AndroidNotificationDetails android = const AndroidNotificationDetails(
-          "com.example.sophiee", "myChannel",
+          "com.android.sophiee", "myChannel",
           importance: Importance.max, priority: Priority.high);
 
       NotificationDetails details = NotificationDetails(android: android);

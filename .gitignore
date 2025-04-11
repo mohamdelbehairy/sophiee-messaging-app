@@ -44,3 +44,5 @@ app.*.map.json
 lib/services/server_info.dart
 lib/services/calls/call_app_info.dart
 lib/services/live_app_info.dart
+
+upload-keystore.jks

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>193753542082-7ebnpoeubintmsc8tbpml1od56aoil8b.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.193753542082-7ebnpoeubintmsc8tbpml1od56aoil8b</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>193753542082-ce2iqt0n535ubrf5tfo66fhssg0jdd15.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyC7i-EoBQvlmZTI3w-1ZS2tX58pq80H7PE</string>
+	<key>GCM_SENDER_ID</key>
+	<string>193753542082</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.android.sophiee</string>
+	<key>PROJECT_ID</key>
+	<string>sophiee-messaging-app</string>
+	<key>STORAGE_BUCKET</key>
+	<string>sophiee-messaging-app.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:193753542082:ios:aa8f895d417b65ccf47a5b</string>
+</dict>
+</plist>
