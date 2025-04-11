@@ -4,8 +4,6 @@ import 'package:sophiee/cubit/auth/login/login_cubit.dart';
 import 'package:sophiee/cubit/user_date/image/get_image/get_image_cubit.dart';
 import 'package:sophiee/models/users_model.dart';
 
-import '../../constants.dart';
-import '../../utils/widget/no_result_found.dart';
 import 'list_view_images_item.dart';
 
 class MyFriendListViewImages extends StatelessWidget {
@@ -41,16 +39,8 @@ class MyFriendListViewImages extends StatelessWidget {
                           imageModel: getImage.imageList[index]));
                 });
           } else {
-            return CustomNoResultFound(
-                height: size.height * .08,
-                sizedBoxHeightOne: size.height * .005,
-                sizedBoxHeightTwo: size.height * .001,
-                textOneFontSize: size.height * .022,
-                textTwoFontSize: 0,
-                mainAxisAlignment: MainAxisAlignment.start,
-                image: emptyImageUrl,
-                textOne: '',
-                textTwo: '');
+            return Text('no images here yet',
+                style: TextStyle(color: isDark ? Colors.white60 : Colors.grey));
           }
         },
       ),

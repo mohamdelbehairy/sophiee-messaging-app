@@ -8,7 +8,6 @@ import 'package:sophiee/cubit/pick_image/pick_image_state.dart';
 import '../../cubit/get_friends/get_friends_cubit.dart';
 import '../../cubit/get_friends/get_friends_state.dart';
 
-
 class InitialState {
   static void initPickImageState(BuildContext context) {
     context.read<PickImageCubit>().emit(PickImageInitial());
@@ -20,9 +19,7 @@ class InitialState {
     context.read<PickContactCubit>().phoneContact = null;
   }
 
-   static void initFriendState(BuildContext context) {
+  static void initFriendState(BuildContext context) {
     context.read<GetFriendsCubit>().emit(GetFriendsInitial());
   }
-
-  
 }

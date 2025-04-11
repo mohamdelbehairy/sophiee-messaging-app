@@ -58,13 +58,15 @@ class AddUserBottom extends StatelessWidget {
           isLoading: isLoading,
           colorBottom: kPrimaryColor,
           colorText: Colors.white,
-          onPressed: onPressedCustomBottom(context),
+          onPressed: () async {
+            await onPressedCustomBottom(context);
+          },
           borderRadius: BorderRadius.circular(size.width * .08),
           width: size.width),
     );
   }
 
-  onPressedCustomBottom(BuildContext context) async {
+  Future<void> onPressedCustomBottom(BuildContext context) async {
     if (globalKey.currentState!.validate()) {
       globalKey.currentState!.save();
 
@@ -109,6 +111,58 @@ class AddUserBottom extends StatelessWidget {
         prefs.setString('userID', FirebaseAuth.instance.currentUser!.uid);
         // ignore: use_build_context_synchronously
         Navigation.go(context, const HomePage());
+      }
+    }
+  }
+
+  Future<void> newMethod(BuildContext context) async {
+    {
+      if (globalKey.currentState!.validate()) {
+        globalKey.currentState!.save();
+
+        String profileImage;
+        if (pickImage.selectedImage != null) {
+          profileImage = await uploadImage.uploadImage(
+              imageFile: pickImage.selectedImage!, fieldName: 'user_images');
+        } else {
+          profileImage = defaultProfileImageUrl;
+        }
+
+        if (FirebaseAuth.instance.currentUser!.email != null) {
+          await storeUserDate.storeUserData(
+              emailAddress: email.text.isNotEmpty
+                  ? email.text
+                  : FirebaseAuth.instance.currentUser!.email!,
+              userName: fullName.text,
+              dateOfBirth: dateOfBirth.text,
+              nickName: nickName.text,
+              bio: bio.text,
+              gender: gender.text,
+              isEmailAuth: true,
+              phoneNumber:
+                  phoneController.text.isNotEmpty ? phoneNumber! : null,
+              profileImage: profileImage);
+
+          // ignore: use_build_context_synchronously
+          Navigation.push(context, const VerificationPage());
+        }
+        if (FirebaseAuth.instance.currentUser!.phoneNumber != null) {
+          await storeUserDate.storeUserData(
+              emailAddress: email.text,
+              userName: fullName.text,
+              dateOfBirth: dateOfBirth.text,
+              nickName: nickName.text,
+              bio: bio.text,
+              gender: gender.text,
+              phoneNumber: phoneController.text.isNotEmpty
+                  ? phoneNumber
+                  : FirebaseAuth.instance.currentUser!.phoneNumber,
+              profileImage: profileImage);
+          SharedPreferences prefs = await SharedPreferences.getInstance();
+          prefs.setString('userID', FirebaseAuth.instance.currentUser!.uid);
+          // ignore: use_build_context_synchronously
+          Navigation.go(context, const HomePage());
+        }
       }
     }
   }

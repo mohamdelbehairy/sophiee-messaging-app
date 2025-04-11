@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../constants.dart';
+import '../../../../utils/widget/no_result_found.dart';
 
 class FriendsSelectedListViewHorzItem extends StatelessWidget {
   const FriendsSelectedListViewHorzItem(
@@ -38,7 +39,13 @@ class FriendsSelectedListViewHorzItem extends StatelessWidget {
               ],
             );
           } else {
-            return Container();
+            return  const Center(
+                child: CustomNoResultFound(
+                  textOne: 'No People Here',
+                  textTwo:
+                      'You didn\'t have any people yet.\nto create a group with them.',
+                ),
+              );
           }
         },
       ),

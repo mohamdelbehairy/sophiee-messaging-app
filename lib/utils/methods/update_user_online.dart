@@ -6,8 +6,9 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class UpdateUserOnline {
+
   static void checkOnline() async {
-    Timer.periodic(const Duration(seconds: 10), (Timer t) async {
+    Timer.periodic(const Duration(minutes: 2), (Timer t) async {
       var connectivityResult = await Connectivity().checkConnectivity();
       if (connectivityResult == ConnectivityResult.mobile ||
           connectivityResult == ConnectivityResult.wifi) {
